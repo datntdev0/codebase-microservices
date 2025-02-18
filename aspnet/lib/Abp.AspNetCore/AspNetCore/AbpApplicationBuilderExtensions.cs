@@ -15,6 +15,7 @@ using Abp.AspNetCore.ExceptionHandling;
 using Abp.AspNetCore.Security;
 using Abp.AspNetCore.Uow;
 using Microsoft.Extensions.Hosting;
+using ILoggerFactory = Castle.Core.Logging.ILoggerFactory;
 
 namespace Abp.AspNetCore;
 
@@ -76,14 +77,14 @@ public static class AbpApplicationBuilderExtensions
 
     public static void UseCastleLoggerFactory(this IApplicationBuilder app)
     {
-        var castleLoggerFactory = app.ApplicationServices.GetService<Castle.Core.Logging.ILoggerFactory>();
+        var castleLoggerFactory = app.ApplicationServices.GetService<ILoggerFactory>();
         if (castleLoggerFactory == null)
         {
             return;
         }
 
         app.ApplicationServices
-            .GetRequiredService<ILoggerFactory>()
+            .GetRequiredService<Microsoft.Extensions.Logging.ILoggerFactory>()
             .AddCastleLogger(castleLoggerFactory);
     }
 

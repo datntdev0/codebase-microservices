@@ -12,7 +12,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Abp.AutoMapper\Abp.AutoMapper.csproj" />
+    <ProjectReference Include="..\datntdev.Microservice.Application.Contracts\datntdev.Microservice.Application.Contracts.csproj" />
     <ProjectReference Include="..\datntdev.Microservice.Core\datntdev.Microservice.Core.csproj" />
   </ItemGroup>
 </Project>

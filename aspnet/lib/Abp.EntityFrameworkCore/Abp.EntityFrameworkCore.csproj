@@ -19,12 +19,12 @@
     <Description>Abp.EntityFrameworkCore</Description>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Abp.EntityFramework.Common\Abp.EntityFramework.Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Update="ConfigureAwait.Fody" Version="3.3.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Abp\Abp.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Fody" Version="6.8.2">

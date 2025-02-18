@@ -16,6 +16,7 @@ using Abp.Reflection;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
 using Castle.MicroKernel.Registration;
+using CastleNs = Castle;
 
 namespace Abp.Zero
 {
@@ -60,7 +61,7 @@ namespace Abp.Zero
             RegisterTenantCache();
         }
 
-        private void Kernel_ComponentRegistered(string key, Castle.MicroKernel.IHandler handler)
+        private void Kernel_ComponentRegistered(string key, CastleNs.MicroKernel.IHandler handler)
         {
             if (typeof(IAbpZeroFeatureValueStore).IsAssignableFrom(handler.ComponentModel.Implementation) && !IocManager.IsRegistered<IAbpZeroFeatureValueStore>())
             {

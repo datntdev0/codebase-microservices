@@ -19,7 +19,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Abp.AspNetCore.SignalR\Abp.AspNetCore.SignalR.csproj" />
     <ProjectReference Include="..\..\lib\Abp.AspNetCore\Abp.AspNetCore.csproj" />
     <ProjectReference Include="..\..\lib\Abp.ZeroCore\Abp.ZeroCore.csproj" />
     <ProjectReference Include="..\datntdev.Microservice.Application\datntdev.Microservice.Application.csproj" />

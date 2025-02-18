@@ -28,7 +28,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Abp.Castle.Log4Net\Abp.Castle.Log4Net.csproj" />
     <ProjectReference Include="..\datntdev.Microservice.Web.Core\datntdev.Microservice.Web.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

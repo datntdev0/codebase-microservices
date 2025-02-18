@@ -23,7 +23,25 @@
     <EmbeddedResource Include="Zero\Localization\SourceExt\*.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Abp.Zero.Common\Abp.Zero.Common.csproj" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ar.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-de.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-es.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-fa.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-fr.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-it.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-lt.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-lv.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-pl.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-pt-BR.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ro.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ru.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-tr.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-zh-Hans.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Abp.EntityFrameworkCore\Abp.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Abp\Abp.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Fody" Version="6.8.2">

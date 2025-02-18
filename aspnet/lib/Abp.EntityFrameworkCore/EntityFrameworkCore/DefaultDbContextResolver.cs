@@ -9,8 +9,7 @@ using JetBrains.Annotations;
 using System.Linq;
 using Abp.EntityFrameworkCore.Extensions;
 using Abp.Extensions;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Query;
+using Castle.MicroKernel.Resolvers;
 
 namespace Abp.EntityFrameworkCore;
 
@@ -55,7 +54,7 @@ public class DefaultDbContextResolver : IDbContextResolver, ITransientDependency
                 options = CreateOptions<TDbContext>(connectionString, existingConnection)
             });
         }
-        catch (Castle.MicroKernel.Resolvers.DependencyResolverException ex)
+        catch (DependencyResolverException ex)
         {
             var hasOptions = isAbstractDbContext ? HasOptions(concreteType) : HasOptions(dbContextType);
             if (!hasOptions)
