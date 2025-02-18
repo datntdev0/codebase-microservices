@@ -1,8 +1,8 @@
-﻿using Abp.AspNetCore;
-using Abp.AspNetCore.Mvc.Antiforgery;
-using Abp.AspNetCore.SignalR.Hubs;
-using Abp.Castle.Logging.Log4Net;
-using Abp.Extensions;
+﻿using datntdev.Abp.Web.Core;
+using datntdev.Abp.Web.Core.Mvc.Antiforgery;
+using datntdev.Abp.Web.Core.SignalR.Hubs;
+using datntdev.Abp.Castle.Logging.Log4Net;
+using datntdev.Abp.Extensions;
 using datntdev.Microservice.Configuration;
 using datntdev.Microservice.Identity;
 using Castle.Facilities.Logging;
@@ -171,3 +171,4 @@ namespace datntdev.Microservice.Web.Host.Startup
         }
     }
 }
+

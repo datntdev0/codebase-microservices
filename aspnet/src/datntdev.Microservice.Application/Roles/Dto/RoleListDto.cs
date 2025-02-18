@@ -1,5 +1,5 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.Domain.Entities.Auditing;
+﻿using datntdev.Abp.Application.Services.Dto;
+using datntdev.Abp.Domain.Entities.Auditing;
 using System;
 
 namespace datntdev.Microservice.Roles.Dto;

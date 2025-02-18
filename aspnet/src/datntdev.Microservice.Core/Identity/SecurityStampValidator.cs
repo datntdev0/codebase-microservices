@@ -1,5 +1,5 @@
-﻿using Abp.Authorization;
-using Abp.Domain.Uow;
+﻿using datntdev.Abp.Authorization;
+using datntdev.Abp.Domain.Uow;
 using datntdev.Microservice.Authorization.Roles;
 using datntdev.Microservice.Authorization.Users;
 using datntdev.Microservice.MultiTenancy;

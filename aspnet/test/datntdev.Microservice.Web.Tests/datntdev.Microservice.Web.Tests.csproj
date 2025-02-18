@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <VersionPrefix>1.0.0.0</VersionPrefix>
     <TargetFramework>net9.0</TargetFramework>
@@ -25,6 +25,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="AngleSharp" Version="1.1.2" />
-    <PackageReference Include="Abp.AspNetCore.TestBase" Version="10.0.0" />
+    <PackageReference Include="Abp.Web.Core.TestBase" Version="10.0.0" />
   </ItemGroup>
 </Project>

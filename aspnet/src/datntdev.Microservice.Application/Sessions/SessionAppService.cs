@@ -1,4 +1,4 @@
-﻿using Abp.Auditing;
+﻿using datntdev.Abp.Auditing;
 using datntdev.Microservice.Sessions.Dto;
 using System.Collections.Generic;
 using System.Threading.Tasks;

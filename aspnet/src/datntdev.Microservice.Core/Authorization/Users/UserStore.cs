@@ -1,7 +1,7 @@
-using Abp.Authorization.Users;
-using Abp.Domain.Repositories;
-using Abp.Domain.Uow;
-using Abp.Organizations;
+using datntdev.Abp.Authorization.Users;
+using datntdev.Abp.Domain.Repositories;
+using datntdev.Abp.Domain.Uow;
+using datntdev.Abp.Organizations;
 using datntdev.Microservice.Authorization.Roles;
 
 namespace datntdev.Microservice.Authorization.Users;

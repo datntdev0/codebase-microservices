@@ -1,5 +1,5 @@
-﻿using Abp.Modules;
-using Abp.Reflection.Extensions;
+﻿using datntdev.Abp.Modules;
+using datntdev.Abp.Reflection.Extensions;
 using datntdev.Microservice.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

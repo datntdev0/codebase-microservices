@@ -1,5 +1,5 @@
-using Abp.Dependency;
-using Abp.Timing;
+using datntdev.Abp.Dependency;
+using datntdev.Abp.Timing;
 using Castle.Core.Logging;
 using System;
 

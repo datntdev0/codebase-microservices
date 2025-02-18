@@ -1,4 +1,4 @@
-﻿using Abp.MultiTenancy;
+﻿using datntdev.Abp.MultiTenancy;
 using datntdev.Microservice.Authorization.Users;
 
 namespace datntdev.Microservice.MultiTenancy;

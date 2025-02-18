@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <VersionPrefix>1.0.0.0</VersionPrefix>
     <TargetFramework>net9.0</TargetFramework>
@@ -19,8 +19,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Abp.AspNetCore\Abp.AspNetCore.csproj" />
-    <ProjectReference Include="..\..\lib\Abp.ZeroCore\Abp.ZeroCore.csproj" />
+    <ProjectReference Include="..\..\lib\datntdev.Abp.Web.Core\datntdev.Abp.Web.Core.csproj" />
+    <ProjectReference Include="..\..\lib\datntdev.Abp.Core\datntdev.Abp.Core.csproj" />
     <ProjectReference Include="..\datntdev.Microservice.Application\datntdev.Microservice.Application.csproj" />
     <ProjectReference Include="..\datntdev.Microservice.EntityFrameworkCore\datntdev.Microservice.EntityFrameworkCore.csproj" />
   </ItemGroup>
@@ -29,3 +29,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
   </ItemGroup>
 </Project>
+

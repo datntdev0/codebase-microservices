@@ -1,4 +1,4 @@
-﻿using Abp.Runtime.Security;
+﻿using datntdev.Abp.Runtime.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

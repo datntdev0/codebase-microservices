@@ -2,14 +2,14 @@
 $OutputEncoding = [Text.UTF8Encoding]::UTF8
 
 # company name placeholder 
-$oldCompanyName="datntdev"
+$oldCompanyName="Abp"
 # your company name
-$newCompanyName="YourCompanyName"
+$newCompanyName="datntdev.Abp"
 
 # project name placeholder
-$oldProjectName="Microservice"
+$oldProjectName="..."
 # your project name
-$newProjectName="YourProjectName"
+$newProjectName=".Abp"
 
 # file type
 $fileType="FileInfo"
@@ -17,19 +17,8 @@ $fileType="FileInfo"
 # directory type
 $dirType="DirectoryInfo"
 
-# copy 
-Write-Host 'Start copy folders...'
-$newRoot=$newCompanyName+"."+$newProjectName
-mkdir $newRoot
-Copy-Item -Recurse .\aspnet-core\ .\$newRoot\
-Copy-Item -Recurse .\vue\ .\$newRoot\
-Copy-Item .gitignore .\$newRoot\
-Copy-Item LICENSE .\$newRoot\
-Copy-Item README.md .\$newRoot\
-
 # folders to deal with
-$slnFolder = (Get-Item -Path "./$newRoot/aspnet-core/" -Verbose).FullName
-$vueFolder = (Get-Item -Path "./$newRoot/vue/" -Verbose).FullName
+$slnFolder = (Get-Item -Path "./$newRoot/aspnet/" -Verbose).FullName
 
 function Rename {
 	param (
@@ -51,9 +40,8 @@ function Rename {
 		$newDirectoryName=$_.Name.Replace($PlaceHolderCompanyName,$NewCompanyName).Replace($PlaceHolderProjectName,$NewProjectName)
 		Rename-Item $_.FullName $newDirectoryName
 	}
-	Write-Host "[$TargetFolder]End rename folder."
+	Write-Host "[$TargetFolder]End rename folder." 
 	Write-Host '-------------------------------------------------------------'
-
 
 	# replace file content and rename file name
 	Write-Host "[$TargetFolder]Start replace file content and rename file name..."
@@ -77,5 +65,3 @@ function Rename {
 }
 
 Rename -TargetFolder $slnFolder -PlaceHolderCompanyName $oldCompanyName -PlaceHolderProjectName $oldProjectName -NewCompanyName $newCompanyName -NewProjectName $newProjectName
-Rename -TargetFolder $vueFolder -PlaceHolderCompanyName $oldCompanyName -PlaceHolderProjectName $oldProjectName -NewCompanyName $newCompanyName -NewProjectName $newProjectName
-

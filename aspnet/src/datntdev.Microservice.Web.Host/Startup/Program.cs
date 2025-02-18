@@ -1,5 +1,5 @@
-﻿using Abp.AspNetCore.Dependency;
-using Abp.Dependency;
+﻿using datntdev.Abp.Web.Core.Dependency;
+using datntdev.Abp.Dependency;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -12,7 +12,7 @@ namespace datntdev.Microservice.Web.Host.Startup
             CreateHostBuilder(args).Build().Run();
         }
 
-        internal static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
@@ -21,3 +21,4 @@ namespace datntdev.Microservice.Web.Host.Startup
                 .UseCastleWindsor(IocManager.Instance.IocContainer);
     }
 }
+

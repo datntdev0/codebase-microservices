@@ -11,7 +11,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\Abp.TestBase\Abp.TestBase.csproj" />
+    <ProjectReference Include="..\..\lib\datntdev.Abp.TestBase\datntdev.Abp.TestBase.csproj" />
     <ProjectReference Include="..\..\src\datntdev.Microservice.Application\datntdev.Microservice.Application.csproj" />
     <ProjectReference Include="..\..\src\datntdev.Microservice.EntityFrameworkCore\datntdev.Microservice.EntityFrameworkCore.csproj" />
   </ItemGroup>

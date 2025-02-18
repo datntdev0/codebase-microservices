@@ -23,15 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datntdev.Microservice.Entit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{58EA8C25-BCD0-4A62-A137-B7611C6C9F6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp", "lib\Abp\Abp.csproj", "{D9E1DF85-266C-42FD-88FB-67947E94F68C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datntdev.Abp", "lib\datntdev.Abp\datntdev.Abp.csproj", "{D9E1DF85-266C-42FD-88FB-67947E94F68C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.EntityFrameworkCore", "lib\Abp.EntityFrameworkCore\Abp.EntityFrameworkCore.csproj", "{293E0260-FC47-4164-BDB1-A7B1AE523AC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datntdev.Abp.EntityFrameworkCore", "lib\datntdev.Abp.EntityFrameworkCore\datntdev.Abp.EntityFrameworkCore.csproj", "{293E0260-FC47-4164-BDB1-A7B1AE523AC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.ZeroCore", "lib\Abp.ZeroCore\Abp.ZeroCore.csproj", "{B112633D-8F2E-445E-A142-3A9B1829EF42}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datntdev.Abp.Core", "lib\datntdev.Abp.Core\datntdev.Abp.Core.csproj", "{B112633D-8F2E-445E-A142-3A9B1829EF42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.AspNetCore", "lib\Abp.AspNetCore\Abp.AspNetCore.csproj", "{F8018D9F-FC78-49E2-9675-89D40781BEAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datntdev.Abp.Web.Core", "lib\datntdev.Abp.Web.Core\datntdev.Abp.Web.Core.csproj", "{F8018D9F-FC78-49E2-9675-89D40781BEAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abp.TestBase", "lib\Abp.TestBase\Abp.TestBase.csproj", "{C3EEBAFF-8212-43B7-94E3-AE05D3756AA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datntdev.Abp.TestBase", "lib\datntdev.Abp.TestBase\datntdev.Abp.TestBase.csproj", "{C3EEBAFF-8212-43B7-94E3-AE05D3756AA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datntdev.Microservice.Core.Shared", "src\datntdev.Microservice.Core.Shared\datntdev.Microservice.Core.Shared.csproj", "{E47B49B7-8EC7-4F03-B4E4-716AB9F97D08}"
 EndProject

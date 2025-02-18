@@ -1,4 +1,4 @@
-﻿using Abp.Dependency;
+﻿using datntdev.Abp.Dependency;
 using datntdev.Microservice.Identity;
 using Castle.Windsor.MsDependencyInjection;
 using Microsoft.Extensions.DependencyInjection;

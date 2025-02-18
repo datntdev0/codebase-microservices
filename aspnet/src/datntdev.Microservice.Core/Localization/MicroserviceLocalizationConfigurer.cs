@@ -1,7 +1,7 @@
-﻿using Abp.Configuration.Startup;
-using Abp.Localization.Dictionaries;
-using Abp.Localization.Dictionaries.Xml;
-using Abp.Reflection.Extensions;
+﻿using datntdev.Abp.Configuration.Startup;
+using datntdev.Abp.Localization.Dictionaries;
+using datntdev.Abp.Localization.Dictionaries.Xml;
+using datntdev.Abp.Reflection.Extensions;
 
 namespace datntdev.Microservice.Localization;
 

@@ -1,4 +1,4 @@
-﻿using Abp.Configuration;
+﻿using datntdev.Abp.Configuration;
 using System.Collections.Generic;
 
 namespace datntdev.Microservice.Configuration;

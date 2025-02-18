@@ -1,5 +1,5 @@
-using Abp.Application.Editions;
-using Abp.Application.Features;
+using datntdev.Abp.Application.Editions;
+using datntdev.Abp.Application.Features;
 using datntdev.Microservice.Editions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

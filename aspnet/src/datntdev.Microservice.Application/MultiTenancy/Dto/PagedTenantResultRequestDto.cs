@@ -1,5 +1,5 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.Runtime.Validation;
+﻿using datntdev.Abp.Application.Services.Dto;
+using datntdev.Abp.Runtime.Validation;
 
 namespace datntdev.Microservice.MultiTenancy.Dto;
 

@@ -1,9 +1,9 @@
-﻿using Abp.AspNetCore;
-using Abp.AspNetCore.Configuration;
-using Abp.AspNetCore.SignalR;
-using Abp.Modules;
-using Abp.Reflection.Extensions;
-using Abp.Zero.Configuration;
+﻿using datntdev.Abp.Web.Core;
+using datntdev.Abp.Web.Core.Configuration;
+using datntdev.Abp.Web.Core.SignalR;
+using datntdev.Abp.Modules;
+using datntdev.Abp.Reflection.Extensions;
+using datntdev.Abp.Zero.Configuration;
 using datntdev.Microservice.Authentication.JwtBearer;
 using datntdev.Microservice.Configuration;
 using datntdev.Microservice.EntityFrameworkCore;
@@ -19,8 +19,8 @@ namespace datntdev.Microservice
     [DependsOn(
          typeof(MicroserviceApplicationModule),
          typeof(MicroserviceEntityFrameworkModule),
-         typeof(AbpAspNetCoreModule)
-        , typeof(AbpAspNetCoreSignalRModule)
+         typeof(AbpWebCoreModule)
+        , typeof(AbpWebCoreSignalRModule)
      )]
     public class MicroserviceWebCoreModule : AbpModule
     {
@@ -42,7 +42,7 @@ namespace datntdev.Microservice
             // Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
-            Configuration.Modules.AbpAspNetCore()
+            Configuration.Modules.AbpWebCore()
                  .CreateControllersForAppServices(
                      typeof(MicroserviceApplicationModule).GetAssembly()
                  );
@@ -74,3 +74,4 @@ namespace datntdev.Microservice
         }
     }
 }
+

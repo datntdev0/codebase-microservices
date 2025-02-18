@@ -1,7 +1,7 @@
-﻿using Abp;
-using Abp.Castle.Logging.Log4Net;
-using Abp.Collections.Extensions;
-using Abp.Dependency;
+﻿using datntdev.Abp;
+using datntdev.Abp.Castle.Logging.Log4Net;
+using datntdev.Abp.Collections.Extensions;
+using datntdev.Abp.Dependency;
 using Castle.Facilities.Logging;
 using System;
 

@@ -1,4 +1,4 @@
-﻿using Abp.Zero.EntityFrameworkCore;
+﻿using datntdev.Abp.Zero.EntityFrameworkCore;
 using datntdev.Microservice.Authorization.Roles;
 using datntdev.Microservice.Authorization.Users;
 using datntdev.Microservice.MultiTenancy;

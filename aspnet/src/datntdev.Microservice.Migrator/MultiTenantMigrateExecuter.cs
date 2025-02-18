@@ -1,10 +1,10 @@
-using Abp.Data;
-using Abp.Dependency;
-using Abp.Domain.Repositories;
-using Abp.Domain.Uow;
-using Abp.Extensions;
-using Abp.MultiTenancy;
-using Abp.Runtime.Security;
+using datntdev.Abp.Data;
+using datntdev.Abp.Dependency;
+using datntdev.Abp.Domain.Repositories;
+using datntdev.Abp.Domain.Uow;
+using datntdev.Abp.Extensions;
+using datntdev.Abp.MultiTenancy;
+using datntdev.Abp.Runtime.Security;
 using datntdev.Microservice.EntityFrameworkCore;
 using datntdev.Microservice.EntityFrameworkCore.Seed;
 using datntdev.Microservice.MultiTenancy;

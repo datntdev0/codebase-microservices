@@ -1,6 +1,6 @@
-﻿using Abp.Authorization;
-using Abp.Localization;
-using Abp.MultiTenancy;
+﻿using datntdev.Abp.Authorization;
+using datntdev.Abp.Localization;
+using datntdev.Abp.MultiTenancy;
 
 namespace datntdev.Microservice.Authorization;
 

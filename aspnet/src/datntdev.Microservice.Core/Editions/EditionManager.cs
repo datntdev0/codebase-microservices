@@ -1,7 +1,7 @@
-﻿using Abp.Application.Editions;
-using Abp.Application.Features;
-using Abp.Domain.Repositories;
-using Abp.Domain.Uow;
+﻿using datntdev.Abp.Application.Editions;
+using datntdev.Abp.Application.Features;
+using datntdev.Abp.Domain.Repositories;
+using datntdev.Abp.Domain.Uow;
 
 namespace datntdev.Microservice.Editions;
 

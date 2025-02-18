@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <Import Project="..\..\common.props" />
+  <Import Project="..\..\configureawait.props" />
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>asp.net;asp.net mvc;boilerplate;application framework;web framework;framework;domain driven design;multitenancy;user management;role management;identity</PackageTags>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Zero\Localization\SourceExt\*.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ar.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-de.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-es.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-fa.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-fr.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-it.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-lt.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-lv.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-pl.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-pt-BR.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ro.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ru.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-tr.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-zh-Hans.xml" />
+    <EmbeddedResource Include="Zero\Localization\Source\AbpZero.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\datntdev.Abp.EntityFrameworkCore\datntdev.Abp.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\datntdev.Abp\datntdev.Abp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Fody" Version="6.8.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="ConfigureAwait.Fody" Version="3.3.2" />
+  </ItemGroup>
+</Project>

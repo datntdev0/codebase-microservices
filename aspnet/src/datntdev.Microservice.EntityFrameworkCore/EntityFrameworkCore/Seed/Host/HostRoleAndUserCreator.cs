@@ -1,7 +1,7 @@
-using Abp.Authorization;
-using Abp.Authorization.Roles;
-using Abp.Authorization.Users;
-using Abp.MultiTenancy;
+using datntdev.Abp.Authorization;
+using datntdev.Abp.Authorization.Roles;
+using datntdev.Abp.Authorization.Users;
+using datntdev.Abp.MultiTenancy;
 using datntdev.Microservice.Authorization;
 using datntdev.Microservice.Authorization.Roles;
 using datntdev.Microservice.Authorization.Users;

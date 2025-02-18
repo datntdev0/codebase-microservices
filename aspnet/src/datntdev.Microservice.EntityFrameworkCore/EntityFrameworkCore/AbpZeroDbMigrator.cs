@@ -1,7 +1,7 @@
-﻿using Abp.Domain.Uow;
-using Abp.EntityFrameworkCore;
-using Abp.MultiTenancy;
-using Abp.Zero.EntityFrameworkCore;
+﻿using datntdev.Abp.Domain.Uow;
+using datntdev.Abp.EntityFrameworkCore;
+using datntdev.Abp.MultiTenancy;
+using datntdev.Abp.Zero.EntityFrameworkCore;
 
 namespace datntdev.Microservice.EntityFrameworkCore;
 

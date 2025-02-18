@@ -1,5 +1,5 @@
-using Abp.Configuration;
-using Abp.Zero.Configuration;
+using datntdev.Abp.Configuration;
+using datntdev.Abp.Zero.Configuration;
 using datntdev.Microservice.Authorization.Accounts.Dto;
 using datntdev.Microservice.Authorization.Users;
 using System.Threading.Tasks;

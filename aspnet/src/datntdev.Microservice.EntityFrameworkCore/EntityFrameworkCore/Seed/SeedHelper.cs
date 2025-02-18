@@ -1,7 +1,7 @@
-﻿using Abp.Dependency;
-using Abp.Domain.Uow;
-using Abp.EntityFrameworkCore.Uow;
-using Abp.MultiTenancy;
+﻿using datntdev.Abp.Dependency;
+using datntdev.Abp.Domain.Uow;
+using datntdev.Abp.EntityFrameworkCore.Uow;
+using datntdev.Abp.MultiTenancy;
 using datntdev.Microservice.EntityFrameworkCore.Seed.Host;
 using datntdev.Microservice.EntityFrameworkCore.Seed.Tenants;
 using Microsoft.EntityFrameworkCore;

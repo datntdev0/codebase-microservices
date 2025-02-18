@@ -1,4 +1,4 @@
-﻿using Abp.MultiTenancy;
+﻿using datntdev.Abp.MultiTenancy;
 using System.ComponentModel.DataAnnotations;
 
 namespace datntdev.Microservice.Authorization.Accounts.Dto;

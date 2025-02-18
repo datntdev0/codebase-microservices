@@ -1,4 +1,4 @@
-﻿using Abp.Dependency;
+﻿using datntdev.Abp.Dependency;
 using datntdev.Microservice.EntityFrameworkCore;
 using datntdev.Microservice.Identity;
 using Castle.MicroKernel.Registration;

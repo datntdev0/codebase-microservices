@@ -1,10 +1,10 @@
-﻿using Abp;
-using Abp.Authorization.Users;
-using Abp.Events.Bus;
-using Abp.Events.Bus.Entities;
-using Abp.MultiTenancy;
-using Abp.Runtime.Session;
-using Abp.TestBase;
+﻿using datntdev.Abp;
+using datntdev.Abp.Authorization.Users;
+using datntdev.Abp.Events.Bus;
+using datntdev.Abp.Events.Bus.Entities;
+using datntdev.Abp.MultiTenancy;
+using datntdev.Abp.Runtime.Session;
+using datntdev.Abp.TestBase;
 using datntdev.Microservice.Authorization.Users;
 using datntdev.Microservice.EntityFrameworkCore;
 using datntdev.Microservice.EntityFrameworkCore.Seed.Host;

@@ -1,4 +1,4 @@
-﻿using Abp.Dependency;
+﻿using datntdev.Abp.Dependency;
 using System.Threading.Tasks;
 
 namespace datntdev.Microservice.Authentication.External

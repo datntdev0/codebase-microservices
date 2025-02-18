@@ -1,7 +1,7 @@
-﻿using Abp.Domain.Entities;
-using Abp.Domain.Repositories;
-using Abp.EntityFrameworkCore;
-using Abp.EntityFrameworkCore.Repositories;
+﻿using datntdev.Abp.Domain.Entities;
+using datntdev.Abp.Domain.Repositories;
+using datntdev.Abp.EntityFrameworkCore;
+using datntdev.Abp.EntityFrameworkCore.Repositories;
 
 namespace datntdev.Microservice.EntityFrameworkCore.Repositories;
 

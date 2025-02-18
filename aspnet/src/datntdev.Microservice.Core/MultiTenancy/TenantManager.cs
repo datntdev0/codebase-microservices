@@ -1,6 +1,6 @@
-﻿using Abp.Application.Features;
-using Abp.Domain.Repositories;
-using Abp.MultiTenancy;
+﻿using datntdev.Abp.Application.Features;
+using datntdev.Abp.Domain.Repositories;
+using datntdev.Abp.MultiTenancy;
 using datntdev.Microservice.Authorization.Users;
 using datntdev.Microservice.Editions;
 

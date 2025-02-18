@@ -1,7 +1,7 @@
-﻿using Abp.Authorization;
-using Abp.Authorization.Users;
-using Abp.MultiTenancy;
-using Abp.Runtime.Security;
+﻿using datntdev.Abp.Authorization;
+using datntdev.Abp.Authorization.Users;
+using datntdev.Abp.MultiTenancy;
+using datntdev.Abp.Runtime.Security;
 using datntdev.Microservice.Authentication.JwtBearer;
 using datntdev.Microservice.Authorization;
 using datntdev.Microservice.Authorization.Users;

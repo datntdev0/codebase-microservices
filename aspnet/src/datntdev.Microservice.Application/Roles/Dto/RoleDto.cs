@@ -1,5 +1,5 @@
-using Abp.Application.Services.Dto;
-using Abp.Authorization.Roles;
+using datntdev.Abp.Application.Services.Dto;
+using datntdev.Abp.Authorization.Roles;
 using datntdev.Microservice.Authorization.Roles;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

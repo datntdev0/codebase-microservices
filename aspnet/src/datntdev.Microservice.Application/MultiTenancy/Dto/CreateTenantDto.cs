@@ -1,6 +1,6 @@
-using Abp.Authorization.Users;
-using Abp.AutoMapper;
-using Abp.MultiTenancy;
+using datntdev.Abp.Authorization.Users;
+using datntdev.Abp.AutoMapper;
+using datntdev.Abp.MultiTenancy;
 using System.ComponentModel.DataAnnotations;
 
 namespace datntdev.Microservice.MultiTenancy.Dto;

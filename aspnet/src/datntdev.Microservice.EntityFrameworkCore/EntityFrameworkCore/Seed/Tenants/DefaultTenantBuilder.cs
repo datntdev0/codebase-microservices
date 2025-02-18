@@ -1,4 +1,4 @@
-﻿using Abp.MultiTenancy;
+﻿using datntdev.Abp.MultiTenancy;
 using datntdev.Microservice.Editions;
 using datntdev.Microservice.MultiTenancy;
 using Microsoft.EntityFrameworkCore;

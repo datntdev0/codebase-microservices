@@ -1,7 +1,7 @@
-﻿using Abp.EntityFrameworkCore.Configuration;
-using Abp.Modules;
-using Abp.Reflection.Extensions;
-using Abp.Zero.EntityFrameworkCore;
+﻿using datntdev.Abp.EntityFrameworkCore.Configuration;
+using datntdev.Abp.Modules;
+using datntdev.Abp.Reflection.Extensions;
+using datntdev.Abp.Zero.EntityFrameworkCore;
 using datntdev.Microservice.EntityFrameworkCore.Seed;
 
 namespace datntdev.Microservice.EntityFrameworkCore;

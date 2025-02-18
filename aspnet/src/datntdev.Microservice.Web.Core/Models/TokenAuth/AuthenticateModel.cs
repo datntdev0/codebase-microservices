@@ -1,5 +1,5 @@
-﻿using Abp.Auditing;
-using Abp.Authorization.Users;
+﻿using datntdev.Abp.Auditing;
+using datntdev.Abp.Authorization.Users;
 using System.ComponentModel.DataAnnotations;
 
 namespace datntdev.Microservice.Models.TokenAuth

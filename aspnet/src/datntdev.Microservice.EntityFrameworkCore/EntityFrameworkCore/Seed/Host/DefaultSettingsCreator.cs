@@ -1,7 +1,7 @@
-﻿using Abp.Configuration;
-using Abp.Localization;
-using Abp.MultiTenancy;
-using Abp.Net.Mail;
+﻿using datntdev.Abp.Configuration;
+using datntdev.Abp.Localization;
+using datntdev.Abp.MultiTenancy;
+using datntdev.Abp.Net.Mail;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 

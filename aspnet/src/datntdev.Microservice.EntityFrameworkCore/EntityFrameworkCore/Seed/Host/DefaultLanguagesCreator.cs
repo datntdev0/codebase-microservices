@@ -1,5 +1,5 @@
-﻿using Abp.Localization;
-using Abp.MultiTenancy;
+﻿using datntdev.Abp.Localization;
+using datntdev.Abp.MultiTenancy;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;

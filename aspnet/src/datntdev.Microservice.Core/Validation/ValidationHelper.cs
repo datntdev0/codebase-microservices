@@ -1,4 +1,4 @@
-﻿using Abp.Extensions;
+﻿using datntdev.Abp.Extensions;
 using System.Text.RegularExpressions;
 
 namespace datntdev.Microservice.Validation;

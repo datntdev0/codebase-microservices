@@ -1,7 +1,7 @@
-﻿using Abp;
-using Abp.Authorization;
-using Abp.Dependency;
-using Abp.UI;
+﻿using datntdev.Abp;
+using datntdev.Abp.Authorization;
+using datntdev.Abp.Dependency;
+using datntdev.Abp.UI;
 using System;
 
 namespace datntdev.Microservice.Authorization;

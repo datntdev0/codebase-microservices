@@ -1,5 +1,5 @@
-using Abp.Authorization;
-using Abp.Authorization.Roles;
+using datntdev.Abp.Authorization;
+using datntdev.Abp.Authorization.Roles;
 using datntdev.Microservice.Authorization.Roles;
 using AutoMapper;
 using System.Linq;

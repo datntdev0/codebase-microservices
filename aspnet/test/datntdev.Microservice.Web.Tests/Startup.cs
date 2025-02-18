@@ -1,5 +1,5 @@
-﻿using Abp.AspNetCore;
-using Abp.AspNetCore.TestBase;
+﻿using Abp.Web.Core;
+using Abp.Web.Core.TestBase;
 using Abp.Dependency;
 using datntdev.Microservice.Authentication.JwtBearer;
 using datntdev.Microservice.Configuration;

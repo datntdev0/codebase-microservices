@@ -1,5 +1,5 @@
-﻿using Abp.MultiTenancy;
-using Abp.Zero.Configuration;
+﻿using datntdev.Abp.MultiTenancy;
+using datntdev.Abp.Zero.Configuration;
 
 namespace datntdev.Microservice.Authorization.Roles;
 

@@ -1,7 +1,7 @@
-using Abp.Auditing;
-using Abp.Authorization.Users;
-using Abp.AutoMapper;
-using Abp.Runtime.Validation;
+using datntdev.Abp.Auditing;
+using datntdev.Abp.Authorization.Users;
+using datntdev.Abp.AutoMapper;
+using datntdev.Abp.Runtime.Validation;
 using datntdev.Microservice.Authorization.Users;
 using System.ComponentModel.DataAnnotations;
 

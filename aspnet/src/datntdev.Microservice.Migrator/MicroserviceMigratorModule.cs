@@ -1,6 +1,6 @@
-using Abp.Events.Bus;
-using Abp.Modules;
-using Abp.Reflection.Extensions;
+using datntdev.Abp.Events.Bus;
+using datntdev.Abp.Modules;
+using datntdev.Abp.Reflection.Extensions;
 using datntdev.Microservice.Configuration;
 using datntdev.Microservice.EntityFrameworkCore;
 using datntdev.Microservice.Migrator.DependencyInjection;

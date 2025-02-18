@@ -1,6 +1,6 @@
-﻿using Abp.AutoMapper;
-using Abp.Modules;
-using Abp.Reflection.Extensions;
+﻿using datntdev.Abp.AutoMapper;
+using datntdev.Abp.Modules;
+using datntdev.Abp.Reflection.Extensions;
 using datntdev.Microservice.Authorization;
 
 namespace datntdev.Microservice;

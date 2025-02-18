@@ -1,4 +1,4 @@
-﻿using Abp.AspNetCore.TestBase;
+﻿using Abp.Web.Core.TestBase;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 using Abp.Json;
@@ -212,3 +212,4 @@ public abstract class MicroserviceWebTestBase : AbpAspNetCoreIntegratedTestBase<
 
     #endregion
 }
+

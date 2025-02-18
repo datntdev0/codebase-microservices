@@ -1,4 +1,4 @@
-﻿using Abp.Authorization.Roles;
+﻿using datntdev.Abp.Authorization.Roles;
 using datntdev.Microservice.Authorization.Users;
 using System.ComponentModel.DataAnnotations;
 
