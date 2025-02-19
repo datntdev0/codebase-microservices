@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "datntdev.Microservice.Migrator": {
+      "commandName": "Project",
+      "commandLineArgs": "-q"
+    }
+  }
+}
