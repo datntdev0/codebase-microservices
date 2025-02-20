@@ -39,13 +39,6 @@ namespace datntdev.Abp.Zero
 
             Configuration.Settings.Providers.Add<AbpZeroSettingProvider>();
 
-            Configuration.Localization.Sources.Add(
-                new DictionaryBasedLocalizationSource(
-                    AbpZeroConsts.LocalizationSourceName,
-                    new XmlEmbeddedFileLocalizationDictionaryProvider(
-                        typeof(AbpZeroCommonModule).GetAssembly(), "Abp.Zero.Localization.Source"
-                        )));
-
             IocManager.IocContainer.Kernel.ComponentRegistered += Kernel_ComponentRegistered;
 
             AddIgnoredTypes();

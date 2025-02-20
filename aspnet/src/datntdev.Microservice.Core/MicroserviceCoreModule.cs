@@ -1,5 +1,4 @@
-﻿using datntdev.Abp.Localization;
-using datntdev.Abp.Modules;
+﻿using datntdev.Abp.Modules;
 using datntdev.Abp.Reflection.Extensions;
 using datntdev.Abp.Runtime.Security;
 using datntdev.Abp.Timing;
@@ -35,8 +34,6 @@ public class MicroserviceCoreModule : AbpModule
         AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
 
         Configuration.Settings.Providers.Add<AppSettingProvider>();
-
-        Configuration.Localization.Languages.Add(new LanguageInfo("fa", "فارسی", "famfamfam-flags ir"));
 
         Configuration.Settings.SettingEncryptionConfiguration.DefaultPassPhrase = MicroserviceConsts.DefaultPassPhrase;
         SimpleStringCipher.DefaultPassPhrase = MicroserviceConsts.DefaultPassPhrase;

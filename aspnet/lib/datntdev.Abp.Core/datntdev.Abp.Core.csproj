@@ -15,24 +15,7 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Zero\Localization\SourceExt\*.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ar.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-de.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-es.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-fa.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-fr.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-it.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-lt.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-lv.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-pl.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-pt-BR.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ro.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-ru.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-tr.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero-zh-Hans.xml" />
-    <EmbeddedResource Include="Zero\Localization\Source\AbpZero.xml" />
+      <EmbeddedResource Include="Zero\Localization\Source\*.xml" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\datntdev.Abp.EntityFrameworkCore\datntdev.Abp.EntityFrameworkCore.csproj" />

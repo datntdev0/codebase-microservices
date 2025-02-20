@@ -1,7 +1,7 @@
 using datntdev.Abp.Authorization.Users;
 using datntdev.Abp.Dependency;
+using datntdev.Abp.Localization.Dictionaries;
 using datntdev.Abp.Localization.Dictionaries.Xml;
-using datntdev.Abp.Localization.Sources;
 using datntdev.Abp.Modules;
 using datntdev.Abp.Reflection.Extensions;
 using datntdev.Abp.Threading.BackgroundWorkers;
@@ -14,11 +14,11 @@ public class AbpZeroCoreModule : AbpModule
 {
     public override void PreInitialize()
     {
-        Configuration.Localization.Sources.Extensions.Add(
-            new LocalizationSourceExtensionInfo(
+        Configuration.Localization.Sources.Add(
+            new DictionaryBasedLocalizationSource(
                 AbpZeroConsts.LocalizationSourceName,
                 new XmlEmbeddedFileLocalizationDictionaryProvider(
-                    typeof(AbpZeroCoreModule).GetAssembly(), "Abp.Zero.Localization.SourceExt"
+                    typeof(AbpZeroCoreModule).GetAssembly()
                 )
             )
         );

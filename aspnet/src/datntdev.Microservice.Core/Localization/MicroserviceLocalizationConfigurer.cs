@@ -12,8 +12,7 @@ public static class MicroserviceLocalizationConfigurer
         localizationConfiguration.Sources.Add(
             new DictionaryBasedLocalizationSource(MicroserviceConsts.LocalizationSourceName,
                 new XmlEmbeddedFileLocalizationDictionaryProvider(
-                    typeof(MicroserviceLocalizationConfigurer).GetAssembly(),
-                    "datntdev.Microservice.Localization.SourceFiles"
+                    typeof(MicroserviceLocalizationConfigurer).GetAssembly()
                 )
             )
         );

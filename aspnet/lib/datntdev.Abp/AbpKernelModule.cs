@@ -158,8 +158,10 @@ namespace datntdev.Abp
                 new DictionaryBasedLocalizationSource(
                     AbpConsts.LocalizationSourceName,
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
-                        typeof(AbpKernelModule).GetAssembly(), "Abp.Localization.Sources.AbpXmlSource"
-                    )));
+                        typeof(AbpKernelModule).GetAssembly()
+                    )
+                )
+            );
         }
 
         private void ConfigureCaches()

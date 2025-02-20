@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="vi">
+    <texts>
+        <text name="InternalServerError">Một lỗi công khai xảy ra trong quá trình yêu cầu của bạn!</text>
+        <text name="ValidationError">Yêu cầu của bạn không hợp lệ!</text>
+        <text name="AreYouSure">Bạn có chắc chắn không?</text>
+        <text name="Cancel">Hủy bỏ</text>
+        <text name="Yes">Có</text>
+        <text name="ValidationNarrativeTitle">Các lỗi sau được phát hiện trong quá trình xác thực.</text>
+        <text name="DefaultError">Đã xảy ra lỗi!</text>
+        <text name="DefaultErrorDetail">Chi tiết lỗi không được máy chủ gửi.</text>
+        <text name="DefaultError401">Bạn chưa xác thực!</text>
+        <text name="DefaultErrorDetail401">Bạn phải xác thực (đăng nhập) để thực hiện thao tác này.</text>
+        <text name="DefaultError403">Bạn không được phép!</text>
+        <text name="DefaultErrorDetail403">Bạn không được phép thực hiện thao tác này.</text>
+        <text name="DefaultError404">Không tìm thấy tài nguyên!</text>
+        <text name="DefaultErrorDetail404">Tài nguyên được yêu cầu không thể tìm thấy trên máy chủ.</text>
+        <text name="EntityNotFound">Không có thực thể {0} với id = {1}!</text>
+    </texts>
+</localizationDictionary>

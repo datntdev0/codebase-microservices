@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="vi">
+    <texts>
+        <text name="SmtpHost">Máy chủ SMTP</text>
+        <text name="SmtpPort">Cổng SMTP</text>
+        <text name="Username">Tên người dùng</text>
+        <text name="Password">Mật khẩu</text>
+        <text name="DomainName">Tên miền</text>
+        <text name="UseSSL">Sử dụng SSL</text>
+        <text name="UseDefaultCredentials">Sử dụng thông tin xác thực mặc định</text>
+        <text name="DefaultFromSenderEmailAddress">Email người gửi mặc định</text>
+        <text name="DefaultFromSenderDisplayName">Tên hiển thị người gửi mặc định</text>
+        <text name="DefaultLanguage">Ngôn ngữ mặc định</text>
+        <text name="ReceiveNotifications">Nhận thông báo</text>
+        <text name="CurrentUserDidNotLoginToTheApplication">Người dùng hiện tại chưa đăng nhập vào ứng dụng!</text>
+        <text name="TimeZone">Múi giờ</text>
+        <text name="AllOfThesePermissionsMustBeGranted">Các quyền yêu cầu không được cấp. Tất cả các quyền này phải được cấp: {0}</text>
+        <text name="AtLeastOneOfThesePermissionsMustBeGranted">Các quyền yêu cầu không được cấp. Ít nhất một trong số các quyền này phải được cấp: {0}</text>
+        <text name="FeatureIsNotEnabled">Tính năng chưa được kích hoạt: {0}</text>
+        <text name="AllOfTheseFeaturesMustBeEnabled">Các tính năng yêu cầu chưa được kích hoạt. Tất cả các tính năng này phải được kích hoạt: {0}</text>
+        <text name="AtLeastOneOfTheseFeaturesMustBeEnabled">Các tính năng yêu cầu chưa được kích hoạt. Ít nhất một trong số các tính năng này phải được kích hoạt: {0}</text>
+        <text name="MainMenu">Menu chính</text>
+    </texts>
+</localizationDictionary>

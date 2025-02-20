@@ -34,8 +34,10 @@ namespace datntdev.Abp.Web
                 new DictionaryBasedLocalizationSource(
                     AbpWebConsts.LocalizationSourceName,
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
-                        typeof(AbpWebCommonModule).GetAssembly(), "Abp.Web.Localization.AbpWebXmlSource"
-                        )));
+                        typeof(AbpWebCommonModule).GetAssembly()
+                    )
+                )
+            );
         }
 
         /// <inheritdoc/>
