@@ -7,7 +7,7 @@ using datntdev.Abp.IdentityFramework;
 using datntdev.Abp.Linq.Extensions;
 using datntdev.Abp.MultiTenancy;
 using datntdev.Abp.Runtime.Security;
-using datntdev.Microservice.Authorization;
+using datntdev.Microservice.Authorization.Permissions;
 using datntdev.Microservice.Authorization.Roles;
 using datntdev.Microservice.Authorization.Users;
 using datntdev.Microservice.Editions;
@@ -54,7 +54,7 @@ public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, Page
             ? null
             : SimpleStringCipher.Instance.Encrypt(input.ConnectionString);
 
-        var defaultEdition = await _editionManager.FindByNameAsync(EditionManager.DefaultEditionName);
+        var defaultEdition = await _editionManager.FindByNameAsync(EditionNames.DefaultEditionName);
         if (defaultEdition != null)
         {
             tenant.EditionId = defaultEdition.Id;

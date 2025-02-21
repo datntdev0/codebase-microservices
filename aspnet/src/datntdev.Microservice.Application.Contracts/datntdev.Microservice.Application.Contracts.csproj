@@ -1,9 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>datntdev.Microservice</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="Configuration\Dto\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\datntdev.Microservice.Core\datntdev.Microservice.Core.csproj" />
+    </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using datntdev.Microservice.Authorization;
+﻿using datntdev.Microservice.Authorization.Permissions;
 using datntdev.Microservice.Authorization.Roles;
 using datntdev.Microservice.Authorization.Users;
 using datntdev.Microservice.Editions;

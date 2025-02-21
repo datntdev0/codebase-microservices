@@ -15,7 +15,6 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
     <RootNamespace>datntdev.Microservice</RootNamespace>
-    <LangVersion>7.2</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>

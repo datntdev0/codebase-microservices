@@ -3,6 +3,7 @@ using datntdev.Abp.Authorization.Roles;
 using datntdev.Abp.Authorization.Users;
 using datntdev.Abp.MultiTenancy;
 using datntdev.Microservice.Authorization;
+using datntdev.Microservice.Authorization.Permissions;
 using datntdev.Microservice.Authorization.Roles;
 using datntdev.Microservice.Authorization.Users;
 using Microsoft.AspNetCore.Identity;
@@ -48,7 +49,7 @@ public class TenantRoleAndUserBuilder
             .ToList();
 
         var permissions = PermissionFinder
-            .GetAllPermissions(new MicroserviceAuthorizationProvider())
+            .GetAllPermissions(new PermissionProvider())
             .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Tenant) &&
                         !grantedPermissions.Contains(p.Name))
             .ToList();

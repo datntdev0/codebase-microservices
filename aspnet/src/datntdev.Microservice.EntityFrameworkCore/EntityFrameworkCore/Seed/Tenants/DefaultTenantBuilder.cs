@@ -29,7 +29,7 @@ public class DefaultTenantBuilder
         {
             defaultTenant = new Tenant(AbpTenantBase.DefaultTenantName, AbpTenantBase.DefaultTenantName);
 
-            var defaultEdition = _context.Editions.IgnoreQueryFilters().FirstOrDefault(e => e.Name == EditionManager.DefaultEditionName);
+            var defaultEdition = _context.Editions.IgnoreQueryFilters().FirstOrDefault(e => e.Name == EditionNames.DefaultEditionName);
             if (defaultEdition != null)
             {
                 defaultTenant.EditionId = defaultEdition.Id;
