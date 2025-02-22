@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace datntdev.Microservice.Users.Dto;
+namespace datntdev.Microservice.Models.Session;
 
-public class ChangeUserLanguageDto
+public class ChangeLanguageInput
 {
     [Required]
     public string LanguageName { get; set; }

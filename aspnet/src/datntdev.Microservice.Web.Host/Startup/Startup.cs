@@ -37,7 +37,6 @@ namespace datntdev.Microservice.Web.Host.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //MVC
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());

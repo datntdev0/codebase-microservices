@@ -1,6 +1,6 @@
 ﻿namespace datntdev.Microservice.Models.Auth
 {
-    public class AuthenticateResultModel
+    public class LoginOutput
     {
         public string AccessToken { get; set; }
 

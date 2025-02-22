@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace datntdev.Microservice.Models.Auth
 {
-    public class AuthenticateModel
+    public class LoginInput
     {
         [Required]
         [StringLength(AbpUserBase.MaxEmailAddressLength)]

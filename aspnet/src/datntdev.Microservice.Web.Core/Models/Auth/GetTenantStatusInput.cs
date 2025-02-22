@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace datntdev.Microservice.Models.Auth;
 
-public class IsTenantAvailableInput
+public class GetTenantStatusInput
 {
     [Required]
     [StringLength(AbpTenantBase.MaxTenancyNameLength)]

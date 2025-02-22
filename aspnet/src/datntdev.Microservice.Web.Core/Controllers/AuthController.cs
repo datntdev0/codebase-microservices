@@ -1,5 +1,6 @@
 ﻿using datntdev.Abp.Authorization;
 using datntdev.Abp.Authorization.Users;
+using datntdev.Abp.Configuration;
 using datntdev.Abp.MultiTenancy;
 using datntdev.Abp.Runtime.Security;
 using datntdev.Abp.Zero.Configuration;
@@ -16,38 +17,45 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using datntdev.Abp.Configuration;
 
 namespace datntdev.Microservice.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    public class AuthController : MicroserviceControllerBase
+    [Route("api/auth")]
+    public class AuthController(
+        LogInManager logInManager,
+        ITenantCache tenantCache,
+        AbpLoginResultTypeHelper abpLoginResultTypeHelper,
+        TokenAuthConfiguration configuration,
+        UserRegistrationManager userRegistrationManager,
+        TenantManager tenantManager
+    ) : MicroserviceControllerBase
     {
-        private readonly LogInManager _logInManager;
-        private readonly ITenantCache _tenantCache;
-        private readonly TenantManager _tenantManager;
-        private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
-        private readonly TokenAuthConfiguration _configuration;
-        private readonly UserRegistrationManager _userRegistrationManager;
+        private readonly LogInManager _logInManager = logInManager;
+        private readonly ITenantCache _tenantCache = tenantCache;
+        private readonly TenantManager _tenantManager = tenantManager;
+        private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
+        private readonly TokenAuthConfiguration _configuration = configuration;
+        private readonly UserRegistrationManager _userRegistrationManager = userRegistrationManager;
 
-        public AuthController(
-            LogInManager logInManager,
-            ITenantCache tenantCache,
-            AbpLoginResultTypeHelper abpLoginResultTypeHelper,
-            TokenAuthConfiguration configuration,
-            UserRegistrationManager userRegistrationManager,
-            TenantManager tenantManager)
+        [HttpGet("tenant-status")]
+        public async Task<GetTenantStatusOutput> GetTenantStatusAsync([FromQuery] string tenancyName)
         {
-            _logInManager = logInManager;
-            _tenantCache = tenantCache;
-            _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
-            _configuration = configuration;
-            _userRegistrationManager = userRegistrationManager;
-            _tenantManager = tenantManager;
+            var tenant = await _tenantManager.FindByTenancyNameAsync(tenancyName);
+            if (tenant == null)
+            {
+                return new GetTenantStatusOutput(TenantAvailabilityState.NotFound);
+            }
+
+            if (!tenant.IsActive)
+            {
+                return new GetTenantStatusOutput(TenantAvailabilityState.InActive);
+            }
+
+            return new GetTenantStatusOutput(TenantAvailabilityState.Available, tenant.Id);
         }
 
-        [HttpPost]
-        public async Task<AuthenticateResultModel> Authenticate([FromBody] AuthenticateModel model)
+        [HttpPost("login")]
+        public async Task<LoginOutput> LoginAsync([FromBody] LoginInput model)
         {
             var loginResult = await GetLoginResultAsync(
                 model.UserNameOrEmailAddress,
@@ -57,34 +65,17 @@ namespace datntdev.Microservice.Controllers
 
             var accessToken = CreateAccessToken(CreateJwtClaims(loginResult.Identity));
 
-            return new AuthenticateResultModel
+            return new LoginOutput
             {
                 AccessToken = accessToken,
-                EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
+                EncryptedAccessToken = SimpleStringCipher.Instance.Encrypt(accessToken),
                 ExpireInSeconds = (int)_configuration.Expiration.TotalSeconds,
                 UserId = loginResult.User.Id
             };
         }
 
-        [HttpGet]
-        public async Task<IsTenantAvailableOutput> IsTenantAvailable([FromQuery] string tenancyName)
-        {
-            var tenant = await _tenantManager.FindByTenancyNameAsync(tenancyName);
-            if (tenant == null)
-            {
-                return new IsTenantAvailableOutput(TenantAvailabilityState.NotFound);
-            }
-
-            if (!tenant.IsActive)
-            {
-                return new IsTenantAvailableOutput(TenantAvailabilityState.InActive);
-            }
-
-            return new IsTenantAvailableOutput(TenantAvailabilityState.Available, tenant.Id);
-        }
-
-        [HttpPost]
-        public async Task<RegisterOutput> Register([FromBody] RegisterInput input)
+        [HttpPost("register")]
+        public async Task<RegisterOutput> RegisterAsync([FromBody] RegisterInput input)
         {
             var user = await _userRegistrationManager.RegisterAsync(
                 input.Name,
@@ -95,7 +86,8 @@ namespace datntdev.Microservice.Controllers
                 true // Assumed email address is always confirmed. Change this if you want to implement email confirmation.
             );
 
-            var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
+            var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueAsync<bool>(
+                AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
 
             return new RegisterOutput
             {
@@ -105,15 +97,13 @@ namespace datntdev.Microservice.Controllers
 
         private string GetTenancyNameOrNull()
         {
-            if (!AbpSession.TenantId.HasValue)
-            {
-                return null;
-            }
+            if (!AbpSession.TenantId.HasValue) return null;
 
             return _tenantCache.GetOrNull(AbpSession.TenantId.Value)?.TenancyName;
         }
 
-        private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(string usernameOrEmailAddress, string password, string tenancyName)
+        private async Task<AbpLoginResult<Tenant, User>> GetLoginResultAsync(
+            string usernameOrEmailAddress, string password, string tenancyName)
         {
             var loginResult = await _logInManager.LoginAsync(usernameOrEmailAddress, password, tenancyName);
 
@@ -122,7 +112,8 @@ namespace datntdev.Microservice.Controllers
                 case AbpLoginResultType.Success:
                     return loginResult;
                 default:
-                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(
+                        loginResult.Result, usernameOrEmailAddress, tenancyName);
             }
         }
 
@@ -148,19 +139,14 @@ namespace datntdev.Microservice.Controllers
             var nameIdClaim = claims.First(c => c.Type == ClaimTypes.NameIdentifier);
 
             // Specifically add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims.
-            claims.AddRange(new[]
-            {
+            claims.AddRange(
+            [
                 new Claim(JwtRegisteredClaimNames.Sub, nameIdClaim.Value),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.Now.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
-            });
+            ]);
 
             return claims;
-        }
-
-        private string GetEncryptedAccessToken(string accessToken)
-        {
-            return SimpleStringCipher.Instance.Encrypt(accessToken);
         }
     }
 }

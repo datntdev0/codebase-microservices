@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace datntdev.Microservice.Users.Dto;
+namespace datntdev.Microservice.Models.Session;
 
-public class ChangePasswordDto
+public class ChangePasswordInput
 {
     [Required]
     public string CurrentPassword { get; set; }
