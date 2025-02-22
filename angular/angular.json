@@ -24,12 +24,12 @@
               "src/favicon.ico",
               {
                 "glob": "abp.signalr.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                "input": "src/_lib/scripts/libs",
                 "output": "/assets/abp"
               },
               {
                 "glob": "abp.signalr-client.js",
-                "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
+                "input": "src/_lib/scripts/libs",
                 "output": "/assets/abp"
               }
             ],
@@ -49,10 +49,10 @@
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "src/assets/freeze-ui/freeze-ui.js",
               "node_modules/push.js/bin/push.min.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
+              "src/_lib/scripts/abp.js",
               "src/assets/abp-web-resources/abp.sweet-alert.js",
               "src/assets/abp-web-resources/abp.freeze-ui.js",
-              "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
+              "src/_lib/scripts/libs/abp.moment.js"
             ],
             "extractLicenses": false,
             "sourceMap": true,

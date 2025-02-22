@@ -1,17 +1,15 @@
 import { Injector, ElementRef } from '@angular/core';
 import { AppConsts } from '@shared/AppConsts';
-import {
-    LocalizationService,
-    PermissionCheckerService,
-    FeatureCheckerService,
-    NotifyService,
-    SettingService,
-    MessageService,
-    AbpMultiTenancyService
-} from 'abp-ng2-module';
+import { LocalizationService } from '@lib/services/localization/localization.service';
 
 import { AppSessionService } from '@shared/session/app-session.service';
 import { PrimengTableHelper } from 'shared/helpers/PrimengTableHelper';
+import { PermissionCheckerService } from '@lib/services/auth/permission-checker.service';
+import { AbpMultiTenancyService } from '@lib/services/multi-tenancy/abp-multi-tenancy.service';
+import { MessageService } from '@lib/services/message/message.service';
+import { FeatureCheckerService } from '@lib/services/features/feature-checker.service';
+import { SettingService } from '@lib/services/settings/setting.service';
+import { NotifyService } from '@lib/services/notify/notify.service';
 
 export abstract class AppComponentBase {
 

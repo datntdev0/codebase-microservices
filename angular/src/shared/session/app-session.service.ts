@@ -1,4 +1,4 @@
-import { AbpMultiTenancyService } from 'abp-ng2-module';
+import { AbpMultiTenancyService } from '@lib/services/multi-tenancy/abp-multi-tenancy.service';
 import { Injectable } from '@angular/core';
 import {
     ApplicationInfoDto,

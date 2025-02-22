@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { TokenService, LogService, UtilsService } from 'abp-ng2-module';
 import { AppConsts } from '@shared/AppConsts';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { AuthServiceProxy, LoginInput, LoginOutput } from '@shared/service-proxies/service-proxies';
+import { UtilsService } from '@lib/services/utils/utils.service';
+import { TokenService } from '@lib/services/auth/token.service';
+import { LogService } from '@lib/services/log/log.service';
 
 @Injectable()
 export class AppAuthService {
