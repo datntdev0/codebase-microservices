@@ -12,7 +12,8 @@ import {MenuItem} from '@shared/layout/menu-item';
 
 @Component({
     selector: 'sidebar-menu',
-    templateUrl: './sidebar-menu.component.html'
+    templateUrl: './sidebar-menu.component.html',
+    standalone: false
 })
 export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     menuItems: MenuItem[];

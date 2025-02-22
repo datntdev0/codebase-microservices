@@ -17,7 +17,8 @@ import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  templateUrl: 'edit-role-dialog.component.html'
+    templateUrl: 'edit-role-dialog.component.html',
+    standalone: false
 })
 export class EditRoleDialogComponent extends AppComponentBase
   implements OnInit {

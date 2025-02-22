@@ -14,7 +14,8 @@ import {
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
-  templateUrl: 'create-tenant-dialog.component.html'
+    templateUrl: 'create-tenant-dialog.component.html',
+    standalone: false
 })
 export class CreateTenantDialogComponent extends AppComponentBase
   implements OnInit {

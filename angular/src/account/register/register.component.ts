@@ -11,8 +11,9 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { AppAuthService } from '@shared/auth/app-auth.service';
 
 @Component({
-  templateUrl: './register.component.html',
-  animations: [accountModuleAnimation()]
+    templateUrl: './register.component.html',
+    animations: [accountModuleAnimation()],
+    standalone: false
 })
 export class RegisterComponent extends AppComponentBase {
   model: RegisterInput = new RegisterInput();

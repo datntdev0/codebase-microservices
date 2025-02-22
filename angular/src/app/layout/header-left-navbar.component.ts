@@ -2,9 +2,10 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { LayoutStoreService } from '@shared/layout/layout-store.service';
 
 @Component({
-  selector: 'header-left-navbar',
-  templateUrl: './header-left-navbar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'header-left-navbar',
+    templateUrl: './header-left-navbar.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HeaderLeftNavbarComponent implements OnInit {
   sidebarExpanded: boolean;

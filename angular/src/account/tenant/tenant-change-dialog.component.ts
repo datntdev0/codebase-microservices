@@ -5,7 +5,8 @@ import { AuthServiceProxy, GetTenantStatusOutput } from '@shared/service-proxies
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  templateUrl: './tenant-change-dialog.component.html'
+    templateUrl: './tenant-change-dialog.component.html',
+    standalone: false
 })
 export class TenantChangeDialogComponent extends AppComponentBase {
   saving = false;

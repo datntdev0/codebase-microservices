@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER, LOCALE_ID,provideExperimentalZonelessChangeDetection} from '@angular/core';
+import { NgModule, LOCALE_ID, provideExperimentalZonelessChangeDetection, inject, provideAppInitializer } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -46,12 +46,10 @@ export function getCurrentLanguage(): string {
     provideExperimentalZonelessChangeDetection(),
     provideClientHydration(),
     { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (appInitializer: AppInitializer) => appInitializer.init(),
-      deps: [AppInitializer],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+        const initializerFn = ((appInitializer: AppInitializer) => appInitializer.init())(inject(AppInitializer));
+        return initializerFn();
+      }),
     { provide: API_BASE_URL, useFactory: () => AppConsts.remoteServiceBaseUrl },
     {
       provide: LOCALE_ID,

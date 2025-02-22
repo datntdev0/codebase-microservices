@@ -7,8 +7,9 @@ import { ChangePasswordInput, SessionServiceProxy } from '@shared/service-proxie
 import { finalize } from 'rxjs/operators';
 
 @Component({
-  templateUrl: './change-password.component.html',
-  animations: [appModuleAnimation()]
+    templateUrl: './change-password.component.html',
+    animations: [appModuleAnimation()],
+    standalone: false
 })
 export class ChangePasswordComponent extends AppComponentBase {
   saving = false;

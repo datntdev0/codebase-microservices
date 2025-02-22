@@ -31,29 +31,10 @@ export class AppInitializer {
             abp.event.trigger('abp.dynamicScriptsInitialized');
             // do not use constructor injection for AppSessionService
             const appSessionService = this._injector.get(AppSessionService);
-            appSessionService.init().then(
-              (result) => {
-                abp.ui.clearBusy();
-                if (this.shouldLoadLocale()) {
-                  const angularLocale = this.convertAbpLocaleToAngularLocale(
-                    abp.localization.currentLanguage.name
-                  );
-                  import(`/node_modules/@angular/common/locales/${angularLocale}.mjs`).then(
-                    (module) => {
-                      registerLocaleData(module.default);
-                      resolve(result);
-                    },
-                    reject
-                  );
-                } else {
-                  resolve(result);
-                }
-              },
-              (err) => {
-                abp.ui.clearBusy();
-                reject(err);
-              }
-            );
+            appSessionService.init()
+              .then((result) => resolve(result))
+              .catch((error) => reject(error))
+              .finally(() => abp.ui.clearBusy());
           });
         });
       });
@@ -78,13 +59,6 @@ export class AppInitializer {
     }
 
     return document.location.origin;
-  }
-
-  private shouldLoadLocale(): boolean {
-    return (
-      abp.localization.currentLanguage.name &&
-      abp.localization.currentLanguage.name !== 'en-US'
-    );
   }
 
   private convertAbpLocaleToAngularLocale(locale: string): string {

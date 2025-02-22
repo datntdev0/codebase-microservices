@@ -4,8 +4,9 @@ import { ResetPasswordInput, UsersServiceProxy } from '@shared/service-proxies/s
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html'
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    standalone: false
 })
 export class ResetPasswordDialogComponent extends AppComponentBase
   implements OnInit {

@@ -7,7 +7,8 @@ export class EntityDto {
 }
 
 @Component({
-    template: ''
+    template: '',
+    standalone: false
 })
 export abstract class PagedListingComponentBase<TEntityDto> extends AppComponentBase {
     public pageSize = 10;

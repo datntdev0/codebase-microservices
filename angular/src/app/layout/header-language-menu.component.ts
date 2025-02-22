@@ -9,9 +9,10 @@ import { ChangeLanguageInput, SessionServiceProxy } from '@shared/service-proxie
 import { filter as _filter } from 'lodash-es';
 
 @Component({
-  selector: 'header-language-menu',
-  templateUrl: './header-language-menu.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'header-language-menu',
+    templateUrl: './header-language-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HeaderLanguageMenuComponent extends AppComponentBase
   implements OnInit {

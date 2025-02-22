@@ -4,8 +4,9 @@ import { TenantChangeDialogComponent } from './tenant-change-dialog.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'tenant-change',
-  templateUrl: './tenant-change.component.html'
+    selector: 'tenant-change',
+    templateUrl: './tenant-change.component.html',
+    standalone: false
 })
 export class TenantChangeComponent extends AppComponentBase implements OnInit {
   tenancyName = '';

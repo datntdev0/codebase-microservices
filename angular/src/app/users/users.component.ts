@@ -22,8 +22,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Paginator } from "primeng/paginator";
 
 @Component({
-  templateUrl: "./users.component.html",
-  animations: [appModuleAnimation()],
+    templateUrl: "./users.component.html",
+    animations: [appModuleAnimation()],
+    standalone: false
 })
 export class UsersComponent extends PagedListingComponentBase<UserDto> {
   users: UserDto[] = [];
