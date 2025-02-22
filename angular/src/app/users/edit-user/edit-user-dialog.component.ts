@@ -10,9 +10,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  UserServiceProxy,
   UserDto,
-  RoleDto
+  RoleDto,
+  UsersServiceProxy
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -30,7 +30,7 @@ export class EditUserDialogComponent extends AppComponentBase
 
   constructor(
     injector: Injector,
-    public _userService: UserServiceProxy,
+    public _usersService: UsersServiceProxy,
     public bsModalRef: BsModalRef,
     private cd: ChangeDetectorRef
   ) {
@@ -38,10 +38,10 @@ export class EditUserDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
-    this._userService.get(this.id).subscribe((result) => {
+    this._usersService.get(this.id).subscribe((result) => {
       this.user = result;
 
-      this._userService.getRoles().subscribe((result2) => {
+      this._usersService.getRoles().subscribe((result2) => {
         this.roles = result2.items;
         this.setInitialRolesStatus();
         this.cd.detectChanges();
@@ -80,7 +80,7 @@ export class EditUserDialogComponent extends AppComponentBase
 
     this.user.roleNames = this.getCheckedRoles();
 
-    this._userService.update(this.user).subscribe(
+    this._usersService.update(this.user).subscribe(
       () => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.bsModalRef.hide();

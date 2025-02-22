@@ -5,10 +5,7 @@ import {
   Injector
 } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-import {
-  UserServiceProxy,
-  ChangeUserLanguageDto
-} from '@shared/service-proxies/service-proxies';
+import { ChangeLanguageInput, SessionServiceProxy } from '@shared/service-proxies/service-proxies';
 import { filter as _filter } from 'lodash-es';
 
 @Component({
@@ -21,7 +18,7 @@ export class HeaderLanguageMenuComponent extends AppComponentBase
   languages: abp.localization.ILanguageInfo[];
   currentLanguage: abp.localization.ILanguageInfo;
 
-  constructor(injector: Injector, private _userService: UserServiceProxy) {
+  constructor(injector: Injector, private _sessionService: SessionServiceProxy) {
     super(injector);
   }
 
@@ -34,10 +31,10 @@ export class HeaderLanguageMenuComponent extends AppComponentBase
   }
 
   changeLanguage(languageName: string): void {
-    const input = new ChangeUserLanguageDto();
+    const input = new ChangeLanguageInput();
     input.languageName = languageName;
 
-    this._userService.changeLanguage(input).subscribe(() => {
+    this._sessionService.changeLanguage(input).subscribe(() => {
       abp.utils.setCookieValue(
         'Abp.Localization.CultureName',
         languageName,

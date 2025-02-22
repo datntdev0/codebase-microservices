@@ -10,9 +10,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  UserServiceProxy,
-  CreateUserDto,
-  RoleDto
+  CreateUserInput,
+  RoleDto,
+  UsersServiceProxy
 } from '@shared/service-proxies/service-proxies';
 import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
 
@@ -22,7 +22,7 @@ import { AbpValidationError } from '@shared/components/validation/abp-validation
 export class CreateUserDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
-  user = new CreateUserDto();
+  user = new CreateUserInput();
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
   defaultRoleCheckedStatus = false;
@@ -44,7 +44,7 @@ export class CreateUserDialogComponent extends AppComponentBase
 
   constructor(
     injector: Injector,
-    public _userService: UserServiceProxy,
+    public _usersService: UsersServiceProxy,
     public bsModalRef: BsModalRef,
     private cd: ChangeDetectorRef
   ) {
@@ -54,7 +54,7 @@ export class CreateUserDialogComponent extends AppComponentBase
   ngOnInit(): void {
     this.user.isActive = true;
 
-    this._userService.getRoles().subscribe((result) => {
+    this._usersService.getRoles().subscribe((result) => {
       this.roles = result.items;
       this.setInitialRolesStatus();
       this.cd.detectChanges();
@@ -94,7 +94,7 @@ export class CreateUserDialogComponent extends AppComponentBase
 
     this.user.roleNames = this.getCheckedRoles();
 
-    this._userService.create(this.user).subscribe(
+    this._usersService.create(this.user).subscribe(
       () => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.bsModalRef.hide();

@@ -9,7 +9,7 @@ import {
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  TenantServiceProxy,
+  TenantsServiceProxy,
   TenantDto
 } from '@shared/service-proxies/service-proxies';
 
@@ -26,7 +26,7 @@ export class EditTenantDialogComponent extends AppComponentBase
 
   constructor(
     injector: Injector,
-    public _tenantService: TenantServiceProxy,
+    public _tenantsService: TenantsServiceProxy,
     public bsModalRef: BsModalRef,
     private cd: ChangeDetectorRef
   ) {
@@ -34,7 +34,7 @@ export class EditTenantDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
-    this._tenantService.get(this.id).subscribe((result: TenantDto) => {
+    this._tenantsService.get(this.id).subscribe((result: TenantDto) => {
       this.tenant = result;
       this.cd.detectChanges();
     });
@@ -43,7 +43,7 @@ export class EditTenantDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    this._tenantService.update(this.tenant).subscribe(
+    this._tenantsService.update(this.tenant).subscribe(
       () => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.bsModalRef.hide();

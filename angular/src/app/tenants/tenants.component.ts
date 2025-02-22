@@ -9,7 +9,7 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import { PagedListingComponentBase } from "@shared/paged-listing-component-base";
 import {
-  TenantServiceProxy,
+  TenantsServiceProxy,
   TenantDto,
   TenantDtoPagedResultDto,
 } from "@shared/service-proxies/service-proxies";
@@ -34,7 +34,7 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
 
   constructor(
     injector: Injector,
-    private _tenantService: TenantServiceProxy,
+    private _tenantsService: TenantsServiceProxy,
     private _modalService: BsModalService,
     private _activatedRoute: ActivatedRoute,
     cd: ChangeDetectorRef
@@ -57,11 +57,11 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
 
     this.primengTableHelper.showLoadingIndicator();
 
-    this._tenantService
+    this._tenantsService
       .getAll(
         this.keyword,
-        this.isActive,
         this.primengTableHelper.getSorting(this.dataTable),
+        this.isActive,
         this.primengTableHelper.getSkipCount(this.paginator, event),
         this.primengTableHelper.getMaxResultCount(this.paginator, event)
       )
@@ -84,7 +84,7 @@ export class TenantsComponent extends PagedListingComponentBase<TenantDto> {
       undefined,
       (result: boolean) => {
         if (result) {
-          this._tenantService
+          this._tenantsService
             .delete(tenant.id)
             .pipe(
               finalize(() => {

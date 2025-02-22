@@ -17,6 +17,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace datntdev.Microservice.Web.Host.Startup
 {
@@ -137,6 +138,10 @@ namespace datntdev.Microservice.Web.Host.Startup
                         Name = "MIT License",
                         Url = new Uri("https://github.com/aspnetboilerplate/aspnetboilerplate/blob/dev/LICENSE.md"),
                     }
+                });
+                options.CustomOperationIds(des => {
+                    var descriptor = des.ActionDescriptor as ControllerActionDescriptor;
+                    return $"{descriptor.ControllerName}_{descriptor.ActionName}";
                 });
                 options.DocInclusionPredicate((docName, description) => true);
 

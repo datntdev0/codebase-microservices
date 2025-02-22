@@ -11,7 +11,7 @@ import {
   PagedListingComponentBase,
 } from "@shared/paged-listing-component-base";
 import {
-  RoleServiceProxy,
+  RolesServiceProxy,
   RoleDto,
   RoleDtoPagedResultDto,
 } from "@shared/service-proxies/service-proxies";
@@ -34,7 +34,7 @@ export class RolesComponent extends PagedListingComponentBase<RoleDto> {
 
   constructor(
     injector: Injector,
-    private _rolesService: RoleServiceProxy,
+    private _rolesService: RolesServiceProxy,
     private _modalService: BsModalService,
     private _activatedRoute: ActivatedRoute,
     cd: ChangeDetectorRef

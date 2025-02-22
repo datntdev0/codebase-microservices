@@ -9,8 +9,8 @@ import {
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  CreateTenantDto,
-  TenantServiceProxy
+  CreateTenantInput,
+  TenantsServiceProxy
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -19,13 +19,13 @@ import {
 export class CreateTenantDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
-  tenant: CreateTenantDto = new CreateTenantDto();
+  tenant: CreateTenantInput = new CreateTenantInput();
 
   @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
-    public _tenantService: TenantServiceProxy,
+    public _tenantsService: TenantsServiceProxy,
     public bsModalRef: BsModalRef,
     private cd: ChangeDetectorRef
   ) {
@@ -40,7 +40,7 @@ export class CreateTenantDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    this._tenantService.create(this.tenant).subscribe(
+    this._tenantsService.create(this.tenant).subscribe(
       () => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.bsModalRef.hide();

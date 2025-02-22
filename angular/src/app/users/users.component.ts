@@ -9,9 +9,9 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import { PagedListingComponentBase } from "shared/paged-listing-component-base";
 import {
-  UserServiceProxy,
   UserDto,
   UserDtoPagedResultDto,
+  UsersServiceProxy,
 } from "@shared/service-proxies/service-proxies";
 import { CreateUserDialogComponent } from "./create-user/create-user-dialog.component";
 import { EditUserDialogComponent } from "./edit-user/edit-user-dialog.component";
@@ -35,7 +35,7 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
 
   constructor(
     injector: Injector,
-    private _userService: UserServiceProxy,
+    private _usersService: UsersServiceProxy,
     private _modalService: BsModalService,
     private _activatedRoute: ActivatedRoute,
     cd: ChangeDetectorRef
@@ -76,11 +76,11 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
 
     this.primengTableHelper.showLoadingIndicator();
 
-    this._userService
+    this._usersService
       .getAll(
         this.keyword,
-        this.isActive,
         this.primengTableHelper.getSorting(this.dataTable),
+        this.isActive,
         this.primengTableHelper.getSkipCount(this.paginator, event),
         this.primengTableHelper.getMaxResultCount(this.paginator, event)
       )
@@ -103,7 +103,7 @@ export class UsersComponent extends PagedListingComponentBase<UserDto> {
       undefined,
       (result: boolean) => {
         if (result) {
-          this._userService.delete(user.id).subscribe(() => {
+          this._usersService.delete(user.id).subscribe(() => {
             abp.notify.success(this.l("SuccessfullyDeleted"));
             this.refresh();
           });

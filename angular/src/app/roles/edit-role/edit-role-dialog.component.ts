@@ -1,22 +1,20 @@
 import {
+  ChangeDetectorRef,
   Component,
+  EventEmitter,
   Injector,
   OnInit,
-  EventEmitter,
   Output,
-  ChangeDetectorRef,
 } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  RoleServiceProxy,
-  GetRoleForEditOutput,
-  RoleDto,
   PermissionDto,
-  RoleEditDto,
-  FlatPermissionDto
+  PermissionDtoListResultDto,
+  RoleDto,
+  RolesServiceProxy
 } from '@shared/service-proxies/service-proxies';
+import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   templateUrl: 'edit-role-dialog.component.html'
@@ -25,8 +23,8 @@ export class EditRoleDialogComponent extends AppComponentBase
   implements OnInit {
   saving = false;
   id: number;
-  role = new RoleEditDto();
-  permissions: FlatPermissionDto[];
+  role = new RoleDto();
+  permissions: PermissionDto[];
   grantedPermissionNames: string[];
   checkedPermissionsMap: { [key: string]: boolean } = {};
 
@@ -34,7 +32,7 @@ export class EditRoleDialogComponent extends AppComponentBase
 
   constructor(
     injector: Injector,
-    private _roleService: RoleServiceProxy,
+    private _rolesService: RolesServiceProxy,
     public bsModalRef: BsModalRef,
     private cd: ChangeDetectorRef
   ) {
@@ -42,14 +40,18 @@ export class EditRoleDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
-    this._roleService
-      .getRoleForEdit(this.id)
-      .subscribe((result: GetRoleForEditOutput) => {
-        this.role = result.role;
-        this.permissions = result.permissions;
-        this.grantedPermissionNames = result.grantedPermissionNames;
+    this._rolesService
+      .get(this.id)
+      .subscribe((result: RoleDto) => {
+        this.role = result;
+        this.grantedPermissionNames = result.grantedPermissions;
         this.setInitialPermissionsStatus();
         this.cd.detectChanges();
+      });
+    this._rolesService
+      .getPermissions()
+      .subscribe((result: PermissionDtoListResultDto) => {
+        this.permissions = result.items;
       });
   }
 
@@ -65,7 +67,7 @@ export class EditRoleDialogComponent extends AppComponentBase
     return _includes(this.grantedPermissionNames, permissionName);
   }
 
-  onPermissionChange(permission: FlatPermissionDto, $event) {
+  onPermissionChange(permission: PermissionDto, $event) {
     this.checkedPermissionsMap[permission.name] = $event.target.checked;
   }
 
@@ -86,7 +88,7 @@ export class EditRoleDialogComponent extends AppComponentBase
     role.init(this.role);
     role.grantedPermissions = this.getCheckedPermissions();
 
-    this._roleService.update(role).subscribe(
+    this._rolesService.update(role).subscribe(
       () => {
         this.notify.info(this.l('SavedSuccessfully'));
         this.bsModalRef.hide();

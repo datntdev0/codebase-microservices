@@ -7,7 +7,7 @@
           type="text"
           class="form-control"
           name="userNameOrEmailAddress"
-          [(ngModel)]="authService.authenticateModel.userNameOrEmailAddress"
+          [(ngModel)]="authService.loginInput.userNameOrEmailAddress"
           [placeholder]="'UserNameOrEmail' | localize"
           required
           maxlength="256"
@@ -31,7 +31,7 @@
             type="password"
             class="form-control"
             name="password"
-            [(ngModel)]="authService.authenticateModel.password"
+            [(ngModel)]="authService.loginInput.password"
             [placeholder]="'Password' | localize"
             required
             maxlength="32"

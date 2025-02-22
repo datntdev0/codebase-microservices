@@ -1,12 +1,8 @@
 import { Component, Injector } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
-import { AccountServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppTenantAvailabilityState } from '@shared/AppEnums';
-import {
-  IsTenantAvailableInput,
-  IsTenantAvailableOutput
-} from '@shared/service-proxies/service-proxies';
+import { AuthServiceProxy, GetTenantStatusOutput } from '@shared/service-proxies/service-proxies';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   templateUrl: './tenant-change-dialog.component.html'
@@ -17,7 +13,7 @@ export class TenantChangeDialogComponent extends AppComponentBase {
 
   constructor(
     injector: Injector,
-    private _accountService: AccountServiceProxy,
+    private _authService: AuthServiceProxy,
     public bsModalRef: BsModalRef
   ) {
     super(injector);
@@ -31,12 +27,9 @@ export class TenantChangeDialogComponent extends AppComponentBase {
       return;
     }
 
-    const input = new IsTenantAvailableInput();
-    input.tenancyName = this.tenancyName;
-
     this.saving = true;
-    this._accountService.isTenantAvailable(input).subscribe(
-      (result: IsTenantAvailableOutput) => {
+    this._authService.getTenantStatus(this.tenancyName).subscribe(
+      (result: GetTenantStatusOutput) => {
         switch (result.state) {
           case AppTenantAvailabilityState.Available:
             abp.multiTenancy.setTenantIdCookie(result.tenantId);

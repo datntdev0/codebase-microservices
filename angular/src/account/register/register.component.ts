@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  AccountServiceProxy,
+  AuthServiceProxy,
   RegisterInput,
   RegisterOutput
 } from '@shared/service-proxies/service-proxies';
@@ -20,7 +20,7 @@ export class RegisterComponent extends AppComponentBase {
 
   constructor(
     injector: Injector,
-    private _accountService: AccountServiceProxy,
+    private _authService: AuthServiceProxy,
     private _router: Router,
     private authService: AppAuthService
   ) {
@@ -29,7 +29,7 @@ export class RegisterComponent extends AppComponentBase {
 
   save(): void {
     this.saving = true;
-    this._accountService
+    this._authService
       .register(this.model)
       .pipe(
         finalize(() => {
@@ -45,9 +45,9 @@ export class RegisterComponent extends AppComponentBase {
 
         // Autheticate
         this.saving = true;
-        this.authService.authenticateModel.userNameOrEmailAddress = this.model.userName;
-        this.authService.authenticateModel.password = this.model.password;
-        this.authService.authenticate(() => {
+        this.authService.loginInput.userNameOrEmailAddress = this.model.userName;
+        this.authService.loginInput.password = this.model.password;
+        this.authService.login(() => {
           this.saving = false;
         });
       });
