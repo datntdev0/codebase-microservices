@@ -4,7 +4,7 @@ using datntdev.Microservice.Authorization.Roles;
 using AutoMapper;
 using System.Linq;
 
-namespace datntdev.Microservice.Roles.Dto;
+namespace datntdev.Microservice.Authorization.Roles.Dto;
 
 public class RoleMapProfile : Profile
 {
@@ -14,15 +14,12 @@ public class RoleMapProfile : Profile
         CreateMap<Permission, string>().ConvertUsing(r => r.Name);
         CreateMap<RolePermissionSetting, string>().ConvertUsing(r => r.Name);
 
-        CreateMap<CreateRoleDto, Role>();
+        CreateMap<CreateRoleInput, Role>();
 
         CreateMap<RoleDto, Role>();
 
-        CreateMap<Role, RoleDto>().ForMember(x => x.GrantedPermissions,
-            opt => opt.MapFrom(x => x.Permissions.Where(p => p.IsGranted)));
-
-        CreateMap<Role, RoleListDto>();
-        CreateMap<Role, RoleEditDto>();
-        CreateMap<Permission, FlatPermissionDto>();
+        CreateMap<Role, RoleDto>()
+            .ForMember(x => x.GrantedPermissions,
+                opt => opt.MapFrom(x => x.Permissions.Where(p => p.IsGranted)));
     }
 }

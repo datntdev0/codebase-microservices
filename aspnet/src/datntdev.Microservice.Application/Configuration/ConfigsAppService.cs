@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace datntdev.Microservice.Configuration;
 
 [AbpAuthorize]
-public class ConfigAppService : MicroserviceAppServiceBase, IConfigAppService
+public class ConfigsAppService : MicroserviceAppServiceBase, IConfigsAppService
 {
-    public async Task ChangeSettingAsync(ChangeSettingInput input)
+    public async Task UpdateAsync(ChangeSettingInput input)
     {
         await SettingManager.ChangeSettingForUserAsync(AbpSession.ToUserIdentifier(), AppSettingNames.AppExampleSetting, input.Value);
     }

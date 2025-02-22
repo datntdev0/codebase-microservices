@@ -20,6 +20,8 @@ namespace datntdev.Abp.Web.Core.Mvc.Conventions;
 
 public class AbpAppServiceConvention : IApplicationModelConvention
 {
+    private static readonly string[] CommonVerbPrefixes = ["Create", "Update", "Delete", "Get", "Patch"];
+
     private readonly Lazy<AbpWebCoreConfiguration> _configuration;
 
     public AbpAppServiceConvention(IServiceCollection services)
@@ -260,7 +262,7 @@ public class AbpAppServiceConvention : IApplicationModelConvention
             if (!selector.ActionConstraints.OfType<HttpMethodActionConstraint>().Any())
             {
                 var httpMethod = SelectHttpMethod(action, configuration);
-                selector.ActionConstraints.Add(new HttpMethodActionConstraint(new[] { httpMethod }));
+                selector.ActionConstraints.Add(new HttpMethodActionConstraint([httpMethod]));
             }
 
             if (selector.AttributeRouteModel == null)
@@ -289,9 +291,29 @@ public class AbpAppServiceConvention : IApplicationModelConvention
 
     private static AttributeRouteModel CreateAbpServiceAttributeRouteModel(string moduleName, string controllerName, ActionModel action)
     {
+        controllerName = controllerName.ToKebabCase();
+        if (((string[])["GetAllAsync", "CreateAsync", "UpdateAsync"]).Contains(action.ActionMethod.Name))
+        {
+            return new AttributeRouteModel(
+                new RouteAttribute(
+                    $"api/services/{moduleName}/{controllerName}"
+                )
+            );
+        }
+
+        if (((string[])["GetAsync", "DeleteAsync"]).Contains(action.ActionMethod.Name))
+        {
+            return new AttributeRouteModel(
+                new RouteAttribute(
+                    $"api/services/{moduleName}/{controllerName}/{{id}}"
+                )
+            );
+        }
+
+        var actionName = action.ActionName.RemovePreFix(CommonVerbPrefixes).ToKebabCase();
         return new AttributeRouteModel(
             new RouteAttribute(
-                $"api/services/{moduleName}/{controllerName}/{action.ActionName}"
+                $"api/services/{moduleName}/{controllerName}/{actionName}"
             )
         );
     }

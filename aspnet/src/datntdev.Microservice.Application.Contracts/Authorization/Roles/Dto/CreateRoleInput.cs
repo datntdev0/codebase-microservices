@@ -1,11 +1,9 @@
 using datntdev.Abp.Authorization.Roles;
-using datntdev.Microservice.Authorization.Roles;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace datntdev.Microservice.Roles.Dto;
+namespace datntdev.Microservice.Authorization.Roles.Dto;
 
-public class CreateRoleDto
+public class CreateRoleInput
 {
     [Required]
     [StringLength(AbpRoleBase.MaxNameLength)]
@@ -22,7 +20,7 @@ public class CreateRoleDto
 
     public List<string> GrantedPermissions { get; set; }
 
-    public CreateRoleDto()
+    public CreateRoleInput()
     {
         GrantedPermissions = new List<string>();
     }

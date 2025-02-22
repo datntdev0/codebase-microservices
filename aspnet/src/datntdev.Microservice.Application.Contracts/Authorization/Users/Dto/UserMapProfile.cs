@@ -1,7 +1,7 @@
 ﻿using datntdev.Microservice.Authorization.Users;
 using AutoMapper;
 
-namespace datntdev.Microservice.Users.Dto;
+namespace datntdev.Microservice.Authorization.Users.Dto;
 
 public class UserMapProfile : Profile
 {
@@ -12,7 +12,7 @@ public class UserMapProfile : Profile
             .ForMember(x => x.Roles, opt => opt.Ignore())
             .ForMember(x => x.CreationTime, opt => opt.Ignore());
 
-        CreateMap<CreateUserDto, User>();
-        CreateMap<CreateUserDto, User>().ForMember(x => x.Roles, opt => opt.Ignore());
+        CreateMap<CreateUserInput, User>();
+        CreateMap<CreateUserInput, User>().ForMember(x => x.Roles, opt => opt.Ignore());
     }
 }

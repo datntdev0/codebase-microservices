@@ -3,7 +3,7 @@ using datntdev.Microservice.MultiTenancy.Dto;
 
 namespace datntdev.Microservice.MultiTenancy;
 
-public interface ITenantAppService : IAsyncCrudAppService<TenantDto, int, PagedTenantResultRequestDto, CreateTenantDto, TenantDto>
+public interface ITenantsAppService : IAsyncCrudAppService<TenantDto, int, PagedTenantResultInput, CreateTenantInput, TenantDto>
 {
 }
 

@@ -1,15 +1,13 @@
 ﻿using datntdev.Abp.Application.Services.Dto;
 using datntdev.Abp.Runtime.Validation;
 
-namespace datntdev.Microservice.Users.Dto;
+namespace datntdev.Microservice.Authorization.Users.Dto;
 
-//custom PagedResultRequestDto
-public class PagedUserResultRequestDto : PagedResultRequestDto, IShouldNormalize
+public class PagedUserResultInput : PagedResultRequestDto, IShouldNormalize
 {
-    public string Keyword { get; set; }
+    public string Keyword { get; set; } = string.Empty;
+    public string Sorting { get; set; } = string.Empty;
     public bool? IsActive { get; set; }
-
-    public string Sorting { get; set; }
 
     public void Normalize()
     {
@@ -18,6 +16,6 @@ public class PagedUserResultRequestDto : PagedResultRequestDto, IShouldNormalize
             Sorting = "UserName,EmailAddress";
         }
 
-        Keyword = Keyword?.Trim();
+        Keyword = Keyword.Trim();
     }
 }

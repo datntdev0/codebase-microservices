@@ -2,7 +2,7 @@ using datntdev.Abp.Application.Services.Dto;
 using datntdev.Abp.Authorization;
 using datntdev.Abp.AutoMapper;
 
-namespace datntdev.Microservice.Roles.Dto;
+namespace datntdev.Microservice.Authorization.Roles.Dto;
 
 [AutoMapFrom(typeof(Permission))]
 public class PermissionDto : EntityDto<long>

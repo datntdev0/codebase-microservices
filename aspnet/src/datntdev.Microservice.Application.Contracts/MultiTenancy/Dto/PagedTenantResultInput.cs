@@ -3,12 +3,12 @@ using datntdev.Abp.Runtime.Validation;
 
 namespace datntdev.Microservice.MultiTenancy.Dto;
 
-public class PagedTenantResultRequestDto : PagedResultRequestDto, IShouldNormalize
+public class PagedTenantResultInput : PagedResultRequestDto, IShouldNormalize
 {
-    public string Keyword { get; set; }
+    public string Keyword { get; set; } = string.Empty;
+    public string Sorting { get; set; } = string.Empty;
     public bool? IsActive { get; set; }
 
-    public string Sorting { get; set; }
 
     public void Normalize()
     {
@@ -17,7 +17,7 @@ public class PagedTenantResultRequestDto : PagedResultRequestDto, IShouldNormali
             Sorting = "TenancyName,Name";
         }
 
-        Keyword = Keyword?.Trim();
+        Keyword = Keyword.Trim();
     }
 }
 

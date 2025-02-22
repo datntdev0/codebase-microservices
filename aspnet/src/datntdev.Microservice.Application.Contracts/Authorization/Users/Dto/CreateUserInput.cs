@@ -5,10 +5,10 @@ using datntdev.Abp.Runtime.Validation;
 using datntdev.Microservice.Authorization.Users;
 using System.ComponentModel.DataAnnotations;
 
-namespace datntdev.Microservice.Users.Dto;
+namespace datntdev.Microservice.Authorization.Users.Dto;
 
 [AutoMapTo(typeof(User))]
-public class CreateUserDto : IShouldNormalize
+public class CreateUserInput : IShouldNormalize
 {
     [Required]
     [StringLength(AbpUserBase.MaxUserNameLength)]

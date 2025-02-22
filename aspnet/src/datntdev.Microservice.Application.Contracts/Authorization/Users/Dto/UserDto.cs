@@ -5,7 +5,7 @@ using datntdev.Microservice.Authorization.Users;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace datntdev.Microservice.Users.Dto;
+namespace datntdev.Microservice.Authorization.Users.Dto;
 
 [AutoMapFrom(typeof(User))]
 public class UserDto : EntityDto<long>

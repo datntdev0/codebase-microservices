@@ -11,7 +11,7 @@ namespace datntdev.Abp.Extensions
     /// <summary>
     /// Extension methods for String class.
     /// </summary>
-    public static class StringExtensions
+    public static partial class StringExtensions
     {
         /// <summary>
         /// Adds a char to end of given string if it does not ends with the char.
@@ -469,6 +469,14 @@ namespace datntdev.Abp.Extensions
             }
 
             return char.ToUpper(str[0], culture) + str.Substring(1);
+        }
+
+        [GeneratedRegex("([a-z])([A-Z])")]
+        private static partial Regex KebabConversionRegex();
+
+        public static string ToKebabCase(this string str)
+        {
+            return KebabConversionRegex().Replace(str, "$1-$2").ToLower();
         }
 
         /// <summary>

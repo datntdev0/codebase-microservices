@@ -1,10 +1,9 @@
 using datntdev.Abp.Application.Services.Dto;
 using datntdev.Abp.Authorization.Roles;
 using datntdev.Microservice.Authorization.Roles;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace datntdev.Microservice.Roles.Dto;
+namespace datntdev.Microservice.Authorization.Roles.Dto;
 
 public class RoleDto : EntityDto<int>
 {

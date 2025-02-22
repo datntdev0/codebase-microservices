@@ -2,7 +2,7 @@
 
 namespace datntdev.Microservice.Configuration;
 
-public interface IConfigAppService
+public interface IConfigsAppService
 {
-    Task ChangeSettingAsync(ChangeSettingInput input);
+    Task UpdateAsync(ChangeSettingInput input);
 }

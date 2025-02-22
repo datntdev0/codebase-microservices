@@ -6,15 +6,14 @@ using datntdev.Abp.Domain.Repositories;
 using datntdev.Abp.Extensions;
 using datntdev.Abp.IdentityFramework;
 using datntdev.Abp.Linq.Extensions;
-using datntdev.Abp.Localization;
 using datntdev.Abp.Runtime.Session;
 using datntdev.Abp.UI;
 using datntdev.Microservice.Authorization.Permissions;
 using datntdev.Microservice.Authorization.Roles;
 using datntdev.Microservice.Identity;
-using datntdev.Microservice.Roles.Dto;
-using datntdev.Microservice.Users;
-using datntdev.Microservice.Users.Dto;
+using datntdev.Microservice.Authorization.Roles.Dto;
+using datntdev.Microservice.Authorization.Users;
+using datntdev.Microservice.Authorization.Users.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,7 +25,7 @@ using System.Threading.Tasks;
 namespace datntdev.Microservice.Authorization.Users;
 
 [AbpAuthorize(PermissionNames.Pages_Users)]
-public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
+public class UsersAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultInput, CreateUserInput, UserDto>, IUsersAppService
 {
     private readonly UserManager _userManager;
     private readonly RoleManager _roleManager;
@@ -35,7 +34,7 @@ public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUser
     private readonly IAbpSession _abpSession;
     private readonly LogInManager _logInManager;
 
-    public UserAppService(
+    public UsersAppService(
         IRepository<User, long> repository,
         UserManager userManager,
         RoleManager roleManager,
@@ -53,7 +52,7 @@ public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUser
         _logInManager = logInManager;
     }
 
-    public override async Task<UserDto> CreateAsync(CreateUserDto input)
+    public override async Task<UserDto> CreateAsync(CreateUserInput input)
     {
         CheckCreatePermission();
 
@@ -91,17 +90,23 @@ public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUser
             CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
         }
 
-        return await GetAsync(input);
+        return await GetAsync(input.Id);
     }
 
-    public override async Task DeleteAsync(EntityDto<long> input)
+    public override async Task DeleteAsync(long id)
     {
-        var user = await _userManager.GetUserByIdAsync(input.Id);
+        var user = await _userManager.GetUserByIdAsync(id);
         await _userManager.DeleteAsync(user);
     }
 
+    public async Task<ListResultDto<RoleDto>> GetRolesAsync()
+    {
+        var roles = await _roleRepository.GetAllListAsync();
+        return new ListResultDto<RoleDto>(ObjectMapper.Map<List<RoleDto>>(roles));
+    }
+
     [AbpAuthorize(PermissionNames.Pages_Users_Activation)]
-    public async Task Activate(EntityDto<long> user)
+    public async Task ActivateAsync(EntityDto<long> user)
     {
         await Repository.UpdateAsync(user.Id, async (entity) =>
         {
@@ -110,7 +115,7 @@ public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUser
     }
 
     [AbpAuthorize(PermissionNames.Pages_Users_Activation)]
-    public async Task DeActivate(EntityDto<long> user)
+    public async Task DeactivateAsync(EntityDto<long> user)
     {
         await Repository.UpdateAsync(user.Id, async (entity) =>
         {
@@ -118,67 +123,7 @@ public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUser
         });
     }
 
-    public async Task<ListResultDto<RoleDto>> GetRoles()
-    {
-        var roles = await _roleRepository.GetAllListAsync();
-        return new ListResultDto<RoleDto>(ObjectMapper.Map<List<RoleDto>>(roles));
-    }
-
-    protected override User MapToEntity(CreateUserDto createInput)
-    {
-        var user = ObjectMapper.Map<User>(createInput);
-        user.SetNormalizedNames();
-        return user;
-    }
-
-    protected override void MapToEntity(UserDto input, User user)
-    {
-        ObjectMapper.Map(input, user);
-        user.SetNormalizedNames();
-    }
-
-    protected override UserDto MapToEntityDto(User user)
-    {
-        var roleIds = user.Roles.Select(x => x.RoleId).ToArray();
-
-        var roles = _roleManager.Roles.Where(r => roleIds.Contains(r.Id)).Select(r => r.NormalizedName);
-
-        var userDto = base.MapToEntityDto(user);
-        userDto.RoleNames = roles.ToArray();
-
-        return userDto;
-    }
-
-    protected override IQueryable<User> CreateFilteredQuery(PagedUserResultRequestDto input)
-    {
-        return Repository.GetAllIncluding(x => x.Roles)
-            .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.Keyword) || x.Name.Contains(input.Keyword) || x.EmailAddress.Contains(input.Keyword))
-            .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive);
-    }
-
-    protected override async Task<User> GetEntityByIdAsync(long id)
-    {
-        var user = await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
-
-        if (user == null)
-        {
-            throw new EntityNotFoundException(typeof(User), id);
-        }
-
-        return user;
-    }
-
-    protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedUserResultRequestDto input)
-    {
-        return query.OrderBy(input.Sorting);
-    }
-
-    protected virtual void CheckErrors(IdentityResult identityResult)
-    {
-        identityResult.CheckErrors(LocalizationManager);
-    }
-
-    public async Task<bool> ResetPassword(ResetPasswordDto input)
+    public async Task<bool> ResetPassword(ResetPasswordInput input)
     {
         if (_abpSession.UserId == null)
         {
@@ -212,5 +157,60 @@ public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUser
 
         return true;
     }
+
+    protected override User MapToEntity(CreateUserInput createInput)
+    {
+        var user = ObjectMapper.Map<User>(createInput);
+        user.SetNormalizedNames();
+        return user;
+    }
+
+    protected override void MapToEntity(UserDto input, User user)
+    {
+        ObjectMapper.Map(input, user);
+        user.SetNormalizedNames();
+    }
+
+    protected override UserDto MapToEntityDto(User user)
+    {
+        var roleIds = user.Roles.Select(x => x.RoleId).ToArray();
+
+        var roles = _roleManager.Roles.Where(r => roleIds.Contains(r.Id)).Select(r => r.NormalizedName);
+
+        var userDto = base.MapToEntityDto(user);
+        userDto.RoleNames = roles.ToArray();
+
+        return userDto;
+    }
+
+    protected override IQueryable<User> CreateFilteredQuery(PagedUserResultInput input)
+    {
+        return Repository.GetAllIncluding(x => x.Roles)
+            .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.Keyword) || x.Name.Contains(input.Keyword) || x.EmailAddress.Contains(input.Keyword))
+            .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive);
+    }
+
+    protected override async Task<User> GetEntityByIdAsync(long id)
+    {
+        var user = await Repository.GetAllIncluding(x => x.Roles).FirstOrDefaultAsync(x => x.Id == id);
+
+        if (user == null)
+        {
+            throw new EntityNotFoundException(typeof(User), id);
+        }
+
+        return user;
+    }
+
+    protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedUserResultInput input)
+    {
+        return query.OrderBy(input.Sorting);
+    }
+
+    protected virtual void CheckErrors(IdentityResult identityResult)
+    {
+        identityResult.CheckErrors(LocalizationManager);
+    }
+
 }
 

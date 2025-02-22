@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 namespace datntdev.Microservice.MultiTenancy;
 
 [AbpAuthorize(PermissionNames.Pages_Tenants)]
-public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedTenantResultRequestDto, CreateTenantDto, TenantDto>, ITenantAppService
+public class TenantsAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedTenantResultInput, CreateTenantInput, TenantDto>, ITenantsAppService
 {
     private readonly TenantManager _tenantManager;
     private readonly EditionManager _editionManager;
@@ -28,7 +28,7 @@ public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, Page
     private readonly RoleManager _roleManager;
     private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
 
-    public TenantAppService(
+    public TenantsAppService(
         IRepository<Tenant, int> repository,
         TenantManager tenantManager,
         EditionManager editionManager,
@@ -44,7 +44,7 @@ public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, Page
         _abpZeroDbMigrator = abpZeroDbMigrator;
     }
 
-    public override async Task<TenantDto> CreateAsync(CreateTenantDto input)
+    public override async Task<TenantDto> CreateAsync(CreateTenantInput input)
     {
         CheckCreatePermission();
 
@@ -92,14 +92,14 @@ public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, Page
         return MapToEntityDto(tenant);
     }
 
-    protected override IQueryable<Tenant> CreateFilteredQuery(PagedTenantResultRequestDto input)
+    protected override IQueryable<Tenant> CreateFilteredQuery(PagedTenantResultInput input)
     {
         return Repository.GetAll()
             .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.TenancyName.Contains(input.Keyword) || x.Name.Contains(input.Keyword))
             .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive);
     }
 
-    protected override IQueryable<Tenant> ApplySorting(IQueryable<Tenant> query, PagedTenantResultRequestDto input)
+    protected override IQueryable<Tenant> ApplySorting(IQueryable<Tenant> query, PagedTenantResultInput input)
     {
         return query.OrderBy(input.Sorting);
     }
@@ -112,11 +112,11 @@ public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, Page
         entity.IsActive = updateInput.IsActive;
     }
 
-    public override async Task DeleteAsync(EntityDto<int> input)
+    public override async Task DeleteAsync(int id)
     {
         CheckDeletePermission();
 
-        var tenant = await _tenantManager.GetByIdAsync(input.Id);
+        var tenant = await _tenantManager.GetByIdAsync(id);
         await _tenantManager.DeleteAsync(tenant);
     }
 

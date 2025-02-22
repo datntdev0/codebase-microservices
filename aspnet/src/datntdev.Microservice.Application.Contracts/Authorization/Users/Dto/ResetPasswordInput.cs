@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace datntdev.Microservice.Users.Dto;
+namespace datntdev.Microservice.Authorization.Users.Dto;
 
-public class ResetPasswordDto
+public class ResetPasswordInput
 {
     [Required]
     public string AdminPassword { get; set; }
