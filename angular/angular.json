@@ -15,13 +15,15 @@
               "base": "dist"
             },
             "index": "src/index.html",
-            "tsConfig": "src/tsconfig.json",
+            "tsConfig": "src/tsconfig.app.json",
             "polyfills": [
               "src/polyfills.ts"
             ],
             "assets": [
-              "src/assets",
-              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "public"
+              },
               {
                 "glob": "abp.signalr.js",
                 "input": "src/_lib/scripts/libs",
@@ -33,25 +35,11 @@
                 "output": "/assets/abp"
               }
             ],
-            "styles": [
-              "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
-              "node_modules/sweetalert2/dist/sweetalert2.css",
-              "src/assets/freeze-ui/freeze-ui.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/admin-lte-css-only/css/adminlte.min.css",
-              "src/shared/core.less",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css"
-            ],
+            "styles": [],
             "scripts": [
-              "node_modules/moment/min/moment.min.js",
               "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
-              "node_modules/sweetalert2/dist/sweetalert2.js",
-              "src/assets/freeze-ui/freeze-ui.js",
-              "node_modules/push.js/bin/push.min.js",
+              "node_modules/moment/min/moment.min.js",
               "src/_lib/scripts/abp.js",
-              "src/assets/abp-web-resources/abp.sweet-alert.js",
-              "src/assets/abp-web-resources/abp.freeze-ui.js",
               "src/_lib/scripts/libs/abp.moment.js"
             ],
             "extractLicenses": false,
@@ -75,8 +63,8 @@
               "extractLicenses": true,
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "src/_environments/environment.ts",
+                  "with": "src/_environments/environment.prod.ts"
                 }
               ]
             },
@@ -89,8 +77,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.hmr.ts"
+                  "replace": "src/_environments/environment.ts",
+                  "with": "src/_environments/environment.hmr.ts"
                 }
               ]
             }
@@ -125,7 +113,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "assets": [
-              "src/assets",
+              "src/_assets",
               "src/favicon.ico",
               {
                 "glob": "abp.signalr.js",
@@ -141,7 +129,7 @@
             "styles": [
               "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
               "node_modules/sweetalert2/dist/sweetalert2.css",
-              "src/assets/freeze-ui/freeze-ui.css",
+              "src/_assets/freeze-ui/freeze-ui.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte-css-only/css/adminlte.min.css",
               "src/shared/core.less"
@@ -150,11 +138,11 @@
               "node_modules/moment/min/moment.min.js",
               "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
-              "src/assets/freeze-ui/freeze-ui.js",
+              "src/_assets/freeze-ui/freeze-ui.js",
               "node_modules/push.js/bin/push.min.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
-              "src/assets/abp-web-resources/abp.sweet-alert.js",
-              "src/assets/abp-web-resources/abp.freeze-ui.js",
+              "src/_assets/abp-web-resources/abp.sweet-alert.js",
+              "src/_assets/abp-web-resources/abp.freeze-ui.js",
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
             ]
           }

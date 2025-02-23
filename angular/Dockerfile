@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 # This is a workaround to avoid updating appconfig.production.json file. 
 # If you prefer to updating appconfig.production.json file instead of appconfig.container.json please delete this line.
-RUN mv ./src/assets/appconfig.container.json ./src/assets/appconfig.production.json
+RUN mv ./src/_assets/appconfig.container.json ./src/_assets/appconfig.production.json
 RUN yarn install
 RUN yarn run ng build --configuration production
 # stage 2

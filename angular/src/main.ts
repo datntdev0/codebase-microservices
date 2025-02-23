@@ -1,6 +1,6 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { environment } from './environments/environment';
+import { environment } from './_environments/environment';
 import { RootModule } from './root.module';
 import { hmrBootstrap } from './hmr';
 

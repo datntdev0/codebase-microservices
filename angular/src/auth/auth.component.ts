@@ -8,11 +8,11 @@ import {
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-    templateUrl: './account.component.html',
+    templateUrl: 'auth.component.html',
     encapsulation: ViewEncapsulation.None,
     standalone: false
 })
-export class AccountComponent extends AppComponentBase implements OnInit {
+export class AuthComponent extends AppComponentBase implements OnInit {
   constructor(injector: Injector, private renderer: Renderer2) {
     super(injector);
   }

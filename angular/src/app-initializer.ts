@@ -5,7 +5,7 @@ import * as moment from 'moment-timezone';
 import { filter as _filter, merge as _merge } from 'lodash-es';
 import { AppConsts } from '@shared/AppConsts';
 import { AppSessionService } from '@shared/session/app-session.service';
-import { environment } from './environments/environment';
+import { environment } from './_environments/environment';
 import { SubdomainTenantResolver } from '@shared/multi-tenancy/tenant-resolvers/subdomain-tenant-resolver';
 import { QueryStringTenantResolver } from '@shared/multi-tenancy/tenant-resolvers/query-string-tenant-resolver';
 import { AuthServiceProxy, GetTenantStatusOutput, TenantAvailabilityState } from '@shared/service-proxies/service-proxies';
@@ -131,7 +131,7 @@ export class AppInitializer {
 
   private getApplicationConfig(appRootUrl: string, callback: () => void) {
     this._httpClient
-      .get<any>(`${appRootUrl}assets/${environment.appConfig}`, {
+      .get<any>(`${appRootUrl}configs/${environment.appConfig}`, {
         headers: {
           'Abp.TenantId': `${abp.multiTenancy.getTenantIdCookie()}`,
         },

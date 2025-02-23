@@ -1412,11 +1412,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.24.2.tgz#34aa0b52d0fbb1a654b596acfa595f0c7b77a77b"
   integrity sha512-7VTgWzgMGvup6aSqDPLiW5zHaxYJGTO4OokMjIlrCtf+VpEL+cXKtCvg723iguPYI5oaUNdS+/V7OU2gvXVWEg==
 
-"@fortawesome/fontawesome-free@^6.6.0":
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.6.0.tgz#0e984f0f2344ee513c185d87d77defac4c0c8224"
-  integrity sha512-60G28ke/sXdtS9KZCpZSHHkCbdsOGEhIUGlwq6yhY74UpTiToIh8np7A8yphhM4BWsvNFtIvLpi4co+h9Mr9Ow==
-
 "@inquirer/checkbox@^4.0.4":
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/@inquirer/checkbox/-/checkbox-4.1.2.tgz#a12079f6aff68253392a1955d1a202eb9ac2e207"
@@ -2744,11 +2739,6 @@ adm-zip@^0.5.2:
   version "0.5.14"
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.5.14.tgz#2c557c0bf12af4311cf6d32970f4060cf8133b2a"
   integrity sha512-DnyqqifT4Jrcvb8USYjp6FHtBpEIz1mnXu6pTRHZ0RL69LbQYiO+0lDFg5+OKA7U29oWSs3a/i8fhn8ZcceIWg==
-
-admin-lte-css-only@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/admin-lte-css-only/-/admin-lte-css-only-3.2.0.tgz#05d6d66afeb95bc0367f0e67a61260b37ec1a20d"
-  integrity sha512-4g+ti2ruv7SjLGiNBwYA7Y2m2bPjAwcCrAPPUxtu3A9EBrspedD7rmm1FlEYmekNlLalRpyXCxHqcFhNdjW3vg==
 
 agent-base@^4.3.0:
   version "4.3.0"
@@ -4239,11 +4229,6 @@ extsprintf@^1.2.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.1.tgz#8d172c064867f235c0c84a596806d279bf4bcc07"
   integrity sha512-Wrk35e8ydCKDj/ArClo1VrPVmN8zph5V4AtHwIuHhvMXsKf73UT3BOD+azBIW+3wOJ4FhEH7zyaJCFvChjYvMA==
-
-famfamfam-flags@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/famfamfam-flags/-/famfamfam-flags-1.0.0.tgz#cd78f776173a2c5962713310dd70c1b141d1103c"
-  integrity sha512-l7F0/L1I1eozNN9oLoXgqHzBCFjrhuuDwwZkuo9fOHPrreS61bV3Qft+IMyYAqjibnGjTU9/2WovGccSvNYahQ==
 
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
@@ -6602,11 +6587,6 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.1.tgz#027422e2faec0b25e1549c3e1bd8309b9133b6e5"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
-push.js@1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/push.js/-/push.js-1.0.12.tgz#5703a03f5d286cd46d58564cb27bc079898d26b1"
-  integrity sha512-Mo/zkrPD58hcbMvC/9WveUPGz0PJ4T5UwQJP6DnMYbyxe7b1xM/9qqmJTMmDcprbZjCtLzf9wWtek7gA8O9QBw==
-
 q@1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
@@ -7638,11 +7618,6 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
-
-sweetalert2@^11.12.2:
-  version "11.12.3"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.12.3.tgz#ce272d8c8d0754090a77465b89769d45430e6199"
-  integrity sha512-tgGJSgfSV/xK113JEvhjwqKAuBYLXsZf0z+tGlHKQNnsLMi4eSNuzn9tt5hUdvjOVTLSPDgo0Lc+tnjy9Uj7Og==
 
 symbol-observable@4.0.0:
   version "4.0.0"

@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientJsonpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { AccountRoutingModule } from './account-routing.module';
+import { AuthRoutingModule } from './auth-routing.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { SharedModule } from '@shared/shared.module';
-import { AccountComponent } from './account.component';
+import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountLanguagesComponent } from './layout/account-languages.component';
@@ -26,11 +26,11 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         HttpClientJsonpModule,
         SharedModule,
         ServiceProxyModule,
-        AccountRoutingModule,
+        AuthRoutingModule,
         ModalModule.forChild()
     ],
     declarations: [
-        AccountComponent,
+        AuthComponent,
         LoginComponent,
         RegisterComponent,
         AccountLanguagesComponent,
@@ -41,6 +41,4 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         TenantChangeDialogComponent,
     ]
 })
-export class AccountModule {
-
-}
+export class AuthModule { }
