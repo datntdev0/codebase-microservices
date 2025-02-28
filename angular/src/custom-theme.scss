@@ -1,0 +1,57 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "tailwindcss";
+@use '@angular/material' as mat;
+
+@theme {
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-fade-in-down: fade-in-down 0.3s ease-out;
+  --animate-fade-out-down: fade-out-down 0.3s ease-out;
+  --animate-fade-in-up: fade-in-up 0.3s ease-out;
+  --animate-fade-out-up: fade-out-up 0.3s ease-out;
+
+  --shadow-custom: 0px 0px 50px 0px rgb(82 63 105 / 15%);
+
+  --color-primary: var(--mat-sys-primary);
+  --color-secondary: var(--mat-sys-secondary);
+
+  --color-muted: var(--abp-muted);
+  --color-muted-foreground: var(--abp-muted-foreground);
+}
+
+html[data-theme="blue"] {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+html[data-theme="red"] {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$rose-palette,
+      tertiary: mat.$red-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+html.dark {
+  color-scheme: dark;
+  --abp-muted: #262626;
+  --abp-muted-foreground: #A3A3A3;
+}
+
+html.light {
+  color-scheme: light;
+  --abp-muted: #CFD9E5;
+  --abp-muted-foreground: #64748B;
+}

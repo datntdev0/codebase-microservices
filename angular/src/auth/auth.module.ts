@@ -13,7 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { AccountLanguagesComponent } from './layout/account-languages.component';
 import { AccountHeaderComponent } from './layout/account-header.component';
 import { AccountFooterComponent } from './layout/account-footer.component';
-
+import { MatButtonModule } from '@angular/material/button';
 // tenants
 import { TenantChangeComponent } from './tenant/tenant-change.component';
 import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.component';
@@ -27,6 +27,7 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         SharedModule,
         ServiceProxyModule,
         AuthRoutingModule,
+        MatButtonModule,
         ModalModule.forChild()
     ],
     declarations: [

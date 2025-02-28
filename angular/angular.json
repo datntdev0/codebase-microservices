@@ -35,7 +35,9 @@
                 "output": "/assets/abp"
               }
             ],
-            "styles": [],
+            "styles": [
+              "src/custom-theme.scss"
+            ],
             "scripts": [
               "node_modules/@microsoft/signalr/dist/browser/signalr.min.js",
               "node_modules/moment/min/moment.min.js",

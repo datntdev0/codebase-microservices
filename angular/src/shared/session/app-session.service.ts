@@ -40,6 +40,14 @@ export class AppSessionService {
         return this.tenant ? this.tenant.id : null;
     }
 
+    get currentYear(): number {
+        return new Date().getFullYear();
+    }
+
+    get versionText(): string {
+        return `${this.application.version} [${this.application.releaseDate.format("YYYYMMDD")}]`;
+    }
+
     getShownLoginName(): string {
         const userName = this._user.userName;
         if (!this._abpMultiTenancyService.isEnabled) {
