@@ -1,147 +1,61 @@
 ﻿<div [@routerTransition]>
-  <h4 class="text-center mb-3">{{ "Register" | localize }}</h4>
-  <form autocomplete="off" #registerForm="ngForm" (ngSubmit)="save()">
-    <div class="form-group">
-      <div class="input-group">
-        <input
-          type="text"
-          class="form-control"
-          name="name"
-          placeholder="{{ 'Name' | localize }}"
-          required
-          maxlength="64"
-          [(ngModel)]="model.name"
-          #nameModel="ngModel"
-          #nameEl
-        />
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <span class="fas fa-arrow-left"></span>
-          </div>
-        </div>
-      </div>
-      <abp-validation-summary
-        [control]="nameModel"
-        [controlEl]="nameEl"
-      ></abp-validation-summary>
+  <form class="my-10 space-y-6" #form="ngForm" (ngSubmit)="submit()">
+    <div class="text-center">
+      <h2 class="text-foreground mb-1 text-3xl font-semibold">Sign Up <span class="text-primary">!</span></h2>
+      <p class="text-muted-foreground text-sm">Let's get started with your 30 day free trial</p>
     </div>
-    <div class="form-group">
-      <div class="input-group">
-        <input
-          type="text"
-          class="form-control"
-          name="surname"
-          placeholder="{{ 'Surname' | localize }}"
-          required
-          maxlength="64"
-          [(ngModel)]="model.surname"
-          #surnameModel="ngModel"
-          #surnameEl
-        />
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <span class="fas fa-arrow-left"></span>
-          </div>
-        </div>
+
+    <button class="w-full! mb-0 bg-muted! shadow-none!" mat-fab extended type="button">
+      <div class="flex items-center justify-center">
+        <img src="/svg/icons/google-logo.svg" class="w-[32px]" />
+        &nbsp;Log in with Google
       </div>
-      <abp-validation-summary
-        [control]="surnameModel"
-        [controlEl]="surnameEl"
-      ></abp-validation-summary>
+    </button>
+
+    <div
+      class="before:border-muted after:border-muted my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t after:mt-0.5 after:flex-1 after:border-t">
+      <p class="text-muted-foreground mx-4 mb-0 text-center text-sm">or</p>
     </div>
-    <div class="form-group">
-      <div class="input-group">
-        <input
-          type="email"
-          class="form-control"
-          name="emailAddress"
-          placeholder="{{ 'EmailAddress' | localize }}"
-          required
-          maxlength="256"
-          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
-          [(ngModel)]="model.emailAddress"
-          #emailAddressModel="ngModel"
-          #emailAddressEl
-        />
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <span class="fas fa-envelope"></span>
-          </div>
-        </div>
+
+    <div class="space-y-1 text-left mb-0">
+      <div class="flex flex-row space-x-3">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>{{ "Name" | localize }}</mat-label>
+          <input matInput id="name" name="name" required maxlength="32" type="text" [(ngModel)]="model.name" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>{{ "Surname" | localize }}</mat-label>
+          <input matInput id="surname" name="surname" required maxlength="32" type="text" [(ngModel)]="model.surname" />
+        </mat-form-field>
       </div>
-      <abp-validation-summary
-        [control]="emailAddressModel"
-        [controlEl]="emailAddressEl"
-      ></abp-validation-summary>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>{{ "EmailAddress" | localize }}</mat-label>
+        <input matInput id="emailAddress" name="emailAddress" required maxlength="32" type="email"
+          [(ngModel)]="model.emailAddress" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>{{ "UserName" | localize }}</mat-label>
+        <input matInput id="userName" name="userName" required maxlength="32" type="text"
+          [(ngModel)]="model.userName" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>{{ "Password" | localize }}</mat-label>
+        <input matInput id="password" name="password" required maxlength="32" type="password"
+          [(ngModel)]="model.password" />
+      </mat-form-field>
     </div>
-    <div class="form-group">
-      <div class="input-group">
-        <input
-          type="email"
-          class="form-control"
-          name="userName"
-          placeholder=" {{ 'UserName' | localize }}"
-          required
-          maxlength="32"
-          [(ngModel)]="model.userName"
-          #userNameModel="ngModel"
-          #userNameEl
-        />
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <span class="fas fa-user"></span>
-          </div>
-        </div>
-      </div>
-      <abp-validation-summary
-        [control]="userNameModel"
-        [controlEl]="userNameEl"
-      ></abp-validation-summary>
-    </div>
-    <div class="form-group">
-      <div class="input-group">
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          placeholder="{{ 'Password' | localize }}"
-          [(ngModel)]="model.password"
-          required
-          maxlength="32"
-          #passwordModel="ngModel"
-          #passwordEl
-        />
-        <div class="input-group-append">
-          <div class="input-group-text">
-            <span class="fas fa-lock"></span>
-          </div>
-        </div>
-      </div>
-      <abp-validation-summary
-        [control]="passwordModel"
-        [controlEl]="passwordEl"
-      ></abp-validation-summary>
-    </div>
-    <div class="row">
-      <div class="col-8">
-        <button
-          type="button"
-          class="btn btn-default"
-          [disabled]="saving"
-          [routerLink]="['../login']"
-        >
-          <i class="fa fa-arrow-circle-left"></i> {{ "Back" | localize }}
-        </button>
-      </div>
-      <div class="col-4">
-        <button
-          type="submit"
-          class="btn btn-primary btn-block"
-          [disabled]="!registerForm.form.valid || saving"
-        >
-          {{ "Register" | localize }}
-        </button>
-      </div>
+
+    <!-- Submit Button -->
+    <button class="w-full! mb-0 text-lg!" mat-fab extended type="submit" [disabled]="submitting || !form.form.valid">
+      {{ "Register" | localize }}
+    </button>
+
+    <!-- Sign-in -->
+    <div class="text-muted-foreground text-center mt-6">
+      Already have an Account?&nbsp;
+      <a type="button" routerLink="/auth/login" class="text-primary font-bold">
+        {{ "LogIn" | localize }}
+      </a>
     </div>
   </form>
 </div>

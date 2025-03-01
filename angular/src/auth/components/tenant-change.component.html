@@ -1,0 +1,18 @@
+﻿@if (isMultiTenancyEnabled) {
+<div class="text-center">
+  <span>
+    {{ "CurrentTenant" | localize }}:
+    @if (appSession.tenant?.tenancyName) {
+    <span title="{{ appSession.tenant.name }}">
+      <strong>{{ appSession.tenant.tenancyName }}</strong>
+    </span>
+    } 
+    @else {
+    <span>{{ "NotSelected" | localize }}</span>
+    }
+    (<button mat-button (click)="openModal()">
+      {{ "Change" | localize }}
+    </button>)
+  </span>
+</div>
+}

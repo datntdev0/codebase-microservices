@@ -1,22 +1,18 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientJsonpModule } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { AuthRoutingModule } from './auth-routing.module';
+import { MatButtonModule } from '@angular/material/button';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { SharedModule } from '@shared/shared.module';
+import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
+import { LanguageChangeComponent } from './components/language-change.component';
+import { TenantChangeDialogComponent } from './components/tenant-change-dialog.component';
+import { TenantChangeComponent } from './components/tenant-change.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AccountLanguagesComponent } from './layout/account-languages.component';
-import { AccountHeaderComponent } from './layout/account-header.component';
-import { AccountFooterComponent } from './layout/account-footer.component';
-import { MatButtonModule } from '@angular/material/button';
-// tenants
-import { TenantChangeComponent } from './tenant/tenant-change.component';
-import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.component';
+import { ThemeModule } from 'theme/theme.module';
 
 @NgModule({
     imports: [
@@ -28,16 +24,13 @@ import { TenantChangeDialogComponent } from './tenant/tenant-change-dialog.compo
         ServiceProxyModule,
         AuthRoutingModule,
         MatButtonModule,
-        ModalModule.forChild()
+        ThemeModule.MaterialModules,
     ],
     declarations: [
         AuthComponent,
         LoginComponent,
         RegisterComponent,
-        AccountLanguagesComponent,
-        AccountHeaderComponent,
-        AccountFooterComponent,
-        // tenant
+        LanguageChangeComponent,
         TenantChangeComponent,
         TenantChangeDialogComponent,
     ]

@@ -17,7 +17,7 @@ import { AppAuthService } from '@shared/auth/app-auth.service';
 })
 export class RegisterComponent extends AppComponentBase {
   model: RegisterInput = new RegisterInput();
-  saving = false;
+  protected submitting: boolean = false;
 
   constructor(
     injector: Injector,
@@ -28,29 +28,27 @@ export class RegisterComponent extends AppComponentBase {
     super(injector);
   }
 
-  save(): void {
-    this.saving = true;
-    this._authService
-      .register(this.model)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-        })
-      )
-      .subscribe((result: RegisterOutput) => {
-        if (!result.canLogin) {
-          this.notify.success(this.l('SuccessfullyRegistered'));
-          this._router.navigate(['/login']);
-          return;
-        }
+  submit(): void {
+    // this.saving = true;
+    // this._authService
+    //   .register(this.model)
+    //   .pipe(
+    //     finalize(() => {
+    //       this.saving = false;
+    //     })
+    //   )
+    //   .subscribe((result: RegisterOutput) => {
+    //     if (!result.canLogin) {
+    //       this.notify.success(this.l('SuccessfullyRegistered'));
+    //       this._router.navigate(['/login']);
+    //       return;
+    //     }
 
-        // Autheticate
-        this.saving = true;
-        this.authService.loginInput.userNameOrEmailAddress = this.model.userName;
-        this.authService.loginInput.password = this.model.password;
-        this.authService.login(() => {
-          this.saving = false;
-        });
-      });
+    //     // Autheticate
+    //     this.saving = true;
+    //     this.authService.loginInput.userNameOrEmailAddress = this.model.userName;
+    //     this.authService.loginInput.password = this.model.password;
+    //      aw this.authService.login();
+    //   });
   }
 }

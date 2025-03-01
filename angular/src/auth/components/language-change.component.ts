@@ -8,33 +8,30 @@ import { AppComponentBase } from '@shared/app-component-base';
 import { filter as _filter } from 'lodash-es';
 
 @Component({
-    selector: 'account-languages',
-    templateUrl: './account-languages.component.html',
+    selector: 'language-change',
+    templateUrl: 'language-change.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
-export class AccountLanguagesComponent extends AppComponentBase
-  implements OnInit {
-  languages: abp.localization.ILanguageInfo[];
-  currentLanguage: abp.localization.ILanguageInfo;
+export class LanguageChangeComponent extends AppComponentBase implements OnInit {
+  protected selectableLanguages: abp.localization.ILanguageInfo[];
 
   constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit() {
-    this.languages = _filter(
+    this.selectableLanguages = _filter(
       this.localization.languages,
-      (l) => !l.isDisabled
+      (l) => !l.isDisabled && l.name != this.localization.currentLanguage.name
     );
-    this.currentLanguage = this.localization.currentLanguage;
   }
 
   changeLanguage(languageName: string): void {
     abp.utils.setCookieValue(
       'Abp.Localization.CultureName',
       languageName,
-      new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
+      new Date(new Date().getTime() + 5 * 365 * 86400000),
       abp.appPath
     );
 

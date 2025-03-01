@@ -4,6 +4,19 @@
 @use "tailwindcss";
 @use '@angular/material' as mat;
 
+// Custom Components
+
+.mat-mdc-notch-piece {
+  border-right-style: none;
+  border-left-style: none;
+}
+
+@include mat.dialog-overrides((
+  container-shape: 16px,
+));
+
+// Custom Themes
+
 @theme {
   --animate-wiggle: wiggle 1s ease-in-out infinite;
   --animate-fade-in-down: fade-in-down 0.3s ease-out;
@@ -23,7 +36,6 @@
 html[data-theme="blue"] {
   @include mat.theme((
     color: (
-      theme-type: light,
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette,
     ),
@@ -35,7 +47,6 @@ html[data-theme="blue"] {
 html[data-theme="red"] {
   @include mat.theme((
     color: (
-      theme-type: light,
       primary: mat.$rose-palette,
       tertiary: mat.$red-palette,
     ),

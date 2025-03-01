@@ -1,0 +1,9 @@
+﻿<div class="flex justify-center mt-3">
+  @for (language of selectableLanguages; track language) {
+  <a href="javascript:void(0);" (click)="changeLanguage(language.name)">
+    <span title="{{ language.displayName }}">
+      <img class="w-[24px] rounded-md" src="/svg/flags/{{ language.icon }}.svg">
+    </span>
+  </a>
+  }
+</div>

@@ -17,8 +17,8 @@ public class DefaultLanguagesCreator
         var tenantId = MicroserviceConsts.MultiTenancyEnabled ? null : (int?)MultiTenancyConsts.DefaultTenantId;
         return
         [
-            new(tenantId, "en", "English", "famfamfam-flags us"),
-            new(tenantId, "vi", "Tiếng Việt", "famfamfam-flags vn"),
+            new(tenantId, "en", "English", "us"),
+            new(tenantId, "vi", "Tiếng Việt", "vn"),
         ];
     }
 
