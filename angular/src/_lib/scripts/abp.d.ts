@@ -327,9 +327,9 @@
 
         function unblock(elm?: any): void;
 
-        function setBusy(elm?: any, optionsOrPromise?: any): void;
+        function setBusy(selector: string): void;
 
-        function clearBusy(elm?: any): void;
+        function clearBusy(): void;
 
     }
 
