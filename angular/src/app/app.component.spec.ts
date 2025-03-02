@@ -16,19 +16,19 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { RouterTestingModule } from "@angular/router/testing";
 import { ServiceProxyModule } from "../shared/service-proxies/service-proxy.module";
 import { SharedModule } from "../shared/shared.module";
-import { HomeComponent } from "../app/home/home.component";
-import { AboutComponent } from "../app/about/about.component";
+import { HomeComponent } from "./containers/home/home.component";
+import { AboutComponent } from "./containers/about/about.component";
 
 // layout
-import { HeaderComponent } from "./layout/header.component";
-import { HeaderLeftNavbarComponent } from "./layout/header-left-navbar.component";
-import { HeaderLanguageMenuComponent } from "./layout/header-language-menu.component";
-import { HeaderUserMenuComponent } from "./layout/header-user-menu.component";
-import { FooterComponent } from "./layout/footer.component";
-import { SidebarComponent } from "./layout/sidebar.component";
+import { NavbarComponent } from "./components/navbar.component";
+import { NavbarMainMenuComponent } from "./components/navbar-main-menu.component";
+import { NavbarMobileMenuComponent } from "./components/navbar-mobile-menu.component";
+import { NavbarUserMenuComponent } from "./components/navbar-user-menu.component";
+import { FooterComponent } from "./components/footer.component";
+import { SidebarComponent } from "./components/sidebar.component";
 import { SidebarLogoComponent } from "./layout/sidebar-logo.component";
 import { SidebarUserPanelComponent } from "./layout/sidebar-user-panel.component";
-import { SidebarMenuComponent } from "./layout/sidebar-menu.component";
+import { SidebarMainMenuComponent } from "./components/sidebar-main-menu.component";
 
 describe("AppComponent", () => {
   beforeEach(() => {
@@ -39,15 +39,15 @@ describe("AppComponent", () => {
         AboutComponent,
 
         // layout
-        HeaderComponent,
-        HeaderLeftNavbarComponent,
-        HeaderLanguageMenuComponent,
-        HeaderUserMenuComponent,
+        NavbarComponent,
+        NavbarMainMenuComponent,
+        NavbarMobileMenuComponent,
+        NavbarUserMenuComponent,
         FooterComponent,
         SidebarComponent,
         SidebarLogoComponent,
         SidebarUserPanelComponent,
-        SidebarMenuComponent,
+        SidebarMainMenuComponent,
       ],
       imports: [
         BrowserAnimationsModule,

@@ -14,16 +14,16 @@
     </div>
   </div>
   <div class="flex flex-1 flex-col items-center justify-center">
-    <div class="grow flex flex-col justify-center max-w-md overflow-y-auto sm:w-[500px]">
+    <div class="grow flex flex-col justify-center max-w-md overflow-y-auto sm:w-[500px] px-3">
       <div class="flex items-center justify-center">
-        <a class="bg-primary rounded-sm p-2"></a>
+        <img class="w-[64px]" src="https://angular.dev/assets/images/press-kit/angular_icon_gradient.gif" />
         <b class="text-3xl text-foreground pl-3 font-bold"> Microservice Angular </b>
       </div>
       <tenant-change></tenant-change>
       <router-outlet></router-outlet>
     </div>
     <language-change></language-change>
-    <div class="flex h-16 items-center bg-background">
+    <div class="flex h-16 items-center">
       <div class="flex w-full items-center justify-between px-7 font-medium">
         <span class="text-muted-foreground/50 mr-2">
           {{ "Copyright" | localize }}©{{this.appSession.currentYear}}

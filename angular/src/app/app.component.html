@@ -1,9 +1,26 @@
-<div class="wrapper">
-  <app-header></app-header>
-  <sidebar></sidebar>
-  <div class="content-wrapper">
-    <router-outlet></router-outlet>
+<div class="flex h-screen w-full overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <div class="flex grow flex-col content-start overflow-hidden bg-card">
+    <!-- Header -->
+    <app-navbar></app-navbar>
+    <!-- main content -->
+    <div id="main-content" style="background-color: var(--mat-sys-surface-container);"
+      class="scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+      <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="flex h-16 items-center text-muted-foreground/50 font-medium">
+      <div class="flex w-full items-center justify-between px-7">
+        <span class="mr-2">
+          {{ "Copyright" | localize }}©{{ this.appSession.currentYear }} Microservice
+        </span>
+        {{this.appSession.versionText}}
+      </div>
+    </div>
   </div>
-  <app-footer></app-footer>
-  <div id="sidebar-overlay" (click)="toggleSidebar()"></div>
 </div>

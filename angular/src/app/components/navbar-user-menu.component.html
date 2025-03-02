@@ -1,0 +1,63 @@
+<div class="relative ml-3">
+  <!-- Profile Button -->
+  <button class="bg-card relative flex rounded-full cursor-pointer" [matMenuTriggerFor]="menu">
+    <span class="sr-only">Open user menu</span>
+    <img class="h-9 w-9 rounded-md"
+      src="https://gravatar.com/avatar/a3ea80d0aa3af2bee2043a9b63611b03b0d654afaa1e4518172140ab76414641" />
+  </button>
+
+  <mat-menu #menu="matMenu" class="bg-background!">
+    <div class="text-foreground overflow-hidden px-2 font-semibold px-6">
+      {{ appSession.user.name }} {{ appSession.user.surname }}
+      <p class="text-muted-foreground truncate text-ellipsis text-sm font-semibold">
+        {{ appSession.user.emailAddress || appSession.user.userName }}
+      </p>
+    </div>
+    <hr class="border-muted border-dashed my-2" />
+    <ul class="my-2 mx-4 flex flex-col">
+      <li
+        class="text-muted-foreground hover:bg-card hover:text-primary inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 font-semibold">
+        <i class="fa-solid fa-gear"></i>
+        {{ "Settings" | localize }}
+      </li>
+      <li (click)="logout()"
+        class="text-muted-foreground hover:bg-card hover:text-primary inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 font-semibold">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        {{ "Logout" | localize }}
+      </li>
+    </ul>
+    <hr class="border-muted border-dashed my-2" />
+    <div class="mx-4 my-2">
+      <span class="text-foreground text-xs font-semibold">Color</span>
+      <div class="mt-2 grid grid-cols-2 gap-2">
+        <mat-chip>
+          <div class="flex items-center text-muted-foreground text-xs font-medium">
+            <span class="h-5 w-5 rounded-full bg-red-500"></span>
+            &nbsp;Rose Red
+          </div>
+        </mat-chip>
+        <mat-chip>
+          <div class="flex items-center text-muted-foreground text-xs font-medium">
+            <span class="h-5 w-5 rounded-full bg-blue-500"></span>
+            &nbsp;Azure Blue
+          </div>
+        </mat-chip>
+      </div>
+    </div>
+    <div class="mx-4 my-2">
+      <span class="text-foreground text-xs font-semibold">Mode</span>
+      <div class="mt-2 grid grid-cols-2 gap-2">
+        <mat-chip>
+          <div class="flex items-center text-muted-foreground text-xs font-medium">
+            <i class="fa-regular fa-sun"></i>&nbsp;Light
+          </div>
+        </mat-chip>
+        <mat-chip>
+          <div class="flex items-center text-muted-foreground text-xs font-medium">
+            <i class="fa-regular fa-moon"></i>&nbsp;Dark
+          </div>
+        </mat-chip>
+      </div>
+    </div>
+  </mat-menu>
+</div>

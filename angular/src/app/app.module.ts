@@ -1,41 +1,35 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientJsonpModule } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
+import { SharedModule } from '@shared/shared.module';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ThemeModule } from 'theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from '@shared/shared.module';
-import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
-// layout
-import { HeaderComponent } from './layout/header.component';
-import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
-import { HeaderLanguageMenuComponent } from './layout/header-language-menu.component';
-import { HeaderUserMenuComponent } from './layout/header-user-menu.component';
-import { FooterComponent } from './layout/footer.component';
-import { SidebarComponent } from './layout/sidebar.component';
-import { SidebarLogoComponent } from './layout/sidebar-logo.component';
-import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
-import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+import { NavbarMainMenuComponent } from './components/navbar-main-menu.component';
+import { NavbarMobileMenuComponent } from './components/navbar-mobile-menu.component';
+import { NavbarUserMenuComponent } from './components/navbar-user-menu.component';
+import { NavbarComponent } from './components/navbar.component';
+import { SidebarMainMenuComponent } from './components/sidebar-main-menu.component';
+import { SidebarSubmenuComponent } from './components/sidebar-submenu.component';
+import { SidebarComponent } from './components/sidebar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        // layout
-        HeaderComponent,
-        HeaderLeftNavbarComponent,
-        HeaderLanguageMenuComponent,
-        HeaderUserMenuComponent,
-        FooterComponent,
+        NavbarComponent,
+        NavbarMainMenuComponent,
+        NavbarMobileMenuComponent,
+        NavbarUserMenuComponent,
         SidebarComponent,
-        SidebarLogoComponent,
-        SidebarUserPanelComponent,
-        SidebarMenuComponent
+        SidebarMainMenuComponent,
+        SidebarSubmenuComponent,
     ],
     imports: [
         AppRoutingModule,
@@ -50,8 +44,9 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         TabsModule,
         ServiceProxyModule,
         NgxPaginationModule,
-        SharedModule
+        SharedModule,
+        ThemeModule.MaterialModules,
     ],
     providers: []
 })
-export class AppModule {}
+export class AppModule { }

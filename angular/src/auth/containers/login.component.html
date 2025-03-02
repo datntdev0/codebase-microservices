@@ -1,0 +1,54 @@
+﻿<div [@routerTransition]>
+  <form class="my-10 space-y-6" #form="ngForm" (ngSubmit)="submit()">
+    <div class="text-center">
+      <h2 class="text-foreground mb-1 text-3xl font-semibold">Hello Again <span class="text-primary">!</span></h2>
+      <p class="text-muted-foreground text-sm">Enter your credential to access your account.</p>
+    </div>
+
+    <button class="mb-0 w-full! h-[48px]! shadow-none!" mat-fab extended type="button">
+      <div class="flex items-center justify-center">
+        <img src="/svg/icons/google-logo.svg" class="w-[28px]" />
+        &nbsp;Log in with Google
+      </div>
+    </button>
+
+    <div
+      class="before:border-muted after:border-muted my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t after:mt-0.5 after:flex-1 after:border-t">
+      <p class="text-muted-foreground mx-4 mb-0 text-center text-sm">or</p>
+    </div>
+
+    <div class="space-y-1 text-left mb-0">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>{{ "UserNameOrEmail" | localize }}</mat-label>
+        <input matInput id="username" name="username" required maxlength="32" type="text"
+          [(ngModel)]="authService.loginInput.userNameOrEmailAddress" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>{{ "Password" | localize }}</mat-label>
+        <input matInput id="password" name="password" required maxlength="32" type="password"
+          [(ngModel)]="authService.loginInput.password" />
+      </mat-form-field>
+    </div>
+
+    <div class="mb-2 flex items-center justify-between space-x-3">
+      <mat-checkbox [(ngModel)]="authService.rememberMe" name="rememberMe">{{ "RememberMe" | localize }}</mat-checkbox>
+
+      <a type="button" href="#" class="text-primary font-bold">
+        Forgot your password?
+      </a>
+    </div>
+
+    <!-- Submit Button -->
+    <button class="mb-0 w-full! h-[56px]! text-lg!" mat-flat-button type="submit" [disabled]="submitting || !form.form.valid">
+      {{ "LogIn" | localize }}
+    </button>
+
+    <!-- Sign-up -->
+    <div *ngIf="appSession.tenantId" class="text-muted-foreground text-center mt-6">
+      Not a Member yet?&nbsp;
+      <a type="button" routerLink="/auth/register" class="text-primary font-bold">
+        {{ "Register" | localize }}
+      </a>
+    </div>
+  </form>
+</div>

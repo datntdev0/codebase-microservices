@@ -1,18 +1,14 @@
-﻿@if (isMultiTenancyEnabled) {
-<div class="text-center">
+﻿<div class="text-center" *ngIf="isMultiTenancyEnabled">
   <span>
     {{ "CurrentTenant" | localize }}:
-    @if (appSession.tenant?.tenancyName) {
-    <span title="{{ appSession.tenant.name }}">
+    <span *ngIf="appSession.tenant?.tenancyName" title="{{ appSession.tenant.name }}">
       <strong>{{ appSession.tenant.tenancyName }}</strong>
     </span>
-    } 
-    @else {
-    <span>{{ "NotSelected" | localize }}</span>
-    }
+    <span *ngIf="!appSession.tenant?.tenancyName">
+      {{ "NotSelected" | localize }}
+    </span>
     (<button mat-button (click)="openModal()">
       {{ "Change" | localize }}
     </button>)
   </span>
 </div>
-}

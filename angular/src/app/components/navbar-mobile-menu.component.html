@@ -1,0 +1,85 @@
+<div [ngClass]="layoutStore.showMobileMenu
+      ? 'animate-fade-in-up pointer-events-auto scale-100 opacity-100 duration-200'
+      : 'pointer-events-none scale-95 opacity-0 duration-100 ease-out'"
+  class="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden">
+  <div class="bg-background rounded-lg shadow-lg">
+    <div class="pt-5 pb-6">
+      <div class="flex items-center justify-between px-5">
+        <div>
+          <!-- Logo -->
+          <div class="flex items-center justify-start sm:order-2 md:mr-10 lg:hidden">
+            <img class="h-[32px]" src="https://angular.dev/assets/images/press-kit/angular_icon_gradient.gif" />
+            <b class="ml-2 font-bold text-lg">Microservice Angular</b>
+          </div>
+        </div>
+        <div class="-mr-2">
+          <button (click)="layoutStore.toggleMobileMenu()" type="button"
+            class="cursor-pointer text-muted-foreground focus:ring-primary inline-flex items-center justify-center rounded-md transition-transform hover:rotate-90">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+            <span class="sr-only">Close menu</span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted max-h-[500px] overflow-y-auto px-5">
+        <div class="pt-4" *ngFor="let menu of layoutStore.navbarNavItems">
+          <div class="mx-1 mb-2 flex items-center justify-between">
+            <small [ngClass]="{ hidden: !layoutStore.showSideBar }"
+              class="text-muted-foreground/50 font-semibold uppercase">
+              {{ menu.group }}
+            </small>
+          </div>
+          <ul class="flex flex-col space-y-1 text-sm">
+            <li *ngFor="let item of menu.items">
+              <ng-container [ngTemplateOutlet]="item.children ? childMenu : parentMenu"
+                [ngTemplateOutletContext]="{ item: item }">
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #parentMenu let-item="item">
+  <div class="text-muted-foreground relative hover:text-primary/50" routerLinkActive="text-primary"
+    [routerLink]="item.route">
+    <div class="absolute h-[36px] w-[36px] flex items-center justify-center"><i class="{{ item.icon }}"></i></div>
+
+    <div class="flex h-9 cursor-pointer items-center justify-start rounded-sm">
+      <a class="ml-10 truncate font-semibold tracking-wide focus:outline-hidden">{{ item.label }}</a>
+    </div>
+
+    <div class="fixed w-full" *ngIf="!layoutStore.showSideBar">
+      <span
+        class="z-1 text-background absolute left-14 -top-[34px] w-auto min-w-max origin-left scale-0 rounded-md p-2 font-bold shadow-md transition-all duration-200">
+        {{ item.label }}
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #childMenu let-item="item">
+  <div (click)="layoutStore.toggleSidebarMenu(item)" class="text-muted-foreground relative hover:text-primary/50">
+    <div class="absolute h-[36px] w-[36px] flex items-center justify-center"><i class="{{ item.icon }}"></i></div>
+
+    <div class="flex h-9 cursor-pointer items-center justify-start rounded-sm">
+      <a class="ml-10 truncate font-semibold tracking-wide focus:outline-hidden">{{ item.label }}</a>
+    </div>
+
+    <button *ngIf="item.children" [ngClass]="{ hidden: !layoutStore.showSideBar, 'rotate-90': item.expanded }"
+      class="text-muted-foreground/50 pointer-events-none absolute top-1 right-0 flex items-center p-1 transition-all duration-500">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="fixed w-full" *ngIf="!layoutStore.showSideBar">
+      <span
+        class="z-1text-background absolute left-14 -top-[34px] w-auto min-w-max origin-left scale-0 rounded-md p-2 font-bold shadow-md transition-all duration-200">
+        {{ item.label }}
+      </span>
+    </div>
+  </div>
+  <app-sidebar-submenu [submenu]="item"></app-sidebar-submenu>
+</ng-template>

@@ -27,7 +27,9 @@
   --shadow-custom: 0px 0px 50px 0px rgb(82 63 105 / 15%);
 
   --color-primary: var(--mat-sys-primary);
+  --color-primary-foreground: var(--mat-sys-on-primary);
   --color-secondary: var(--mat-sys-secondary);
+  --color-background: var(--mat-sys-background);
 
   --color-muted: var(--abp-muted);
   --color-muted-foreground: var(--abp-muted-foreground);

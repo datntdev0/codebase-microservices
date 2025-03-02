@@ -10,8 +10,8 @@ import { AuthComponent } from './auth.component';
 import { LanguageChangeComponent } from './components/language-change.component';
 import { TenantChangeDialogComponent } from './components/tenant-change-dialog.component';
 import { TenantChangeComponent } from './components/tenant-change.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './containers/login.component';
+import { RegisterComponent } from './containers/register.component';
 import { ThemeModule } from 'theme/theme.module';
 
 @NgModule({
