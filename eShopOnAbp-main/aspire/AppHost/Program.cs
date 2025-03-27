@@ -7,11 +7,13 @@ builder.AddForwardedHeaders();
 var profile = "http";
 
 // Microservices
-var administrationService =
-    builder.AddProject<Projects.EShopOnAbp_AdministrationService_HttpApi_Host>("administrationService", profile);
+var adminService = builder.AddProject<Projects.EShopOnAbp_AdministrationService_HttpApi_Host>("adminService", profile);
 var identityService = builder.AddProject<Projects.EShopOnAbp_IdentityService_HttpApi_Host>("identityService", profile);
-var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_HttpApi_Host>("catalogService")
-    .WithHttpEndpoint(name: "http", port: 5054, isProxied: false)
+var cmsKitService = builder.AddProject<Projects.EShopOnAbp_CmskitService_HttpApi_Host>("cmsKitService", profile);
+var orderingService = builder.AddProject<Projects.EShopOnAbp_OrderingService_HttpApi_Host>("orderingService", profile);
+var paymentService = builder.AddProject<Projects.EShopOnAbp_PaymentService_HttpApi_Host>("paymentService", profile);
+
+var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_HttpApi_Host>("catalogService", profile)
     .WithEndpoint(
         endpointName: "grpc",
         callback: static endpoint =>
@@ -22,16 +24,14 @@ var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_HttpA
             endpoint.IsProxied = false;
         }
     );
+
 var basketService = builder.AddProject<Projects.EShopOnAbp_BasketService>("basketService", profile)
     .WithReference(catalogService);
-var cmsKitService = builder.AddProject<Projects.EShopOnAbp_CmskitService_HttpApi_Host>("cmsKitService", profile);
-var orderingService = builder.AddProject<Projects.EShopOnAbp_OrderingService_HttpApi_Host>("orderingService", profile);
-var paymentService = builder.AddProject<Projects.EShopOnAbp_PaymentService_HttpApi_Host>("paymentService", profile);
 
 // Gateways
 var webGateway = builder.AddProject<Projects.EShopOnAbp_WebGateway>("webGateway");
 var webPublicGateway = builder.AddProject<Projects.EShopOnAbp_WebPublicGateway>("webPublicGateway")
-    .WithReference(administrationService)
+    .WithReference(adminService)
     .WithReference(identityService)
     .WithReference(catalogService)
     .WithReference(basketService)
