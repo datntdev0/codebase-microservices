@@ -1,0 +1,30 @@
+# Ignore build artifacts and dependency directories
+dist/
+node_modules/
+bin/
+obj/
+libs/
+publish/
+
+# Ignore environment and configuration files
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Ignore test and coverage results
+coverage/
+test-results/
+
+# Ignore Cursor IDE-specific files (if needed)
+.cursorignore
+*.cursor
+
+# Ignore logs
+*.log
+
+# Ignore temporary or cache files
+*.tmp
+*.cache
