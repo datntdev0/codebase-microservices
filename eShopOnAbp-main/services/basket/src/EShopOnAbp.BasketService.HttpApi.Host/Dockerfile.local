@@ -1,0 +1,4 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+COPY bin/Release/publish/ /app
+WORKDIR /app
+ENTRYPOINT ["dotnet", "EShopOnAbp.BasketService.HttpApi.Host.dll"]

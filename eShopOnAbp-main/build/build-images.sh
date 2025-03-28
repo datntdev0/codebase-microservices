@@ -37,7 +37,7 @@ docker build --force-rm -t "eshoponabp/service-administration:${IMAGE_TAG}" .
 
 
 echo "**************** BUILDING BASKET-SERVICE 7/$total ****************"
-cd ${currentFolder}/services/basket/src/EShopOnAbp.BasketService
+cd ${currentFolder}/services/basket/src/EShopOnAbp.BasketService.HttpApi.Host
 docker build --force-rm -t "eshoponabp/service-basket:${IMAGE_TAG}" .
 
 

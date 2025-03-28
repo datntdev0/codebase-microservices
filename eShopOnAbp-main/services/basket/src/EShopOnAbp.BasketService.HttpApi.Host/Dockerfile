@@ -38,7 +38,7 @@ COPY "NuGet.Config" "NuGet.Config"
 RUN dotnet restore "EShopOnAbp.sln"
 COPY . .
 
-WORKDIR "/src/services/basket/src/EShopOnAbp.BasketService"
+WORKDIR "/src/services/basket/src/EShopOnAbp.BasketService.HttpApi.Host"
 RUN dotnet publish -c Release -o /app 
 # RUN dotnet publish --no-restore -c Release -o /app 
 
@@ -47,4 +47,4 @@ FROM build AS publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "EShopOnAbp.BasketService.dll"]
+ENTRYPOINT ["dotnet", "EShopOnAbp.BasketService.HttpApi.Host.dll"]

@@ -253,7 +253,7 @@ stages:
       inputs:
         command: build
         repository: eshoponabp/service-basket
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/basket/src/EShopOnAbp.BasketService/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/basket/src/EShopOnAbp.BasketService.HttpApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |

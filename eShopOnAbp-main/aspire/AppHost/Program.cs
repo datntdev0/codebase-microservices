@@ -22,7 +22,7 @@ var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_HttpA
             endpoint.IsProxied = false;
         }
     );
-var basketService = builder.AddProject<Projects.EShopOnAbp_BasketService>("basketService", profile)
+var basketService = builder.AddProject<Projects.EShopOnAbp_BasketService_HttpApi_Host>("basketService", profile)
     .WithReference(catalogService);
 var cmsKitService = builder.AddProject<Projects.EShopOnAbp_CmskitService_HttpApi_Host>("cmsKitService", profile);
 var orderingService = builder.AddProject<Projects.EShopOnAbp_OrderingService_HttpApi_Host>("orderingService", profile);
