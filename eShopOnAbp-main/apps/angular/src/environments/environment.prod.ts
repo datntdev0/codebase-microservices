@@ -14,7 +14,7 @@ export const environment = {
     redirectUri: baseUrl,
     clientId: 'Web',
     responseType: 'code',
-    scope: 'offline_access openid profile email phone AccountService IdentityService AdministrationService CatalogService OrderingService',
+    scope: 'offline_access openid profile email phone AccountService IdentityService AdminService CatalogService OrderingService',
   },
   apis: {
     default: {

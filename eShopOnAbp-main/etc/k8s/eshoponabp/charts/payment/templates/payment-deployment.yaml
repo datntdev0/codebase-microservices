@@ -27,8 +27,8 @@ spec:
           value: "{{ .Values.config.corsOrigins }}"
         - name: "ConnectionStrings__PaymentService"
           value: {{ .Values.config.connectionStrings.paymentService }}  
-        - name: "ConnectionStrings__AdministrationService"
-          value: {{ .Values.config.connectionStrings.administrationService }}
+        - name: "ConnectionStrings__AdminService"
+          value: {{ .Values.config.connectionStrings.adminService }}
         - name: "DOTNET_ENVIRONMENT"
           value: "{{ .Values.config.dotnetEnv }}"
         - name: "Redis__Configuration"

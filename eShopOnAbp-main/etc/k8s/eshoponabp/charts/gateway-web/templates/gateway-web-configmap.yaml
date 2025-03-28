@@ -127,9 +127,9 @@ data:
           "Administration": {
             "Destinations": {
               "destination1": {
-                "Address": "{{ .Values.reRoutes.administrationService.url }}",
+                "Address": "{{ .Values.reRoutes.adminService.url }}",
                 "MetaData": {
-                  "PublicAddress": "{{ .Values.reRoutes.administrationService.dns }}"
+                  "PublicAddress": "{{ .Values.reRoutes.adminService.dns }}"
                 }
               }
             }

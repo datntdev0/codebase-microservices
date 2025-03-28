@@ -145,7 +145,7 @@
       "Administration": {
         "Destinations": {
           "destination1": {
-            "Address": "http://administrationService",
+            "Address": "http://adminService",
             "MetaData": {
               "PublicAddress": "https://admininstration.eshop.dev"
             }

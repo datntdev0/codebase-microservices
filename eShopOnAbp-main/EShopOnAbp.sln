@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{224361D2-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{0B9A1A27-E4AC-4228-AE7A-FC2CEBE2AD7B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "administration", "administration", "{A630417B-1C25-4BAB-B1D3-22C627DF0009}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "admin", "admin", "{A630417B-1C25-4BAB-B1D3-22C627DF0009}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "basket", "basket", "{C6516D98-035B-4742-B3C8-B031455546DF}"
 EndProject
@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopOnAbp.ServiceDefaults"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PublicWeb", "apps\public-web\src\EShopOnAbp.PublicWeb\EShopOnAbp.PublicWeb.csproj", "{FD9ECE3E-487B-4961-BEE9-3C26F866EAB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.HttpApi.Host", "services\administration\src\EShopOnAbp.AdministrationService.HttpApi.Host\EShopOnAbp.AdministrationService.HttpApi.Host.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0008}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.HttpApi.Host", "services\admin\src\EShopOnAbp.AdminService.HttpApi.Host\EShopOnAbp.AdminService.HttpApi.Host.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0008}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.HttpApi.Host", "services\identity\src\EShopOnAbp.IdentityService.HttpApi.Host\EShopOnAbp.IdentityService.HttpApi.Host.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B5}"
 EndProject
@@ -62,19 +62,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.Shared.Hosting.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.Shared.Localization", "shared\EShopOnAbp.Shared.Localization\EShopOnAbp.Shared.Localization.csproj", "{3A7CC445-7D7D-41E6-A115-EFFE3A225506}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.Domain.Shared", "services\administration\src\EShopOnAbp.AdministrationService.Domain.Shared\EShopOnAbp.AdministrationService.Domain.Shared.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0010}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.Domain.Shared", "services\admin\src\EShopOnAbp.AdminService.Domain.Shared\EShopOnAbp.AdminService.Domain.Shared.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.HttpApi", "services\administration\src\EShopOnAbp.AdministrationService.HttpApi\EShopOnAbp.AdministrationService.HttpApi.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0011}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.HttpApi", "services\admin\src\EShopOnAbp.AdminService.HttpApi\EShopOnAbp.AdminService.HttpApi.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.Application.Contracts", "services\administration\src\EShopOnAbp.AdministrationService.Application.Contracts\EShopOnAbp.AdministrationService.Application.Contracts.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0012}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.Application.Contracts", "services\admin\src\EShopOnAbp.AdminService.Application.Contracts\EShopOnAbp.AdminService.Application.Contracts.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.HttpApi.Client", "services\administration\src\EShopOnAbp.AdministrationService.HttpApi.Client\EShopOnAbp.AdministrationService.HttpApi.Client.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0013}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.HttpApi.Client", "services\admin\src\EShopOnAbp.AdminService.HttpApi.Client\EShopOnAbp.AdminService.HttpApi.Client.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0013}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.Domain", "services\administration\src\EShopOnAbp.AdministrationService.Domain\EShopOnAbp.AdministrationService.Domain.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0014}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.Domain", "services\admin\src\EShopOnAbp.AdminService.Domain\EShopOnAbp.AdminService.Domain.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.Application", "services\administration\src\EShopOnAbp.AdministrationService.Application\EShopOnAbp.AdministrationService.Application.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0015}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.Application", "services\admin\src\EShopOnAbp.AdminService.Application\EShopOnAbp.AdminService.Application.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0015}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdministrationService.EntityFrameworkCore", "services\administration\src\EShopOnAbp.AdministrationService.EntityFrameworkCore\EShopOnAbp.AdministrationService.EntityFrameworkCore.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0016}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.AdminService.EntityFrameworkCore", "services\admin\src\EShopOnAbp.AdminService.EntityFrameworkCore\EShopOnAbp.AdminService.EntityFrameworkCore.csproj", "{A630417B-1C25-4BAB-B1D3-22C627DF0016}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.BasketService.Contracts", "services\basket\src\EShopOnAbp.BasketService.Contracts\EShopOnAbp.BasketService.Contracts.csproj", "{C6516D98-035B-4742-B3C8-B031455546E0}"
 EndProject

@@ -51,7 +51,7 @@ public class AppConfigurationAggregation : AggregateServiceBase<ApplicationConfi
     }
 
     /// <summary>
-    /// Checks "Administration" clusterId to set the initial data from the AdministrationService.
+    /// Checks "Administration" clusterId to set the initial data from the AdminService.
     /// Otherwise uses the first available service for the initial application configuration data 
     /// </summary>
     /// <param name="appConfigurations"></param>
@@ -65,9 +65,9 @@ public class AppConfigurationAggregation : AggregateServiceBase<ApplicationConfi
             return new ApplicationConfigurationDto();
         }
 
-        if (appConfigurations.TryGetValue("Administration_AppConfig", out var administrationServiceData))
+        if (appConfigurations.TryGetValue("Administration_AppConfig", out var adminServiceData))
         {
-            return MapServiceData(administrationServiceData);
+            return MapServiceData(adminServiceData);
         }
 
         return MapServiceData(appConfigurations.First().Value);

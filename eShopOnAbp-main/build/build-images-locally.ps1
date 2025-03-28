@@ -10,7 +10,7 @@ $webGatewayFolder = Join-Path $slnFolder "gateways/web/src/EShopOnAbp.WebGateway
 $webPublicGatewayFolder = Join-Path $slnFolder "gateways/web-public/src/EShopOnAbp.WebPublicGateway"
 # Microservices
 $identityServiceFolder = Join-Path $slnFolder "services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host"
-$administrationServiceFolder = Join-Path $slnFolder "services/administration/src/EShopOnAbp.AdministrationService.HttpApi.Host"
+$adminServiceFolder = Join-Path $slnFolder "services/admin/src/EShopOnAbp.AdminService.HttpApi.Host"
 $basketServiceFolder = Join-Path $slnFolder "services/basket/src/EShopOnAbp.BasketService.HttpApi.Host"
 $catalogServiceFolder = Join-Path $slnFolder "services/catalog/src/EShopOnAbp.CatalogService.HttpApi.Host"
 $paymentServiceFolder = Join-Path $slnFolder "services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host"
@@ -53,7 +53,7 @@ docker build -f Dockerfile.local -t eshoponabp/service-identity:$version .
 
 ### ADMINISTRATION-SERVICE
 Write-Host "*** BUILDING ADMINISTRATION-SERVICE 6/$total ****************" -ForegroundColor Green
-Set-Location $administrationServiceFolder
+Set-Location $adminServiceFolder
 dotnet publish -c Release
 docker build -f Dockerfile.local -t eshoponabp/service-administration:$version .
 

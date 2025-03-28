@@ -25,8 +25,8 @@ spec:
           value: "{{ .Values.config.selfUrl }}"
         - name: App__CorsOrigins
           value: "{{ .Values.config.corsOrigins }}"
-        - name: "ConnectionStrings__AdministrationService"
-          value: {{ .Values.config.connectionStrings.administrationService }}
+        - name: "ConnectionStrings__AdminService"
+          value: {{ .Values.config.connectionStrings.adminService }}
         - name: "DOTNET_ENVIRONMENT"
           value: "{{ .Values.config.dotnetEnv }}"
         - name: "Redis__Configuration"

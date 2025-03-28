@@ -8,7 +8,7 @@ authserver:
       authority: https://auth.eshoponabp.com
       requireHttpsMetadata: "false"
     connectionStrings:
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
       identityService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
     dotnetEnv: Production
     redisHost: eshop-az-redis
@@ -66,7 +66,7 @@ identity:
     corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com
     connectionStrings:
       identityService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://eshop-az-authserver
       requireHttpsMetadata: "false"
@@ -82,7 +82,7 @@ identity:
     webGatewayRootUrl: https://gateway.eshoponabp.com/
     publicWebGatewayRootUrl: https://gateway-public.eshoponabp.com/
     identityServiceRootUrl: https://identity.eshoponabp.com/
-    administrationServiceRootUrl: https://administration.eshoponabp.com/
+    adminServiceRootUrl: https://administration.eshoponabp.com/
     accountServiceRootUrl: https://auth.eshoponabp.com
     basketServiceRootUrl: https://basket.eshoponabp.com/
     catalogServiceRootUrl: https://catalog.eshoponabp.com
@@ -101,7 +101,7 @@ administration:
     selfUrl: https://administration.eshoponabp.com
     corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com,https://eshop-az-gateway-internal
     connectionStrings:
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://eshop-az-authserver
       requireHttpsMetadata: "false"      
@@ -147,7 +147,7 @@ gateway-web:
       url: http://eshop-az-authserver
     identityService:
       url: http://eshop-az-identity
-    administrationService:
+    adminService:
       url: http://eshop-az-administration
     catalogService:
       url: http://eshop-az-catalog
@@ -179,7 +179,7 @@ gateway-web-public:
       url: http://eshop-az-authserver
     identityService:
       url: http://eshop-az-identity
-    administrationService:
+    adminService:
       url: http://eshop-az-administration
     catalogService:
       url: http://eshop-az-catalog
@@ -198,7 +198,7 @@ basket:
     selfUrl: https://basket.eshoponabp.com
     corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com,https://www.eshoponabp.com
     connectionStrings:
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://eshop-az-authserver
       requireHttpsMetadata: "false"
@@ -224,7 +224,7 @@ catalog:
     corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com,https://www.eshoponabp.com,https://admin.eshoponabp.com
     connectionStrings:
       catalogService: "mongodb://eshop-az-mongodb/EShopOnAbp_Catalog"
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://eshop-az-authserver
       requireHttpsMetadata: "false"
@@ -252,7 +252,7 @@ ordering:
     corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com
     connectionStrings:
       orderingService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://eshop-az-authserver
       requireHttpsMetadata: "false"
@@ -275,7 +275,7 @@ cmskit:
     corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com
     connectionStrings:
       cmskitService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Cmskit;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://eshop-az-authserver
       requireHttpsMetadata: "false"
@@ -302,7 +302,7 @@ payment:
     corsOrigins: https://gateway.eshoponabp.com,https://gateway-public.eshoponabp.com
     connectionStrings:
       paymentService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-az-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://eshop-az-authserver
       requireHttpsMetadata: "false"

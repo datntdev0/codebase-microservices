@@ -74,7 +74,7 @@ identity:
     corsOrigins: https://gateway-web.eshoponabp.dev,https://gateway-public.eshoponabp.dev,https://admin.eshoponabp.dev
     connectionStrings:
       identityService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Identity;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     keycloak:
       url: http://eshop-st-keycloak
       adminUsername: admin
@@ -95,7 +95,7 @@ identity:
     webGatewayRootUrl: https://gateway-web.eshoponabp.dev/
     publicWebGatewayRootUrl: https://gateway-public.eshoponabp.dev/
     identityServiceRootUrl: https://identity.eshoponabp.dev/
-    administrationServiceRootUrl: https://administration.eshoponabp.dev/
+    adminServiceRootUrl: https://administration.eshoponabp.dev/
     accountServiceRootUrl: https://account.eshoponabp.dev/
     basketServiceRootUrl: https://basket.eshoponabp.dev/
     catalogServiceRootUrl: https://catalog.eshoponabp.dev/
@@ -115,7 +115,7 @@ administration:
     selfUrl: https://administration.eshoponabp.dev
     corsOrigins: https://gateway-web.eshoponabp.dev,https://gateway-public.eshoponabp.dev,https://admin.eshoponabp.dev
     connectionStrings:
-      administrationService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: https://account.eshoponabp.dev/realms/master
       requireHttpsMetadata: "false"
@@ -160,7 +160,7 @@ gateway-web:
     identityService:
       url: http://eshop-st-identity:8080
       dns: https://identity.eshoponabp.dev
-    administrationService:
+    adminService:
       url: http://eshop-st-administration:8080
       dns: https://administration.eshoponabp.dev
     catalogService:
@@ -196,7 +196,7 @@ gateway-web-public:
     identityService:
       url: http://eshop-st-identity:8080
       dns: https://identity.eshoponabp.dev
-    administrationService:
+    adminService:
       url: http://eshop-st-administration:8080
       dns: https://administration.eshoponabp.dev
     catalogService:
@@ -221,7 +221,7 @@ basket:
     selfUrl: https://basket.eshoponabp.dev
     corsOrigins: https://gateway-web.eshoponabp.dev,https://gateway-public.eshoponabp.dev,https://eshoponabp.dev
     connectionStrings:
-      administrationService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: https://account.eshoponabp.dev/realms/master
       requireHttpsMetadata: "false"
@@ -248,7 +248,7 @@ catalog:
     corsOrigins: https://gateway-web.eshoponabp.dev,https://gateway-public.eshoponabp.dev,https://eshoponabp.dev,https://admin.eshoponabp.dev
     connectionStrings:
       catalogService: "mongodb://eshop-st-mongodb/EShopOnAbp_Catalog"
-      administrationService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: https://account.eshoponabp.dev/realms/master
       requireHttpsMetadata: "false"
@@ -277,7 +277,7 @@ ordering:
     corsOrigins: https://gateway-web.eshoponabp.dev,https://gateway-public.eshoponabp.dev,https://admin.eshoponabp.dev
     connectionStrings:
       orderingService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Ordering;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: https://account.eshoponabp.dev/realms/master
       requireHttpsMetadata: "false"
@@ -301,7 +301,7 @@ cmskit:
     corsOrigins: https://gateway-web.eshoponabp.dev,https://gateway-public.eshoponabp.dev,https://admin.eshoponabp.dev
     connectionStrings:
       cmskitService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Cmskit;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: https://account.eshoponabp.dev/realms/master
       requireHttpsMetadata: "false"
@@ -329,7 +329,7 @@ payment:
     corsOrigins: https://gateway-web.eshoponabp.dev,https://gateway-public.eshoponabp.dev,https://admin.eshoponabp.dev
     connectionStrings:
       paymentService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Payment;User ID=postgres;password=myPassw0rd;Pooling=false"
-      administrationService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
+      adminService: "Host=eshop-st-postgresdb;Port=5432;Database=EShopOnAbp_Administration;User ID=postgres;password=myPassw0rd;Pooling=false"
     authServer:
       authority: http://account.eshoponabp.dev
       requireHttpsMetadata: "false"

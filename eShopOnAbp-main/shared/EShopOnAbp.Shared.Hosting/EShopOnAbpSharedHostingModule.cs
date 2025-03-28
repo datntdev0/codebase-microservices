@@ -18,7 +18,7 @@ namespace EShopOnAbp.Shared.Hosting
         {
             Configure<AbpDbConnectionOptions>(options =>
             {
-                options.Databases.Configure("AdministrationService", database =>
+                options.Databases.Configure("AdminService", database =>
                 {
                     database.MappedConnections.Add("AbpAuditLogging");
                     database.MappedConnections.Add("AbpPermissionManagement");

@@ -13,7 +13,7 @@ export const environment = {
     redirectUri: baseUrl,
     clientId: 'Web',
     responseType: 'code',
-    scope: 'offline_access openid profile email phone roles AdministrationService IdentityService BasketService CatalogService OrderingService PaymentService CmskitService', 
+    scope: 'offline_access openid profile email phone roles AdminService IdentityService BasketService CatalogService OrderingService PaymentService CmskitService', 
     //requireHttps: true,
   },
   apis: {

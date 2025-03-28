@@ -40,7 +40,7 @@ docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-identity:${IM
 
 
 echo "*** BUILDING ADMINISTRATION-SERVICE 6/$total ****************"
-cd ${currentFolder}/services/administration/src/EShopOnAbp.AdministrationService.HttpApi.Host
+cd ${currentFolder}/services/admin/src/EShopOnAbp.AdminService.HttpApi.Host
 dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-administration:${IMAGE_TAG}" .
 

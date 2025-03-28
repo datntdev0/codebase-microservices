@@ -19,7 +19,7 @@
     <ProjectReference Include="..\..\apps\public-web\src\EShopOnAbp.PublicWeb\EShopOnAbp.PublicWeb.csproj" />
     <ProjectReference Include="..\..\gateways\web-public\src\EShopOnAbp.WebPublicGateway\EShopOnAbp.WebPublicGateway.csproj" />
     <ProjectReference Include="..\..\gateways\web\src\EShopOnAbp.WebGateway\EShopOnAbp.WebGateway.csproj" />
-    <ProjectReference Include="..\..\services\administration\src\EShopOnAbp.AdministrationService.HttpApi.Host\EShopOnAbp.AdministrationService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\admin\src\EShopOnAbp.AdminService.HttpApi.Host\EShopOnAbp.AdminService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\basket\src\EShopOnAbp.BasketService.HttpApi.Host\EShopOnAbp.BasketService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\catalog\src\EShopOnAbp.CatalogService.HttpApi.Host\EShopOnAbp.CatalogService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\cmskit\src\EShopOnAbp.CmskitService.HttpApi.Host\EShopOnAbp.CmskitService.HttpApi.Host.csproj" />

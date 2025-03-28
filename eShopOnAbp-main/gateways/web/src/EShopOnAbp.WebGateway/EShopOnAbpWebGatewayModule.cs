@@ -28,7 +28,7 @@ public class EShopOnAbpWebGatewayModule : AbpModule
             scopes:
             [
                 /* Requested scopes for authorization code request and descriptions for swagger UI only */
-                "IdentityService", "AdministrationService", "CatalogService", "BasketService", "PaymentService",
+                "IdentityService", "AdminService", "CatalogService", "BasketService", "PaymentService",
                 "OrderingService", "CmskitService"
             ],
             apiTitle: "Web Gateway API",

@@ -83,7 +83,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
     private async Task CreateClientScopesAsync()
     {
-        await CreateScopeAsync("AdministrationService");
+        await CreateScopeAsync("AdminService");
         await CreateScopeAsync("IdentityService");
         await CreateScopeAsync("BasketService");
         await CreateScopeAsync("CatalogService");
@@ -146,14 +146,14 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
     {
         var administrationClient =
             (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName,
-                clientId: "EShopOnAbp_AdministrationService"))
+                clientId: "EShopOnAbp_AdminService"))
             .FirstOrDefault();
 
         if (administrationClient == null)
         {
             administrationClient = new Client()
             {
-                ClientId = "EShopOnAbp_AdministrationService",
+                ClientId = "EShopOnAbp_AdminService",
                 Name = "Administration service client",
                 Protocol = "openid-connect",
                 PublicClient = false,
@@ -174,7 +174,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, administrationClient);
 
             await AddOptionalClientScopesAsync(
-                "EShopOnAbp_AdministrationService",
+                "EShopOnAbp_AdminService",
                 new List<string>
                 {
                     "IdentityService"
@@ -182,7 +182,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             );
             
             var insertedClient =
-                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_AdministrationService"))
+                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_AdminService"))
                 .First();
             
             var clientIdProtocolMapper = insertedClient.ProtocolMappers.First(q => q.Name == "Client ID");
@@ -278,7 +278,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 "Web",
                 new List<string>
                 {
-                    "AdministrationService", "IdentityService", "BasketService", "CatalogService",
+                    "AdminService", "IdentityService", "BasketService", "CatalogService",
                     "OrderingService", "PaymentService", "CmskitService"
                 }
             );
@@ -297,7 +297,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             var publicWebGatewayRootUrl = _configuration[$"Clients:PublicWebGateway:RootUrl"].TrimEnd('/');
             var accountServiceRootUrl = _configuration[$"Clients:AccountService:RootUrl"].TrimEnd('/');
             var identityServiceRootUrl = _configuration[$"Clients:IdentityService:RootUrl"].TrimEnd('/');
-            var administrationServiceRootUrl = _configuration[$"Clients:AdministrationService:RootUrl"].TrimEnd('/');
+            var adminServiceRootUrl = _configuration[$"Clients:AdminService:RootUrl"].TrimEnd('/');
             var catalogServiceRootUrl = _configuration[$"Clients:CatalogService:RootUrl"].TrimEnd('/');
             var basketServiceRootUrl = _configuration[$"Clients:BasketService:RootUrl"].TrimEnd('/');
             var orderingServiceRootUrl = _configuration[$"Clients:OrderingService:RootUrl"].TrimEnd('/');
@@ -316,7 +316,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                     $"{publicWebGatewayRootUrl}/swagger/oauth2-redirect.html", // PublicWebGateway redirect uri
                     $"{accountServiceRootUrl}/swagger/oauth2-redirect.html", // AccountService redirect uri
                     $"{identityServiceRootUrl}/swagger/oauth2-redirect.html", // IdentityService redirect uri
-                    $"{administrationServiceRootUrl}/swagger/oauth2-redirect.html", // AdministrationService redirect uri
+                    $"{adminServiceRootUrl}/swagger/oauth2-redirect.html", // AdminService redirect uri
                     $"{catalogServiceRootUrl}/swagger/oauth2-redirect.html", // CatalogService redirect uri
                     $"{basketServiceRootUrl}/swagger/oauth2-redirect.html", // BasketService redirect uri
                     $"{orderingServiceRootUrl}/swagger/oauth2-redirect.html", // OrderingService redirect uri
@@ -333,7 +333,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 "SwaggerClient",
                 new List<string>
                 {
-                    "AdministrationService", "IdentityService", "BasketService", "CatalogService",
+                    "AdminService", "IdentityService", "BasketService", "CatalogService",
                     "OrderingService", "PaymentService", "CmskitService"
                 }
             );
@@ -374,7 +374,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 "PublicWeb",
                 new List<string>
                 {
-                    "AdministrationService", "IdentityService", "BasketService", "CatalogService",
+                    "AdminService", "IdentityService", "BasketService", "CatalogService",
                     "OrderingService", "PaymentService", "CmskitService"
                 }
             );

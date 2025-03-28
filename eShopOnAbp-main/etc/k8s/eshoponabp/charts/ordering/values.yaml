@@ -3,7 +3,7 @@ config:
   corsOrigins: # https://eshop-st-gateway-web,https://eshop-st-gateway-public-web
   connectionStrings:
     orderingService: #
-    administrationService: #
+    adminService: #
   authServer:
     authority: http://eshop-st-authserver
     requireHttpsMetadata: "false"

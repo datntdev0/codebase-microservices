@@ -174,7 +174,7 @@ public class EShopOnAbpPublicWebModule : AbpModule
                 options.Scope.Add("roles");
                 options.Scope.Add("offline_access");
 
-                options.Scope.Add("AdministrationService");
+                options.Scope.Add("AdminService");
                 options.Scope.Add("BasketService");
                 options.Scope.Add("IdentityService");
                 options.Scope.Add("CatalogService");

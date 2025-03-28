@@ -1,4 +1,4 @@
-﻿using EShopOnAbp.AdministrationService.EntityFrameworkCore;
+﻿using EShopOnAbp.AdminService.EntityFrameworkCore;
 using EShopOnAbp.Shared.Hosting.AspNetCore;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
@@ -22,7 +22,7 @@ namespace EShopOnAbp.Shared.Hosting.Microservices;
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpEventBusRabbitMqModule),
     typeof(AbpCachingStackExchangeRedisModule),
-    typeof(AdministrationServiceEntityFrameworkCoreModule),
+    typeof(AdminServiceEntityFrameworkCoreModule),
     typeof(AbpDistributedLockingModule)
 )]
 public class EShopOnAbpSharedHostingMicroservicesModule : AbpModule

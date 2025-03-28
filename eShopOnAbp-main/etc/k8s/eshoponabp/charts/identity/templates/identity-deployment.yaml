@@ -27,8 +27,8 @@ spec:
           value: "{{ .Values.config.corsOrigins }}"
         - name: "ConnectionStrings__IdentityService"
           value: {{ .Values.config.connectionStrings.identityService }}
-        - name: "ConnectionStrings__AdministrationService"
-          value: {{ .Values.config.connectionStrings.administrationService }}
+        - name: "ConnectionStrings__AdminService"
+          value: {{ .Values.config.connectionStrings.adminService }}
         - name: "DOTNET_ENVIRONMENT"
           value: "{{ .Values.config.dotnetEnv }}"
         - name: "Redis__Configuration"
@@ -65,8 +65,8 @@ spec:
           value: {{ .Values.keycloakClients.webGatewayRootUrl }}  
         - name: "Clients__IdentityService__RootUrl"
           value: {{ .Values.keycloakClients.identityServiceRootUrl }}
-        - name: "Clients__AdministrationService__RootUrl"
-          value: {{ .Values.keycloakClients.administrationServiceRootUrl }}
+        - name: "Clients__AdminService__RootUrl"
+          value: {{ .Values.keycloakClients.adminServiceRootUrl }}
         - name: "Clients__AccountService__RootUrl"
           value: {{ .Values.keycloakClients.accountServiceRootUrl }}
         - name: "Clients__BasketService__RootUrl"

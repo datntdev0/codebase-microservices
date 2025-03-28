@@ -15,7 +15,7 @@ reRoutes:
   identityService:
     url: http://eshop-st-identity
     dns: https://identity.eshoponabp.dev
-  administrationService:
+  adminService:
     url: http://eshop-st-administration
     dns: https://administration.eshoponabp.dev
   catalogService:

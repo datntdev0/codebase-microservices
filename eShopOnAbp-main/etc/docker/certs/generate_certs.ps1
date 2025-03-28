@@ -6,7 +6,7 @@
 $rootCN = "eShopOnAbp"
 $authserverCNs = "app-authserver", "localhost"
 $publicWebCNs = "app-public-web", "localhost"
-$administrationServiceCNs = "administration-service", "localhost"
+$adminServiceCNs = "administration-service", "localhost"
 $identityServiceCNs = "identity-service", "localhost"
 $catalogServiceCNs = "catalog-service", "localhost"
 $basketServiceCNs = "basket-service", "localhost"
@@ -25,7 +25,7 @@ if ($alreadyExistingCertsRoot.Count -eq 1) {
 
 $authserverCert = New-SelfSignedCertificate -DnsName $authserverCNs -Signer $rootCN -CertStoreLocation Cert:\LocalMachine\My
 # $publicWebCert = New-SelfSignedCertificate -DnsName $publicWebCNs -Signer $rootCN -CertStoreLocation Cert:\LocalMachine\My
-# $administrationServiceCert = New-SelfSignedCertificate -DnsName $administrationServiceCNs -Signer $rootCN -CertStoreLocation Cert:\LocalMachine\My
+# $adminServiceCert = New-SelfSignedCertificate -DnsName $adminServiceCNs -Signer $rootCN -CertStoreLocation Cert:\LocalMachine\My
 # $identityServiceCert = New-SelfSignedCertificate -DnsName $identityServiceCNs -Signer $rootCN -CertStoreLocation Cert:\LocalMachine\My
 # $catalogServiceCert = New-SelfSignedCertificate -DnsName $catalogServiceCNs -Signer $rootCN -CertStoreLocation Cert:\LocalMachine\My
 # $basketServiceCert = New-SelfSignedCertificate -DnsName $basketServiceCNs -Signer $rootCN -CertStoreLocation Cert:\LocalMachine\My
@@ -38,7 +38,7 @@ $password = ConvertTo-SecureString -String "8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 Export-PfxCertificate -Cert $rootCA -FilePath eShopOnAbp-root-cert.pfx -Password $password | Out-Null
 Export-PfxCertificate -Cert $authserverCert -FilePath app-authserver-cert.pfx -Password $password | Out-Null
 # Export-PfxCertificate -Cert $publicWebCert -FilePath app-public-cert.pfx -Password $password | Out-Null
-# Export-PfxCertificate -Cert $administrationServiceCert -FilePath administration-service-cert.pfx -Password $password | Out-Null
+# Export-PfxCertificate -Cert $adminServiceCert -FilePath administration-service-cert.pfx -Password $password | Out-Null
 # Export-PfxCertificate -Cert $identityServiceCert -FilePath identity-service-cert.pfx -Password $password | Out-Null
 # Export-PfxCertificate -Cert $catalogServiceCert -FilePath catalog-service-cert.pfx -Password $password | Out-Null
 # Export-PfxCertificate -Cert $basketServiceCert -FilePath basket-service-cert.pfx -Password $password | Out-Null

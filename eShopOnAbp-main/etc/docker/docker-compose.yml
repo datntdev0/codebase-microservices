@@ -33,7 +33,7 @@ services:
     container_name: administration-service-container
     build:
       context: ../../
-      dockerfile: services/administration/src/EShopOnAbp.AdministrationService.HttpApi.Host/Dockerfile
+      dockerfile: services/admin/src/EShopOnAbp.AdminService.HttpApi.Host/Dockerfile
     environment:
       # - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -41,7 +41,7 @@ services:
       - App__CorsOrigins=https://gateway-web,gateway-web-public
       - RemoteServices__AbpIdentity__BaseUrl=eshop-st-identity
       - RemoteServices__AbpIdentity__UseCurrentAccessToken=false
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
       - AuthServer__Authority=http://eshop-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - IdentityClients__Default__Authority=http://eshop-st-identity
@@ -71,7 +71,7 @@ services:
       - AuthServer__Authority=http://eshop-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
       - Redis__Configuration=redis
       - RabbitMQ__Connections__Default__HostName=rabbitmq
       - IdentityServerClients__Web__RootUrl=https://eshop-st-web
@@ -79,7 +79,7 @@ services:
       - IdentityServerClients__WebGateway__RootUrl=https://eshop-st-gateway-web
       - IdentityServerClients__PublicWebGateway__RootUrl=https://eshop-st-gateway-web-public
       - IdentityServerClients__IdentityService__RootUrl=https://eshop-st-identity
-      - IdentityServerClients__AdministrationService__RootUrl=https://eshop-st-administration
+      - IdentityServerClients__AdminService__RootUrl=https://eshop-st-administration
       - IdentityServerClients__AccountService__RootUrl=https://eshop-st-authserver
       - IdentityServerClients__CatalogService__RootUrl=https://eshop-st-catalog
       - IdentityServerClients__BasketService__RootUrl=https://eshop-st-basket     
@@ -113,7 +113,7 @@ services:
       - Kestrel__EndPoints__gRPC__Url=http://docker.host.internal:81
       - Kestrel__EndPoints__gRPC__Protocols=Http2
       - ConnectionStrings__CatalogService=mongodb://mongodb/EShopOnAbp_Catalog
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
       - Redis__Configuration=redis
       - RabbitMQ__Connections__Default__HostName=rabbitmq
     depends_on:
@@ -139,7 +139,7 @@ services:
       - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public,https://eshop-st-public-web
       - RemoteServices__Catalog__BaseUrl=http://eshop-st-catalog:80
       - RemoteServices__Catalog__GrpcUrl=http://eshop-st-catalog:81
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
       - AuthServer__Authority=http://eshop-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - Redis__Configuration=redis
@@ -166,7 +166,7 @@ services:
       - App__SelfUrl=https://eshop-st-ordering
       - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public,https://eshop-st-web
       - ConnectionStrings__OrderingService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Ordering;Pooling=false;
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
       - AuthServer__Authority=http://eshop-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - Redis__Configuration=redis
@@ -195,7 +195,7 @@ services:
       - App__SelfUrl=https://eshop-st-cmskit
       - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public
       - ConnectionStrings__CmskitService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Cmskit;Pooling=false;
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
       - AuthServer__Authority=http://eshop-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - Redis__Configuration=redis
@@ -226,7 +226,7 @@ services:
       - App__SelfUrl=https://eshop-st-payment
       - App__CorsOrigins=https://eshop-st-gateway-web,https://eshop-st-gateway-web-public      
       - ConnectionStrings__PaymentService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Payment;Pooling=false;
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
       - AuthServer__Authority=http://eshop-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - Redis__Configuration=redis
@@ -259,7 +259,7 @@ services:
       - AuthServer__Authority=http://eshop-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;   
+      - ConnectionStrings__AdminService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;   
       - Redis__Configuration=redis
       - RabbitMQ__Connections__Default__HostName=rabbitmq
     depends_on:

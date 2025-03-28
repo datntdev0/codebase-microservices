@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\services\administration\src\EShopOnAbp.AdministrationService.EntityFrameworkCore\EShopOnAbp.AdministrationService.EntityFrameworkCore.csproj" />        
+        <ProjectReference Include="..\..\services\admin\src\EShopOnAbp.AdminService.EntityFrameworkCore\EShopOnAbp.AdminService.EntityFrameworkCore.csproj" />        
     </ItemGroup>
 
 </Project>
