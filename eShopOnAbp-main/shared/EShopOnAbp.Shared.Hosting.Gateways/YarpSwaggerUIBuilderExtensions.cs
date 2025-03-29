@@ -24,7 +24,7 @@ public static class YarpSwaggerUIBuilderExtensions
             var yarpConfig = proxyConfigProvider.GetConfig();
 
             var routedClusters = yarpConfig.Clusters
-                .SelectMany(t => t.Destinations,
+                .SelectMany(t => t.Destinations!,
                     (clusterId, destination) => new {clusterId.ClusterId, destination.Value});
 
             var groupedClusters = routedClusters
@@ -35,8 +35,9 @@ public static class YarpSwaggerUIBuilderExtensions
 
             foreach (var clusterGroup in groupedClusters)
             {
-                var routeConfig = yarpConfig.Routes.FirstOrDefault(q =>
-                    q.ClusterId == clusterGroup.ClusterId);
+                var routeConfig = yarpConfig.Routes
+                    .Where(x => x.RouteId.StartsWith("swagger", StringComparison.OrdinalIgnoreCase))
+                    .FirstOrDefault(q => q.ClusterId == clusterGroup.ClusterId);
                 if (routeConfig == null)
                 {
                     logger.LogWarning($"Swagger UI: Couldn't find route configuration for {clusterGroup.ClusterId}...");
@@ -45,7 +46,8 @@ public static class YarpSwaggerUIBuilderExtensions
 
                 var baseUrl = clusterGroup.Value.Address;
 
-                if (Convert.ToBoolean(configuration["App:IsOnK8s"])) // If the application is running on K8s, the swagger.json should be reached from public dns.
+                // If the application is running on K8s, the swagger.json should be reached from public dns.
+                if (Convert.ToBoolean(configuration["App:IsOnK8s"])) 
                 {
                     baseUrl = clusterGroup.Value.Metadata?["PublicAddress"];
                 }

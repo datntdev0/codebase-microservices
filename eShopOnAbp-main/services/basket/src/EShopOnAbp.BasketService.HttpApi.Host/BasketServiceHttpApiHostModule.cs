@@ -29,7 +29,7 @@ namespace EShopOnAbp.BasketService;
     typeof(BasketServiceContractsModule),
     typeof(EShopOnAbpSharedHostingMicroservicesModule)
 )]
-public class BasketServiceModule : AbpModule
+public class BasketServiceHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
@@ -68,7 +68,7 @@ public class BasketServiceModule : AbpModule
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(BasketServiceModule).Assembly, opts =>
+            options.ConventionalControllers.Create(typeof(BasketServiceHttpApiHostModule).Assembly, opts =>
             {
                 opts.RootPath = "basket";
                 opts.RemoteServiceName = BasketServiceConstants.RemoteServiceName;
@@ -148,7 +148,7 @@ public class BasketServiceModule : AbpModule
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(BasketServiceModule).Assembly);
+            options.ConventionalControllers.Create(typeof(BasketServiceHttpApiHostModule).Assembly);
         });
     }
 
@@ -165,7 +165,7 @@ public class BasketServiceModule : AbpModule
     {
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<BasketServiceModule>();
+            options.AddMaps<BasketServiceHttpApiHostModule>();
         });
     }
 
@@ -192,7 +192,7 @@ public class BasketServiceModule : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<BasketServiceModule>();
+            options.FileSets.AddEmbedded<BasketServiceHttpApiHostModule>();
         });
     }
 }

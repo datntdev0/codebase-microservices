@@ -321,8 +321,8 @@ public class EShopOnAbpPublicWebModule : AbpModule
         app.UseConfiguredEndpoints(endpoints =>
         {
             endpoints.MapReverseProxy();
-            endpoints.MapForwarder("*/product-images/{name}", "http://catalog:8080/product-images", "/{name}");
-            endpoints.MapForwarder("/products/product-images/{name}", "http://catalog:8080/product-images", "/{name}");
+            endpoints.MapForwarder("/product-images/{name}", "https://localhost:44354/product-images", "/{name}");
+            endpoints.MapForwarder("/products/product-images/{name}", "https://localhost:44354/product-images", "/{name}");
         });
     }
 

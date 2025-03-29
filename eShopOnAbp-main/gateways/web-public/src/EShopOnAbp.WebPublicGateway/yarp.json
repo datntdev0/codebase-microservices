@@ -1,26 +1,17 @@
 ﻿{
   "ReverseProxy": {
     "Routes": {
-      "AbpApi": {
-        "ClusterId": "Administration",
-        "Match": {
-          "Path": "/api/abp/{**catch-all}"
-        }
-      },
       "Identity Service": {
         "ClusterId": "Identity",
         "Match": {
           "Path": "/api/identity/{**everything}"
         }
       },
-      "Identity Service Swagger": {
-        "ClusterId": "Identity",
+      "AbpApi": {
+        "ClusterId": "Administration",
         "Match": {
-          "Path": "/swagger-json/Identity/swagger/v1/swagger.json"
-        },
-        "Transforms": [
-          { "PathRemovePrefix": "/swagger-json/Identity" }
-        ]
+          "Path": "/api/abp/{**catch-all}"
+        }
       },
       "FeatureManagement": {
         "ClusterId": "Administration",
@@ -40,29 +31,11 @@
           "Path": "/api/setting-management/{**everything}"
         }
       },
-      "Administration Service Swagger": {
-        "ClusterId": "Administration",
-        "Match": {
-          "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
-        },
-        "Transforms": [
-          { "PathRemovePrefix": "/swagger-json/Administration" }
-        ]
-      },
       "Catalog Service": {
-        "ClusterId": "catalogCluster",
+        "ClusterId": "Catalog",
         "Match": {
           "Path": "/api/catalog/{**everything}"
         }
-      },
-      "Catalog Service Swagger": {
-        "ClusterId": "catalogCluster",
-        "Match": {
-          "Path": "/swagger-json/Catalog/swagger/v1/swagger.json"
-        },
-        "Transforms": [
-          { "PathRemovePrefix": "/swagger-json/Catalog" }
-        ]
       },
       "Basket Service": {
         "ClusterId": "Basket",
@@ -70,29 +43,17 @@
           "Path": "/api/basket/{**everything}"
         }
       },
-      "Basket Service Swagger": {
-        "ClusterId": "Basket",
-        "Match": {
-          "Path": "/swagger-json/Basket/swagger/v1/swagger.json"
-        },
-        "Transforms": [
-          { "PathRemovePrefix": "/swagger-json/Basket" }
-        ]
-      },
       "Ordering Service": {
         "ClusterId": "Ordering",
         "Match": {
           "Path": "/api/ordering/{**everything}"
         }
       },
-      "Ordering Service Swagger": {
-        "ClusterId": "Ordering",
+      "Payment Service": {
+        "ClusterId": "Payment",
         "Match": {
-          "Path": "/swagger-json/Ordering/swagger/v1/swagger.json"
-        },
-        "Transforms": [
-          { "PathRemovePrefix": "/swagger-json/Ordering" }
-        ]
+          "Path": "/api/payment/{**everything}"
+        }
       },
       "Cmskit Public Service": {
         "ClusterId": "CmsKit",
@@ -106,22 +67,52 @@
           "Path": "/api/cms-kit-admin/{**everything}"
         }
       },
-      "Cmskit Service Swagger": {
-        "ClusterId": "CmsKit",
+      "Swagger - Identity Service": {
+        "ClusterId": "Identity",
         "Match": {
-          "Path": "/swagger-json/Cmskit/swagger/v1/swagger.json"
+          "Path": "/swagger-json/Identity/swagger/v1/swagger.json"
         },
         "Transforms": [
-          { "PathRemovePrefix": "/swagger-json/Cmskit" }
+          { "PathRemovePrefix": "/swagger-json/Identity" }
         ]
       },
-      "Payment Service": {
-        "ClusterId": "Payment",
+      "Swagger - Administration Service": {
+        "ClusterId": "Administration",
         "Match": {
-          "Path": "/api/payment/{**everything}"
-        }
+          "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Administration" }
+        ]
       },
-      "Payment Service Swagger": {
+      "Swagger - Catalog Service": {
+        "ClusterId": "Catalog",
+        "Match": {
+          "Path": "/swagger-json/Catalog/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Catalog" }
+        ]
+      },
+      "Swagger - Basket Service": {
+        "ClusterId": "Basket",
+        "Match": {
+          "Path": "/swagger-json/Basket/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Basket" }
+        ]
+      },
+      "Swagger - Ordering Service": {
+        "ClusterId": "Ordering",
+        "Match": {
+          "Path": "/swagger-json/Ordering/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Ordering" }
+        ]
+      },
+      "Swagger - Payment Service": {
         "ClusterId": "Payment",
         "Match": {
           "Path": "/swagger-json/Payment/swagger/v1/swagger.json"
@@ -129,13 +120,22 @@
         "Transforms": [
           { "PathRemovePrefix": "/swagger-json/Payment" }
         ]
+      },
+      "Swagger - Cmskit Service": {
+        "ClusterId": "CmsKit",
+        "Match": {
+          "Path": "/swagger-json/Cmskit/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Cmskit" }
+        ]
       }
     },
     "Clusters": {
       "Identity": {
         "Destinations": {
           "destination1": {
-            "Address": "http://identityService",
+            "Address": "https://localhost:44351",
             "MetaData": {
               "PublicAddress": "https://identity.eshoponabp.dev"
             }
@@ -145,17 +145,17 @@
       "Administration": {
         "Destinations": {
           "destination1": {
-            "Address": "http://adminService",
+            "Address": "https://localhost:44353",
             "MetaData": {
               "PublicAddress": "https://admininstration.eshop.dev"
             }
-          }          
+          }
         }
       },
-      "catalogCluster": {
+      "Catalog": {
         "Destinations": {
           "destination1": {
-            "Address": "http://catalogService",
+            "Address": "https://localhost:44354",
             "MetaData": {
               "PublicAddress": "https://catalog.eshoponabp.dev"
             }
@@ -165,7 +165,7 @@
       "Basket": {
         "Destinations": {
           "destination1": {
-            "Address": "http://basketService",
+            "Address": "https://localhost:44355",
             "MetaData": {
               "PublicAddress": "https://basket.eshoponabp.dev"
             }
@@ -175,19 +175,9 @@
       "Ordering": {
         "Destinations": {
           "destination1": {
-            "Address": "http://orderingService",
+            "Address": "https://localhost:44356",
             "MetaData": {
               "PublicAddress": "https://ordering.eshoponabp.dev"
-            }
-          }
-        }
-      },
-      "CmsKit": {
-        "Destinations": {
-          "destination1": {
-            "Address": "http://cmsKitService",
-            "MetaData": {
-              "PublicAddress": "https://cmskit.eshoponabp.dev"
             }
           }
         }
@@ -195,9 +185,19 @@
       "Payment": {
         "Destinations": {
           "destination1": {
-            "Address": "http://paymentService",
+            "Address": "https://localhost:44357",
             "MetaData": {
               "PublicAddress": "https://payment.eshoponabp.dev"
+            }
+          }
+        }
+      },
+      "CmsKit": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44358",
+            "MetaData": {
+              "PublicAddress": "https://cmskit.eshoponabp.dev"
             }
           }
         }

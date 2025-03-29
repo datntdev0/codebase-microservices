@@ -4,7 +4,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 builder.AddForwardedHeaders();
 
-var profile = "http";
+var profile = "kestrel";
 
 // Microservices
 var adminService = builder.AddProject<Projects.EShopOnAbp_AdminService_HttpApi_Host>("adminService", profile);
@@ -29,7 +29,14 @@ var basketService = builder.AddProject<Projects.EShopOnAbp_BasketService_HttpApi
     .WithReference(catalogService);
 
 // Gateways
-var webGateway = builder.AddProject<Projects.EShopOnAbp_WebGateway>("webGateway");
+var webGateway = builder.AddProject<Projects.EShopOnAbp_WebGateway>("webGateway")
+    .WithReference(adminService)
+    .WithReference(identityService)
+    .WithReference(catalogService)
+    .WithReference(basketService)
+    .WithReference(cmsKitService)
+    .WithReference(orderingService)
+    .WithReference(paymentService);
 var webPublicGateway = builder.AddProject<Projects.EShopOnAbp_WebPublicGateway>("webPublicGateway")
     .WithReference(adminService)
     .WithReference(identityService)

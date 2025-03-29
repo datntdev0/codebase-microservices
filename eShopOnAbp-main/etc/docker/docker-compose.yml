@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   lb:
     image: nginx:1.21
