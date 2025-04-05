@@ -11,7 +11,7 @@ $webPublicGatewayFolder = Join-Path $slnFolder "gateways/web-public/src/EShopOnA
 # Microservices
 $identityServiceFolder = Join-Path $slnFolder "services/identity/EShopOnAbp.IdentityService.WebApi.Host"
 $adminServiceFolder = Join-Path $slnFolder "services/admin/EShopOnAbp.AdminService.WebApi.Host"
-$basketServiceFolder = Join-Path $slnFolder "services/basket/src/EShopOnAbp.BasketService.HttpApi.Host"
+$basketServiceFolder = Join-Path $slnFolder "services/basket/EShopOnAbp.BasketService.WebApi.Host"
 $catalogServiceFolder = Join-Path $slnFolder "services/catalog/EShopOnAbp.CatalogService.WebApi.Host"
 $paymentServiceFolder = Join-Path $slnFolder "services/payment/EShopOnAbp.PaymentService.WebApi.Host"
 $orderingServiceFolder = Join-Path $slnFolder "services/ordering/EShopOnAbp.OrderingService.WebApi.Host"

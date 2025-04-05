@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\..\..\common.props" />
+    <Import Project="..\..\..\common.props" />
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -14,10 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\catalog\EShopOnAbp.CatalogService.Contracts\EShopOnAbp.CatalogService.Contracts.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
         <EmbeddedResource Include="**\*generate-proxy.json" />
         <Content Remove="**\*generate-proxy.json" />
     </ItemGroup>
@@ -26,5 +22,9 @@
         <EmbeddedResource Include="Localization\BasketService\*.json" />
         <Content Remove="Localization\BasketService\*.json" />
     </ItemGroup>
-    
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\catalog\EShopOnAbp.CatalogService.Contracts\EShopOnAbp.CatalogService.Contracts.csproj" />
+    </ItemGroup>
+
 </Project>

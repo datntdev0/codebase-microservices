@@ -25,7 +25,7 @@ var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_WebAp
         }
     );
 
-var basketService = builder.AddProject<Projects.EShopOnAbp_BasketService_HttpApi_Host>("basketService", profile)
+var basketService = builder.AddProject<Projects.EShopOnAbp_BasketService_WebApi_Host>("basketService", profile)
     .WithReference(catalogService);
 
 // Gateways

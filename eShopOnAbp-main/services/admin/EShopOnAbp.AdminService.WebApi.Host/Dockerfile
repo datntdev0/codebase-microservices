@@ -23,7 +23,7 @@ COPY "shared/EShopOnAbp.Shared.Localization/EShopOnAbp.Shared.Localization.cspro
 # Microservices
 COPY "services/admin/EShopOnAbp.AdminService.WebApi.Host/EShopOnAbp.AdminService.WebApi.Host.csproj" "services/admin/EShopOnAbp.AdminService.WebApi.Host/EShopOnAbp.AdminService.WebApi.Host.csproj"
 COPY "services/identity/EShopOnAbp.IdentityService.WebApi.Host/EShopOnAbp.IdentityService.WebApi.Host.csproj" "services/identity/EShopOnAbp.IdentityService.WebApi.Host/EShopOnAbp.IdentityService.WebApi.Host.csproj"
-COPY "services/basket/src/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj" "services/basket/src/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj"
+COPY "services/basket/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj" "services/basket/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj"
 COPY "services/ordering/EShopOnAbp.OrderingService.WebApi.Host/EShopOnAbp.OrderingService.WebApi.Host.csproj" "services/ordering/EShopOnAbp.OrderingService.WebApi.Host/EShopOnAbp.OrderingService.WebApi.Host.csproj"
 COPY "services/catalog/EShopOnAbp.CatalogService.WebApi.Host/EShopOnAbp.CatalogService.WebApi.Host.csproj" "services/catalog/EShopOnAbp.CatalogService.WebApi.Host/EShopOnAbp.CatalogService.WebApi.Host.csproj"
 COPY "services/payment/EShopOnAbp.PaymentService.WebApi.Host/EShopOnAbp.PaymentService.WebApi.Host.csproj" "services/payment/EShopOnAbp.PaymentService.WebApi.Host/EShopOnAbp.PaymentService.WebApi.Host.csproj"

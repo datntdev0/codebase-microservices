@@ -35,7 +35,7 @@
     <ProjectReference Include="..\..\..\..\shared\EShopOnAbp.Shared.Hosting.AspNetCore\EShopOnAbp.Shared.Hosting.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\..\shared\EShopOnAbp.Shared.Localization\EShopOnAbp.Shared.Localization.csproj" />
     <ProjectReference Include="..\..\..\..\services\catalog\EShopOnAbp.CatalogService.WebApi.Client\EShopOnAbp.CatalogService.WebApi.Client.csproj" />
-    <ProjectReference Include="..\..\..\..\services\basket\src\EShopOnAbp.BasketService.Contracts\EShopOnAbp.BasketService.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\services\basket\EShopOnAbp.BasketService.Contracts\EShopOnAbp.BasketService.Contracts.csproj" />
     <ProjectReference Include="..\..\..\..\services\payment\EShopOnAbp.PaymentService.WebApi.Client\EShopOnAbp.PaymentService.WebApi.Client.csproj" />
     <ProjectReference Include="..\..\..\..\services\ordering\EShopOnAbp.OrderingService.WebApi.Client\EShopOnAbp.OrderingService.WebApi.Client.csproj" />
     <ProjectReference Include="..\..\..\..\services\cmskit\EShopOnAbp.CmskitService.WebApi.Client\EShopOnAbp.CmskitService.WebApi.Client.csproj" />

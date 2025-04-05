@@ -46,7 +46,7 @@ docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-administratio
 
 
 echo "**************** BUILDING BASKET-SERVICE 7/$total ****************"
-cd ${currentFolder}/services/basket/src/EShopOnAbp.BasketService
+cd ${currentFolder}/services/basket/EShopOnAbp.BasketService
 dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-basket:${IMAGE_TAG}" .
 

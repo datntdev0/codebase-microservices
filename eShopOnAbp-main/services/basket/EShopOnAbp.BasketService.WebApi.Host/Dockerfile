@@ -23,7 +23,7 @@ COPY "shared/EShopOnAbp.Shared.Localization/EShopOnAbp.Shared.Localization.cspro
 # Microservices
 COPY "services/admin/EShopOnAbp.AdminService.WebApi.Host/EShopOnAbp.AdminService.WebApi.Host.csproj" "services/admin/EShopOnAbp.AdminService.WebApi.Host/EShopOnAbp.AdminService.WebApi.Host.csproj"
 COPY "services/identity/EShopOnAbp.IdentityService.WebApi.Host/EShopOnAbp.IdentityService.WebApi.Host.csproj" "services/identity/EShopOnAbp.IdentityService.WebApi.Host/EShopOnAbp.IdentityService.WebApi.Host.csproj"
-COPY "services/basket/src/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj" "services/basket/src/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj"
+COPY "services/basket/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj" "services/basket/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj"
 COPY "services/ordering/EShopOnAbp.OrderingService.WebApi.Host/EShopOnAbp.OrderingService.WebApi.Host.csproj" "services/ordering/EShopOnAbp.OrderingService.WebApi.Host/EShopOnAbp.OrderingService.WebApi.Host.csproj"
 COPY "services/catalog/EShopOnAbp.CatalogService.WebApi.Host/EShopOnAbp.CatalogService.WebApi.Host.csproj" "services/catalog/EShopOnAbp.CatalogService.WebApi.Host/EShopOnAbp.CatalogService.WebApi.Host.csproj"
 COPY "services/payment/EShopOnAbp.PaymentService.WebApi.Host/EShopOnAbp.PaymentService.WebApi.Host.csproj" "services/payment/EShopOnAbp.PaymentService.WebApi.Host/EShopOnAbp.PaymentService.WebApi.Host.csproj"
@@ -38,7 +38,7 @@ COPY "NuGet.Config" "NuGet.Config"
 RUN dotnet restore "EShopOnAbp.sln"
 COPY . .
 
-WORKDIR "/src/services/basket/src/EShopOnAbp.BasketService.HttpApi.Host"
+WORKDIR "/src/services/basket/EShopOnAbp.BasketService.WebApi.Host"
 RUN dotnet publish -c Release -o /app 
 # RUN dotnet publish --no-restore -c Release -o /app 
 
@@ -47,4 +47,4 @@ FROM build AS publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "EShopOnAbp.BasketService.HttpApi.Host.dll"]
+ENTRYPOINT ["dotnet", "EShopOnAbp.BasketService.WebApi.Host.dll"]
