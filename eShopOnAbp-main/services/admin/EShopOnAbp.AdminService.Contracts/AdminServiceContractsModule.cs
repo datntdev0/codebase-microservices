@@ -20,7 +20,7 @@ namespace EShopOnAbp.AdminService
         typeof(AbpAuditLoggingDomainSharedModule),
         typeof(AbpPermissionManagementApplicationContractsModule),
         typeof(AbpSettingManagementApplicationContractsModule)
-        // typeof(CatalogServiceApplicationContractsModule),
+        // typeof(CatalogServiceContractsModule),
         // typeof(OrderingServiceApplicationContractsModule),
         // typeof(CmskitServiceApplicationContractsModule)
     )]

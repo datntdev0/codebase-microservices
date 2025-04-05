@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\catalog\src\EShopOnAbp.CatalogService.Application.Contracts\EShopOnAbp.CatalogService.Application.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\catalog\EShopOnAbp.CatalogService.Contracts\EShopOnAbp.CatalogService.Contracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>

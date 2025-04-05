@@ -13,7 +13,7 @@ var cmsKitService = builder.AddProject<Projects.EShopOnAbp_CmskitService_HttpApi
 var orderingService = builder.AddProject<Projects.EShopOnAbp_OrderingService_HttpApi_Host>("orderingService", profile);
 var paymentService = builder.AddProject<Projects.EShopOnAbp_PaymentService_HttpApi_Host>("paymentService", profile);
 
-var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_HttpApi_Host>("catalogService", profile)
+var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_WebApi_Host>("catalogService", profile)
     .WithEndpoint(
         endpointName: "grpc",
         callback: static endpoint =>

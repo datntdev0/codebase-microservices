@@ -70,7 +70,7 @@ namespace EShopOnAbp.PublicWeb;
     typeof(AbpAccountHttpApiClientModule),
     typeof(EShopOnAbpSharedHostingAspNetCoreModule),
     typeof(EShopOnAbpSharedLocalizationModule),
-    typeof(CatalogServiceHttpApiClientModule),
+    typeof(CatalogServiceWebApiClientModule),
     typeof(BasketServiceContractsModule),
     typeof(OrderingServiceHttpApiClientModule),
     typeof(AbpAspNetCoreSignalRModule),

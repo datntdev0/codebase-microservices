@@ -42,7 +42,7 @@ docker build --force-rm -t "eshoponabp/service-basket:${IMAGE_TAG}" .
 
 
 echo "**************** BUILDING CATALOG-SERVICE 8/$total ****************"
-cd ${currentFolder}/services/catalog/src/EShopOnAbp.CatalogService.HttpApi.Host
+cd ${currentFolder}/services/catalog/EShopOnAbp.CatalogService.WebApi.Host
 docker build --force-rm -t "eshoponabp/service-catalog:${IMAGE_TAG}" .
 
 

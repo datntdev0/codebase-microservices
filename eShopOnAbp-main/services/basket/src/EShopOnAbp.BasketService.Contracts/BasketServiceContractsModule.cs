@@ -12,7 +12,7 @@ using Volo.Abp.Validation.Localization;
 namespace EShopOnAbp.BasketService;
 
 [DependsOn(
-    typeof(CatalogServiceApplicationContractsModule),
+    typeof(CatalogServiceContractsModule),
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationModule),
     typeof(AbpValidationModule)

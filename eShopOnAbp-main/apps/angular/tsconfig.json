@@ -25,7 +25,7 @@
       ],
       "@eshoponabp/catalog": [
         "node_modules/@eshoponabp/catalog",
-        "projects/catalog/src/public-api.ts"
+        "projects/catalog/public-api.ts"
       ],
       "@eshoponabp/ordering/config": [
         "node_modules/@eshoponabp/ordering/config",

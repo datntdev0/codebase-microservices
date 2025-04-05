@@ -226,7 +226,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "EShopOnAbp.CatalogService.Products.CreateProductDto, EShopOnAbp.CatalogService.Application.Contracts",
+                  "typeAsString": "EShopOnAbp.CatalogService.Products.CreateProductDto, EShopOnAbp.CatalogService.Contracts",
                   "type": "EShopOnAbp.CatalogService.Products.CreateProductDto",
                   "typeSimple": "EShopOnAbp.CatalogService.Products.CreateProductDto",
                   "isOptional": false,
@@ -271,7 +271,7 @@
                 },
                 {
                   "name": "input",
-                  "typeAsString": "EShopOnAbp.CatalogService.Products.UpdateProductDto, EShopOnAbp.CatalogService.Application.Contracts",
+                  "typeAsString": "EShopOnAbp.CatalogService.Products.UpdateProductDto, EShopOnAbp.CatalogService.Contracts",
                   "type": "EShopOnAbp.CatalogService.Products.UpdateProductDto",
                   "typeSimple": "EShopOnAbp.CatalogService.Products.UpdateProductDto",
                   "isOptional": false,

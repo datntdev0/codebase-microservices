@@ -25,7 +25,7 @@ COPY "services/admin/EShopOnAbp.AdminService.WebApi.Host/EShopOnAbp.AdminService
 COPY "services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host/EShopOnAbp.IdentityService.HttpApi.Host.csproj" "services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host/EShopOnAbp.IdentityService.HttpApi.Host.csproj"
 COPY "services/basket/src/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj" "services/basket/src/EShopOnAbp.BasketService/EShopOnAbp.BasketService.csproj"
 COPY "services/ordering/src/EShopOnAbp.OrderingService.HttpApi.Host/EShopOnAbp.OrderingService.HttpApi.Host.csproj" "services/ordering/src/EShopOnAbp.OrderingService.HttpApi.Host/EShopOnAbp.OrderingService.HttpApi.Host.csproj"
-COPY "services/catalog/src/EShopOnAbp.CatalogService.HttpApi.Host/EShopOnAbp.CatalogService.HttpApi.Host.csproj" "services/catalog/src/EShopOnAbp.CatalogService.HttpApi.Host/EShopOnAbp.CatalogService.HttpApi.Host.csproj"
+COPY "services/catalog/EShopOnAbp.CatalogService.WebApi.Host/EShopOnAbp.CatalogService.WebApi.Host.csproj" "services/catalog/EShopOnAbp.CatalogService.WebApi.Host/EShopOnAbp.CatalogService.WebApi.Host.csproj"
 COPY "services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host/EShopOnAbp.PaymentService.HttpApi.Host.csproj" "services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host/EShopOnAbp.PaymentService.HttpApi.Host.csproj"
 COPY "services/cmskit/src/EShopOnAbp.CmskitService.HttpApi.Host/EShopOnAbp.CmskitService.HttpApi.Host.csproj" "services/cmskit/src/EShopOnAbp.CmskitService.HttpApi.Host/EShopOnAbp.CmskitService.HttpApi.Host.csproj"
 

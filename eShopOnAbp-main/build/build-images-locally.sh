@@ -52,7 +52,7 @@ docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-basket:${IMAG
 
 
 echo "**************** BUILDING CATALOG-SERVICE 8/$total ****************"
-cd ${currentFolder}/services/catalog/src/EShopOnAbp.CatalogService.HttpApi.Host
+cd ${currentFolder}/services/catalog/EShopOnAbp.CatalogService.WebApi.Host
 dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-catalog:${IMAGE_TAG}" .
 

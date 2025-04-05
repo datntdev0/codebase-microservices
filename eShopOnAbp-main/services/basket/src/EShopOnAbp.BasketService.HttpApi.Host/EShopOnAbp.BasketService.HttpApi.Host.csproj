@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\..\..\catalog\src\EShopOnAbp.CatalogService.Application\Protos\product.proto" GrpcServices="Client" />
+    <Protobuf Include="..\..\..\catalog\EShopOnAbp.CatalogService.Application\Protos\product.proto" GrpcServices="Client" />
   </ItemGroup>
 
   <ItemGroup>

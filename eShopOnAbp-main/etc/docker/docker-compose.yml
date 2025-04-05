@@ -99,7 +99,7 @@ services:
     container_name: catalog-service-container
     build:
       context: ../../
-      dockerfile: services/catalog/src/EShopOnAbp.CatalogService.HttpApi.Host/Dockerfile
+      dockerfile: services/catalog/EShopOnAbp.CatalogService.WebApi.Host/Dockerfile
     environment:
       # - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80;http://+:81;
