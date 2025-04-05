@@ -150,7 +150,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "EShopOnAbp.OrderingService.Orders.GetMyOrdersInput, EShopOnAbp.OrderingService.Application.Contracts",
+                  "typeAsString": "EShopOnAbp.OrderingService.Orders.GetMyOrdersInput, EShopOnAbp.OrderingService.Contracts",
                   "type": "EShopOnAbp.OrderingService.Orders.GetMyOrdersInput",
                   "typeSimple": "EShopOnAbp.OrderingService.Orders.GetMyOrdersInput",
                   "isOptional": false,
@@ -187,7 +187,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "EShopOnAbp.OrderingService.Orders.GetOrdersInput, EShopOnAbp.OrderingService.Application.Contracts",
+                  "typeAsString": "EShopOnAbp.OrderingService.Orders.GetOrdersInput, EShopOnAbp.OrderingService.Contracts",
                   "type": "EShopOnAbp.OrderingService.Orders.GetOrdersInput",
                   "typeSimple": "EShopOnAbp.OrderingService.Orders.GetOrdersInput",
                   "isOptional": false,
@@ -285,7 +285,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "EShopOnAbp.OrderingService.Orders.DashboardInput, EShopOnAbp.OrderingService.Application.Contracts",
+                  "typeAsString": "EShopOnAbp.OrderingService.Orders.DashboardInput, EShopOnAbp.OrderingService.Contracts",
                   "type": "EShopOnAbp.OrderingService.Orders.DashboardInput",
                   "typeSimple": "EShopOnAbp.OrderingService.Orders.DashboardInput",
                   "isOptional": false,
@@ -433,7 +433,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "EShopOnAbp.OrderingService.Orders.OrderCreateDto, EShopOnAbp.OrderingService.Application.Contracts",
+                  "typeAsString": "EShopOnAbp.OrderingService.Orders.OrderCreateDto, EShopOnAbp.OrderingService.Contracts",
                   "type": "EShopOnAbp.OrderingService.Orders.OrderCreateDto",
                   "typeSimple": "EShopOnAbp.OrderingService.Orders.OrderCreateDto",
                   "isOptional": false,

@@ -14,7 +14,7 @@ $adminServiceFolder = Join-Path $slnFolder "services/admin/EShopOnAbp.AdminServi
 $basketServiceFolder = Join-Path $slnFolder "services/basket/src/EShopOnAbp.BasketService.HttpApi.Host"
 $catalogServiceFolder = Join-Path $slnFolder "services/catalog/EShopOnAbp.CatalogService.WebApi.Host"
 $paymentServiceFolder = Join-Path $slnFolder "services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host"
-$orderingServiceFolder = Join-Path $slnFolder "services/ordering/src/EShopOnAbp.OrderingService.HttpApi.Host"
+$orderingServiceFolder = Join-Path $slnFolder "services/ordering/EShopOnAbp.OrderingService.WebApi.Host"
 $cmskitServiceFolder = Join-Path $slnFolder "services/cmskit/EShopOnAbp.CmskitService.WebApi.Host"
 
 $total = 11

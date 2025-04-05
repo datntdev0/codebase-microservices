@@ -33,7 +33,7 @@
       ],
       "@eshoponabp/ordering": [
         "node_modules/@eshoponabp/ordering",
-        "projects/ordering/src/public-api.ts"
+        "projects/ordering/public-api.ts"
       ]
     },
     "useDefineForClassFields": false

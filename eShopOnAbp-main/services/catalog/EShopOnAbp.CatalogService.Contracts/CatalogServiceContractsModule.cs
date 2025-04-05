@@ -14,7 +14,7 @@ namespace EShopOnAbp.CatalogService;
 
 [DependsOn(
     typeof(AbpValidationModule),
-    typeof(OrderingServiceDomainSharedModule),
+    typeof(OrderingServiceContractsModule),
     typeof(AbpObjectExtendingModule),
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationModule)

@@ -25,7 +25,7 @@
   <!--
   <ItemGroup>
     <ProjectReference Include="..\..\..\catalog\EShopOnAbp.CatalogService.Contracts\EShopOnAbp.CatalogService.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\ordering\src\EShopOnAbp.OrderingService.Application.Contracts\EShopOnAbp.OrderingService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\ordering\EShopOnAbp.OrderingService.Contracts\EShopOnAbp.OrderingService.Contracts.csproj" />
     <ProjectReference Include="..\..\..\cmskit\EShopOnAbp.CmskitService.Contracts\EShopOnAbp.CmskitService.Contracts.csproj" />
   </ItemGroup>
   -->

@@ -52,7 +52,7 @@ docker build --force-rm -t "eshoponabp/service-payment:${IMAGE_TAG}" .
 
 
 echo "**************** BUILDING ORDERING-SERVICE 10/$total ****************"
-cd ${currentFolder}/services/ordering/src/EShopOnAbp.OrderingService.HttpApi.Host
+cd ${currentFolder}/services/ordering/EShopOnAbp.OrderingService.WebApi.Host
 docker build --force-rm -t "eshoponabp/service-ordering:${IMAGE_TAG}" .
 
 echo "**************** BUILDING CMSKIT-SERVICE 11/$total ****************"

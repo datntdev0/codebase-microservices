@@ -10,7 +10,7 @@ var profile = "kestrel";
 var adminService = builder.AddProject<Projects.EShopOnAbp_AdminService_WebApi_Host>("adminService", profile);
 var identityService = builder.AddProject<Projects.EShopOnAbp_IdentityService_WebApi_Host>("identityService", profile);
 var cmsKitService = builder.AddProject<Projects.EShopOnAbp_CmskitService_WebApi_Host>("cmsKitService", profile);
-var orderingService = builder.AddProject<Projects.EShopOnAbp_OrderingService_HttpApi_Host>("orderingService", profile);
+var orderingService = builder.AddProject<Projects.EShopOnAbp_OrderingService_WebApi_Host>("orderingService", profile);
 var paymentService = builder.AddProject<Projects.EShopOnAbp_PaymentService_HttpApi_Host>("paymentService", profile);
 
 var catalogService = builder.AddProject<Projects.EShopOnAbp_CatalogService_WebApi_Host>("catalogService", profile)

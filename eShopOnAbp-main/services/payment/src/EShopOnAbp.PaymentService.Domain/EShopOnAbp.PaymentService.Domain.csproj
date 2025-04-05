@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ordering\src\EShopOnAbp.OrderingService.Domain.Shared\EShopOnAbp.OrderingService.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\..\ordering\EShopOnAbp.OrderingService.Contracts\EShopOnAbp.OrderingService.Contracts.csproj" />
     <ProjectReference Include="..\..\..\..\shared\EShopOnAbp.Shared.Hosting\EShopOnAbp.Shared.Hosting.csproj" />
   </ItemGroup>
 

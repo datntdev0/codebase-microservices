@@ -64,7 +64,7 @@ docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-payment:${IMA
 
 
 echo "**************** BUILDING ORDERING-SERVICE 10/$total ****************"
-cd ${currentFolder}/services/ordering/src/EShopOnAbp.OrderingService.HttpApi.Host
+cd ${currentFolder}/services/ordering/EShopOnAbp.OrderingService.WebApi.Host
 dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-ordering:${IMAGE_TAG}" .
 

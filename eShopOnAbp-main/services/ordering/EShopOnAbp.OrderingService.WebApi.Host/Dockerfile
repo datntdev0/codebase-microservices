@@ -38,8 +38,7 @@ COPY "NuGet.Config" "NuGet.Config"
 RUN dotnet restore "EShopOnAbp.sln"
 COPY . .
 
-WORKDIR "/src/apps/public-web/src/EShopOnAbp.PublicWeb"
-
+WORKDIR "/src/services/ordering/EShopOnAbp.OrderingService.WebApi.Host"
 RUN dotnet publish -c Release -o /app 
 # RUN dotnet publish --no-restore -c Release -o /app 
 
@@ -48,4 +47,4 @@ FROM build AS publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "EShopOnAbp.PublicWeb.dll"]
+ENTRYPOINT ["dotnet", "EShopOnAbp.OrderingService.WebApi.Host.dll"]
