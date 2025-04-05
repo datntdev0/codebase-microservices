@@ -27,7 +27,7 @@ docker build --force-rm -t "eshoponabp/gateway-web-public:${IMAGE_TAG}" .
 
 
 echo "*** BUILDING IDENTITY-SERVICE 5/$total ****************"
-cd ${currentFolder}/services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host
+cd ${currentFolder}/services/identity/EShopOnAbp.IdentityService.WebApi.Host
 docker build --force-rm -t "eshoponabp/service-identity:${IMAGE_TAG}" .
 
 

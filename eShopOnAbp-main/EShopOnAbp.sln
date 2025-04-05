@@ -64,21 +64,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.WebApi.Tests", "services\cmskit\EShopOnAbp.CmskitService.WebApi.Tests\EShopOnAbp.CmskitService.WebApi.Tests.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.Application", "services\identity\src\EShopOnAbp.IdentityService.Application\EShopOnAbp.IdentityService.Application.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.Application", "services\identity\EShopOnAbp.IdentityService.Application\EShopOnAbp.IdentityService.Application.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.Application.Contracts", "services\identity\src\EShopOnAbp.IdentityService.Application.Contracts\EShopOnAbp.IdentityService.Application.Contracts.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.Contracts", "services\identity\EShopOnAbp.IdentityService.Contracts\EShopOnAbp.IdentityService.Contracts.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.Domain", "services\identity\src\EShopOnAbp.IdentityService.Domain\EShopOnAbp.IdentityService.Domain.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.WebApi.Client", "services\identity\EShopOnAbp.IdentityService.WebApi.Client\EShopOnAbp.IdentityService.WebApi.Client.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.Domain.Shared", "services\identity\src\EShopOnAbp.IdentityService.Domain.Shared\EShopOnAbp.IdentityService.Domain.Shared.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.WebApi.Host", "services\identity\EShopOnAbp.IdentityService.WebApi.Host\EShopOnAbp.IdentityService.WebApi.Host.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.EntityFrameworkCore", "services\identity\src\EShopOnAbp.IdentityService.EntityFrameworkCore\EShopOnAbp.IdentityService.EntityFrameworkCore.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.HttpApi", "services\identity\src\EShopOnAbp.IdentityService.HttpApi\EShopOnAbp.IdentityService.HttpApi.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.HttpApi.Client", "services\identity\src\EShopOnAbp.IdentityService.HttpApi.Client\EShopOnAbp.IdentityService.HttpApi.Client.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.HttpApi.Host", "services\identity\src\EShopOnAbp.IdentityService.HttpApi.Host\EShopOnAbp.IdentityService.HttpApi.Host.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.WebApi.Tests", "services\identity\EShopOnAbp.IdentityService.WebApi.Tests\EShopOnAbp.IdentityService.WebApi.Tests.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.Keycloak.DbMigrator", "shared\EShopOnAbp.Keycloak.DbMigrator\EShopOnAbp.Keycloak.DbMigrator.csproj", "{A0ECB336-8E44-46F4-B551-0595AF5B4D62}"
 EndProject

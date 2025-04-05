@@ -60,7 +60,7 @@ services:
     container_name: identity-service-container
     build:
       context: ../../
-      dockerfile: services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host/Dockerfile
+      dockerfile: services/identity/EShopOnAbp.IdentityService.WebApi.Host/Dockerfile
     environment:
       # - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80

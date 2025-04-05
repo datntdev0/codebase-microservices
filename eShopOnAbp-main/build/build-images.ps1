@@ -9,7 +9,7 @@ $publicWebFolder = Join-Path $slnFolder "apps/public-web/src/EShopOnAbp.PublicWe
 $webGatewayFolder = Join-Path $slnFolder "gateways/web/src/EShopOnAbp.WebGateway"
 $webPublicGatewayFolder = Join-Path $slnFolder "gateways/web-public/src/EShopOnAbp.WebPublicGateway"
 # Microservices
-$identityServiceFolder = Join-Path $slnFolder "services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host"
+$identityServiceFolder = Join-Path $slnFolder "services/identity/EShopOnAbp.IdentityService.WebApi.Host"
 $adminServiceFolder = Join-Path $slnFolder "services/admin/EShopOnAbp.AdminService.WebApi.Host"
 $basketServiceFolder = Join-Path $slnFolder "services/basket/src/EShopOnAbp.BasketService.HttpApi.Host"
 $catalogServiceFolder = Join-Path $slnFolder "services/catalog/EShopOnAbp.CatalogService.WebApi.Host"

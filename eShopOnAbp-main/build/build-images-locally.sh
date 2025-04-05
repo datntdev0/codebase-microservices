@@ -34,7 +34,7 @@ docker build -f Dockerfile.local --force-rm -t "eshoponabp/gateway-web-public:${
 
 
 echo "*** BUILDING IDENTITY-SERVICE 5/$total ****************"
-cd ${currentFolder}/services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host
+cd ${currentFolder}/services/identity/EShopOnAbp.IdentityService.WebApi.Host
 dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-identity:${IMAGE_TAG}" .
 

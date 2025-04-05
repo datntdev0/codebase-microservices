@@ -12,7 +12,7 @@ trigger:
       - services/basket/src/**
       - services/catalog/**
       - services/cmskit/**
-      - services/identity/src/**
+      - services/identity/**
       - services/ordering/src/**
       - services/payment/src/**
 
@@ -62,7 +62,7 @@ stages:
         echo "##vso[task.setvariable variable=hasChangedBasket]$(hasChanged 'services/basket/src/')"
         echo "##vso[task.setvariable variable=hasChangedCatalog]$(hasChanged 'services/catalog/')"
         echo "##vso[task.setvariable variable=hasChangedCmsKit]$(hasChanged 'services/cmskit/')"
-        echo "##vso[task.setvariable variable=hasChangedIdentity]$(hasChanged 'services/identity/src/')"
+        echo "##vso[task.setvariable variable=hasChangedIdentity]$(hasChanged 'services/identity/')"
         echo "##vso[task.setvariable variable=hasChangedOrdering]$(hasChanged 'services/ordering/src/')"
         echo "##vso[task.setvariable variable=hasChangedPayment]$(hasChanged 'services/payment/src/')"
       displayName: 'Check if the services have changed'
@@ -361,7 +361,7 @@ stages:
       inputs:
         command: build
         repository: eshoponabp/service-identity
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/identity/EShopOnAbp.IdentityService.WebApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |

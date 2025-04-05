@@ -1,7 +1,7 @@
 name: EShopOnAbp
 services:
 - name: identity-service
-  project: services/identity/src/EShopOnAbp.IdentityService.HttpApi.Host/EShopOnAbp.IdentityService.HttpApi.Host.csproj
+  project: services/identity/EShopOnAbp.IdentityService.WebApi.Host/EShopOnAbp.IdentityService.WebApi.Host.csproj
   bindings:
     - protocol: https
       port: 44351
