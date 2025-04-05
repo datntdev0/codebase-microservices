@@ -7,7 +7,7 @@ builder.AddForwardedHeaders();
 var profile = "kestrel";
 
 // Microservices
-var adminService = builder.AddProject<Projects.EShopOnAbp_AdminService_HttpApi_Host>("adminService", profile);
+var adminService = builder.AddProject<Projects.EShopOnAbp_AdminService_WebApi_Host>("adminService", profile);
 var identityService = builder.AddProject<Projects.EShopOnAbp_IdentityService_HttpApi_Host>("identityService", profile);
 var cmsKitService = builder.AddProject<Projects.EShopOnAbp_CmskitService_HttpApi_Host>("cmsKitService", profile);
 var orderingService = builder.AddProject<Projects.EShopOnAbp_OrderingService_HttpApi_Host>("orderingService", profile);

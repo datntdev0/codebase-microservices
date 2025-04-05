@@ -38,7 +38,7 @@ COPY "NuGet.Config" "NuGet.Config"
 RUN dotnet restore "EShopOnAbp.sln"
 COPY . .
 
-WORKDIR "/src/services/cmskit/src/EShopOnAbp.CmskitService.HttpApi.Host"
+WORKDIR "/src/services/admin/EShopOnAbp.AdminService.WebApi.Host"
 RUN dotnet publish -c Release -o /app 
 # RUN dotnet publish --no-restore -c Release -o /app 
 
@@ -47,4 +47,4 @@ FROM build AS publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "EShopOnAbp.CmskitService.HttpApi.Host.dll"]
+ENTRYPOINT ["dotnet", "EShopOnAbp.AdminService.WebApi.Host.dll"]

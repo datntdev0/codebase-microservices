@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>EShopOnAbp.AdminService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EShopOnAbp.AdminService.Contracts\EShopOnAbp.AdminService.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>

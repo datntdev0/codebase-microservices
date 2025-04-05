@@ -8,7 +8,7 @@ trigger:
       - apps/public-web/src/EShopOnAbp.PublicWeb/**
       - gateways/web/src/EShopOnAbp.WebGateway/**
       - gateways/web-public/src/EShopOnAbp.WebPublicGateway/**
-      - services/admin/src/**
+      - services/admin/**
       - services/basket/src/**
       - services/catalog/src/**
       - services/cmskit/src/**
@@ -58,7 +58,7 @@ stages:
         echo "##vso[task.setvariable variable=hasChangedPublicWeb]$(hasChanged 'apps/public-web/src/EShopOnAbp.PublicWeb/')"
         echo "##vso[task.setvariable variable=hasChangedWebGateway]$(hasChanged 'gateways/web/src/EShopOnAbp.WebGateway/')"
         echo "##vso[task.setvariable variable=hasChangedWebPublicGateway]$(hasChanged 'gateways/web-public/src/EShopOnAbp.WebPublicGateway/')"
-        echo "##vso[task.setvariable variable=hasChangedAdministration]$(hasChanged 'services/admin/src/')"
+        echo "##vso[task.setvariable variable=hasChangedAdministration]$(hasChanged 'services/admin/')"
         echo "##vso[task.setvariable variable=hasChangedBasket]$(hasChanged 'services/basket/src/')"
         echo "##vso[task.setvariable variable=hasChangedCatalog]$(hasChanged 'services/catalog/src/')"
         echo "##vso[task.setvariable variable=hasChangedCmsKit]$(hasChanged 'services/cmskit/src/')"
@@ -217,7 +217,7 @@ stages:
       inputs:
         command: build
         repository: eshoponabp/service-administration
-        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/admin/src/EShopOnAbp.AdminService.HttpApi.Host/Dockerfile.azure
+        dockerfile: $(buildContextBasePath)/eShopOnAbp/services/admin/EShopOnAbp.AdminService.WebApi.Host/Dockerfile.azure
         buildContext: $(buildContextBasePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |

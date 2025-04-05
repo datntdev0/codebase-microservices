@@ -32,7 +32,7 @@ docker build --force-rm -t "eshoponabp/service-identity:${IMAGE_TAG}" .
 
 
 echo "*** BUILDING ADMINISTRATION-SERVICE 6/$total ****************"
-cd ${currentFolder}/services/admin/src/EShopOnAbp.AdminService.HttpApi.Host
+cd ${currentFolder}/services/admin/EShopOnAbp.AdminService.WebApi.Host
 docker build --force-rm -t "eshoponabp/service-administration:${IMAGE_TAG}" .
 
 

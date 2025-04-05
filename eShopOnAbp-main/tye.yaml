@@ -10,7 +10,7 @@ services:
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
 - name: administration-service
-  project: services/admin/src/EShopOnAbp.AdminService.HttpApi.Host/EShopOnAbp.AdminService.HttpApi.Host.csproj
+  project: services/admin/EShopOnAbp.AdminService.WebApi.Host/EShopOnAbp.AdminService.WebApi.Host.csproj
   bindings:
     - protocol: https
       port: 44353
