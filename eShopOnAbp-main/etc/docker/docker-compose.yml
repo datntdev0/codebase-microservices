@@ -186,7 +186,7 @@ services:
     container_name: cmskit-service-container
     build:
       context: ../../
-      dockerfile: services/cmskit/src/EShopOnAbp.CmskitService.HttpApi.Host/Dockerfile
+      dockerfile: services/cmskit/EShopOnAbp.CmskitService.WebApi.Host/Dockerfile
     environment:
       # - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80;

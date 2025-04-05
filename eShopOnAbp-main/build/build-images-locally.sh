@@ -69,7 +69,7 @@ dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-ordering:${IMAGE_TAG}" .
 
 echo "**************** BUILDING CMSKIT-SERVICE 11/$total ****************"
-cd ${currentFolder}/services/cmskit/src/EShopOnAbp.CmskitService.HttpApi.Host
+cd ${currentFolder}/services/cmskit/EShopOnAbp.CmskitService.WebApi.Host
 dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-cmskit:${IMAGE_TAG}" .
 

@@ -38,7 +38,7 @@
     <ProjectReference Include="..\..\..\..\services\basket\src\EShopOnAbp.BasketService.Contracts\EShopOnAbp.BasketService.Contracts.csproj" />
     <ProjectReference Include="..\..\..\..\services\payment\src\EShopOnAbp.PaymentService.HttpApi.Client\EShopOnAbp.PaymentService.HttpApi.Client.csproj" />
     <ProjectReference Include="..\..\..\..\services\ordering\src\EShopOnAbp.OrderingService.HttpApi.Client\EShopOnAbp.OrderingService.HttpApi.Client.csproj" />
-    <ProjectReference Include="..\..\..\..\services\cmskit\src\EShopOnAbp.CmskitService.HttpApi.Client\EShopOnAbp.CmskitService.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\services\cmskit\EShopOnAbp.CmskitService.WebApi.Client\EShopOnAbp.CmskitService.WebApi.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -56,7 +56,7 @@ cd ${currentFolder}/services/ordering/src/EShopOnAbp.OrderingService.HttpApi.Hos
 docker build --force-rm -t "eshoponabp/service-ordering:${IMAGE_TAG}" .
 
 echo "**************** BUILDING CMSKIT-SERVICE 11/$total ****************"
-cd ${currentFolder}/services/cmskit/src/EShopOnAbp.CmskitService.HttpApi.Host
+cd ${currentFolder}/services/cmskit/EShopOnAbp.CmskitService.WebApi.Host
 docker build --force-rm -t "eshoponabp/service-cmskit:${IMAGE_TAG}" .
 
 echo "ALL COMPLETED"

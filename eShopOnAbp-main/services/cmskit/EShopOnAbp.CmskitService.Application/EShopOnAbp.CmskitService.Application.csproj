@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>EShopOnAbp.CmskitService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Volo.CmsKit.Application" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="9.0.0" />
+    <PackageReference Include="Volo.CmsKit.Domain" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Volo.CmsKit.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="9.0.0" />
+    <ProjectReference Include="..\EShopOnAbp.CmskitService.Contracts\EShopOnAbp.CmskitService.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

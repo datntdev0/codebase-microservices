@@ -22,7 +22,7 @@
     <ProjectReference Include="..\..\services\admin\EShopOnAbp.AdminService.WebApi.Host\EShopOnAbp.AdminService.WebApi.Host.csproj" />
     <ProjectReference Include="..\..\services\basket\src\EShopOnAbp.BasketService.HttpApi.Host\EShopOnAbp.BasketService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\catalog\EShopOnAbp.CatalogService.WebApi.Host\EShopOnAbp.CatalogService.WebApi.Host.csproj" />
-    <ProjectReference Include="..\..\services\cmskit\src\EShopOnAbp.CmskitService.HttpApi.Host\EShopOnAbp.CmskitService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\cmskit\EShopOnAbp.CmskitService.WebApi.Host\EShopOnAbp.CmskitService.WebApi.Host.csproj" />
     <ProjectReference Include="..\..\services\identity\src\EShopOnAbp.IdentityService.HttpApi.Host\EShopOnAbp.IdentityService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\ordering\src\EShopOnAbp.OrderingService.HttpApi.Host\EShopOnAbp.OrderingService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\payment\src\EShopOnAbp.PaymentService.HttpApi.Host\EShopOnAbp.PaymentService.HttpApi.Host.csproj" />

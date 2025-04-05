@@ -76,7 +76,7 @@ namespace EShopOnAbp.PublicWeb;
     typeof(AbpAspNetCoreSignalRModule),
     typeof(PaymentServiceHttpApiClientModule),
     typeof(AbpAutoMapperModule),
-    typeof(CmskitServiceHttpApiClientModule),
+    typeof(CmskitServiceWebApiClientModule),
     typeof(CmsKitPublicWebModule)
 )]
 public class EShopOnAbpPublicWebModule : AbpModule

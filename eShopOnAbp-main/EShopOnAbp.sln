@@ -54,21 +54,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CatalogService.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CatalogService.WebApi.Tests", "services\catalog\EShopOnAbp.CatalogService.WebApi.Tests\EShopOnAbp.CatalogService.WebApi.Tests.csproj", "{E41F937A-0FE1-4E55-B449-CABF5D42A093}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.Application", "services\cmskit\src\EShopOnAbp.CmskitService.Application\EShopOnAbp.CmskitService.Application.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.Application", "services\cmskit\EShopOnAbp.CmskitService.Application\EShopOnAbp.CmskitService.Application.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.Application.Contracts", "services\cmskit\src\EShopOnAbp.CmskitService.Application.Contracts\EShopOnAbp.CmskitService.Application.Contracts.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.Contracts", "services\cmskit\EShopOnAbp.CmskitService.Contracts\EShopOnAbp.CmskitService.Contracts.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.Domain", "services\cmskit\src\EShopOnAbp.CmskitService.Domain\EShopOnAbp.CmskitService.Domain.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.WebApi.Client", "services\cmskit\EShopOnAbp.CmskitService.WebApi.Client\EShopOnAbp.CmskitService.WebApi.Client.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.Domain.Shared", "services\cmskit\src\EShopOnAbp.CmskitService.Domain.Shared\EShopOnAbp.CmskitService.Domain.Shared.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.WebApi.Host", "services\cmskit\EShopOnAbp.CmskitService.WebApi.Host\EShopOnAbp.CmskitService.WebApi.Host.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.EntityFrameworkCore", "services\cmskit\src\EShopOnAbp.CmskitService.EntityFrameworkCore\EShopOnAbp.CmskitService.EntityFrameworkCore.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.HttpApi", "services\cmskit\src\EShopOnAbp.CmskitService.HttpApi\EShopOnAbp.CmskitService.HttpApi.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.HttpApi.Client", "services\cmskit\src\EShopOnAbp.CmskitService.HttpApi.Client\EShopOnAbp.CmskitService.HttpApi.Client.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.HttpApi.Host", "services\cmskit\src\EShopOnAbp.CmskitService.HttpApi.Host\EShopOnAbp.CmskitService.HttpApi.Host.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.CmskitService.WebApi.Tests", "services\cmskit\EShopOnAbp.CmskitService.WebApi.Tests\EShopOnAbp.CmskitService.WebApi.Tests.csproj", "{C08FF8C8-354D-40EC-A80C-AFCE36A88DFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.IdentityService.Application", "services\identity\src\EShopOnAbp.IdentityService.Application\EShopOnAbp.IdentityService.Application.csproj", "{582CE0DB-2B91-4978-9AF8-B18C732D08B7}"
 EndProject

@@ -57,7 +57,7 @@ services:
     - ./.env  
   
 - name: cmskit-service
-  project: services/cmskit/src/EShopOnAbp.CmskitService.HttpApi.Host/EShopOnAbp.CmskitService.HttpApi.Host.csproj
+  project: services/cmskit/EShopOnAbp.CmskitService.WebApi.Host/EShopOnAbp.CmskitService.WebApi.Host.csproj
   bindings:
     - protocol: https
       port: 44358

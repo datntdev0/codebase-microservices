@@ -22,7 +22,7 @@ namespace EShopOnAbp.AdminService
         typeof(AbpSettingManagementApplicationContractsModule)
         // typeof(CatalogServiceContractsModule),
         // typeof(OrderingServiceApplicationContractsModule),
-        // typeof(CmskitServiceApplicationContractsModule)
+        // typeof(CmskitServiceContractsModule)
     )]
     public class AdminServiceContractsModule : AbpModule
     {

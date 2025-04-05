@@ -38,7 +38,7 @@ COPY "NuGet.Config" "NuGet.Config"
 RUN dotnet restore "EShopOnAbp.sln"
 COPY . .
 
-WORKDIR "/src/gateways/web/src/EShopOnAbp.WebGateway"
+WORKDIR "/src/services/cmskit/EShopOnAbp.CmskitService.WebApi.Host"
 RUN dotnet publish -c Release -o /app 
 # RUN dotnet publish --no-restore -c Release -o /app 
 
@@ -47,4 +47,4 @@ FROM build AS publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "EShopOnAbp.WebGateway.dll"]
+ENTRYPOINT ["dotnet", "EShopOnAbp.CmskitService.WebApi.Host.dll"]
