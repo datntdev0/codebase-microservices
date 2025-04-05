@@ -74,7 +74,7 @@ namespace EShopOnAbp.PublicWeb;
     typeof(BasketServiceContractsModule),
     typeof(OrderingServiceWebApiClientModule),
     typeof(AbpAspNetCoreSignalRModule),
-    typeof(PaymentServiceHttpApiClientModule),
+    typeof(PaymentServiceWebApiClientModule),
     typeof(AbpAutoMapperModule),
     typeof(CmskitServiceWebApiClientModule),
     typeof(CmsKitPublicWebModule)

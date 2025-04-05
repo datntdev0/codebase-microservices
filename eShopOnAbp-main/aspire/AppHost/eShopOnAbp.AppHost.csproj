@@ -25,7 +25,7 @@
     <ProjectReference Include="..\..\services\cmskit\EShopOnAbp.CmskitService.WebApi.Host\EShopOnAbp.CmskitService.WebApi.Host.csproj" />
     <ProjectReference Include="..\..\services\identity\EShopOnAbp.IdentityService.WebApi.Host\EShopOnAbp.IdentityService.WebApi.Host.csproj" />
     <ProjectReference Include="..\..\services\ordering\EShopOnAbp.OrderingService.WebApi.Host\EShopOnAbp.OrderingService.WebApi.Host.csproj" />
-    <ProjectReference Include="..\..\services\payment\src\EShopOnAbp.PaymentService.HttpApi.Host\EShopOnAbp.PaymentService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\payment\EShopOnAbp.PaymentService.WebApi.Host\EShopOnAbp.PaymentService.WebApi.Host.csproj" />
     <ProjectReference Include="..\..\shared\EShopOnAbp.Keycloak.DbMigrator\EShopOnAbp.Keycloak.DbMigrator.csproj" />
   </ItemGroup>
 

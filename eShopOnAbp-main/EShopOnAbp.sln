@@ -84,21 +84,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.OrderingService.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.OrderingService.WebApi.Tests", "services\ordering\EShopOnAbp.OrderingService.WebApi.Tests\EShopOnAbp.OrderingService.WebApi.Tests.csproj", "{89A65776-2367-4855-8956-53322C2BF713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.Application", "services\payment\src\EShopOnAbp.PaymentService.Application\EShopOnAbp.PaymentService.Application.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573594}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.Application", "services\payment\EShopOnAbp.PaymentService.Application\EShopOnAbp.PaymentService.Application.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573594}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.Application.Contracts", "services\payment\src\EShopOnAbp.PaymentService.Application.Contracts\EShopOnAbp.PaymentService.Application.Contracts.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573595}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.Contracts", "services\payment\EShopOnAbp.PaymentService.Contracts\EShopOnAbp.PaymentService.Contracts.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.Domain", "services\payment\src\EShopOnAbp.PaymentService.Domain\EShopOnAbp.PaymentService.Domain.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573591}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.WebApi.Client", "services\payment\EShopOnAbp.PaymentService.WebApi.Client\EShopOnAbp.PaymentService.WebApi.Client.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.Domain.Shared", "services\payment\src\EShopOnAbp.PaymentService.Domain.Shared\EShopOnAbp.PaymentService.Domain.Shared.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573596}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.WebApi.Host", "services\payment\EShopOnAbp.PaymentService.WebApi.Host\EShopOnAbp.PaymentService.WebApi.Host.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD457358F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.EntityFrameworkCore", "services\payment\src\EShopOnAbp.PaymentService.EntityFrameworkCore\EShopOnAbp.PaymentService.EntityFrameworkCore.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573597}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.HttpApi", "services\payment\src\EShopOnAbp.PaymentService.HttpApi\EShopOnAbp.PaymentService.HttpApi.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573592}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.HttpApi.Client", "services\payment\src\EShopOnAbp.PaymentService.HttpApi.Client\EShopOnAbp.PaymentService.HttpApi.Client.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573593}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.HttpApi.Host", "services\payment\src\EShopOnAbp.PaymentService.HttpApi.Host\EShopOnAbp.PaymentService.HttpApi.Host.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD457358F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PaymentService.WebApi.Tests", "services\payment\EShopOnAbp.PaymentService.WebApi.Tests\EShopOnAbp.PaymentService.WebApi.Tests.csproj", "{2C55D527-4E09-4FD6-B4C6-7EFDD4573592}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopOnAbp.PublicWeb", "apps\public-web\src\EShopOnAbp.PublicWeb\EShopOnAbp.PublicWeb.csproj", "{FD9ECE3E-487B-4961-BEE9-3C26F866EAB2}"
 EndProject

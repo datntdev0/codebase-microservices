@@ -13,7 +13,7 @@ namespace EShopOnAbp.OrderingService;
 
 [DependsOn(
     typeof(AbpValidationModule),
-    typeof(PaymentServiceDomainSharedModule),
+    typeof(PaymentServiceContractsModule),
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationModule)
 )]

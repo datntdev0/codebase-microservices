@@ -58,7 +58,7 @@ docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-catalog:${IMA
 
 
 echo "**************** BUILDING PAYMENT-SERVICE 9/$total ****************"
-cd ${currentFolder}/services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host
+cd ${currentFolder}/services/payment/EShopOnAbp.PaymentService.WebApi.Host
 dotnet publish -c Release
 docker build -f Dockerfile.local --force-rm -t "eshoponabp/service-payment:${IMAGE_TAG}" .
 

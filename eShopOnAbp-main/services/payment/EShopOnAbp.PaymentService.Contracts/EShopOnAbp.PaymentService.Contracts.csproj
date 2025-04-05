@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>EShopOnAbp.OrderingService</RootNamespace>
+    <RootNamespace>EShopOnAbp.PaymentService</RootNamespace>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
 
@@ -19,12 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\payment\EShopOnAbp.PaymentService.Contracts\EShopOnAbp.PaymentService.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Localization\OrderingService\*.json" />
-    <Content Remove="Localization\OrderingService\*.json" />
+    <EmbeddedResource Include="Localization\PaymentService\*.json" />
+    <Content Remove="Localization\PaymentService\*.json" />
   </ItemGroup>
 
 </Project>

@@ -47,7 +47,7 @@ docker build --force-rm -t "eshoponabp/service-catalog:${IMAGE_TAG}" .
 
 
 echo "**************** BUILDING PAYMENT-SERVICE 9/$total ****************"
-cd ${currentFolder}/services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host
+cd ${currentFolder}/services/payment/EShopOnAbp.PaymentService.WebApi.Host
 docker build --force-rm -t "eshoponabp/service-payment:${IMAGE_TAG}" .
 
 

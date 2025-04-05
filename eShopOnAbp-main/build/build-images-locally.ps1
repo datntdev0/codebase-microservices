@@ -13,7 +13,7 @@ $identityServiceFolder = Join-Path $slnFolder "services/identity/EShopOnAbp.Iden
 $adminServiceFolder = Join-Path $slnFolder "services/admin/EShopOnAbp.AdminService.WebApi.Host"
 $basketServiceFolder = Join-Path $slnFolder "services/basket/src/EShopOnAbp.BasketService.HttpApi.Host"
 $catalogServiceFolder = Join-Path $slnFolder "services/catalog/EShopOnAbp.CatalogService.WebApi.Host"
-$paymentServiceFolder = Join-Path $slnFolder "services/payment/src/EShopOnAbp.PaymentService.HttpApi.Host"
+$paymentServiceFolder = Join-Path $slnFolder "services/payment/EShopOnAbp.PaymentService.WebApi.Host"
 $orderingServiceFolder = Join-Path $slnFolder "services/ordering/EShopOnAbp.OrderingService.WebApi.Host"
 $cmskitServiceFolder = Join-Path $slnFolder "services/cmskit/EShopOnAbp.CmskitService.WebApi.Host"
 

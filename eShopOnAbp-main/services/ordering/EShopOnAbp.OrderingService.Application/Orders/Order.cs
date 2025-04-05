@@ -32,7 +32,7 @@ public class Order : AggregateRoot<Guid>
         Address = address;
         PaymentRequestId = paymentRequestId;
         PaymentMethod = Check.NotNullOrEmpty(paymentMethod, nameof(paymentMethod), maxLength: OrderConstants.OrderPaymentMethodNameMaxLength);
-        PaymentStatus = PaymentRequestState.Waiting.ToString(); // From PaymentService.Domain.Shared
+        PaymentStatus = PaymentRequestState.Waiting.ToString(); // From PaymentService.Contracts
         OrderItems = new List<OrderItem>();
     }
 
