@@ -1,0 +1,207 @@
+﻿{
+  "ReverseProxy": {
+    "Routes": {
+      "Identity Service": {
+        "ClusterId": "Identity",
+        "Match": {
+          "Path": "/api/identity/{**everything}"
+        }
+      },
+      "AbpApi": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/abp/{**catch-all}"
+        }
+      },
+      "FeatureManagement": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/feature-management/{**everything}"
+        }
+      },
+      "PermissionManagement": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/permission-management/{**everything}"
+        }
+      },
+      "SettingManagement": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/setting-management/{**everything}"
+        }
+      },
+      "Catalog Service": {
+        "ClusterId": "Catalog",
+        "Match": {
+          "Path": "/api/catalog/{**everything}"
+        }
+      },
+      "Basket Service": {
+        "ClusterId": "Basket",
+        "Match": {
+          "Path": "/api/basket/{**everything}"
+        }
+      },
+      "Ordering Service": {
+        "ClusterId": "Ordering",
+        "Match": {
+          "Path": "/api/ordering/{**everything}"
+        }
+      },
+      "Payment Service": {
+        "ClusterId": "Payment",
+        "Match": {
+          "Path": "/api/payment/{**everything}"
+        }
+      },
+      "Cmskit Public Service": {
+        "ClusterId": "CmsKit",
+        "Match": {
+          "Path": "/api/cms-kit-public/{**everything}"
+        }
+      },
+      "Cmskit Admin Service": {
+        "ClusterId": "CmsKit",
+        "Match": {
+          "Path": "/api/cms-kit-admin/{**everything}"
+        }
+      },
+      "Swagger - Identity Service": {
+        "ClusterId": "Identity",
+        "Match": {
+          "Path": "/swagger-json/Identity/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Identity" }
+        ]
+      },
+      "Swagger - Administration Service": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Administration" }
+        ]
+      },
+      "Swagger - Catalog Service": {
+        "ClusterId": "Catalog",
+        "Match": {
+          "Path": "/swagger-json/Catalog/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Catalog" }
+        ]
+      },
+      "Swagger - Basket Service": {
+        "ClusterId": "Basket",
+        "Match": {
+          "Path": "/swagger-json/Basket/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Basket" }
+        ]
+      },
+      "Swagger - Ordering Service": {
+        "ClusterId": "Ordering",
+        "Match": {
+          "Path": "/swagger-json/Ordering/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Ordering" }
+        ]
+      },
+      "Swagger - Payment Service": {
+        "ClusterId": "Payment",
+        "Match": {
+          "Path": "/swagger-json/Payment/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Payment" }
+        ]
+      },
+      "Swagger - Cmskit Service": {
+        "ClusterId": "CmsKit",
+        "Match": {
+          "Path": "/swagger-json/Cmskit/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Cmskit" }
+        ]
+      }
+    },
+    "Clusters": {
+      "Identity": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44351",
+            "MetaData": {
+              "PublicAddress": "https://identity.eshoponabp.dev"
+            }
+          }
+        }
+      },
+      "Administration": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44353",
+            "MetaData": {
+              "PublicAddress": "https://admininstration.eshop.dev"
+            }
+          }
+        }
+      },
+      "Catalog": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44354",
+            "MetaData": {
+              "PublicAddress": "https://catalog.eshoponabp.dev"
+            }
+          }
+        }
+      },
+      "Basket": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44355",
+            "MetaData": {
+              "PublicAddress": "https://basket.eshoponabp.dev"
+            }
+          }
+        }
+      },
+      "Ordering": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44356",
+            "MetaData": {
+              "PublicAddress": "https://ordering.eshoponabp.dev"
+            }
+          }
+        }
+      },
+      "Payment": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44357",
+            "MetaData": {
+              "PublicAddress": "https://payment.eshoponabp.dev"
+            }
+          }
+        }
+      },
+      "CmsKit": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:44358",
+            "MetaData": {
+              "PublicAddress": "https://cmskit.eshoponabp.dev"
+            }
+          }
+        }
+      }
+    }
+  }
+}

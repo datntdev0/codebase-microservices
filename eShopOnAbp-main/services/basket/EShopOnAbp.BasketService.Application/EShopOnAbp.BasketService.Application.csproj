@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>EShopOnAbp.BasketService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Volo.Abp.MongoDB" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EShopOnAbp.BasketService.Contracts\EShopOnAbp.BasketService.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
