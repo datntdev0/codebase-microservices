@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "name": "EShopOnAbpPublicWeb",
+  "private": true,
+  "dependencies": {
+    "@abp/aspnetcore.mvc.ui.theme.leptonxlite": "~3.3.1",
+    "@abp/signalr": "^9.0.0",
+    "@abp/cms-kit": "^9.0.0"
+  }
+}
