@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Sdk Name="Aspire.AppHost.Sdk" Version="9.3.1" />
 
@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\infra\datntdev.Microservices.Gateway\datntdev.Microservices.Gateway.csproj" />
     <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Admin.Web.Host\datntdev.Microservices.Srv.Admin.Web.Host.csproj" />
     <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Identity.Web.Host\datntdev.Microservices.Srv.Identity.Web.Host.csproj" />
   </ItemGroup>

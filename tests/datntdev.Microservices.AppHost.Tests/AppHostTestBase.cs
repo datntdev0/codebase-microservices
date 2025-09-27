@@ -19,11 +19,7 @@ namespace datntdev.Microservices.AppHost.Tests
                 .ContinueWith(x => x.Result.BuildAsync(cancellationToken)).Unwrap();
 
             await App.StartAsync(cancellationToken);
-
-            await Task.WhenAll(
-                App.ResourceNotifications.WaitForResourceHealthyAsync("srv-identity", cancellationToken),
-                App.ResourceNotifications.WaitForResourceHealthyAsync("srv-admin", cancellationToken)
-            );
+            await App.ResourceNotifications.WaitForResourceHealthyAsync("gateway", cancellationToken);
         }
     }
 }

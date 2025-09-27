@@ -1,19 +1,17 @@
 namespace datntdev.Microservices.AppHost.Tests;
 
 [TestClass]
-public class GetHealthCheckTests : AppHostTestBase
+public class ServiceHealthCheckTests : AppHostTestBase
 {
     [TestMethod]
     public async Task GetHealthChecks_ReturnOkStatusCode()
     {
         // Arrange
         var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
-        var clientNames = new string[] { "srv-identity", "srv-admin" };
-        await Task.WhenAll(clientNames.Select(x
-            => App.ResourceNotifications.WaitForResourceHealthyAsync(x, cancellationToken)));
+        var serviceNames = new string[] { "srv-identity", "srv-admin" };
 
         // Act
-        var httpClients = clientNames.Select(x => App.CreateHttpClient(x));
+        var httpClients = serviceNames.Select(x => App.CreateHttpClient(x));
         var responses = await Task.WhenAll(httpClients.Select(client => client.GetAsync("/health")));
 
         // Assert

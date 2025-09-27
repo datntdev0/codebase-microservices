@@ -2,6 +2,9 @@
   <Folder Name="/apps/">
     <Project Path="apps/datntdev.Microservices.AppHost/datntdev.Microservices.AppHost.csproj" />
   </Folder>
+  <Folder Name="/infra/">
+    <Project Path="infra/datntdev.Microservices.Gateway/datntdev.Microservices.Gateway.csproj" />
+  </Folder>
   <Folder Name="/services/" />
   <Folder Name="/services/admin/">
     <Project Path="services/datntdev.Microservices.Srv.Admin.Contract/datntdev.Microservices.Srv.Admin.Contract.csproj" Id="32cbce0a-8943-41cc-a539-9750a9f7b4e3" />
