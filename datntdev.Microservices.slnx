@@ -2,11 +2,19 @@
   <Folder Name="/apps/">
     <Project Path="apps/datntdev.Microservices.AppHost/datntdev.Microservices.AppHost.csproj" />
   </Folder>
-  <Folder Name="/services/">
+  <Folder Name="/services/" />
+  <Folder Name="/services/admin/">
+    <Project Path="services/datntdev.Microservices.Srv.Admin.Contract/datntdev.Microservices.Srv.Admin.Contract.csproj" Id="32cbce0a-8943-41cc-a539-9750a9f7b4e3" />
+    <Project Path="services/datntdev.Microservices.Srv.Admin.Web.App/datntdev.Microservices.Srv.Admin.Web.App.csproj" Id="f58e77c3-6072-4eea-8d7c-4d3f56ca0127" />
     <Project Path="services/datntdev.Microservices.Srv.Admin.Web.Host/datntdev.Microservices.Srv.Admin.Web.Host.csproj" />
+  </Folder>
+  <Folder Name="/services/identity/">
+    <Project Path="services/datntdev.Microservices.Srv.Identity.Contract/datntdev.Microservices.Srv.Identity.Contract.csproj" Id="28c5eecd-3a61-481c-96f2-db78ee533743" />
+    <Project Path="services/datntdev.Microservices.Srv.Identity.Web.App/datntdev.Microservices.Srv.Identity.Web.App.csproj" Id="1112714d-d974-4388-abf3-7f8c9d03a07e" />
     <Project Path="services/datntdev.Microservices.Srv.Identity.Web.Host/datntdev.Microservices.Srv.Identity.Web.Host.csproj" />
   </Folder>
   <Folder Name="/shared/">
+    <Project Path="shared/datntdev.Microservices.Common/datntdev.Microservices.Common.csproj" Id="eab5e002-a027-411b-82f4-cf02f2a1c419" />
     <Project Path="shared/datntdev.Microservices.ServiceDefaults/datntdev.Microservices.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/tests/">

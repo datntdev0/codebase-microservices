@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
@@ -15,6 +15,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\shared\datntdev.Microservices.ServiceDefaults\datntdev.Microservices.ServiceDefaults.csproj" />
+		<ProjectReference Include="..\datntdev.Microservices.Srv.Admin.Web.App\datntdev.Microservices.Srv.Admin.Web.App.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

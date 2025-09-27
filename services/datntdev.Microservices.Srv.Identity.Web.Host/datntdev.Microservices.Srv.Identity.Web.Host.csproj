@@ -15,6 +15,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\shared\datntdev.Microservices.ServiceDefaults\datntdev.Microservices.ServiceDefaults.csproj" />
+		<ProjectReference Include="..\datntdev.Microservices.Srv.Identity.Web.App\datntdev.Microservices.Srv.Identity.Web.App.csproj" />
 	</ItemGroup>
 
 

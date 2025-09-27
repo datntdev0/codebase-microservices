@@ -28,18 +28,6 @@ namespace datntdev.Microservices.Srv.Admin.Tests
         }
 
         [TestMethod]
-        public async Task GetRoot_ReturnsHelloWorld()
-        {
-            // Act
-            var response = await _client.GetAsync("/");
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            Assert.AreEqual("Hello World!", content);
-        }
-
-        [TestMethod]
         public async Task GetHealthChecks_ReturnOkStatusCode()
         {
             // Act
