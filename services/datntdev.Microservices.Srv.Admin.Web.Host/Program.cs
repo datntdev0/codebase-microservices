@@ -1,6 +1,6 @@
 namespace datntdev.Microservices.Srv.Admin.Web.Host;
 
-public class Program
+public partial class Program
 {
     public static void Main(string[] args)
     {
