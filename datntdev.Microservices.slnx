@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="datntdev.Microservices.ApiService/datntdev.Microservices.ApiService.csproj" />
+  <Project Path="datntdev.Microservices.AppHost/datntdev.Microservices.AppHost.csproj" />
+  <Project Path="datntdev.Microservices.ServiceDefaults/datntdev.Microservices.ServiceDefaults.csproj" />
+  <Project Path="datntdev.Microservices.Tests/datntdev.Microservices.Tests.csproj" />
+  <Project Path="datntdev.Microservices.Web/datntdev.Microservices.Web.csproj" />
+</Solution>
