@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\services\datntdev.Microservices.ApiService\datntdev.Microservices.ApiService.csproj" />
+    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Admin.Web.Host\datntdev.Microservices.Srv.Admin.Web.Host.csproj" />
+    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Identity.Web.Host\datntdev.Microservices.Srv.Identity.Web.Host.csproj" />
     <ProjectReference Include="..\..\services\datntdev.Microservices.Web\datntdev.Microservices.Web.csproj" />
   </ItemGroup>
 
