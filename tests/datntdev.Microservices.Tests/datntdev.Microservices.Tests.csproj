@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\datntdev.Microservices.AppHost\datntdev.Microservices.AppHost.csproj" />
+    <ProjectReference Include="..\..\apps\datntdev.Microservices.AppHost\datntdev.Microservices.AppHost.csproj" />
   </ItemGroup>
 
   <ItemGroup>

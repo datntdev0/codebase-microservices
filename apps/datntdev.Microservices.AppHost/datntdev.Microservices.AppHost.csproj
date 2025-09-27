@@ -11,12 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\datntdev.Microservices.ApiService\datntdev.Microservices.ApiService.csproj" />
-    <ProjectReference Include="..\datntdev.Microservices.Web\datntdev.Microservices.Web.csproj" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
+    <ProjectReference Include="..\..\services\datntdev.Microservices.ApiService\datntdev.Microservices.ApiService.csproj" />
+    <ProjectReference Include="..\..\services\datntdev.Microservices.Web\datntdev.Microservices.Web.csproj" />
   </ItemGroup>
 
 </Project>
