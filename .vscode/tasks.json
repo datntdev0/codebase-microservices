@@ -49,6 +49,29 @@
       }
     },
     {
+      "label": "cypress: run datntdev.Microservices.Angular",
+      "type": "npm",
+      "script": "e2e:run",
+      "group": "test",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/apps/datntdev.Microservices.Angular"
+      },
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "(.*?)"
+          },
+          "endsPattern": {
+            "regexp": "bundle generation complete"
+          }
+        }
+      }
+    },
+    {
       "label": "dotnet: test datntdev.Microservices",
       "type": "process",
       "command": "dotnet",
