@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "msedge",
+      "request": "launch",
+      "name": "Angular (Edge) Debug",
+      "url": "http://localhost:64372",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Aspire AppHost Debug",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/apps/datntdev.Microservices.AppHost/datntdev.Microservices.AppHost.csproj"
+    }
+  ]
+}

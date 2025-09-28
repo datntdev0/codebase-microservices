@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/out": true,
+        "**/obj": true,
+        "**/bin": true,
+        "**/.vs": true,
+        "**/.git": true,
+        "**/TestResults": true,
+        "**/*.drawio*": true
+    },
+    "typescript.tsc.autoDetect": "off",
+    "npm.autoDetect": "off",
+}

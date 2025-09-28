@@ -3,9 +3,14 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "npm: start datntdev.Microservices.Angular",
       "type": "npm",
       "script": "start",
+      "group": "build",
       "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/apps/datntdev.Microservices.Angular"
+      },
       "problemMatcher": {
         "owner": "typescript",
         "pattern": "$tsc",
@@ -21,9 +26,14 @@
       }
     },
     {
+      "label": "npm: test datntdev.Microservices.Angular",
       "type": "npm",
       "script": "test",
+      "group": "test",
       "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/apps/datntdev.Microservices.Angular"
+      },
       "problemMatcher": {
         "owner": "typescript",
         "pattern": "$tsc",
@@ -37,6 +47,14 @@
           }
         }
       }
+    },
+    {
+      "label": "dotnet: test datntdev.Microservices",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["test"],
+      "group": "test",
+      "problemMatcher": "$msCompile"
     }
   ]
 }
