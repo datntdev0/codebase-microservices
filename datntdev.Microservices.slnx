@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/infra/">
     <Project Path="infra/datntdev.Microservices.Gateway/datntdev.Microservices.Gateway.csproj" />
+    <Project Path="infra/datntdev.Microservices.Migrator/datntdev.Microservices.Migrator.csproj" Id="ad4b6fe2-f231-44d3-94a0-48e170972a48" />
   </Folder>
   <Folder Name="/services/" />
   <Folder Name="/services/admin/">

@@ -7,6 +7,7 @@
 		<UserSecretsId>beb45e0b-3f4f-4e66-9c67-9e23332c701b</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..</DockerfileContext>
+		<UserSecretsId>datntdev.Microservices</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
