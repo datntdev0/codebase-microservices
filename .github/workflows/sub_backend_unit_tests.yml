@@ -1,0 +1,45 @@
+name: Backend Unit Tests (Reusable)
+
+description: 'Reusable workflow for backend unit tests with caching'
+
+on:
+  workflow_call:
+
+jobs:
+  backend_unit_tests:
+    name: Backend Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Trust ASP.NET Core HTTPS development certificate
+        run: dotnet dev-certs https --trust
+      - name: Install ReportGenerator
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+      - name: Run unit tests with coverage
+        run: |
+          dotnet test --no-build --configuration Release \
+          --results-directory ./TestResults --collect:"XPlat Code Coverage" \
+          -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByAttribute=*.Tests*
+      - name: Generate coverage report
+        run: |
+          reportgenerator \
+          -reports:TestResults/**/coverage.cobertura.xml \
+          -targetdir:CoverageReport \
+          -reporttypes:TextSummary \
+          -assemblyfilters:"-*.Tests*"
+          cat CoverageReport/Summary.txt

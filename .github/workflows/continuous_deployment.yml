@@ -1,0 +1,52 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  frontend_unit_tests:
+    uses: ./.github/workflows/sub_frontend_unit_tests.yml
+
+  backend_unit_tests:
+    uses: ./.github/workflows/sub_backend_unit_tests.yml
+
+  build_frontend:
+    name: Build Frontend (Mock)
+    runs-on: ubuntu-latest
+    needs: frontend_unit_tests
+    steps:
+      - name: Mock build step
+        run: |
+          echo "Mock: Building Angular frontend..."
+
+  build_backend_images:
+    name: Build Backend (Mock)
+    runs-on: ubuntu-latest
+    needs: backend_unit_tests
+    steps:
+      - name: Mock build images
+        run: |
+          echo "Mock: Building Docker image for Gateway..."
+          echo "Mock: Building Docker image for Srv.Admin.Web.Host..."
+          echo "Mock: Building Docker image for Srv.Identity.Web.Host..."
+
+  deploy_frontend:
+    name: Deploy Frontend (Mock)
+    runs-on: ubuntu-latest
+    needs: build_frontend
+    steps:
+      - name: Mock deploy step
+        run: |
+          echo "Mock: Deploying Angular frontend..."
+
+  deploy_backend:
+    name: Deploy Backend (Mock)
+    runs-on: ubuntu-latest
+    needs: build_backend_images
+    steps:
+      - name: Mock deploy step
+        run: |
+          echo "Mock: Deploying backend services..."

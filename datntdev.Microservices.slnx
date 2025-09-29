@@ -1,8 +1,8 @@
 <Solution>
   <Folder Name="/apps/">
     <Project Path="apps/datntdev.Microservices.Angular/datntdev.Microservices.Angular.esproj">
-      <Build />
-      <Deploy />
+      <Build Solution="Release|*" />
+      <Deploy Solution="Release|*" />
     </Project>
     <Project Path="apps/datntdev.Microservices.AppHost/datntdev.Microservices.AppHost.csproj" />
   </Folder>

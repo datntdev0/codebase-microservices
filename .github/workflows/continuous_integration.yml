@@ -1,0 +1,12 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  frontend_unit_tests:
+    uses: ./.github/workflows/sub_frontend_unit_tests.yml
+  backend_unit_tests:
+    uses: ./.github/workflows/sub_backend_unit_tests.yml
