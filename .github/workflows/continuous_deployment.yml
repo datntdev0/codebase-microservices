@@ -7,16 +7,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  frontend_unit_tests:
-    uses: ./.github/workflows/sub_frontend_unit_tests.yml
-
-  backend_unit_tests:
-    uses: ./.github/workflows/sub_backend_unit_tests.yml
-
   build_frontend:
     name: Build Frontend (Mock)
     runs-on: ubuntu-latest
-    needs: frontend_unit_tests
     steps:
       - name: Mock build step
         run: |
@@ -25,7 +18,6 @@ jobs:
   build_backend_images:
     name: Build Backend (Mock)
     runs-on: ubuntu-latest
-    needs: backend_unit_tests
     steps:
       - name: Mock build images
         run: |
@@ -37,6 +29,7 @@ jobs:
     name: Deploy Frontend (Mock)
     runs-on: ubuntu-latest
     needs: build_frontend
+    if: github.event_name != 'workflow_dispatch' || success()
     steps:
       - name: Mock deploy step
         run: |

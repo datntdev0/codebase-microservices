@@ -1,7 +1,5 @@
 name: Backend Unit Tests (Reusable)
 
-description: 'Reusable workflow for backend unit tests with caching'
-
 on:
   workflow_call:
 

@@ -26,6 +26,7 @@
       subdir: '.',
       reporters: [
         { type: 'html' },
+        { type: 'lcovonly', },
         { type: 'text-summary' }
       ]
     },
