@@ -8,7 +8,7 @@ public class ServiceHealthCheckTests : AppHostTestBase
     {
         // Arrange
         var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
-        var serviceNames = new string[] { "srv-identity", "srv-admin" };
+        var serviceNames = new string[] { "srv-identity", "srv-admin", "srv-notify", "srv-payment" };
 
         // Act
         var httpClients = serviceNames.Select(x => App.CreateHttpClient(x));

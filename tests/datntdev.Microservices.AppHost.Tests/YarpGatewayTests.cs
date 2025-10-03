@@ -11,6 +11,8 @@
             var serviceNames = new Dictionary<string, string> 
             {
                 { "srv-admin", "Srv.Admin" },
+                { "srv-notify", "Srv.Notify" },
+                { "srv-payment", "Srv.Payment" },
                 { "srv-identity", "Srv.Identity" },
             };
 

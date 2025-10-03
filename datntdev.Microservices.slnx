@@ -17,6 +17,16 @@
     <Project Path="services/datntdev.Microservices.Srv.Identity.Web.App/datntdev.Microservices.Srv.Identity.Web.App.csproj" Id="1112714d-d974-4388-abf3-7f8c9d03a07e" />
     <Project Path="services/datntdev.Microservices.Srv.Identity.Web.Host/datntdev.Microservices.Srv.Identity.Web.Host.csproj" />
   </Folder>
+  <Folder Name="/services/notify/">
+    <Project Path="services/datntdev.Microservices.Srv.Notify.Contract/datntdev.Microservices.Srv.Notify.Contract.csproj" Id="ff19270b-4972-46b5-8f3d-75a6555fba64" />
+    <Project Path="services/datntdev.Microservices.Srv.Notify.Web.App/datntdev.Microservices.Srv.Notify.Web.App.csproj" Id="86af3b57-9116-47fd-a47c-1cdcbce41b9a" />
+    <Project Path="services/datntdev.Microservices.Srv.Notify.Web.Host/datntdev.Microservices.Srv.Notify.Web.Host.csproj" />
+  </Folder>
+  <Folder Name="/services/payment/">
+    <Project Path="services/datntdev.Microservices.Srv.Payment.Contract/datntdev.Microservices.Srv.Payment.Contract.csproj" Id="8cbcfedf-8f1b-4775-9658-1e7ecedbb6d0" />
+    <Project Path="services/datntdev.Microservices.Srv.Payment.Web.App/datntdev.Microservices.Srv.Payment.Web.App.csproj" Id="ce2d24fe-32e5-4d94-9dc2-ebb6a79540b2" />
+    <Project Path="services/datntdev.Microservices.Srv.Payment.Web.Host/datntdev.Microservices.Srv.Payment.Web.Host.csproj" />
+  </Folder>
   <Folder Name="/shared/">
     <Project Path="shared/datntdev.Microservices.Common/datntdev.Microservices.Common.csproj" Id="eab5e002-a027-411b-82f4-cf02f2a1c419" />
     <Project Path="shared/datntdev.Microservices.ServiceDefaults/datntdev.Microservices.ServiceDefaults.csproj" />
@@ -25,5 +35,7 @@
     <Project Path="tests/datntdev.Microservices.AppHost.Tests/datntdev.Microservices.AppHost.Tests.csproj" />
     <Project Path="tests/datntdev.Microservices.Srv.Admin.Tests/datntdev.Microservices.Srv.Admin.Tests.csproj" Id="a25de347-8a47-4de3-a823-7928ff9af302" />
     <Project Path="tests/datntdev.Microservices.Srv.Identity.Tests/datntdev.Microservices.Srv.Identity.Tests.csproj" Id="c027c911-3591-4bc6-9ad4-05c72eaf4a85" />
+    <Project Path="tests/datntdev.Microservices.Srv.Notify.Tests/datntdev.Microservices.Srv.Notify.Tests.csproj" Id="229f19fd-e570-4c3b-bf06-cce6299851ad" />
+    <Project Path="tests/datntdev.Microservices.Srv.Payment.Tests/datntdev.Microservices.Srv.Payment.Tests.csproj" Id="7f30abf2-5b99-4c5d-8bcf-670288292353" />
   </Folder>
 </Solution>

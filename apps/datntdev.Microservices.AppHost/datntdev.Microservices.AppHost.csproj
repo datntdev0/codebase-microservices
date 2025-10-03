@@ -18,6 +18,8 @@
     <ProjectReference Include="..\..\infra\datntdev.Microservices.Gateway\datntdev.Microservices.Gateway.csproj" />
     <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Admin.Web.Host\datntdev.Microservices.Srv.Admin.Web.Host.csproj" />
     <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Identity.Web.Host\datntdev.Microservices.Srv.Identity.Web.Host.csproj" />
+    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Notify.Web.Host\datntdev.Microservices.Srv.Notify.Web.Host.csproj" />
+    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Payment.Web.Host\datntdev.Microservices.Srv.Payment.Web.Host.csproj" />
   </ItemGroup>
 
 </Project>
