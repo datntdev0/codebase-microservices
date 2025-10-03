@@ -17,8 +17,8 @@ namespace datntdev.Microservices.Common.Configuration
             _configurationCache = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false)
-                .AddJsonFile($"appsettings.{envName}.json", optional: !string.IsNullOrWhiteSpace(envName))
-                .AddUserSecrets(Assembly.GetEntryAssembly()!, optional: env.IsDevelopment())
+                .AddJsonFile($"appsettings.{envName}.json", optional: true)
+                .AddUserSecrets(Assembly.GetEntryAssembly()!, optional: true)
                 .AddEnvironmentVariables()
                 .Build();
 

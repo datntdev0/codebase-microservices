@@ -13,9 +13,9 @@ internal class Startup(IHostEnvironment env) : AppServiceStartup(env)
     }
 }
 
-internal class Program
+public partial class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
         ServiceBootstrapBuilder.CreateHostApplication<Startup>(args).Run();
     }
