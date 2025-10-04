@@ -28,6 +28,7 @@
     <Project Path="services/datntdev.Microservices.Srv.Payment.Web.Host/datntdev.Microservices.Srv.Payment.Web.Host.csproj" />
   </Folder>
   <Folder Name="/shared/">
+    <Project Path="shared/datntdev.Microservices.Common.Web.App/datntdev.Microservices.Common.Web.App.csproj" Id="16337a70-774c-470b-b954-c1b7afc6aabb" />
     <Project Path="shared/datntdev.Microservices.Common/datntdev.Microservices.Common.csproj" Id="eab5e002-a027-411b-82f4-cf02f2a1c419" />
     <Project Path="shared/datntdev.Microservices.ServiceDefaults/datntdev.Microservices.ServiceDefaults.csproj" />
   </Folder>

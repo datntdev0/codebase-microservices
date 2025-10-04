@@ -5,7 +5,6 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PublishAot>true</PublishAot>
 		<InvariantGlobalization>true</InvariantGlobalization>
 		<UserSecretsId>datntdev.Microservices</UserSecretsId>
 	</PropertyGroup>
@@ -24,8 +23,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Admin.Web.App\datntdev.Microservices.Srv.Admin.Web.App.csproj" />
 		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Identity.Web.App\datntdev.Microservices.Srv.Identity.Web.App.csproj" />
+		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Notify.Web.App\datntdev.Microservices.Srv.Notify.Web.App.csproj" />
+		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Payment.Web.App\datntdev.Microservices.Srv.Payment.Web.App.csproj" />
 		<ProjectReference Include="..\..\shared\datntdev.Microservices.ServiceDefaults\datntdev.Microservices.ServiceDefaults.csproj" />
 	</ItemGroup>
 
