@@ -5,7 +5,6 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<InvariantGlobalization>true</InvariantGlobalization>
 		<UserSecretsId>datntdev.Microservices</UserSecretsId>
 	</PropertyGroup>
 
@@ -23,7 +22,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

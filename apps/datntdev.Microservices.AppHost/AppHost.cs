@@ -7,13 +7,13 @@ using Gateway = Projects.datntdev_Microservices_Gateway;
 var builder = DistributedApplication.CreateBuilder(args);
 
 var srvAdmin = builder.AddProject<SrvAdmin>("srv-admin")
-    .WithHttpHealthCheck("/health");
+    .WithHttpHealthCheck("/alive");
 var srvNotify = builder.AddProject<SrvNotify>("srv-notify")
-    .WithHttpHealthCheck("/health");
+    .WithHttpHealthCheck("/alive");
 var srvPayment = builder.AddProject<SrvPayment>("srv-payment")
-    .WithHttpHealthCheck("/health");
+    .WithHttpHealthCheck("/alive");
 var srvIdentity = builder.AddProject<SrvIdentity>("srv-identity")
-    .WithHttpHealthCheck("/health");
+    .WithHttpHealthCheck("/alive");
 
 builder.AddProject<Gateway>("gateway")
     .WithReference(srvAdmin).WaitFor(srvAdmin).WithExternalHttpEndpoints()

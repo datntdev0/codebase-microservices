@@ -3,6 +3,7 @@ using datntdev.Microservices.Common.Modular;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -35,8 +36,10 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
 
         public static IServiceCollection AddDefaultHealthChecks(this IServiceCollection services)
         {
-            services.AddHealthChecks() // Add a default liveness check to ensure app is responsive
-                .AddCheck("self", () => HealthCheckResult.Healthy(), ["live"]);
+            services.AddHealthChecks()
+                .AddCheck<StartupHealthCheck>("startup", tags: ["ready"])
+                .AddCheck<DbContextHealthCheck>("dbcontext", tags: ["live"]);
+
             return services;
         }
 
@@ -96,9 +99,14 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             // Adding health checks endpoints to applications in non-development environments has security implications.
             // See https://aka.ms/dotnet/aspire/healthchecks for details before enabling these endpoints in non-development environments.
             // All health checks must pass for app to be considered ready to accept traffic after starting
-            builder.MapHealthChecks(Constants.Endpoints.Health);
+
+            // Only health checks tagged with the "ready" tag must pass for app to be considered health
+            builder.MapHealthChecks(Constants.Endpoints.Health, new()
+            {
+                Predicate = r => r.Tags.Contains("ready")
+            });
             // Only health checks tagged with the "live" tag must pass for app to be considered alive
-            builder.MapHealthChecks(Constants.Endpoints.Liveness, new HealthCheckOptions
+            builder.MapHealthChecks(Constants.Endpoints.Liveness, new()
             {
                 Predicate = r => r.Tags.Contains("live")
             });

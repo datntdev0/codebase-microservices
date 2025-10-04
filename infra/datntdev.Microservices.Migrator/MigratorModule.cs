@@ -26,10 +26,10 @@ namespace datntdev.Microservices.Migrator
         {
             var migrationsAssembly = GetType().Assembly.GetName().Name;
             services.ConfigureDbContext<SrvIdentityDbContext>(
-                opt => opt.UseSqlServer(configs.GetConnectionString("IdentityService"),
+                opt => opt.UseSqlServer(configs.GetConnectionString("Identity"),
                     o => o.MigrationsAssembly(migrationsAssembly)));
             services.ConfigureDbContext<SrvPaymentDbContext>(
-                opt => opt.UseSqlServer(configs.GetConnectionString("PaymentService"),
+                opt => opt.UseSqlServer(configs.GetConnectionString("Payment"),
                     o => o.MigrationsAssembly(migrationsAssembly)));
         }
     }

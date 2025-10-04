@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using datntdev.Microservices.Srv.Identity.Web.App;
+using datntdev.Microservices.Srv.Payment.Web.App;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -23,11 +26,26 @@ namespace datntdev.Microservices.Migrator
 
                 logger.LogInformation("Migrator service is starting...");
 
-                await Task.Delay(5000); // Simulate some work being done, e.g., running migrations
+                await Task.WhenAll(
+                    StartMigrationAsync<SrvIdentityDbContext>(scoped),
+                    StartMigrationAsync<SrvPaymentDbContext>(scoped)
+                );
 
                 logger.LogInformation("Migrator service is completed. Stopping application lifetime...");
                 lifetime.StopApplication();
             }, services, TimeSpan.FromSeconds(1), Timeout.InfiniteTimeSpan);
+            return Task.CompletedTask;
+        }
+
+        private static Task StartMigrationAsync<TDbContext>(IServiceProvider scoped) 
+            where TDbContext : DbContext
+        {
+            var logger = scoped.GetRequiredService<ILogger<TDbContext>>();
+            logger.LogInformation("Checking database existed or pending migrations...");
+            var dbContext = scoped.GetRequiredService<TDbContext>();
+            var pendingChanges = dbContext.Database.GetPendingMigrations();
+            if (pendingChanges.Any()) dbContext.Database.Migrate();
+
             return Task.CompletedTask;
         }
 
