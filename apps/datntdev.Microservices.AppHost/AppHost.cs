@@ -6,13 +6,21 @@ using Gateway = Projects.datntdev_Microservices_Gateway;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
+var paramPassword = builder.AddParameter("param-Password", "Password!123");
+
+var dbInstanceSqlServer = builder.AddSqlServer("dbSqlServer", password: paramPassword, port: 1433);
+var dbSrvIdentity = dbInstanceSqlServer.AddDatabase("db-SrvIdentity", "db.Identity");
+var dbSrvPayment = dbInstanceSqlServer.AddDatabase("db-SrvPayment", "db.Payment");
+
 var srvAdmin = builder.AddProject<SrvAdmin>("srv-admin")
     .WithHttpHealthCheck("/alive");
 var srvNotify = builder.AddProject<SrvNotify>("srv-notify")
     .WithHttpHealthCheck("/alive");
 var srvPayment = builder.AddProject<SrvPayment>("srv-payment")
+    .WithReference(dbSrvPayment, "Default").WaitFor(dbSrvPayment)
     .WithHttpHealthCheck("/alive");
 var srvIdentity = builder.AddProject<SrvIdentity>("srv-identity")
+    .WithReference(dbSrvIdentity, "Default").WaitFor(dbSrvIdentity)
     .WithHttpHealthCheck("/alive");
 
 builder.AddProject<Gateway>("gateway")
