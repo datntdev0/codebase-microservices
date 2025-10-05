@@ -1,0 +1,29 @@
+services:
+  db-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+    ports:
+      - "1433:1433"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourStrong!Passw0rd", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db-mongodb:
+    image: mongo:8.0
+    environment:
+      - MONGO_INITDB_DATABASE=localhost
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=YourMongo!Passw0rd
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.runCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

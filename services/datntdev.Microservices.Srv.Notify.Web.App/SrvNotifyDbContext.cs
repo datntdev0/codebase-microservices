@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using datntdev.Microservices.Common.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace datntdev.Microservices.Srv.Notify.Web.App
 {
-    public class SrvNotifyDbContext(DbContextOptions<SrvNotifyDbContext> options) : DbContext(options)
+    public class SrvNotifyDbContext(DbContextOptions<SrvNotifyDbContext> options)
+        : DbContext(options), IDocumentDbContext
     {
     }
 }

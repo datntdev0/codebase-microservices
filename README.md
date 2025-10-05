@@ -17,3 +17,10 @@ A modern microservice boilerplate for rapid SaaS development with .NET and Angul
 - Payment integration for subscription management
 - CI/CD pipelines with automated testing and quality scans
 - Monitoring and alerting with Grafana Cloud
+
+## Prerequisites
+
+- Docker Desktop or Docker Engine
+- Visual Studio Code and NodeJs version 22 
+- Visual Studio 2022 or later with .NET workloads
+- Database GUI tools (SSMS, MongoDB Compass, RedisInsight)

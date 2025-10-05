@@ -1,0 +1,1 @@
+docker compose -f .github/dockers/docker-compose.yml -p datntdev_microservices_infra up -d
