@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\shared\datntdev.Microservices.Common.Web.App\datntdev.Microservices.Common.Web.App.csproj" />
     <ProjectReference Include="..\datntdev.Microservices.Srv.Notify.Contract\datntdev.Microservices.Srv.Notify.Contract.csproj" />
   </ItemGroup>
 

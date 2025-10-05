@@ -25,12 +25,18 @@ namespace datntdev.Microservices.Migrator
         private void ConfigureDbContextSqlServer(IServiceCollection services, IConfigurationRoot configs)
         {
             var migrationsAssembly = GetType().Assembly.GetName().Name;
+
             services.ConfigureDbContext<SrvIdentityDbContext>(
                 opt => opt.UseSqlServer(configs.GetConnectionString("Identity"),
                     o => o.MigrationsAssembly(migrationsAssembly)));
             services.ConfigureDbContext<SrvPaymentDbContext>(
                 opt => opt.UseSqlServer(configs.GetConnectionString("Payment"),
                     o => o.MigrationsAssembly(migrationsAssembly)));
+
+            services.ConfigureDbContext<SrvAdminDbContext>(
+                opt => opt.UseMongoDB(configs.GetConnectionString("Admin")!));
+            services.ConfigureDbContext<SrvNotifyDbContext>(
+                opt => opt.UseMongoDB(configs.GetConnectionString("Notify")!));
         }
     }
 }
