@@ -1,14 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\shared\datntdev.Microservices.Common.Web.App\datntdev.Microservices.Common.Web.App.csproj" />
-    <ProjectReference Include="..\datntdev.Microservices.Srv.Identity.Contract\datntdev.Microservices.Srv.Identity.Contract.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="OpenIddict.AspNetCore" Version="7.1.0" />
+		<PackageReference Include="OpenIddict.EntityFrameworkCore" Version="7.1.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\..\shared\datntdev.Microservices.Common.Web.App\datntdev.Microservices.Common.Web.App.csproj" />
+		<ProjectReference Include="..\datntdev.Microservices.Srv.Identity.Contract\datntdev.Microservices.Srv.Identity.Contract.csproj" />
+	</ItemGroup>
 
 </Project>

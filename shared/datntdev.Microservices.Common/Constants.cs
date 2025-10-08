@@ -11,6 +11,8 @@
         {
             public const string Health = "/health";
             public const string Liveness = "/alive";
+            public const string OAuth2Token = "/connect/token";
+            public const string OAuth2Auth = "/connect/authorize";
         }
     }
 }
