@@ -3,11 +3,12 @@ using Scalar.AspNetCore;
 
 namespace datntdev.Microservices.Srv.Notify.Web.Host;
 
-internal class Startup(IWebHostEnvironment env) : WebServiceStartup(env)
+internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvNotifyWebHostModule>(env)
 {
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.AddServiceBootstrap<SrvNotifyWebHostModule>(_hostingConfiguration);
+        base.ConfigureServices(services);
+
         services.AddDefaultHealthChecks();
         services.AddDefaultOpenTelemetry();
         services.AddDefaultServiceDiscovery();
@@ -18,7 +19,7 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup(env)
 
     public override void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseServiceBootstrap<SrvNotifyWebHostModule>(_hostingConfiguration);
+        base.Configure(app, env);
 
         app.UseHttpsRedirection();
         app.UseRouting();

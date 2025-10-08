@@ -1,4 +1,5 @@
 ﻿using datntdev.Microservices.Common.Configuration;
+using datntdev.Microservices.Common.Modular;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,17 +8,35 @@ using Microsoft.Extensions.Hosting;
 
 namespace datntdev.Microservices.ServiceDefaults.Hosting
 {
-    public abstract class AppServiceStartup(IHostEnvironment env)
+    public interface IAppServiceStartup
     {
-        protected readonly IConfigurationRoot _hostingConfiguration = AppConfiguration.Get(env);
-
         public virtual void ConfigureServices(IServiceCollection services) { }
     }
 
-    public abstract class WebServiceStartup(IWebHostEnvironment env) : AppServiceStartup(env)
+    public interface IWebServiceStartup : IAppServiceStartup
     {
-        protected readonly IWebHostEnvironment _hostingEnvironment = env;
-
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env) { }
+    }
+
+    public abstract class AppServiceStartup<TBootstrapModule>(IHostEnvironment env) : IAppServiceStartup
+        where TBootstrapModule : BaseModule
+    {
+        protected readonly IHostEnvironment _hostingEnvironment = env;
+        protected readonly IConfigurationRoot _hostingConfiguration = AppConfiguration.Get(env);
+
+        public virtual void ConfigureServices(IServiceCollection services) 
+        {
+            services.AddServiceBootstrap<TBootstrapModule>(_hostingConfiguration);
+        }
+    }
+
+    public abstract class WebServiceStartup<TBootstrapModule>(IWebHostEnvironment env) 
+        : AppServiceStartup<TBootstrapModule>(env), IWebServiceStartup
+        where TBootstrapModule : BaseModule
+    {
+        public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
+        {
+            app.UseServiceBootstrap<TBootstrapModule>(_hostingConfiguration);
+        }
     }
 }

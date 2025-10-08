@@ -13,7 +13,7 @@ namespace datntdev.Microservices.Common.Configuration
             if (_configurationCache != null) return _configurationCache;
 
             var envName = env.EnvironmentName;
-            var assembly = Assembly.GetEntryAssembly()!;
+            var assembly = Assembly.GetExecutingAssembly()!;
 
             _configurationCache = new ConfigurationBuilder()
                 .SetBasePath(Path.GetDirectoryName(assembly.Location)!)

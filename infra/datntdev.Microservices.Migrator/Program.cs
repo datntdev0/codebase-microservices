@@ -4,11 +4,12 @@ using Microsoft.Extensions.Hosting;
 
 namespace datntdev.Microservices.Migrator;
 
-internal class Startup(IHostEnvironment env) : AppServiceStartup(env)
+internal class Startup(IHostEnvironment env) : AppServiceStartup<MigratorModule>(env)
 {
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.AddServiceBootstrap<MigratorModule>(_hostingConfiguration);
+        base.ConfigureServices(services);
+
         services.AddHostedService<MigratorHostedWorker>();
     }
 }

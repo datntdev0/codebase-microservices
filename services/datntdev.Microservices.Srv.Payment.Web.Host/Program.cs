@@ -3,11 +3,12 @@ using Scalar.AspNetCore;
 
 namespace datntdev.Microservices.Srv.Payment.Web.Host;
 
-internal class Startup(IWebHostEnvironment env) : WebServiceStartup(env)
+internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvPaymentWebHostModule>(env)
 {
     public override void ConfigureServices(IServiceCollection services)
     {
-        services.AddServiceBootstrap<SrvPaymentWebHostModule>(_hostingConfiguration);
+        base.ConfigureServices(services);
+
         services.AddDefaultHealthChecks();
         services.AddDefaultOpenTelemetry();
         services.AddDefaultServiceDiscovery();
@@ -18,7 +19,7 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup(env)
 
     public override void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseServiceBootstrap<SrvPaymentWebHostModule>(_hostingConfiguration);
+        base.Configure(app, env);
 
         app.UseHttpsRedirection();
         app.UseRouting();
