@@ -1,4 +1,5 @@
 ﻿using datntdev.Microservices.Common;
+using datntdev.Microservices.Common.Configuration;
 using datntdev.Microservices.Common.Modular;
 using datntdev.Microservices.Srv.Identity.Contract;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
         public override void ConfigureServices(IServiceCollection services, IConfigurationRoot configs)
         {
             services.AddDbContext<SrvIdentityDbContext>(opt => opt.UseOpenIddict());
+            services.AddOpenIddictServices(configs);
         }
     }
 
@@ -28,9 +30,9 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
                 .AddCore(opt => opt.UseEntityFrameworkCore().UseDbContext<SrvIdentityDbContext>())
                 .AddServer(options =>
                 {
-                    // TODO: Disable access token encryption for debug
-                    // edit this code for applying higher environments
-                    options.DisableAccessTokenEncryption()
+                    if (AppConfiguration.IsDevelopment()) options.DisableAccessTokenEncryption();
+
+                    options
                         .AddEphemeralSigningKey()
                         .AddEncryptionKey(new SymmetricSecurityKey(encryptionKey));
 

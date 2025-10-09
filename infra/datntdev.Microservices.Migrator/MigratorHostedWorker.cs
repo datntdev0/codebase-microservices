@@ -4,7 +4,6 @@ using datntdev.Microservices.Srv.Identity.Web.App;
 using datntdev.Microservices.Srv.Notify.Web.App;
 using datntdev.Microservices.Srv.Payment.Web.App;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -36,6 +35,12 @@ namespace datntdev.Microservices.Migrator
                     StartMigrationAsync(scoped, scoped.GetRequiredService<SrvPaymentDbContext>()),
                     StartMigrationAsync(scoped, scoped.GetRequiredService<SrvNotifyDbContext>()),
                     StartMigrationAsync(scoped, scoped.GetRequiredService<SrvAdminDbContext>())
+                );
+
+                logger.LogInformation("Database migration is completed. Starting data seeding...");
+
+                await Task.WhenAll(
+                    new Seeders.IdentityDataSeeder(scoped).SeedAsync()
                 );
 
                 logger.LogInformation("Migrator service is completed. Stopping application lifetime...");

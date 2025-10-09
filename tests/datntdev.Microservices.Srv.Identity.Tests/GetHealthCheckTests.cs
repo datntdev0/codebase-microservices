@@ -1,32 +1,8 @@
-﻿using datntdev.Microservices.Srv.Identity.Web.Host;
-using Microsoft.AspNetCore.Mvc.Testing;
-
-namespace datntdev.Microservices.Srv.Identity.Tests
+﻿namespace datntdev.Microservices.Srv.Identity.Tests
 {
     [TestClass]
-    public sealed class GetHealthCheckTests
+    public sealed class GetHealthCheckTests : TestBase
     {
-        private static WebApplicationFactory<Program> _factory = default!;
-        private static HttpClient _client = default!;
-
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext _)
-        {
-            _factory = new WebApplicationFactory<Program>();
-        }
-
-        [AssemblyCleanup]
-        public static void AssemblyCleanup()
-        {
-            _factory.Dispose();
-        }
-
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext _)
-        {
-            _client = _factory.CreateClient();
-        }
-
         [TestMethod]
         public async Task GetHealthChecks_ReturnOkStatusCode()
         {
