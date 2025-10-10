@@ -30,7 +30,7 @@ namespace datntdev.Microservices.Migrator.Seeders
             var newApplication = CreateConfidentialApplication(
                 openIddictClientId, openIddictClientSecret, openIddictRedirectUris);
             var existingApplication = await manager.FindByClientIdAsync(newApplication.ClientId!);
-            if (existingApplication != null) await manager.DeleteAsync(newApplication);
+            if (existingApplication != null) await manager.DeleteAsync(existingApplication);
             await manager.CreateAsync(newApplication);
         }
 

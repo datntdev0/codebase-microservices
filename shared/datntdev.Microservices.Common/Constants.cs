@@ -7,6 +7,13 @@
             public const string Name = "datntdev Microservices";
             public const string Version = "1.0.0";
         }
+
+        public static class MultiTenancy
+        {
+            public const int DefaultTenantId = 0;
+            public const string DefaultTenantName = "Default";
+        }
+
         public static class Endpoints
         {
             public const string Health = "/health";

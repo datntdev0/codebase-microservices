@@ -40,7 +40,8 @@ namespace datntdev.Microservices.Migrator
                 logger.LogInformation("Database migration is completed. Starting data seeding...");
 
                 await Task.WhenAll(
-                    new Seeders.IdentityDataSeeder(scoped).SeedAsync()
+                    new Seeders.IdentityDataSeeder(scoped).SeedAsync(),
+                    new Seeders.AdminDataSeeder(scoped).SeedAsync()
                 );
 
                 logger.LogInformation("Migrator service is completed. Stopping application lifetime...");
