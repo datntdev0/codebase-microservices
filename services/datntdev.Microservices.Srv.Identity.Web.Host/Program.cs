@@ -1,4 +1,5 @@
 using datntdev.Microservices.ServiceDefaults.Hosting;
+using datntdev.Microservices.Srv.Identity.Web.Host.Components;
 using Scalar.AspNetCore;
 
 namespace datntdev.Microservices.Srv.Identity.Web.Host;
@@ -13,6 +14,7 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
         services.AddDefaultOpenTelemetry();
         services.AddDefaultServiceDiscovery();
 
+        services.AddRazorComponents();
         services.AddControllers();
         services.AddOpenApi();
     }
@@ -27,11 +29,16 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
         app.UseAuthentication();
         app.UseAuthorization();
 
+        app.UseAntiforgery();
+
         app.UseEndpoints(configure =>
         {
+            configure.MapRazorComponents<AppIndex>();
+            configure.MapStaticAssets();
             configure.MapControllers();
             configure.MapOpenApi();
             configure.MapScalarApiReference();
+
             if (env.IsDevelopment()) configure.MapDefaultHealthChecks();
         });
     }
