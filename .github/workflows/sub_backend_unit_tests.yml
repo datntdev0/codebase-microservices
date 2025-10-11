@@ -24,10 +24,12 @@ jobs:
         run: dotnet dev-certs https --trust
       - name: Install ReportGenerator
         run: dotnet tool install --global dotnet-reportgenerator-globaltool
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Build solution
-        run: dotnet build --no-restore --configuration Release
+      - name: Start Docker Desktop to run the required infrastructure services.
+        run: docker compose -f .github/dockers/docker-compose.yml -p datntdev_microservices_infra up -d
+      - name: Restore dependencies and Build solution
+        run: dotnet restore && dotnet build --no-restore --configuration Release
+      - name: Run the database migrations and start the application.
+        run: dotnet run --project ./infra/datntdev.Microservices.Migrator/datntdev.Microservices.Migrator.csproj
       - name: Run unit tests with coverage
         run: |
           dotnet test --no-build --configuration Release \

@@ -39,4 +39,7 @@
     <Project Path="tests/datntdev.Microservices.Srv.Notify.Tests/datntdev.Microservices.Srv.Notify.Tests.csproj" Id="229f19fd-e570-4c3b-bf06-cce6299851ad" />
     <Project Path="tests/datntdev.Microservices.Srv.Payment.Tests/datntdev.Microservices.Srv.Payment.Tests.csproj" Id="7f30abf2-5b99-4c5d-8bcf-670288292353" />
   </Folder>
+  <Folder Name="/_/">
+    <File Path="common.props" />
+  </Folder>
 </Solution>
