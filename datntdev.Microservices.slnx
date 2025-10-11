@@ -34,7 +34,6 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/datntdev.Microservices.AppHost.Tests/datntdev.Microservices.AppHost.Tests.csproj" />
-    <Project Path="tests/datntdev.Microservices.Migrator.Tests/datntdev.Microservices.Migrator.Tests.csproj" Id="ec407ee7-358e-421c-ab36-e60a7de8a796" />
     <Project Path="tests/datntdev.Microservices.Srv.Admin.Tests/datntdev.Microservices.Srv.Admin.Tests.csproj" Id="a25de347-8a47-4de3-a823-7928ff9af302" />
     <Project Path="tests/datntdev.Microservices.Srv.Identity.Tests/datntdev.Microservices.Srv.Identity.Tests.csproj" Id="c027c911-3591-4bc6-9ad4-05c72eaf4a85" />
     <Project Path="tests/datntdev.Microservices.Srv.Notify.Tests/datntdev.Microservices.Srv.Notify.Tests.csproj" Id="229f19fd-e570-4c3b-bf06-cce6299851ad" />

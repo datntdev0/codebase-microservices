@@ -20,9 +20,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Components.Pages.Auth
         [Inject]
         private IdentityManager IdentityManager { get; set; } = default!;
 
-        [CascadingParameter]
-        private HttpContext HttpContext { get; set; } = default!;
-
         [SupplyParameterFromForm]
         private InputModel Model { get; set; } = new();
 
