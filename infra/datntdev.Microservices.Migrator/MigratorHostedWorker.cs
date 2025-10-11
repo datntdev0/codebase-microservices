@@ -56,8 +56,6 @@ namespace datntdev.Microservices.Migrator
             var logger = scoped.GetRequiredService<ILogger<TDbContext>>();
             logger.LogInformation("Checking database existed or pending migrations...");
 
-            dbContext.Database.EnsureCreated();
-
             if (dbContext is IRelationalDbContext)
             {
                 var pendingChanges = dbContext.Database.GetPendingMigrations();

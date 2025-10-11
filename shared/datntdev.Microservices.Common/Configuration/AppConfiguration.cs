@@ -17,7 +17,6 @@ namespace datntdev.Microservices.Common.Configuration
 
             var envName = env.EnvironmentName;
             var assembly = Assembly.GetExecutingAssembly()!;
-
             _configurationCache = new ConfigurationBuilder()
                 .SetBasePath(Path.GetDirectoryName(assembly.Location)!)
                 .AddJsonFile("appsettings.json", optional: false)

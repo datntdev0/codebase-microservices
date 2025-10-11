@@ -36,3 +36,8 @@ dotnet run --project ./infra/datntdev.Microservices.Migrator/datntdev.Microservi
 # 3. Start the microservices with Aspire Orchestrator.
 dotnet run --project ./apps/datntdev.Microservices.AppHost/datntdev.Microservices.AppHost.csproj
 ```
+
+To stop cleanup the infrastructure services, run:
+```bash
+docker compose -f .github/dockers/docker-compose.yml -p datntdev_microservices_infra down -v
+```
