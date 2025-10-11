@@ -1,0 +1,12 @@
+﻿
+@include color-mode(light) {
+    [theme-show='dark'] {
+        display: none !important;
+    }
+}
+
+@include color-mode(dark) {
+    [theme-show='light'] {
+        display: none !important;
+    }
+}

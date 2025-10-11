@@ -1,6 +1,7 @@
 ﻿using datntdev.Microservices.Common;
 using datntdev.Microservices.Common.Configuration;
 using datntdev.Microservices.Common.Modular;
+using datntdev.Microservices.Common.Web.App;
 using datntdev.Microservices.Srv.Identity.Contract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +10,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace datntdev.Microservices.Srv.Identity.Web.App
 {
-    [DependOn(typeof(SrvIdentityContractModule))]
+    [DependOn(
+        typeof(CommonWebAppModule),
+        typeof(SrvIdentityContractModule)
+    )]
     public class SrvIdentityWebAppModule : BaseModule
     {
         public override void ConfigureServices(IServiceCollection services, IConfigurationRoot configs)

@@ -1,5 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using datntdev.Microservices.Common.Web.App.Session
+
+@inject AppSessionContext AppSession
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="@AppSession.AppInfo.AppTheme">
 
 <head>
   <base href="/" />
@@ -15,9 +19,7 @@
 
 <body>
   <script src="@Assets["bundles/js/scripts.js"]"></script>
-
   <Routes />
-
   <script src="_framework/blazor.web.js"></script>
 </body>
 

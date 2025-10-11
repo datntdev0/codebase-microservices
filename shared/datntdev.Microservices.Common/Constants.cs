@@ -6,6 +6,7 @@
         {
             public const string Name = "datntdev Microservices";
             public const string Version = "1.0.0";
+            public const string DefaultTheme = "light";
         }
 
         public static class MultiTenancy
