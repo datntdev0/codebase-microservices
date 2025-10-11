@@ -11,6 +11,33 @@ namespace datntdev.Microservices.Migrator.Seeders
         public async Task SeedAsync()
         {
             await EnsureOpenIddictApplicationExistsAsync();
+            await EnsureDefaultAdminUserExistsAsync();
+        }
+
+        private async Task EnsureDefaultAdminUserExistsAsync()
+        {
+            var defaultAdminUsername = _configuration.GetValue<string>("DefaultAdmin:Username");
+            var defaultAdminEmail = _configuration.GetValue<string>("DefaultAdmin:Username");
+            var defaultAdminPassword = _configuration.GetValue<string>("DefaultAdmin:Password");
+            var defaultAdminFirstName = _configuration.GetValue<string>("DefaultAdmin:FirstName");
+            var defaultAdminLastName = _configuration.GetValue<string>("DefaultAdmin:LastName");
+
+            ArgumentNullException.ThrowIfNull(defaultAdminUsername, nameof(defaultAdminUsername));
+            ArgumentNullException.ThrowIfNull(defaultAdminPassword, nameof(defaultAdminPassword));
+
+            var manager = services.GetRequiredService<Srv.Identity.Web.App.Authorization.Users.UserManager>();
+
+            // Recreate the default admin user althgough it exists.
+            var existingUser = await manager.FindAsync(defaultAdminUsername);
+            if (existingUser != null) await manager.DeleteAsync(defaultAdminUsername);
+            var newUser = new Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity
+            {
+                Username = defaultAdminUsername,
+                EmailAddress = defaultAdminEmail ?? string.Empty,
+                FirstName = defaultAdminFirstName ?? string.Empty,
+                LastName = defaultAdminLastName ?? string.Empty,
+            };
+            await manager.CreateAsync(newUser, defaultAdminPassword);
         }
 
         private async Task EnsureOpenIddictApplicationExistsAsync()

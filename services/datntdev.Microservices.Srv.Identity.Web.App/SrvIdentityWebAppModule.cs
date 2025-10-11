@@ -3,6 +3,9 @@ using datntdev.Microservices.Common.Configuration;
 using datntdev.Microservices.Common.Modular;
 using datntdev.Microservices.Common.Web.App;
 using datntdev.Microservices.Srv.Identity.Contract;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +23,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
         {
             services.AddDbContext<SrvIdentityDbContext>(opt => opt.UseOpenIddict());
             services.AddOpenIddictServices(configs);
+            services.AddIdentityServices();
         }
     }
 
@@ -53,6 +57,13 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
                         .EnableTokenEndpointPassthrough()
                         .EnableAuthorizationEndpointPassthrough();
                 });
+            return services;
+        }
+
+        public static IServiceCollection AddIdentityServices(this IServiceCollection services)
+        {
+            services.AddScoped<UserManager>()
+                .AddSingleton<PasswordHasher<AppUserEntity>>();
             return services;
         }
     }
