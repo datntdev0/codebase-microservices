@@ -1,4 +1,5 @@
 using datntdev.Microservices.ServiceDefaults.Hosting;
+using datntdev.Microservices.ServiceDefaults.Session;
 using datntdev.Microservices.Srv.Identity.Web.Host.Components;
 using Scalar.AspNetCore;
 
@@ -17,6 +18,8 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
         services.AddRazorComponents();
         services.AddControllers();
         services.AddOpenApi();
+
+        services.AddTransient<AppSessionMiddleware>();
     }
 
     public override void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -28,6 +31,7 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
 
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseMiddleware<AppSessionMiddleware>();
 
         app.UseAntiforgery();
 

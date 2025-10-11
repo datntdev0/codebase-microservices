@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using datntdev.Microservices.Srv.Identity.Web.App.Identity;
+using datntdev.Microservices.Srv.Identity.Web.App.Identity.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,9 +9,14 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Components.Pages.Auth
     public partial class SignIn
     {
         private EditContext _editContext = default!;
+        private string? _sweetAlertTitle;
+        private string? _sweetAlertText;
 
         [Inject]
         private NavigationManager NavigationManager { get; set; } = default!;
+
+        [Inject]
+        private IdentityManager IdentityManager { get; set; } = default!;
 
         [CascadingParameter]
         private HttpContext HttpContext { get; set; } = default!;
@@ -34,6 +41,17 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Components.Pages.Auth
 
         private async Task HandleValidSubmitAsync()
         {
+            var loginResult = await IdentityManager.SignInWithPassword(Model.Email!, Model.Password!);
+
+            if (loginResult.Status == IdentityResultStatus.Success)
+            {
+                NavigationManager.NavigateTo(ReturnUrl, forceLoad: true);
+            }
+            else
+            {
+                _sweetAlertTitle = "Login Failed";
+                _sweetAlertText = "Invalid login attempt. Please try again.";
+            }
         }
 
         public class InputModel

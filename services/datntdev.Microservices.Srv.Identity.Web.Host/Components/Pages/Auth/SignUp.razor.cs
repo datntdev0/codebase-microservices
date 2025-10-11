@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using datntdev.Microservices.Common;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
+using datntdev.Microservices.Srv.Identity.Web.App.Identity;
+using datntdev.Microservices.Srv.Identity.Web.App.Identity.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,9 +11,14 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Components.Pages.Auth
     public partial class SignUp
     {
         private EditContext _editContext = default!;
+        private string? _sweetAlertTitle;
+        private string? _sweetAlertText;
 
         [Inject]
         private NavigationManager NavigationManager { get; set; } = default!;
+
+        [Inject]
+        private IdentityManager IdentityManager { get; set; } = default!;
 
         [CascadingParameter]
         private HttpContext HttpContext { get; set; } = default!;
@@ -31,6 +40,24 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Components.Pages.Auth
 
         private async Task HandleValidSubmit()
         {
+            var newUser = new AppUserEntity
+            {
+                Username = Model.Email!,
+                EmailAddress = Model.Email!,
+                FirstName = Model.FirstName!,
+                LastName = Model.LastName!,
+            };
+            var registerResult = await IdentityManager.SignUpWithPassword(newUser, Model.Password!);
+
+            if (registerResult.Status == IdentityResultStatus.Success)
+            {
+                NavigationManager.NavigateTo(Constants.Endpoints.AuthSignIn, forceLoad: true);
+            }
+            else
+            {
+                _sweetAlertTitle = "Registration Failed";
+                _sweetAlertText = "Invalid register attempt. Please try again.";
+            }
         }
 
         public class InputModel

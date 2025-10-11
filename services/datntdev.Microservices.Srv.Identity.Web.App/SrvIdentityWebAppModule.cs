@@ -4,8 +4,7 @@ using datntdev.Microservices.Common.Modular;
 using datntdev.Microservices.Common.Web.App;
 using datntdev.Microservices.Srv.Identity.Contract;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users;
-using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
-using Microsoft.AspNetCore.Identity;
+using datntdev.Microservices.Srv.Identity.Web.App.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -62,8 +61,10 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
 
         public static IServiceCollection AddIdentityServices(this IServiceCollection services)
         {
-            services.AddScoped<UserManager>()
-                .AddSingleton<PasswordHasher<AppUserEntity>>();
+            services.AddScoped<IdentityManager>()
+                .AddSingleton<PasswordHasher>()
+                .AddScoped<UserManager>()
+                .AddHttpContextAccessor();
             return services;
         }
     }

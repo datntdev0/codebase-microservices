@@ -66,5 +66,12 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Controllers
             // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
             return SignIn(claimsPrincipal, authenticationScheme);
         }
+
+        [HttpPost("/me/signout")]
+        public async Task<IActionResult> SignOutAsync()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect(Constants.Endpoints.AuthSignIn);
+        }
     }
 }

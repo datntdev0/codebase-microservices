@@ -1,5 +1,5 @@
 ﻿using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
-using Microsoft.AspNetCore.Identity;
+using datntdev.Microservices.Srv.Identity.Web.App.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +8,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
     public class UserManager(IServiceProvider services)
     {
         private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
-        private readonly PasswordHasher<AppUserEntity> _passwordHasher = services.GetRequiredService<PasswordHasher<AppUserEntity>>();
+        private readonly PasswordHasher _passwordHasher = services.GetRequiredService<PasswordHasher>();
 
         public Task<AppUserEntity?> FindAsync(string username)
         {
