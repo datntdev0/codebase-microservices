@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\common.props" />
+
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<IsAspireSharedProject>true</IsAspireSharedProject>
 	</PropertyGroup>
 
@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\datntdev.Microservices.Common\datntdev.Microservices.Common.csproj" />
+	  <ProjectReference Include="..\datntdev.Microservices.Common.Web.App\datntdev.Microservices.Common.Web.App.csproj" />
 	</ItemGroup>
 
 </Project>

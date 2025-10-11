@@ -1,0 +1,39 @@
+{
+  "name": "microservice",
+  "version": "0.1.0",
+  "description": "Packages used by yarn, npm, gulp and webpack",
+  "main": "gulpfile.js",
+  "type": "module",
+  "dependencies": {
+    "bootstrap": "5.3.5",
+    "sweetalert2": "^11.22.2"
+  },
+  "devDependencies": {
+    "del": "^8.0.0",
+    "glob": "^11.0.1",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-dart-sass": "^1.1.0",
+    "gulp-if": "^3.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-rewrite-css": "^1.1.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-terser": "^2.1.0",
+    "lazypipe": "^1.0.2",
+    "lodash": "^4.17.21"
+  },
+  "scripts": {
+    "build": "gulp compile",
+    "clean": "gulp clean",
+    "gulp": "gulp"
+  },
+  "overrides": {
+    "gulp-dart-sass": {
+      "sass": "1.70.0"
+    }
+  },
+  "resolutions": {
+    "gulp-dart-sass/sass": "1.70.0"
+  }
+}

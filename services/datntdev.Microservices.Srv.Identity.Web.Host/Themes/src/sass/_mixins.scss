@@ -1,0 +1,31 @@
+@mixin button-reset() {
+    appearance: none;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin input-reset() {
+    border: 0;
+    background-color: transparent;
+    outline: none !important;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+@mixin placeholder($color) {
+    // Chrome, Firefox, Opera, Safari 10.1+
+    &::placeholder {
+        color: $color;
+    }
+    // Firefox
+    &::-moz-placeholder {
+        color: $color;
+        opacity: 1;
+    }
+}

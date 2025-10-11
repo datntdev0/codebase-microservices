@@ -6,15 +6,17 @@ namespace datntdev.Microservices.Common.Configuration
 {
     public static class AppConfiguration
     {
+        private static IHostEnvironment _hostEnvironment = default!;
         private static IConfigurationRoot _configurationCache = default!;
 
         public static IConfigurationRoot Get(IHostEnvironment env)
         {
+            _hostEnvironment = env;
+
             if (_configurationCache != null) return _configurationCache;
 
             var envName = env.EnvironmentName;
-            var assembly = Assembly.GetEntryAssembly()!;
-
+            var assembly = Assembly.GetExecutingAssembly()!;
             _configurationCache = new ConfigurationBuilder()
                 .SetBasePath(Path.GetDirectoryName(assembly.Location)!)
                 .AddJsonFile("appsettings.json", optional: false)
@@ -25,5 +27,7 @@ namespace datntdev.Microservices.Common.Configuration
 
             return _configurationCache;
         }
+
+        public static bool IsDevelopment() => _hostEnvironment.IsDevelopment();
     }
 }

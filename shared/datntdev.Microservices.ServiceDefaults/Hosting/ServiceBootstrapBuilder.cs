@@ -5,7 +5,8 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
 {
     public static class ServiceBootstrapBuilder
     {
-        public static IHost CreateHostApplication<TStartup>(string[] args) where TStartup : AppServiceStartup
+        public static IHost CreateHostApplication<TStartup>(string[] args) 
+            where TStartup : IAppServiceStartup
         {
             var builder = Host.CreateApplicationBuilder(args);
             var startup = Activator.CreateInstance(typeof(TStartup), builder.Environment);
@@ -14,7 +15,8 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             return app;
         }
 
-        public static IHost CreateWebApplication<TStartup>(string[] args) where TStartup : WebServiceStartup
+        public static IHost CreateWebApplication<TStartup>(string[] args)
+            where TStartup : IWebServiceStartup
         {
             var builder = WebApplication.CreateBuilder(args);
             var startup = Activator.CreateInstance(typeof(TStartup), builder.Environment);

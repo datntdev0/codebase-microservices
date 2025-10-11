@@ -1,0 +1,26 @@
+﻿@using datntdev.Microservices.Common.Web.App.Session
+
+@page "/"
+
+@inject AppSessionContext AppSession
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<AuthorizeView>
+  <Authorized>
+    <p>You are logged in! <a href="#" onclick="signout()">Sign Out</a></p>
+    <p>Current User: @AppSession.UserInfo?.EmailAddress</p>
+    <p>Full Name: @AppSession.UserInfo?.FirstName @AppSession.UserInfo?.LastName</p>
+  </Authorized>
+  <NotAuthorized>
+    <p>You are not logged in. <a href="/auth/signin">Sign In</a></p>
+  </NotAuthorized>
+</AuthorizeView>
+
+<script>
+  function signout() { fetch('/me/signout', { method: 'POST' }).then(() => location.reload()) }
+</script>

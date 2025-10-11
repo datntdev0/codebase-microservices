@@ -1,0 +1,35 @@
+//
+// Theme style
+//
+
+// Initialize
+@import "mixins";
+
+// Variables
+@import "variables";
+
+// Bootstrap initializaton
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+// Extended bootstrap utilities
+@import "helpers/utilities";
+// Bootstrap components
+@import "bootstrap/scss/bootstrap";
+
+// Components
+@import "helpers/flex";
+@import "helpers/themes";
+@import "components/buttons";
+@import "components/separator";
+@import "components/forms";
+
+// Vendors
+@import "vendors/sweetalert";
+
+// Layout
+@import "layout";
+

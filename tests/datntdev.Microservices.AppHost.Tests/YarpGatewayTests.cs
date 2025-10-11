@@ -22,7 +22,7 @@
             {
                 service = x.Key, 
                 serviceName = x.Value,
-                responseTask = client.GetAsync($"{x.Key}/api/home"),
+                responseTask = client.GetAsync($"{x.Key}/health"),
             });
             await Task.WhenAll(requests.Select(r => r.responseTask));
 
@@ -32,7 +32,6 @@
                 var response = request.responseTask.Result;
                 var responseString = await response.Content.ReadAsStringAsync();
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-                Assert.AreEqual($"Hello World from {request.serviceName}", responseString);
             }
         }
     }

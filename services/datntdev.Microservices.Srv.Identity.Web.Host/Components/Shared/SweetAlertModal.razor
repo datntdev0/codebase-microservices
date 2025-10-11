@@ -1,0 +1,18 @@
+﻿@if (!string.IsNullOrEmpty(Title))
+{
+  <script>
+    Swal.fire({
+      title: '@Title',
+      text: '@Text',
+      icon: '@Icon',
+    })
+  </script>
+}
+
+@code {
+  [Parameter] public string? Title { get; set; }
+
+  [Parameter] public string? Text { get; set; }
+
+  [Parameter] public string? Icon { get; set; } = "info";
+}

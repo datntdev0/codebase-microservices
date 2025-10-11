@@ -1,27 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Sdk Name="Aspire.AppHost.Sdk" Version="9.3.1" />
+	<Sdk Name="Aspire.AppHost.Sdk" Version="9.3.1" />
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <UserSecretsId>50ed8109-7736-4e4a-b386-7680a3cd10fe</UserSecretsId>
-  </PropertyGroup>
+	<Import Project="..\..\common.props" />
 
-  <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
-    <PackageReference Include="Aspire.Hosting.MongoDB" Version="9.5.1" />
-    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.5.1" />
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\infra\datntdev.Microservices.Gateway\datntdev.Microservices.Gateway.csproj" />
-    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Admin.Web.Host\datntdev.Microservices.Srv.Admin.Web.Host.csproj" />
-    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Identity.Web.Host\datntdev.Microservices.Srv.Identity.Web.Host.csproj" />
-    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Notify.Web.Host\datntdev.Microservices.Srv.Notify.Web.Host.csproj" />
-    <ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Payment.Web.Host\datntdev.Microservices.Srv.Payment.Web.Host.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
+		<PackageReference Include="Aspire.Hosting.MongoDB" Version="9.5.1" />
+		<PackageReference Include="Aspire.Hosting.SqlServer" Version="9.5.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\infra\datntdev.Microservices.Gateway\datntdev.Microservices.Gateway.csproj" />
+		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Admin.Web.Host\datntdev.Microservices.Srv.Admin.Web.Host.csproj" />
+		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Identity.Web.Host\datntdev.Microservices.Srv.Identity.Web.Host.csproj" />
+		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Notify.Web.Host\datntdev.Microservices.Srv.Notify.Web.Host.csproj" />
+		<ProjectReference Include="..\..\services\datntdev.Microservices.Srv.Payment.Web.Host\datntdev.Microservices.Srv.Payment.Web.Host.csproj" />
+	</ItemGroup>
 
 </Project>
