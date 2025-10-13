@@ -126,16 +126,28 @@ jobs:
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
 
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+
       - name: Trust ASP.NET Core HTTPS development certificate
         run: dotnet dev-certs https --trust
-      - name: Remove Angular project and restore nuget packages
-        run: |
-          rm -rf apps/datntdev.Microservices.Angular
-          dotnet restore
+
+      - name: Start Docker Desktop to run the required infrastructure services.
+        run: docker compose -f .github/dockers/docker-compose.yml -p datntdev_microservices_infra up -d
+        
+      - name: Run the database migrations and start the application.
+        run: dotnet run --project ./infra/datntdev.Microservices.Migrator/datntdev.Microservices.Migrator.csproj
+
       - name: Install SonarQube Cloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         run: |
