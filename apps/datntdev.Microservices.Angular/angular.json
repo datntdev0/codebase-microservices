@@ -35,8 +35,13 @@
               }
             ],
             "styles": [
-              "src/styles.css"
-            ]
+              "src/styles/style.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": [ "import", "global-builtin" ]
+              }
+            }
           },
           "configurations": {
             "production": {
@@ -95,8 +100,13 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/style.scss"
             ],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": [ "import", "global-builtin" ]
+              }
+            },
             "karmaConfig": "karma.conf.js"
           }
         }
