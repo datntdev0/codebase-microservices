@@ -19,9 +19,8 @@
 
     &.separator-content {
         display: flex;
-        white-space: nowrap;
-        border-bottom: 0;
         align-items: center;
+        border-bottom: 0;
         text-align: center;
 
         &::before,
@@ -31,11 +30,11 @@
             border-bottom: 1px solid var(--#{$prefix}border-color);
         }
 
-        &::before {
+        &::before{
             margin-right: 1.25rem;
         }
 
-        &::after {
+        &::after{
             margin-left: 1.25rem;
         }
 
@@ -56,10 +55,10 @@
         }
 
         @each $color, $value in $theme-colors {
-            &.border-#{$color} {
+            &.border-#{$color}{
                 &::before,
                 &::after {
-                    border-color: $value !important;
+                    border-color: $value !important; 
                 }
             }
         }

@@ -1,0 +1,471 @@
+//
+// Buttons Base
+//
+
+// Button
+.btn {
+	--#{$prefix}btn-color: var(--#{$prefix}body-color);
+
+	// Reset outline
+	outline: none !important;	
+
+	// Reset focus shadow
+	&:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(.shadow-xs) {
+		box-shadow: none;
+	}
+
+	// Remove border
+	&:not(.btn-outline):not(.btn-dashed):not(.btn-bordered):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon):not(.btn-hover-outline) {
+		border: 0;
+		padding: calc(#{$btn-padding-y} + #{$btn-border-width}) calc(#{$btn-padding-x} + #{$btn-border-width});
+
+		&.btn-lg {
+			padding: calc(#{$btn-padding-y-lg} + #{$btn-border-width}) calc(#{$btn-padding-x-lg} + #{$btn-border-width});
+		}
+
+		&.btn-sm {
+			padding: calc(#{$btn-padding-y-sm} + #{$btn-border-width}) calc(#{$btn-padding-x-sm} + #{$btn-border-width});
+		}
+	}
+
+	// Link
+	&.btn-link {
+		border: 0;
+		border-radius: 0;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		text-decoration: none;
+		font-weight: $btn-font-weight;
+	}
+ 
+	// Outline
+	&.btn-outline:not(.btn-outline-dashed) {
+		border: 1px solid $input-border-color;
+	}
+
+	// Outline dashed
+	&.btn-outline-dashed {
+		border: 1px dashed $input-border-color;
+	}
+
+	// Flush
+	&.btn-flush {
+		@include button-reset();
+	}
+
+	// Flex
+	&.btn-flex {		
+		display: inline-flex;
+		align-items: center;
+	}
+
+	// Align start
+	&.btn-trim-start {
+		justify-content: flex-start !important;
+		padding-left: 0 !important;		
+	}
+
+	// Align start
+	&.btn-trim-end {
+		justify-content: flex-end !important;
+		padding-right: 0 !important;	
+	} 
+}
+
+// Reset
+.btn-reset {
+	background-color: transparent;
+	border: 0;
+	box-shadow: none;
+	user-select: none;
+	outline: none;
+}
+
+// Icons
+.btn {
+	// Font icon
+	> i {
+		display: inline-flex;
+		font-size: $font-size-base;
+		padding-right: 0.35rem;
+		vertical-align: middle;
+	}
+
+	// Icon only button
+	&.btn-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		height: $input-height;
+		width: $input-height;
+		line-height: 1;
+
+		i {
+			padding-right: 0;	
+		}
+
+		// Remove border
+		&:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush) {
+			border: 0;
+		}
+
+		// Sizes
+		&.btn-sm {
+			height: $input-height-sm;
+			width: $input-height-sm;
+			 
+		}
+
+		&.btn-lg {
+			height: $input-height-lg;
+			width: $input-height-lg;
+		}
+
+		&.btn-circle {
+			border-radius: 50%;
+		}
+	}
+}
+
+
+//
+// Buttons Theme
+//
+
+// Outline dashed basic style
+.btn.btn-outline.btn-outline-dashed {
+	border-width: 1px;
+	border-style: dashed;	
+	
+	$color: null;
+	$icon-color: null;
+	$border-color: null;
+	$bg-color: null;;
+
+	$color-active: null;
+	$icon-color-active: null;
+	$border-color-active: var(--#{$prefix}primary);
+	$bg-color-active: null;
+
+	@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+}
+
+// Outline hover basic style
+.btn.btn-hover-outline {
+	border-width: 1px;
+	border-style: solid;	
+	
+	$color: null;
+	$icon-color: null;
+	$border-color: null;
+	$bg-color: null;
+
+	$color-active: null;
+	$icon-color-active: null;
+	$border-color-active: $input-border-color;
+	$bg-color-active: null;
+
+	@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+}
+
+// Theme colors
+@each $name, $value in $theme-colors {
+	// Base
+	.btn.btn-#{$name} {
+		$color: var(--#{$prefix}#{$name}-inverse);
+		$icon-color: var(--#{$prefix}#{$name}-inverse);
+		$border-color: var(--#{$prefix}#{$name});
+		$bg-color: var(--#{$prefix}#{$name});
+
+		$color-active: var(--#{$prefix}#{$name}-inverse);
+		$icon-color-active: var(--#{$prefix}#{$name}-inverse);
+		$border-color-active: var(--#{$prefix}#{$name}-active);
+		$bg-color-active: var(--#{$prefix}#{$name}-active);
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Light
+	@if ( map-get($theme-light-colors, $name) ) {
+		.btn.btn-light-#{$name} {
+			$color: var(--#{$prefix}#{$name});
+			$icon-color: var(--#{$prefix}#{$name});
+			@if $name == 'secondary' {
+					$color: var(--#{$prefix}#{$name}-inverse);
+					$icon-color: var(--#{$prefix}#{$name}-inverse);
+			}
+
+			$border-color: var(--#{$prefix}#{$name}-light);
+			$bg-color: var(--#{$prefix}#{$name}-light);
+	
+			$color-active: var(--#{$prefix}#{$name}-inverse);
+			$icon-color-active: var(--#{$prefix}#{$name}-inverse);
+			$border-color-active: var(--#{$prefix}#{$name});
+			$bg-color-active: var(--#{$prefix}#{$name});
+	
+			@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+		}
+	}	
+
+	// Background
+	.btn.btn-bg-#{$name} {
+		$color: null;
+		$icon-color: null;
+		$border-color: var(--#{$prefix}#{$name});
+		$bg-color: var(--#{$prefix}#{$name});		
+
+		$color-active: null;
+		$icon-color-active: null;
+		$border-color-active: null;
+		$bg-color-active: null;			
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+	
+	// Active
+	.btn.btn-active-#{$name} {
+		$color: null;
+		$icon-color: null;
+		$border-color: null;
+		$bg-color: null;
+
+		$color-active: var(--#{$prefix}#{$name}-inverse);
+		$icon-color-active: var(--#{$prefix}#{$name}-inverse);
+		$border-color-active: var(--#{$prefix}#{$name});
+		$bg-color-active: var(--#{$prefix}#{$name});
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Light
+	@if ( map-get($theme-light-colors, $name) ) {
+		.btn.btn-active-light-#{$name} {
+			$color: null;
+			$icon-color: null;
+			$border-color: null;
+			$bg-color: null;
+
+			$color-active: var(--#{$prefix}#{$name});
+			$icon-color-active: var(--#{$prefix}#{$name});
+			@if $name == 'secondary' {
+					$color-active: var(--#{$prefix}#{$name}-inverse);
+					$icon-color-active: var(--#{$prefix}#{$name}-inverse);
+			}
+
+			$border-color-active: var(--#{$prefix}#{$name}-light);
+			$bg-color-active: var(--#{$prefix}#{$name}-light);
+
+			@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+		}
+	}
+
+	// Outline
+	.btn.btn-outline.btn-outline-#{$name} {
+		$color: var(--#{$prefix}#{$name});
+		$icon-color: var(--#{$prefix}#{$name});
+		$border-color: var(--#{$prefix}#{$name});
+
+		@if $name == 'secondary' {
+				$color: var(--#{$prefix}#{$name}-inverse);
+				$icon-color: var(--#{$prefix}#{$name}-inverse);
+				$border-color: var(--#{$prefix}#{$name}-inverse);
+		}
+		
+		$bg-color: transparent;
+
+		$color-active: var(--#{$prefix}#{$name}-active);
+		$icon-color-active: var(--#{$prefix}#{$name}-active);
+		$border-color-active: var(--#{$prefix}#{$name});
+		@if $name == 'secondary' {
+				$color-active: var(--#{$prefix}#{$name}-inverse);
+				$icon-color-active: var(--#{$prefix}#{$name}-inverse);
+				$border-color-active: var(--#{$prefix}#{$name}-inverse);
+		}
+
+		$bg-color-active: var(--#{$prefix}#{$name}-light);
+
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+}
+
+// Theme text colors
+@each $name, $value in $theme-text-colors {
+	// Text and icon colors
+	.btn.btn-color-#{$name} {
+		$color: var(--#{$prefix}text-#{$name});
+		$icon-color: var(--#{$prefix}text-#{$name});
+		$bg-color: null;
+		$border-color: null;
+
+		$color-active: null;
+		$icon-color-active: null;
+		$border-color-active: null;
+		$bg-color-active: null;
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Text and icon colors active state
+	.btn.btn-active-color-#{$name} {
+		$color: null;
+		$icon-color: null;
+		$border-color: null;
+		$bg-color: null;
+
+		$color-active: var(--#{$prefix}text-#{$name});
+		$icon-color-active: var(--#{$prefix}text-#{$name});
+		$border-color-active: null;
+		$bg-color-active: null;
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Icon colors 
+	.btn.btn-icon-#{$name} {
+		$color: null;
+		$icon-color: var(--#{$prefix}text-#{$name});
+		$bg-color: null;
+		$border-color: null;
+
+		$color-active: null;
+		$icon-color-active: null;
+		$border-color-active: null;
+		$bg-color-active: null;
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Icon colors active state
+	.btn.btn-active-icon-#{$name} {
+		$color: null;
+		$icon-color: null;
+		$bg-color: null;
+		$border-color: null;
+
+		$color-active: null;
+		$icon-color-active: var(--#{$prefix}text-#{$name});
+		$border-color-active: null;
+		$bg-color-active: null;
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Text colors
+	.btn.btn-text-#{$name} {
+		$color: var(--#{$prefix}text-#{$name});
+		$icon-color: null;
+		$bg-color: null;
+		$border-color: null;
+
+		$color-active: null;
+		$icon-color-active: null;
+		$border-color-active: null;
+		$bg-color-active: null;
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Text colors active state
+	.btn.btn-active-text-#{$name} {
+		$color: null;
+		$icon-color: null;
+		$bg-color: null;
+		$border-color: null;
+
+		$color-active: var(--#{$prefix}text-#{$name});
+		$icon-color-active: null;
+		$border-color-active: null;
+		$bg-color-active: null;
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}	
+}
+
+// Social colors
+@each $name, $value in $social-colors {
+	// Base
+	.btn.btn-#{$name} {
+		$color: map-get($value, inverse);
+		$icon-color: map-get($value, inverse);
+		$border-color: map-get($value, base);
+		$bg-color: map-get($value, base);
+
+		$color-active: null;
+		$icon-color-active: null;
+		$border-color-active: map-get($value, active);
+		$bg-color-active: map-get($value, active);
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+
+	// Light
+	.btn.btn-light-#{$name} {
+		$color: map-get($value, base);
+		$icon-color: map-get($value, base);
+		$bg-color: map-get($value, light);
+		$border-color: map-get($value, light);
+
+		$color-active: map-get($value, inverse);
+		$icon-color-active: map-get($value, inverse);
+		$bg-color-active: map-get($value, base);
+		$border-color-active: map-get($value, base);
+
+		@if $name == 'secondary' {
+			color: var(--#{$prefix}#{$name}-inverse);
+		} @else {
+			color: var(--#{$prefix}#{$name});
+		}
+
+		@include button-custom-variant($color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active);
+	}
+}
+
+@include color-mode(dark) {
+	.btn.btn-dark {
+		@include button-custom-variant(
+			$color: $gray-800-dark, 
+			$icon-color: $gray-800-dark, 
+			$border-color: null, 
+			$bg-color: $gray-400-dark,
+			$color-active: lighten($gray-800-dark, 3%), 
+			$icon-color-active: lighten($gray-800-dark, 3%), 
+			$border-color-active: null, 
+			$bg-color-active: lighten($gray-400-dark, 3%),
+		);
+	}
+}
+
+// Secondary button
+// Desktop mode
+@include media-breakpoint-up(lg) {
+    .btn.btn-secondary {
+        @include button-custom-variant(
+            $color: null, 
+            $icon-color: var(--#{$prefix}gray-600), 
+            $border-color: null, 
+            $bg-color: var(--#{$prefix}gray-200),
+            $color-active: null, 
+            $icon-color-active: var(--#{$prefix}primary), 
+            $border-color-active: null, 
+            $bg-color-active: var(--#{$prefix}gray-300),
+        );
+    }
+}
+
+@include color-mode(dark) {
+    // Secondary button
+    .btn.btn-secondary  {
+        @include button-custom-variant(
+            $color: null,
+            $icon-color: #878794,
+            $border-color: null, 
+            $bg-color: #1A1A1A,
+            $color-active: null,
+            $icon-color-active: null,
+            $border-color-active: null, 
+            $bg-color-active: #1A1A1A,
+        );
+    }
+}
