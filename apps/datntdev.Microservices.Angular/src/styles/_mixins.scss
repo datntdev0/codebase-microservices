@@ -1,3 +1,13 @@
+//
+// Mixins
+//
+
+@mixin property($attr, $value, $important: '') {
+    @if  $value != null and $value != false  {
+        #{$attr}: #{$value} #{$important};
+    }
+}
+
 @mixin button-reset() {
     appearance: none;
     box-shadow: none;
@@ -5,27 +15,53 @@
     border: none;
     cursor: pointer;
     background-color: transparent;
-    outline: none !important;
+    outline: none  !important;
     margin: 0;
     padding: 0;
 }
 
 @mixin input-reset() {
-    border: 0;
-    background-color: transparent;
+	border: 0;
+	background-color: transparent;
     outline: none !important;
-    box-shadow: none;
+	box-shadow: none;
     border-radius: 0;
 }
 
 @mixin placeholder($color) {
     // Chrome, Firefox, Opera, Safari 10.1+
-    &::placeholder {
+    &::placeholder { 
         color: $color;
     }
+    
     // Firefox
     &::-moz-placeholder {
         color: $color;
         opacity: 1;
     }
 }
+
+@mixin media-breakpoint-direction($direction, $name, $breakpoints: $grid-breakpoints) {
+    @if $direction == up {
+        $min: breakpoint-min($name, $breakpoints);
+
+        @if $min {
+            @media (min-width: $min) {
+                @content;
+            }
+        } @else {
+            @content;
+        }
+
+    } @else if $direction == down {
+        $max: breakpoint-max($name, $breakpoints);
+
+        @if $max {
+            @media (max-width: $max) {
+                @content;
+            }
+        }
+    }
+}
+
+@import "components/mixins";

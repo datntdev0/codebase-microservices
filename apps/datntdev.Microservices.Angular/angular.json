@@ -7,18 +7,18 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "standalone": false
+          "path": "src"
         },
         "@schematics/angular:directive": {
-          "standalone": false
+          "path": "src"
         },
         "@schematics/angular:pipe": {
-          "standalone": false
+          "path": "src"
         }
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -39,9 +39,12 @@
             ],
             "stylePreprocessorOptions": {
               "sass": {
-                "silenceDeprecations": [ "import", "global-builtin" ]
+                "silenceDeprecations": [ "color-functions", "global-builtin", "import", "mixed-decls" ]
               }
-            }
+            },
+            "externalDependencies": [
+              "assets/*"
+            ]
           },
           "configurations": {
             "production": {

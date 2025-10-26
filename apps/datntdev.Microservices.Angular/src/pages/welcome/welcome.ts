@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'root-element',
-  template: '<router-outlet />',
-  standalone: false,
+  selector: 'welcome',
+  templateUrl: './welcome.html',
   host: { "class": "d-flex flex-column flex-root" }
 })
-export class RootComponent {
+export class WelcomePage {
+
 }

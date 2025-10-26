@@ -3,12 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { RootComponent } from './root';
 import { RouterModule, Routes } from '@angular/router';
+import { WelcomePage } from './pages/welcome/welcome';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: "", component: WelcomePage }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class RootRoutingModule { }
 
