@@ -1,0 +1,23 @@
+<style>
+  [data-bs-theme="light"] :host {
+    background-image: url('/assets/media/illustration/bg-light.jpg');
+  }
+
+  [data-bs-theme="dark"] :host {
+    background-image: url('/assets/media/illustration/bg-dark.jpg');
+  }
+</style>
+<div class="d-flex flex-column flex-center flex-column-fluid">
+  <div class="d-flex flex-column flex-center text-center p-10">
+    <div class="card card-flush w-md-650px py-5">
+      <div class="card-body py-15 py-lg-20">
+        <div class="mb-7">
+          <a href="index.html" class="">
+            <img alt="Logo" src="assets/media/logos/angular.svg" class="h-60px">
+          </a>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
