@@ -6,6 +6,9 @@
     "datntdev.Microservices.Angular": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular:module": {
+          "path": "src"
+        },
         "@schematics/angular:component": {
           "path": "src"
         },
