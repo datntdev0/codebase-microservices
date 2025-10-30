@@ -8,7 +8,8 @@
         "**/.vs": true,
         "**/.git": true,
         "**/TestResults": true,
-        "**/*.drawio*": true
+        "**/*.drawio*": true,
+        "**/*.user": true,
     },
     "typescript.tsc.autoDetect": "off",
     "npm.autoDetect": "off",

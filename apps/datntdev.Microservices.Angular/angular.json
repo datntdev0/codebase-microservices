@@ -21,7 +21,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -99,20 +99,8 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles/style.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "sass": {
-                "silenceDeprecations": [ "import", "global-builtin" ]
-              }
-            },
+            "assets": [],
+            "styles": [],
             "karmaConfig": "karma.conf.js"
           }
         }
