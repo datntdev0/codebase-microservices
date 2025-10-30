@@ -1,0 +1,36 @@
+<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
+  <a href="index.html" class="d-flex flex-center">
+    <img alt="Logo" src="assets/media/logos/angular.svg" class="h-30px me-6" />
+    <h3 class="text-white">Microservice</h3>
+  </a>
+</div>
+<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+  <div id="app-sidebar-wrapper" class="app-sidebar-wrapper">
+    <div id="app-sidebar-scroll" class="scroll-y py-5 mx-3 h-100">
+      <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" data-kt-menu="true"
+        data-kt-menu-expand="false">
+        @for (section of menu; track section.heading) {
+          @if (section.heading) {
+            <div class="menu-item pt-5">
+              <div class="menu-content">
+                <span class="menu-heading fw-bold text-uppercase fs-7">{{ section.heading }}</span>
+              </div>
+            </div>
+          }
+
+          @for (item of section.items; track item.title) {
+            <div class="menu-item">
+              <a class="menu-link" 
+                 [routerLink]="item.url" 
+                 [routerLinkActive]="'active'"
+                 [target]="item.target || '_self'">
+                <span class="menu-icon"><i [classList]="`fs-5 ${item.icon}`"></i></span>
+                <span class="menu-title">{{ item.title }}</span>
+              </a>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</div>

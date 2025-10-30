@@ -11,6 +11,7 @@
         "**/*.drawio*": true,
         "**/*.user": true,
     },
+    "editor.tabSize": 2,
     "typescript.tsc.autoDetect": "off",
     "npm.autoDetect": "off",
 }

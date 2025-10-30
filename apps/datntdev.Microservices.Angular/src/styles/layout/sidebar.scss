@@ -11,6 +11,10 @@
     border-right: var(--#{$prefix}app-sidebar-base-border-end);
 }
 
+#app-sidebar-wrapper {
+    height: calc(100vh - var(--#{$prefix}app-header-height));
+}
+
 // Utilities
 .app-sidebar-minimize-d-flex,
 .app-sidebar-sticky-d-flex,

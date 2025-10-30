@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { HeaderComponent } from './header/header';
+import { Sidebar } from "./sidebar/sidebar";
 
 @Component({
   selector: 'main-layout',
   imports: [RouterModule, PopoverModule,
-    HeaderComponent],
+    HeaderComponent, Sidebar],
   templateUrl: './main-layout.html',
   host: { class: 'd-flex flex-column flex-root' }
 })
