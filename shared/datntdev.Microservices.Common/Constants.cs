@@ -22,6 +22,7 @@
             public const string Liveness = "/alive";
             public const string OAuth2Token = "/connect/token";
             public const string OAuth2Auth = "/connect/authorize";
+            public const string OAuth2Logout = "/connect/logout";
             public const string AuthSignIn = "/auth/signin";
             public const string AuthSignUp = "/auth/signup";
         }

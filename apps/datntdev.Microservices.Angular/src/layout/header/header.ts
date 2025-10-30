@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { filter } from 'rxjs/operators';
-import { APPLICATION } from '../../shared/models/constants';
-import { MENU } from '../../shared/models/menu';
+import { APPLICATION } from '@shared/models/constants';
+import { MENU } from '@shared/models/menu';
+import { AuthService } from '@shared/services/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,21 @@ export class HeaderComponent implements OnInit {
   public pageTitle: string | undefined
   public pageDescription: string | undefined
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) { }
+
+  protected signOut(): void {
+    this.authService.signOut({ post_logout_redirect_uri: window.location.origin });
+  }
+
+  protected userProfile = () => this.authService.userSignal()?.profile;
+
+  protected userFullName() {
+    return this.authService.userSignal()?.profile.name;
+  }
+
+  protected userEmailAddress() {
+    return this.authService.userSignal()?.profile.sub;
+  }
 
   ngOnInit(): void {
     // Set initial page info

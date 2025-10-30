@@ -50,11 +50,13 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
 
                     options
                         .SetTokenEndpointUris(Constants.Endpoints.OAuth2Token)
-                        .SetAuthorizationEndpointUris(Constants.Endpoints.OAuth2Auth);
+                        .SetAuthorizationEndpointUris(Constants.Endpoints.OAuth2Auth)
+                        .SetEndSessionEndpointUris(Constants.Endpoints.OAuth2Logout);
 
                     options.UseAspNetCore()
                         .EnableTokenEndpointPassthrough()
-                        .EnableAuthorizationEndpointPassthrough();
+                        .EnableAuthorizationEndpointPassthrough()
+                        .EnableEndSessionEndpointPassthrough();
                 });
             return services;
         }

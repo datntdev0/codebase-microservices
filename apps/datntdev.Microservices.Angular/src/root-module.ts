@@ -1,15 +1,20 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { RootComponent } from './root';
 
 import { MainLayout } from './layout/main-layout';
 import { ErrorLayout } from './layout/error-layout';
 
+import { authGuard } from './shared/guards/auth-guard';
+import { appInitializerFactory } from './shared/services/app-initializer';
+
 import { Error403Page } from './shared/pages/error403/error403';
 import { Error404Page } from './shared/pages/error404/error404';
 import { Error500Page } from './shared/pages/error500/error500';
+import { SigninCallback } from './shared/pages/callbacks/signin-callback';
 
 const routes: Routes = [
   {
@@ -21,13 +26,15 @@ const routes: Routes = [
     ]
   },
   {
-    path: "app", component: MainLayout, children: [
+    path: "app", component: MainLayout, canActivate: [authGuard], children: [
       { path: "dashboard", loadChildren: () => import('./modules/dashboard/dashboard-module').then(m => m.DashboardModule) }, 
       { path: "tenancy", loadChildren: () => import('./modules/tenancy/tenancy-module').then(m => m.TenancyModule) },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: '/error/404' }
     ]
   },
+  { path: 'auth/callback', component: SigninCallback },
+  { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: '/error/404' }
 ];
 
@@ -46,7 +53,9 @@ export class RootRoutingModule { }
     RootRoutingModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideAppInitializer(appInitializerFactory),
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [RootComponent]
 })

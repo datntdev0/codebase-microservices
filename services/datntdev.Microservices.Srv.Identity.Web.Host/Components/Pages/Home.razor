@@ -22,5 +22,5 @@ Welcome to your new app.
 </AuthorizeView>
 
 <script>
-  function signout() { fetch('/me/signout', { method: 'POST' }).then(() => location.reload()) }
+  function signout() { fetch('/connect/logout', { method: 'GET' }).then(() => location.reload()) }
 </script>

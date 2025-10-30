@@ -1,4 +1,5 @@
 ﻿using datntdev.Microservices.Common;
+using datntdev.Microservices.Common.Web.App.Session;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 namespace datntdev.Microservices.Srv.Identity.Web.Host.Controllers
 {
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController(AppSessionContext appSession) : ControllerBase
     {
         [HttpGet(Constants.Endpoints.OAuth2Auth)]
         [HttpPost(Constants.Endpoints.OAuth2Auth)]
@@ -28,10 +29,23 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Controllers
             var authenticationScheme = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme;
             var subjectClaim = new Claim(Claims.Subject, result.Principal.Identity!.Name!);
             var claims = result.Principal.Claims.Append(subjectClaim);
+            if (appSession.UserInfo != null)
+            {
+                var emailClaim = new Claim(Claims.Email, appSession.UserInfo.EmailAddress);
+                var nameClaim = new Claim(Claims.Name, $"{appSession.UserInfo.FirstName} {appSession.UserInfo.LastName}");
+                claims = claims.Append(emailClaim).Append(nameClaim);
+            }
+
             var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, authenticationScheme));
 
             // Set requested scopes (this is not done automatically)
             claimsPrincipal.SetScopes(request.GetScopes());
+            claimsPrincipal.SetDestinations(static claim => claim.Type switch
+            {
+                Claims.Name => [Destinations.AccessToken, Destinations.IdentityToken],
+                Claims.Email => [Destinations.AccessToken, Destinations.IdentityToken],
+                _ => [],
+            });
 
             // Signing in with the OpenIddict authentiction scheme trigger
             // OpenIddict to issue a code (which can be exchanged for an access token)
@@ -67,11 +81,11 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Controllers
             return SignIn(claimsPrincipal, authenticationScheme);
         }
 
-        [HttpPost("/me/signout")]
+        [HttpGet(Constants.Endpoints.OAuth2Logout)]
         public async Task<IActionResult> SignOutAsync()
         {
-            await HttpContext.SignOutAsync();
-            return Redirect(Constants.Endpoints.AuthSignIn);
+            await HttpContext.SignOutAsync(Constants.Application.AuthenticationScheme);
+            return SignOut(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
     }
 }
