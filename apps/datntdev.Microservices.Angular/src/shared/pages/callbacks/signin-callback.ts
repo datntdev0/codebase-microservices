@@ -5,7 +5,8 @@ import { AuthService } from '@shared/services/auth-service';
 @Component({
   selector: 'app-signin-callback',
   templateUrl: './signin-callback.html',
-  host: { 'class': 'd-flex flex-column flex-center flex-column-fluid' }
+  host: { 'class': 'd-flex flex-column flex-center flex-column-fluid' },
+  standalone: false
 })
 export class SigninCallback implements OnInit {
   constructor(

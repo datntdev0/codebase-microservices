@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   public async initialize(): Promise<void> {
-    if (!window.location.pathname.startsWith('/app/')) return;
+    if (window.location.pathname.startsWith('/error/')) return;
 
     await this.userManager.clearStaleState();
     await this.userManager.metadataService.getMetadata();

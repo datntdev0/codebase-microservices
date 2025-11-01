@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 
-import { Sidebar } from './sidebar';
+import { Error500Page } from './error500';
 
-describe('Sidebar', () => {
-  let component: Sidebar;
-  let fixture: ComponentFixture<Sidebar>;
+describe('Error500Page', () => {
+  let component: Error500Page;
+  let fixture: ComponentFixture<Error500Page>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Sidebar],
-      providers: [provideRouter([])]
+      declarations: [Error500Page]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Sidebar);
+    fixture = TestBed.createComponent(Error500Page);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
