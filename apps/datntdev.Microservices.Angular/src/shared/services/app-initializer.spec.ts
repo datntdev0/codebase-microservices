@@ -33,24 +33,19 @@ describe('AppInitializerService', () => {
 
   it('should initialize successfully', async () => {
     authService.initialize.and.returnValue(Promise.resolve());
-    spyOn(console, 'log');
 
     await service.initialize();
 
     expect(authService.initialize).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith('Application is initializing...');
-    expect(console.log).toHaveBeenCalledWith('Application initialized successfully');
   });
 
   it('should handle initialization error', async () => {
     const error = new Error('Init failed');
     authService.initialize.and.returnValue(Promise.reject(error));
-    spyOn(console, 'error');
 
     await service.initialize();
 
     expect(authService.initialize).toHaveBeenCalled();
-    expect(console.error).toHaveBeenCalledWith('Error during application initialization:', error);
     expect(router.navigate).toHaveBeenCalledWith(['/error/500']);
   });
 

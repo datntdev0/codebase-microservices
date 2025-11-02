@@ -27,9 +27,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -37,9 +35,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles/style.scss"
-            ],
+            "styles": ["src/styles/style.scss"],
             "stylePreprocessorOptions": {
               "sass": {
                 "silenceDeprecations": [ "color-functions", "global-builtin", "import", "mixed-decls" ]
@@ -68,13 +64,17 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "default"
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "port": 64372
+          },
           "configurations": {
             "production": {
               "buildTarget": "datntdev.Microservices.Angular:build:production"
@@ -83,13 +83,7 @@
               "buildTarget": "datntdev.Microservices.Angular:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "port": 64372
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
+          "defaultConfiguration": "development"
         },
         "test": {
           "builder": "@angular/build:karma",
@@ -108,7 +102,22 @@
               "src/main.ts",
               "src/test.ts"
             ]
-          }
+          },
+          "configurations": {
+            "default": {
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.tst.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "default"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
         }
       }
     }

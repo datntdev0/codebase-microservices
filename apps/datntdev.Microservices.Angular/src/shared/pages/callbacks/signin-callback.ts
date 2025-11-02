@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@shared/services/auth-service';
+import { LoggerService } from '@shared/services/logger-service';
 
 @Component({
   selector: 'app-signin-callback',
@@ -9,15 +10,14 @@ import { AuthService } from '@shared/services/auth-service';
   standalone: false
 })
 export class SigninCallback implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  private loggerService = inject(LoggerService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   async ngOnInit(): Promise<void> {
     try {
       const user = await this.authService.signinCallback();
-      console.log('Sign in completed successfully', user);
+      this.loggerService.info('Sign in completed successfully', user);
 
       // Check for return URL from state or session storage
       const returnUrl = sessionStorage.getItem('redirectUrl') || '/';
@@ -25,7 +25,7 @@ export class SigninCallback implements OnInit {
 
       this.router.navigate([returnUrl]);
     } catch (error) {
-      console.error('Error completing sign in:', error);
+      this.loggerService.error('Error completing sign in:', error);
       this.router.navigate(['/']);
     }
   }
