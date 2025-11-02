@@ -6,8 +6,7 @@ import { Sidebar } from "./sidebar/sidebar";
 
 @Component({
   selector: 'main-layout',
-  imports: [RouterModule, PopoverModule,
-    HeaderComponent, Sidebar],
+  imports: [RouterModule, PopoverModule, HeaderComponent, Sidebar],
   templateUrl: './main-layout.html',
   host: { class: 'd-flex flex-column flex-root' }
 })

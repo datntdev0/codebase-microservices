@@ -2,6 +2,9 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { NgModule, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { authConfig } from '@shared/models/config';
+
+import { UserManager } from 'oidc-client-ts';
 
 import { RootComponent } from './root';
 
@@ -54,7 +57,8 @@ export class RootRoutingModule { }
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideAppInitializer(appInitializerFactory),
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: UserManager, useValue: new UserManager(authConfig) }
   ],
   bootstrap: [RootComponent]
 })

@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { SigninRedirectArgs, SignoutRedirectArgs, User, UserManager } from 'oidc-client-ts';
 import { authConfig } from '../models/config';
 
@@ -6,7 +6,7 @@ import { authConfig } from '../models/config';
   providedIn: 'root'
 })
 export class AuthService {
-  private userManager = new UserManager(authConfig);
+  private userManager = inject(UserManager);
 
   public userSignal = signal<User | null>(null);
 

@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 
 import { SigninCallback } from './signin-callback';
 import { AuthService } from '@shared/services/auth-service';
+import { LoggerService } from '@shared/services/logger-service';
 
 describe('SigninCallback', () => {
   let component: SigninCallback;
@@ -19,6 +20,7 @@ describe('SigninCallback', () => {
       declarations: [SigninCallback],
       providers: [
         provideRouter([]),
+        { provide: LoggerService },
         { provide: AuthService, useValue: authServiceSpy },
         { provide: Router, useValue: routerSpy }
       ]
@@ -37,12 +39,13 @@ describe('SigninCallback', () => {
   });
 
   it('should navigate to root on successful signin', async () => {
+    sessionStorage.setItem('redirectUrl', '/protected');
     authService.signinCallback.and.returnValue(Promise.resolve(null as any));
 
     await component.ngOnInit();
 
     expect(authService.signinCallback).toHaveBeenCalled();
-    expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(router.navigate).toHaveBeenCalledWith(['/protected']);
   });
 
   it('should navigate to root on signin error', async () => {
