@@ -1,3 +1,3 @@
 export const APPLICATION = {
-  name: 'datntdev Microservices',
+  name: 'datntdev.Microservices',
 }
