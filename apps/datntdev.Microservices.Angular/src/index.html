@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
   <meta charset="utf-8">
   <title>datntdev.Microservices.Angular</title>
@@ -6,7 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body>
-  <app-root></app-root>
+<body class="app-blank bgi-size-cover bgi-position-center bgi-no-repeat">
+  <root-element></root-element>
+  <div id="splash-screen" class="d-flex flex-column flex-center flex-column-fluid">
+    <div class="d-flex flex-center text-center p-10">
+      <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      </div>
+      <span class="fs-5 ms-3 fw-bold">Loading...</span>
+    </div>
+  </div>
 </body>
 </html>

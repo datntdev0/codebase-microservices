@@ -1,0 +1,33 @@
+//
+// Theme style
+// This is stylesheet template that includes all unused components
+// TODO: Remove unused components to reduce final css size
+//
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/mixins";
+@import "mixins";
+@import "layout/mixins";
+
+// 2. Include any default variable overrides here
+@import "variables";
+@import "layout/variables";
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "bootstrap/scss/variables";
+
+// 4. Include any default map overrides here
+@import "utilities";
+
+// 5. Include remainder of required parts
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/utilities";
+
+// 8. Add additional custom code here
+@import "components";
+@import "helpers";
+@import "layout";
+
+// Import the bootstrap icons
+@import "bootstrap-icons/font/bootstrap-icons";

@@ -1,0 +1,92 @@
+//
+// Components
+//
+
+// Bootstrap components
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/spinners";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/placeholders";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+
+// Custom the boostrap's components
+@import "components/root";
+@import "components/tables";
+@import "components/forms";
+@import "components/buttons";
+@import "components/dropdown";
+@import "components/nav";
+@import "components/card";
+@import "components/accordion";
+@import "components/breadcrumb";
+@import "components/pagination";
+@import "components/badge";
+@import "components/alert";
+@import "components/progress";
+@import "components/toasts";
+@import "components/modal";
+@import "components/tooltip";
+@import "components/popover";
+@import "components/carousel";
+
+// Additional custom components
+@import "components/theme-mode";
+@import "components/animation";
+@import "components/separator";
+@import "components/menu";
+@import "components/anchor";
+@import "components/code";
+@import "components/image-input";
+@import "components/symbol";
+@import "components/pulse";
+@import "components/page-loader";
+@import "components/scrolltop";
+@import "components/svg-icon";
+@import "components/fixed";
+@import "components/timeline";
+@import "components/overlay";
+@import "components/bullet";
+@import "components/drawer";
+@import "components/indicator";
+@import "components/hover";
+@import "components/rotate";
+@import "components/scroll";
+@import "components/rating";
+@import "components/stepper";
+@import "components/toggle";
+@import "components/shape";
+@import "components/ribbon";
+@import "components/blockui";
+@import "components/explore";
+@import "components/engage";
+@import "components/tree";
+@import "components/testimonials-slider";
+@import "components/landing";
