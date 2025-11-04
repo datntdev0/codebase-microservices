@@ -1,6 +1,4 @@
-name: Frontend Unit Tests (Reusable)
-
-description: 'Reusable workflow for frontend unit tests with caching'
+name: (Reusable) Frontend Unit Tests
 
 on:
   workflow_call:
@@ -14,7 +12,7 @@ jobs:
         working-directory: apps/datntdev.Microservices.Angular
     steps:
       - uses: actions/checkout@v4
-      - name: Cache node modules
+      - name: Cache NPM modules
         uses: actions/cache@v4
         with:
           path: |
@@ -22,11 +20,11 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('apps/datntdev.Microservices.Angular/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Setup Node.js
+      - name: Setup NODEJS
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install dependencies
+      - name: Install NPM dependencies
         run: yarn install --frozen-lockfile
-      - name: Run unit tests
+      - name: Run unit tests with coverage
         run: yarn ng test --code-coverage --watch=false --browsers=ChromeHeadless
