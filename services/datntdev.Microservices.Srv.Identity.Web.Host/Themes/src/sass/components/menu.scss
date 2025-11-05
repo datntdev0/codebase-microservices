@@ -41,9 +41,8 @@
   .menu-link {
     cursor: pointer;
     display: flex;
-    align-items: center;
-    padding: 0;
     flex: 0 0 100%;
+    align-items: center;
     padding: $menu-link-padding-y $menu-link-padding-x;
     transition: none;
     outline: none !important;

@@ -82,34 +82,19 @@
         // Sidebar
         [data-kt-app-toolbar-sticky="on"][data-kt-app-sidebar-fixed="true"][data-kt-app-sidebar-push-toolbar="true"] &,
         [data-kt-app-toolbar-fixed="true"][data-kt-app-sidebar-fixed="true"][data-kt-app-sidebar-push-toolbar="true"] & {
-            left: calc(
-                var(--#{$prefix}app-sidebar-width) + 
-                var(--#{$prefix}app-sidebar-gap-start, 0px) + 
-                var(--#{$prefix}app-sidebar-gap-end, 0px)
-            );
+            left: calc(var(--#{$prefix}app-sidebar-width) + var(--#{$prefix}app-sidebar-gap-start, 0px) + var(--#{$prefix}app-sidebar-gap-end, 0px));
         } 
 
         // Sidebar panel
         [data-kt-app-toolbar-sticky="on"][data-kt-app-sidebar-panel-fixed="true"][data-kt-app-sidebar-panel-push-toolbar="true"] &,
         [data-kt-app-toolbar-fixed="true"][data-kt-app-sidebar-panel-fixed="true"][data-kt-app-sidebar-panel-push-toolbar="true"] & {
-            left: calc(
-                var(--#{$prefix}app-sidebar-width) + 
-                var(--#{$prefix}app-sidebar-gap-start, 0px) + 
-                var(--#{$prefix}app-sidebar-gap-end, 0px) +
-                var(--#{$prefix}app-sidebar-panel-width) + 
-                var(--#{$prefix}app-sidebar-panel-gap-start, 0px) + 
-                var(--#{$prefix}app-sidebar-panel-gap-end, 0px)
-            );
+            left: calc(var(--#{$prefix}app-sidebar-width) + var(--#{$prefix}app-sidebar-gap-start, 0px) + var(--#{$prefix}app-sidebar-gap-end, 0px) + var(--#{$prefix}app-sidebar-panel-width) + var(--#{$prefix}app-sidebar-panel-gap-start, 0px) + var(--#{$prefix}app-sidebar-panel-gap-end, 0px));
         }
 
         // Aside
         [data-kt-app-toolbar-sticky="on"][data-kt-app-aside-fixed="true"][data-kt-app-aside-push-toolbar="true"] &,
         [data-kt-app-toolbar-fixed="true"][data-kt-app-aside-fixed="true"][data-kt-app-aside-push-toolbar="true"] & {
-            right: calc(
-                var(--#{$prefix}app-aside-width) + 
-                var(--#{$prefix}app-aside-gap-start, 0px) + 
-                var(--#{$prefix}app-aside-gap-end, 0px)
-            );
+            right: calc(var(--#{$prefix}app-aside-width) + var(--#{$prefix}app-aside-gap-start, 0px) + var(--#{$prefix}app-aside-gap-end, 0px));
         } 
     } 
 }

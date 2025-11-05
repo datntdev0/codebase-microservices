@@ -1,4 +1,4 @@
-name: Code Quality Scanning
+name: Code Quality Scanning (Scheduled)
 
 on:
   schedule:

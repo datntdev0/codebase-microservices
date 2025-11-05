@@ -22,57 +22,6 @@
     @include property(--#{$prefix}app-header-sticky-box-shadow, $app-header-sticky-box-shadow);
     @include property(--#{$prefix}app-header-sticky-border-bottom, $app-header-sticky-border-bottom);
 
-    // Header primary
-    @include property(--#{$prefix}app-header-primary-base-bg-color, $app-header-primary-base-bg-color);
-    @include property(--#{$prefix}app-header-primary-base-box-shadow, $app-header-primary-base-box-shadow);
-    @include property(--#{$prefix}app-header-primary-base-border-bottom, $app-header-primary-base-border-bottom);
-
-    @include property(--#{$prefix}app-header-primary-minimize-bg-color, $app-header-primary-minimize-bg-color);
-    @include property(--#{$prefix}app-header-primary-minimize-box-shadow, $app-header-primary-minimize-box-shadow);
-    @include property(--#{$prefix}app-header-primary-minimize-border-top, $app-header-primary-minimize-border-top);
-    @include property(--#{$prefix}app-header-primary-minimize-border-bottom, $app-header-primary-minimize-border-bottom);
-
-    @include property(--#{$prefix}app-header-primary-sticky-bg-color, $app-header-primary-sticky-bg-color);
-    @include property(--#{$prefix}app-header-primary-sticky-box-shadow, $app-header-primary-sticky-box-shadow);
-    @include property(--#{$prefix}app-header-primary-sticky-border-top, $app-header-primary-sticky-border-top);
-    @include property(--#{$prefix}app-header-primary-sticky-border-bottom, $app-header-primary-sticky-border-bottom);
-
-    // Header secondary base
-    @include property(--#{$prefix}app-header-secondary-base-bg-color, $app-header-secondary-base-bg-color);
-    @include property(--#{$prefix}app-header-secondary-base-box-shadow, $app-header-secondary-base-box-shadow);
-    @include property(--#{$prefix}app-header-secondary-base-border-top, $app-header-secondary-base-border-top);
-    @include property(--#{$prefix}app-header-secondary-base-border-bottom, $app-header-secondary-base-border-bottom);
-
-    // Header secondary minimize
-    @include property(--#{$prefix}app-header-secondary-minimize-bg-color, $app-header-secondary-minimize-bg-color);
-    @include property(--#{$prefix}app-header-secondary-minimize-box-shadow, $app-header-secondary-minimize-box-shadow);
-    @include property(--#{$prefix}app-header-secondary-minimize-border-top, $app-header-secondary-minimize-border-top);
-    @include property(--#{$prefix}app-header-secondary-minimize-border-bottom, $app-header-secondary-minimize-border-bottom);
-
-    // Header secondary sticky
-    @include property(--#{$prefix}app-header-secondary-sticky-bg-color, $app-header-secondary-sticky-bg-color);
-    @include property(--#{$prefix}app-header-secondary-sticky-box-shadow, $app-header-secondary-sticky-box-shadow);
-    @include property(--#{$prefix}app-header-secondary-sticky-border-top, $app-header-secondary-sticky-border-top);
-    @include property(--#{$prefix}app-header-secondary-sticky-border-bottom, $app-header-secondary-sticky-border-bottom);
-
-    // Header tertiary base
-    @include property(--#{$prefix}app-header-tertiary-base-bg-color, $app-header-tertiary-base-bg-color);     
-    @include property(--#{$prefix}app-header-tertiary-base-box-shadow, $app-header-tertiary-base-box-shadow);
-    @include property(--#{$prefix}app-header-tertiary-base-border-top, $app-header-tertiary-base-border-top);
-    @include property(--#{$prefix}app-header-tertiary-base-border-bottom, $app-header-tertiary-base-border-bottom);
-
-    // Header tertiary minimize
-    @include property(--#{$prefix}app-header-tertiary-minimize-bg-color, $app-header-tertiary-minimize-bg-color);
-    @include property(--#{$prefix}app-header-tertiary-minimize-box-shadow, $app-header-tertiary-minimize-box-shadow);
-    @include property(--#{$prefix}app-header-tertiary-minimize-border-top, $app-header-tertiary-minimize-border-top);
-    @include property(--#{$prefix}app-header-tertiary-minimize-border-bottom, $app-header-tertiary-minimize-border-bottom);
-
-    // Header tertiary sticky
-    @include property(--#{$prefix}app-header-tertiary-sticky-bg-color, $app-header-tertiary-sticky-bg-color);
-    @include property(--#{$prefix}app-header-tertiary-sticky-box-shadow, $app-header-tertiary-sticky-box-shadow);
-    @include property(--#{$prefix}app-header-tertiary-sticky-border-top, $app-header-tertiary-sticky-border-top);
-    @include property(--#{$prefix}app-header-tertiary-sticky-border-bottom, $app-header-tertiary-sticky-border-bottom);
-
     // Toolbar base
     @include property(--#{$prefix}app-toolbar-base-bg-color, $app-toolbar-base-bg-color);
     @include property(--#{$prefix}app-toolbar-base-box-shadow, $app-toolbar-base-box-shadow);
@@ -206,57 +155,6 @@
     @include property(--#{$prefix}app-header-sticky-box-shadow, $app-header-sticky-box-shadow-dark);
     @include property(--#{$prefix}app-header-sticky-border-bottom, $app-header-sticky-border-bottom-dark);
 
-    // Header primary
-    @include property(--#{$prefix}app-header-primary-base-bg-color, $app-header-primary-base-bg-color-dark);
-    @include property(--#{$prefix}app-header-primary-base-box-shadow, $app-header-primary-base-box-shadow-dark);
-    @include property(--#{$prefix}app-header-primary-base-border-bottom, $app-header-primary-base-border-bottom-dark);
-
-    @include property(--#{$prefix}app-header-primary-minimize-bg-color, $app-header-primary-minimize-bg-color-dark);
-    @include property(--#{$prefix}app-header-primary-minimize-box-shadow, $app-header-primary-minimize-box-shadow-dark);
-    @include property(--#{$prefix}app-header-primary-minimize-border-top, $app-header-primary-minimize-border-top-dark);
-    @include property(--#{$prefix}app-header-primary-minimize-border-bottom, $app-header-primary-minimize-border-bottom-dark);
-
-    @include property(--#{$prefix}app-header-primary-sticky-bg-color, $app-header-primary-sticky-bg-color-dark);
-    @include property(--#{$prefix}app-header-primary-sticky-box-shadow, $app-header-primary-sticky-box-shadow-dark);
-    @include property(--#{$prefix}app-header-primary-sticky-border-top, $app-header-primary-sticky-border-top-dark);
-    @include property(--#{$prefix}app-header-primary-sticky-border-bottom, $app-header-primary-sticky-border-bottom-dark);
-
-    // Header secondary base
-    @include property(--#{$prefix}app-header-secondary-base-bg-color, $app-header-secondary-base-bg-color-dark);
-    @include property(--#{$prefix}app-header-secondary-base-box-shadow, $app-header-secondary-base-box-shadow-dark);
-    @include property(--#{$prefix}app-header-secondary-base-border-top, $app-header-secondary-base-border-top-dark);
-    @include property(--#{$prefix}app-header-secondary-base-border-bottom, $app-header-secondary-base-border-bottom-dark);
-
-    // Header secondary minimize
-    @include property(--#{$prefix}app-header-secondary-minimize-bg-color, $app-header-secondary-minimize-bg-color-dark);
-    @include property(--#{$prefix}app-header-secondary-minimize-box-shadow, $app-header-secondary-minimize-box-shadow-dark);
-    @include property(--#{$prefix}app-header-secondary-minimize-border-top, $app-header-secondary-minimize-border-top-dark);
-    @include property(--#{$prefix}app-header-secondary-minimize-border-bottom, $app-header-secondary-minimize-border-bottom-dark);
-
-    // Header secondary sticky
-    @include property(--#{$prefix}app-header-secondary-sticky-bg-color, $app-header-secondary-sticky-bg-color-dark);
-    @include property(--#{$prefix}app-header-secondary-sticky-box-shadow, $app-header-secondary-sticky-box-shadow-dark);
-    @include property(--#{$prefix}app-header-secondary-sticky-border-top, $app-header-secondary-sticky-border-top-dark);
-    @include property(--#{$prefix}app-header-secondary-sticky-border-bottom, $app-header-secondary-sticky-border-bottom-dark);
-
-    // Header tertiary base
-    @include property(--#{$prefix}app-header-tertiary-base-bg-color, $app-header-tertiary-base-bg-color-dark);     
-    @include property(--#{$prefix}app-header-tertiary-base-box-shadow, $app-header-tertiary-base-box-shadow-dark);
-    @include property(--#{$prefix}app-header-tertiary-base-border-top, $app-header-tertiary-base-border-top-dark);
-    @include property(--#{$prefix}app-header-tertiary-base-border-bottom, $app-header-tertiary-base-border-bottom-dark);
-
-    // Header tertiary minimize
-    @include property(--#{$prefix}app-header-tertiary-minimize-bg-color, $app-header-tertiary-minimize-bg-color-dark);
-    @include property(--#{$prefix}app-header-tertiary-minimize-box-shadow, $app-header-tertiary-minimize-box-shadow-dark);
-    @include property(--#{$prefix}app-header-tertiary-minimize-border-top, $app-header-tertiary-minimize-border-top-dark);
-    @include property(--#{$prefix}app-header-tertiary-minimize-border-bottom, $app-header-tertiary-minimize-border-bottom-dark);
-
-    // Header tertiary sticky
-    @include property(--#{$prefix}app-header-tertiary-sticky-bg-color, $app-header-tertiary-sticky-bg-color-dark);
-    @include property(--#{$prefix}app-header-tertiary-sticky-box-shadow, $app-header-tertiary-sticky-box-shadow-dark);
-    @include property(--#{$prefix}app-header-tertiary-sticky-border-top, $app-header-tertiary-sticky-border-top-dark);
-    @include property(--#{$prefix}app-header-tertiary-sticky-border-bottom, $app-header-tertiary-sticky-border-bottom-dark);
-
     // Toolbar base
     @include property(--#{$prefix}app-toolbar-base-bg-color, $app-toolbar-base-bg-color-dark);
     @include property(--#{$prefix}app-toolbar-base-box-shadow, $app-toolbar-base-box-shadow-dark);
@@ -376,9 +274,6 @@
 
 // Light mode
 @include color-mode(light) {
-    // Header light
-    --#{$prefix}app-header-light-separator-color: #{$app-header-light-separator-color};
-
     // Sidebar base
     --#{$prefix}app-sidebar-base-toggle-btn-box-shadow: #{$app-sidebar-base-toggle-btn-box-shadow};
     --#{$prefix}app-sidebar-base-toggle-btn-bg-color: #{$app-sidebar-base-toggle-btn-bg-color};
@@ -399,9 +294,6 @@
 
 // Dark mode
 @include color-mode(dark) {
-    // Header light
-    --#{$prefix}app-header-light-separator-color: #{$app-header-light-separator-color-dark};    
-
     // Sidebar base
     --#{$prefix}app-sidebar-base-toggle-btn-box-shadow: #{$app-sidebar-base-toggle-btn-box-shadow-dark};
     --#{$prefix}app-sidebar-base-toggle-btn-bg-color: #{$app-sidebar-base-toggle-btn-bg-color-dark};
