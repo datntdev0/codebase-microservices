@@ -245,6 +245,16 @@ const dotPaths = (paths) => {
     });
 };
 
+// Helper function to remove all ../ and ./ patterns completely
+const removeDotSegments = (input) => {
+    let previous;
+    do {
+        previous = input;
+        input = input.replace(/\.?\.\//g, "");
+    } while (input !== previous);
+    return input;
+}
+
 /**
  * Css path rewriter when bundle files moved
  * @param bundle
@@ -277,7 +287,7 @@ const cssRewriter = (bundle) => {
                         return path.join(extension, vendor, path.basename(ctx.targetFile));
                     }
 
-                    return ctx.targetFile.replace(/\.?\.\//, "");
+                    return removeDotSegments(ctx.targetFile);
                 }
             },
         });

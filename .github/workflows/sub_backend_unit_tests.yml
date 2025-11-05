@@ -9,17 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Cache .NET packages
+      - name: Setup DOTNET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Setup NODEJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Cache NET packages
         uses: actions/cache@v4
         with:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-      - name: Setup DOTNET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.0.x'
       - name: Cache NPM modules
         uses: actions/cache@v4
         with:
@@ -28,10 +32,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('apps/datntdev.Microservices.Angular/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Setup NODEJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
       - name: Start docker-compose infrastructure services.
         run: docker compose -f .github/dockers/docker-compose.yml -p datntdev_microservices_infra up -d
       - name: Trust ASP.NET Core HTTPS development certificate

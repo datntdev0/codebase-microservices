@@ -21,7 +21,7 @@ const gulpConfig = {
 			src: {
 				styles: ["{$config.path.src}/sass/style.scss"],
 				scripts: [
-                    "{$config.path.node_modules}/sweetalert2/dist/sweetalert2.js",
+					"{$config.path.node_modules}/sweetalert2/dist/sweetalert2.js",
 					"{$config.path.src}/js/**/*.js",
 				],
 			},

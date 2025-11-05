@@ -12,5 +12,114 @@ on:
 jobs:
   frontend_unit_tests:
     uses: ./.github/workflows/sub_frontend_unit_tests.yml
+ 
   backend_unit_tests:
     uses: ./.github/workflows/sub_backend_unit_tests.yml
+ 
+  sonar-scan-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            apps/datntdev.Microservices.Angular/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('apps/datntdev.Microservices.Angular/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        working-directory: apps/datntdev.Microservices.Angular
+        run: yarn install --frozen-lockfile
+      - name: Run unit tests
+        working-directory: apps/datntdev.Microservices.Angular
+        run: yarn ng test --code-coverage --watch=false --browsers=ChromeHeadless
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+        with:
+          projectBaseDir: apps/datntdev.Microservices.Angular
+  
+  sonar-scan-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'microsoft'
+      - name: Setup DOTNET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Setup NODEJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Cache SonarQube Cloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarQube Cloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v4
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Cache NET packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - name: Cache NPM modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            apps/datntdev.Microservices.Angular/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('apps/datntdev.Microservices.Angular/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Start docker-compose infrastructure services.
+        run: docker compose -f .github/dockers/docker-compose.yml -p datntdev_microservices_infra up -d
+      - name: Trust ASP.NET Core HTTPS development certificate
+        run: dotnet dev-certs https --trust
+      - name: Install NPM dependencies
+        working-directory: apps/datntdev.Microservices.Angular
+        run: yarn install --frozen-lockfile
+      - name: Install NET dependencies
+        run: dotnet restore --no-dependencies
+      - name: Run the database migrations
+        run: dotnet run --project ./infra/datntdev.Microservices.Migrator/datntdev.Microservices.Migrator.csproj
+      - name: Cleanup Visual Studio solution
+        run: |
+          dotnet clean && dotnet restore --no-dependencies
+          rm apps/datntdev.Microservices.Angular/sonar-project.properties
+      - name: Install SonarQube Cloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ./.sonar/scanner
+          dotnet tool update dotnet-sonarscanner --tool-path /home/runner/.sonar/scanner
+          dotnet tool install --global dotnet-coverage
+      - name: Run SonarQube Cloud analysis
+        run: |
+          /home/runner/.sonar/scanner/dotnet-sonarscanner begin \
+            /k:"datntdev0_codebase-microservices-backend" \
+            /o:"${{ vars.SONAR_ORG }}" \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}" \
+            /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml \
+            /d:sonar.exclusions="**/datntdev.Microservices.Migrator/**,**/datntdev.Microservices.Angular/**,**/*.js"
+          dotnet build --configuration Release
+          dotnet-coverage collect "dotnet test --no-build --configuration Release" -f xml -o "coverage.xml"
+          /home/runner/.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"

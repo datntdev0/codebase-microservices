@@ -5,6 +5,7 @@
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<SonarQubeExclude>true</SonarQubeExclude>
 	</PropertyGroup>
 
 	<ItemGroup>
