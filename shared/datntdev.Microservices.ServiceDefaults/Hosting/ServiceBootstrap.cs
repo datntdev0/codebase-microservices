@@ -1,4 +1,5 @@
 ﻿using datntdev.Microservices.Common.Modular;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -15,6 +16,7 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             {
                 module.ConfigureServices(services, configs);
                 RegisterInjectableServices(module, services);
+                RegisterApplicationPartAssembly(module, services);
             });
         }
 
@@ -76,7 +78,17 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
                 }
             }
         }
-    }
 
-    
+        private static void RegisterApplicationPartAssembly(BaseModule module, IServiceCollection services)
+        {
+            services.AddControllers().ConfigureApplicationPartManager(manager =>
+            {
+                var assembly = module.GetType().Assembly;
+                if (!manager.ApplicationParts.OfType<AssemblyPart>().Any(ap => ap.Assembly == assembly))
+                {
+                    manager.ApplicationParts.Add(new AssemblyPart(assembly));
+                }
+            });
+        }
+    }
 }

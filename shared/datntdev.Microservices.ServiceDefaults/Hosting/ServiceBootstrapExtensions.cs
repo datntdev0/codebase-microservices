@@ -1,6 +1,8 @@
 ﻿using datntdev.Microservices.Common;
 using datntdev.Microservices.Common.Modular;
+using datntdev.Microservices.ServiceDefaults.Providers;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +31,18 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             var bootstrapper = app.ApplicationServices.GetRequiredService<ServiceBootstrap<TStartupModule>>();
             bootstrapper.Configure(app.ApplicationServices, configs);
             return app;
+        }
+
+        public static IServiceCollection AddAppServiceAsControllers(this IServiceCollection services)
+        {
+            var controllerFeatureProvider = new AppServiceControllerFeatureProvider();
+            services.AddControllers()
+                .ConfigureApplicationPartManager(manager =>
+                {
+                    manager.FeatureProviders.Add(controllerFeatureProvider);
+                });
+            services.Configure<MvcOptions>(options => options.Conventions.Add(controllerFeatureProvider));
+            return services;
         }
 
         public static IServiceCollection AddDefaultHealthChecks(this IServiceCollection services)
