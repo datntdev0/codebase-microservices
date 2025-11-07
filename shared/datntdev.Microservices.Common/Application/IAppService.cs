@@ -15,6 +15,4 @@ namespace datntdev.Microservices.Common.Application
         Task<TDto> UpdateAsync(TKey id, TUpdateReq request);
         Task DeleteAsync(TKey id);
     }
-
-    public abstract class BaseAppService : IAppService { }
 }

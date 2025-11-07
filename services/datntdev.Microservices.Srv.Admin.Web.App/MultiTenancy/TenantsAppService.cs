@@ -1,19 +1,25 @@
-﻿using datntdev.Microservices.Common.Application;
-using datntdev.Microservices.Common.Models;
+﻿using datntdev.Microservices.Common.Models;
+using datntdev.Microservices.Common.Web.App.Application;
 using datntdev.Microservices.Srv.Admin.Contract.MultiTenancy;
 using datntdev.Microservices.Srv.Admin.Contract.MultiTenancy.Dto;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Srv.Admin.Web.App.MultiTenancy
 {
-    internal class TenantsAppService : BaseAppService, ITenantsAppService
+    internal class TenantsAppService(IServiceProvider services) : BaseAppService, ITenantsAppService
     {
-        public Task<TenantDto> CreateAsync(TenantCreateDto request)
+        private readonly TenantManager _manager = services.GetRequiredService<TenantManager>();
+
+        public async Task<TenantDto> CreateAsync(TenantCreateDto request)
         {
+            var tenantEntity = new Models.AppTenantEntity();
+            tenantEntity = await _manager.CreateEntityAsync(tenantEntity);
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
+            await _manager.DeleteEntityAsync(id);
             throw new NotImplementedException();
         }
 
@@ -22,13 +28,16 @@ namespace datntdev.Microservices.Srv.Admin.Web.App.MultiTenancy
             throw new NotImplementedException();
         }
 
-        public Task<TenantDto> GetAsync(int id)
+        public async Task<TenantDto> GetAsync(int id)
         {
+            var tenantEntity = await _manager.GetEntityAsync(id);
             throw new NotImplementedException();
         }
 
-        public Task<TenantDto> UpdateAsync(int id, TenantUpdateDto request)
+        public async Task<TenantDto> UpdateAsync(int id, TenantUpdateDto request)
         {
+            var tenantEntity = new Models.AppTenantEntity();
+            tenantEntity = await _manager.UpdateEntityAsync(tenantEntity);
             throw new NotImplementedException();
         }
     }
