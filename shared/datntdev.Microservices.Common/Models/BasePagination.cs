@@ -16,7 +16,7 @@
 
     public class PaginatedRequest : IPaginatedRequest
     {
-        public int Offset { get; set; } = 1;
+        public int Offset { get; set; } = 0;
         public int Limit { get; set; } = 10;
     }
 
