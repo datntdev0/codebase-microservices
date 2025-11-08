@@ -10,7 +10,8 @@
     "test": "ng test --watch=true --browsers=ChromeHeadless",
     "test:coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
     "e2e": "cypress open",
-    "e2e:run": "cypress run"
+    "e2e:run": "cypress run",
+    "gencode": "sh ./nswag/gencode.sh"
   },
   "prettier": {
     "printWidth": 100,
@@ -34,6 +35,7 @@
     "@angular/router": "^20.3.0",
     "bootstrap": "5.3.5",
     "bootstrap-icons": "^1.13.1",
+    "moment": "^2.30.1",
     "ngx-bootstrap": "^20.0.2",
     "oidc-client-ts": "^3.3.0",
     "rxjs": "~7.8.0",
@@ -53,6 +55,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nswag": "^14.6.2",
     "typescript": "~5.9.2"
   }
 }

@@ -6,7 +6,7 @@ namespace datntdev.Microservices.Srv.Admin.Web.Host.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet(Name = "Home.Get")]
         public Task<IActionResult> Get()
         {
             return Task.FromResult<IActionResult>(Ok("Hello World from Srv.Admin"));

@@ -38,8 +38,11 @@ namespace datntdev.Microservices.ServiceDefaults.Providers
         {
             var httpMethod = GetConventionalVerbForMethodName(action.ActionName);
             var httpMethodConstraint = new HttpMethodActionConstraint([httpMethod]);
-            var routeAttribute = new AttributeRouteModel(new RouteAttribute(
-                GetConventionalActionRoute(action)));
+            var routeAttribute = new RouteAttribute(GetConventionalActionRoute(action));
+            var routeAttributeModel = new AttributeRouteModel(routeAttribute)
+            {
+                Name = action.Controller.ControllerName + "." + action.ActionName
+            };
 
             foreach (var param in action.Parameters.Where(x => x.Name != "id" && x.BindingInfo is null))
             {
@@ -49,7 +52,7 @@ namespace datntdev.Microservices.ServiceDefaults.Providers
                 }
             }
 
-            var selector = new SelectorModel() { AttributeRouteModel = routeAttribute };
+            var selector = new SelectorModel() { AttributeRouteModel = routeAttributeModel };
             selector.ActionConstraints.Add(httpMethodConstraint);
             return selector;
         }
