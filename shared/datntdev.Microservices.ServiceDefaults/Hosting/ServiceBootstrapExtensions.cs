@@ -25,6 +25,25 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             return services.AddSingleton(bootstrapper);
         }
 
+        public static IServiceCollection AddCorsOriginsFromConfiguration(this IServiceCollection services, IConfiguration configs)
+        {
+            var corsOrigins = configs.GetSection("AllowedOrigins").Get<string>()?.Split(';') ?? [];
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    if (corsOrigins.Length == 0) return;
+
+                    policy.WithOrigins(corsOrigins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
+            return services;
+        }
+
         public static IApplicationBuilder UseServiceBootstrap<TStartupModule>(this IApplicationBuilder app, IConfigurationRoot configs)
             where TStartupModule : BaseModule
         {
@@ -104,6 +123,7 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
 
             return services;
         }
+
 
         public static IEndpointRouteBuilder MapDefaultHealthChecks(this IEndpointRouteBuilder builder)
         {

@@ -1,8 +1,9 @@
 import { UserManagerSettings } from 'oidc-client-ts';
+import { environment } from 'src/environments/environment';
 
 export const authConfig: UserManagerSettings = {
   // Identity Server URL - update this to match your environment
-  authority: 'https://localhost:7076',
+  authority: environment.ssourl,
   
   // Client ID registered in OpenIddict
   client_id: 'datntdev.Microservices.Public',

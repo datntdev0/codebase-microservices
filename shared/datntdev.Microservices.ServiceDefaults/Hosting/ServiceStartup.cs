@@ -27,6 +27,7 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
         public virtual void ConfigureServices(IServiceCollection services) 
         {
             services.AddServiceBootstrap<TBootstrapModule>(_hostingConfiguration);
+            services.AddCorsOriginsFromConfiguration(_hostingConfiguration);
         }
     }
 
