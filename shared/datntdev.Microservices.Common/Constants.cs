@@ -26,5 +26,16 @@
             public const string AuthSignIn = "/auth/signin";
             public const string AuthSignUp = "/auth/signup";
         }
+
+        public static class Enum
+        {
+            public enum ServiceType
+            {
+                Default,
+                Gateway,
+                Migrator,
+                Microservice,
+            }
+        }
     }
 }

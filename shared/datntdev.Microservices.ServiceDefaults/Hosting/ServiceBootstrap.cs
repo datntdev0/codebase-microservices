@@ -90,6 +90,8 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
 
         private static void RegisterApplicationPartAssembly(BaseModule module, IServiceCollection services)
         {
+            if (AppServiceStartup.ServiceType != Common.Constants.Enum.ServiceType.Microservice) return;
+
             services.AddControllers().ConfigureApplicationPartManager(manager =>
             {
                 var assembly = module.GetType().Assembly;

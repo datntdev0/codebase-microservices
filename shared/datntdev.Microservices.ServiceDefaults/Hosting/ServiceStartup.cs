@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using ServiceType = datntdev.Microservices.Common.Constants.Enum.ServiceType;
+
 namespace datntdev.Microservices.ServiceDefaults.Hosting
 {
     public interface IAppServiceStartup
@@ -18,26 +20,39 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env) { }
     }
 
-    public abstract class AppServiceStartup<TBootstrapModule>(IHostEnvironment env) : IAppServiceStartup
+    public abstract class AppServiceStartup
+    {
+        public static ServiceType ServiceType { get; private set; }
+        public static IHostEnvironment HostingEnvironment { get; private set; } = default!;
+        public static IConfigurationRoot HostingConfiguration { get; private set; } = default!;
+
+        public AppServiceStartup(IHostEnvironment env, ServiceType type = ServiceType.Microservice)
+        {
+            ServiceType = type;
+            HostingEnvironment = env;
+            HostingConfiguration = AppConfiguration.Get(env);
+        }
+    }
+
+    public abstract class AppServiceStartup<TBootstrapModule>(
+        IHostEnvironment env, ServiceType type = ServiceType.Microservice
+    ) : AppServiceStartup(env, type), IAppServiceStartup
         where TBootstrapModule : BaseModule
     {
-        protected readonly IHostEnvironment _hostingEnvironment = env;
-        protected readonly IConfigurationRoot _hostingConfiguration = AppConfiguration.Get(env);
-
         public virtual void ConfigureServices(IServiceCollection services) 
         {
-            services.AddServiceBootstrap<TBootstrapModule>(_hostingConfiguration);
-            services.AddCorsOriginsFromConfiguration(_hostingConfiguration);
+            services.AddServiceBootstrap<TBootstrapModule>(HostingConfiguration);
+            services.AddCorsOriginsFromConfiguration(HostingConfiguration);
         }
     }
 
     public abstract class WebServiceStartup<TBootstrapModule>(IWebHostEnvironment env) 
-        : AppServiceStartup<TBootstrapModule>(env), IWebServiceStartup
+        : AppServiceStartup<TBootstrapModule>(env, ServiceType.Microservice), IWebServiceStartup
         where TBootstrapModule : BaseModule
     {
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
         {
-            app.UseServiceBootstrap<TBootstrapModule>(_hostingConfiguration);
+            app.UseServiceBootstrap<TBootstrapModule>(HostingConfiguration);
         }
     }
 }
