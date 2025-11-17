@@ -1,1 +1,42 @@
-<p>tenant page works!</p>
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <div class="card-title">
+      <div class="d-flex align-items-center position-relative">
+        <i class="bi bi-search position-absolute ms-5"></i>
+        <input type="text" class="form-control form-control-solid w-250px ps-12" placeholder="Search Tenant" />
+      </div>
+    </div>
+
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-light-primary me-3">
+          <i class="bi bi-filter"></i> Filter
+        </button>
+
+        <button type="button" class="btn btn-light-primary me-3">
+          <i class="bi bi-box-arrow-up"></i> Export
+        </button>
+
+        <button type="button" class="btn btn-primary">
+          <i class="bi bi-plus-square-fill"></i> New Tenant
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body pt-0">
+    <app-datatable [data]="tenants" [columns]="columns" [checkboxEnabled]="true" [actionsTemplate]="actionsTemplate">
+    </app-datatable>
+  </div>
+</div>
+
+<ng-template #actionsTemplate let-item>
+  <a type="button" class="btn btn-light btn-active-light-primary btn-sm me-1"
+    (click)="onEdit(item)">
+    <i class="bi bi-pencil-square"></i>
+  </a>
+  <a type="button" class="btn btn-light btn-active-light-primary btn-sm"
+    (click)="onDelete(item)">
+    <i class="bi bi-x-square"></i>
+  </a>
+</ng-template>

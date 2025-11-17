@@ -122,25 +122,12 @@
 }
 
 // Icons
-i {
-    &.bi,
-    &[class^="fonticon-"],
-    &[class*=" fonticon-"],
-    &[class^="la-"],
-    &[class*=" la-"] {
-        line-height: 1;
-        font-size: 1rem;
-        color: var(--#{$prefix}text-muted);        
-    }   
+i.bi {
+    color: var(--#{$prefix}text-muted);        
 }
 
-i {
-    &[class^="fa-"],
-    &[class*=" fa-"] {
-        //line-height: 1;
-        //font-size: 1rem;
-        //color: var(--#{$prefix}text-muted);        
-    }   
+button i.bi {
+    font-size: 1.275rem;
 }
 
 // Link transition

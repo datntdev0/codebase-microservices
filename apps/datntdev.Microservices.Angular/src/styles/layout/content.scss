@@ -6,34 +6,10 @@
 @include media-breakpoint-up(lg) {
 	.app-content {
 		padding-top: $app-content-padding-y;
-        padding-bottom: $app-content-padding-y;
-        padding-left: $app-content-padding-x;
-        padding-right: $app-content-padding-x;
-	}
-}
+		padding-bottom: $app-content-padding-y;
+		padding-left: $app-content-padding-x;
+		padding-right: $app-content-padding-x;
 
-// Tablet & mobile modes
-@include media-breakpoint-down(lg) {
-	.app-content { 
-		max-width: none;
-		padding-top: $app-content-padding-y-mobile;
-        padding-bottom: $app-content-padding-y-mobile;
-        padding-left: $app-content-padding-x-mobile;
-        padding-right: $app-content-padding-x-mobile;
-	}
-}
-// =============================================
-// Content merged from layout/_content.scss
-// =============================================
-
-//
-// Content
-//
-
-
-// Desktop mode
-@include media-breakpoint-up(lg) {
-	.app-content {
 		[data-kt-app-toolbar-enabled="true"]:not([data-kt-app-toolbar-fixed="true"]) & {
 			padding-top: 0;
 		}			
@@ -43,6 +19,12 @@
 // Tablet & mobile modes
 @include media-breakpoint-down(lg) {
 	.app-content { 
+		max-width: none;
+		padding-top: $app-content-padding-y-mobile;
+		padding-bottom: $app-content-padding-y-mobile;
+		padding-left: $app-content-padding-x-mobile;
+		padding-right: $app-content-padding-x-mobile;
+
 		[data-kt-app-toolbar-enabled="true"]:not([data-kt-app-toolbar-fixed-mobile="true"]) & {
 			padding-top: 0;
 		}
