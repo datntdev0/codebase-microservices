@@ -15,6 +15,7 @@ import { Error403Page } from '@shared/pages/error403/error403';
 import { Error404Page } from '@shared/pages/error404/error404';
 import { Error500Page } from '@shared/pages/error500/error500';
 import { SharedModule } from '@shared/shared-module';
+import { ComponentsModule } from './components/components-module';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ export class RootRoutingModule { }
     BrowserModule,
     RootRoutingModule,
     SharedModule,
+    ComponentsModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
