@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatatableColumn } from '@components/datatable/datatable';
+import { ToastService } from '@components/toast/toast-service';
 import { MULTI_TENANCY } from '@shared/models/constants';
 import { SrvAdminClient, TenantCreateDto } from '@shared/proxies/admin-proxies';
 
@@ -10,6 +11,7 @@ import { SrvAdminClient, TenantCreateDto } from '@shared/proxies/admin-proxies';
 })
 export class TenantPage implements OnInit {
   private readonly clientAdminSrv = inject(SrvAdminClient);
+  private readonly toastSrv = inject(ToastService);
   private readonly fb = inject(FormBuilder);
 
   tenants: any[] = [];
@@ -68,8 +70,10 @@ export class TenantPage implements OnInit {
 
   protected onEdit(item: any): void {
     console.log('Edit item', item);
+    this.toastSrv.info('Info', 'Edit functionality is not implemented yet.', 3000);
   }
   protected onDelete(item: any): void {
     console.log('Delete item', item);
+    this.toastSrv.info('Info', 'Delete functionality is not implemented yet.', 3000);
   }
 }
