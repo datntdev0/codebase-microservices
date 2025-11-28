@@ -5,7 +5,7 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
   selector: 'app-paginator',
   templateUrl: './paginator.html',
 })
-export class Paginator implements OnChanges {
+export class PaginatorComponent implements OnChanges {
   @Input() currentPage: number = 1;
   @Input() totalPages: number = 1;
   @Input() maxVisiblePages: number = 5;

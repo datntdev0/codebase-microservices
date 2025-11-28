@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Datatable } from './datatable/datatable';
-import { Paginator } from './paginator/paginator';
+import { DatatableComponent } from './datatable/datatable';
+import { PaginatorComponent } from './paginator/paginator';
 import { ToastComponent } from './toast/toast';
+import { DialogComponent } from './confirmation-dialog/dialog';
 import { FormsModule } from '@angular/forms';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
-    Datatable,
-    Paginator,
+    DatatableComponent,
+    PaginatorComponent,
     ToastComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -18,10 +20,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ModalModule,
   ],
   exports: [
-    Datatable,
-    Paginator,
-    ToastComponent,
     ModalModule,
+    DatatableComponent,
+    PaginatorComponent,
+    ToastComponent,
+    DialogComponent,
   ], 
+  providers: [
+    BsModalService,
+  ]
 })
 export class ComponentsModule { }

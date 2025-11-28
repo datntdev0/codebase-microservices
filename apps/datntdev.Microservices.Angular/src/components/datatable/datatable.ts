@@ -13,7 +13,7 @@ export interface DatatableColumn {
   selector: 'app-datatable',
   templateUrl: './datatable.html',
 })
-export class Datatable {
+export class DatatableComponent {
   @Input() data: any[] = [];
   @Input() columns: DatatableColumn[] = [];
   @Input() actionsTemplate?: TemplateRef<any>;
