@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface ToastConfig {
   id: string;
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: 'success' | 'danger' | 'warning' | 'info';
   title: string;
   message?: string;
   createdAt?: string;
@@ -40,7 +40,7 @@ export class ToastService {
   }
 
   error(title: string, message?: string, duration?: number): void {
-    this.show({ type: 'error', title, message, duration });
+    this.show({ type: 'danger', title, message, duration });
   }
 
   warning(title: string, message?: string, duration?: number): void {
