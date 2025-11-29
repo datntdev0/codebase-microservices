@@ -15,22 +15,6 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
         services.AddDefaultOpenTelemetry();
         services.AddDefaultServiceDiscovery();
 
-        // Configure CORS
-        var corsOrigins = _hostingConfiguration.GetSection("AllowedOrigins").Get<string>()?.Split(';') ?? [];
-        services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(policy =>
-            {
-                if (corsOrigins.Length > 0)
-                {
-                    policy.WithOrigins(corsOrigins)
-                          .AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .AllowCredentials();
-                }
-            });
-        });
-
         services.AddRazorComponents();
         services.AddControllers();
         services.AddOpenApi();
@@ -43,10 +27,9 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
         base.Configure(app, env);
 
         app.UseHttpsRedirection();
-        
-        // Enable CORS (must be before UseRouting)
+
         app.UseCors();
-        
+
         app.UseRouting();
 
         app.UseAuthentication();

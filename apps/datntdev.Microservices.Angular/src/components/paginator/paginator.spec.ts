@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TenantPage } from './tenant';
+import { Paginator } from './paginator';
 
-describe('Tenant', () => {
-  let component: TenantPage;
-  let fixture: ComponentFixture<TenantPage>;
+describe('Paginator', () => {
+  let component: Paginator;
+  let fixture: ComponentFixture<Paginator>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TenantPage]
+      imports: [Paginator]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TenantPage);
+    fixture = TestBed.createComponent(Paginator);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

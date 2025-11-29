@@ -1,0 +1,18 @@
+<div class="modal-header border-0 pb-0">
+  <button type="button" class="btn-close" (click)="cancel()" aria-label="Close"></button>
+</div>
+<div class="modal-body text-center py-4">
+  <div class="mb-3">
+    <i class="bi {{ icon }} {{ iconColor }}" style="font-size: 4rem;"></i>
+  </div>
+  <h5 class="modal-title mb-3">{{ title }}</h5>
+  <p class="text-muted">{{ message }}</p>
+</div>
+<div class="modal-footer border-0 justify-content-center pt-0">
+  <button *ngIf="cancelText" type="button" class="btn {{ cancelButtonClass }}" (click)="cancel()">
+    {{ cancelText }}
+  </button>
+  <button *ngIf="confirmText" type="button" class="btn {{ confirmButtonClass }}" (click)="confirm()">
+    {{ confirmText }}
+  </button>
+</div>

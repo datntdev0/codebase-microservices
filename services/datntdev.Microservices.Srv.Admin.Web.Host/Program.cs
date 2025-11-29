@@ -12,8 +12,7 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvAdminWebH
         services.AddDefaultHealthChecks();
         services.AddDefaultOpenTelemetry();
         services.AddDefaultServiceDiscovery();
-
-        services.AddControllers();
+        services.AddAppServiceAsControllers();
         services.AddOpenApi();
     }
 

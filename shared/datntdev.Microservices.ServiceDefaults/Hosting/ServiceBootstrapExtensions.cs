@@ -1,6 +1,8 @@
 ﻿using datntdev.Microservices.Common;
 using datntdev.Microservices.Common.Modular;
+using datntdev.Microservices.ServiceDefaults.Providers;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,12 +25,43 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             return services.AddSingleton(bootstrapper);
         }
 
+        public static IServiceCollection AddCorsOriginsFromConfiguration(this IServiceCollection services, IConfiguration configs)
+        {
+            var corsOrigins = configs.GetSection("AllowedOrigins").Get<string>()?.Split(';') ?? [];
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    if (corsOrigins.Length == 0) return;
+
+                    policy.WithOrigins(corsOrigins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
+            return services;
+        }
+
         public static IApplicationBuilder UseServiceBootstrap<TStartupModule>(this IApplicationBuilder app, IConfigurationRoot configs)
             where TStartupModule : BaseModule
         {
             var bootstrapper = app.ApplicationServices.GetRequiredService<ServiceBootstrap<TStartupModule>>();
             bootstrapper.Configure(app.ApplicationServices, configs);
             return app;
+        }
+
+        public static IServiceCollection AddAppServiceAsControllers(this IServiceCollection services)
+        {
+            var controllerFeatureProvider = new AppServiceControllerFeatureProvider();
+            services.AddControllers()
+                .ConfigureApplicationPartManager(manager =>
+                {
+                    manager.FeatureProviders.Add(controllerFeatureProvider);
+                });
+            services.Configure<MvcOptions>(options => options.Conventions.Add(controllerFeatureProvider));
+            return services;
         }
 
         public static IServiceCollection AddDefaultHealthChecks(this IServiceCollection services)
@@ -90,6 +123,7 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
 
             return services;
         }
+
 
         public static IEndpointRouteBuilder MapDefaultHealthChecks(this IEndpointRouteBuilder builder)
         {

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Common.Web.App.Session
 {
-    [InjectService(ServiceLifetime.Scoped)]
+    [InjectableService(ServiceLifetime.Scoped)]
     public class AppSessionContext
     {
         public AppSessionAppInfo AppInfo { get; private set; } = new();

@@ -1,4 +1,6 @@
 ﻿using datntdev.Microservices.Common.Modular;
+using datntdev.Microservices.Common.Web.App.Application;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -14,8 +16,13 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             _modules.ToList().ForEach(module => 
             {
                 module.ConfigureServices(services, configs);
+                RegisterManagerServices(module, services);
                 RegisterInjectableServices(module, services);
+                RegisterApplicationPartAssembly(module, services);
             });
+
+            // Register all assemblies for AutoMapper
+            services.AddAutoMapper(_modules.Select(m => m.GetType().Assembly).ToArray());
         }
 
         public void Configure(IServiceProvider serviceProvider, IConfigurationRoot configs)
@@ -30,7 +37,6 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
                 .Select(Activator.CreateInstance)
                 .Select(module => (BaseModule)module!);
         }
-
 
         private static IEnumerable<Type> FindDependedModuleTypesRecursively(Type moduleType)
         {
@@ -52,15 +58,12 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             var injectServiceTypes = module.GetType().Assembly.GetTypes()
                  .Where(type => type.IsClass && !type.IsAbstract)
                  .Where(type => type.GetTypeInfo().CustomAttributes
-                     .Any(att => att.AttributeType == typeof(InjectServiceAttribute))
+                     .Any(att => att.AttributeType == typeof(InjectableServiceAttribute))
                  );
 
             foreach (var type in injectServiceTypes)
             {
-                var lifetime = type.GetTypeInfo().GetCustomAttribute<InjectServiceAttribute>()?.Lifetime;
-                if (lifetime == null) continue;
-
-                switch (lifetime)
+                switch (type.GetTypeInfo().GetCustomAttribute<InjectableServiceAttribute>()?.Lifetime)
                 {
                     case ServiceLifetime.Singleton:
                         services.AddSingleton(type);
@@ -76,7 +79,27 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
                 }
             }
         }
-    }
 
-    
+        private static void RegisterManagerServices(BaseModule module, IServiceCollection services)
+        {
+            var managerServiceTypes = module.GetType().Assembly.GetTypes()
+                 .Where(type => type.IsClass && !type.IsAbstract)
+                 .Where(type => type.IsAssignableTo(typeof(BaseManager)));
+            managerServiceTypes.ToList().ForEach(type => services.AddScoped(type));
+        }
+
+        private static void RegisterApplicationPartAssembly(BaseModule module, IServiceCollection services)
+        {
+            if (AppServiceStartup.ServiceType != Common.Constants.Enum.ServiceType.Microservice) return;
+
+            services.AddControllers().ConfigureApplicationPartManager(manager =>
+            {
+                var assembly = module.GetType().Assembly;
+                if (!manager.ApplicationParts.OfType<AssemblyPart>().Any(ap => ap.Assembly == assembly))
+                {
+                    manager.ApplicationParts.Add(new AssemblyPart(assembly));
+                }
+            });
+        }
+    }
 }

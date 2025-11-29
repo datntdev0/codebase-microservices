@@ -10,7 +10,8 @@
     "test": "ng test --watch=true --browsers=ChromeHeadless",
     "test:coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
     "e2e": "cypress open",
-    "e2e:run": "cypress run"
+    "e2e:run": "cypress run",
+    "gencode": "sh ./nswag/gencode.sh"
   },
   "prettier": {
     "printWidth": 100,
@@ -53,6 +54,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nswag": "^14.6.2",
     "typescript": "~5.9.2"
   }
 }

@@ -1,0 +1,34 @@
+<div class="dt-paging paging_simple_numbers">
+  <nav aria-label="pagination">
+    <ul class="pagination">
+      <li class="dt-paging-button page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link previous" role="link" type="button" 
+                [attr.aria-disabled]="currentPage === 1" 
+                aria-label="Previous" 
+                [attr.tabindex]="currentPage === 1 ? -1 : 0"
+                (click)="goToPage(currentPage - 1)"
+                [disabled]="currentPage === 1">
+          <i class="previous"></i>
+        </button>
+      </li>
+      <li *ngFor="let page of visiblePages" 
+          class="dt-paging-button page-item" 
+          [class.active]="page === currentPage">
+        <button class="page-link" role="link" type="button" 
+                [attr.aria-current]="page === currentPage ? 'page' : null"
+                (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </li>
+      <li class="dt-paging-button page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link next" role="link" type="button" 
+                aria-label="Next"
+                [attr.tabindex]="currentPage === totalPages ? -1 : 0"
+                (click)="goToPage(currentPage + 1)"
+                [disabled]="currentPage === totalPages">
+          <i class="next"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>

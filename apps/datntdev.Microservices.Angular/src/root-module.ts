@@ -1,23 +1,22 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { NgModule, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { authConfig } from '@shared/models/config';
-
-import { UserManager } from 'oidc-client-ts';
-
-import { RootComponent } from './root';
 
 import { ErrorLayout } from './layout/error-layout';
 import { MainLayout } from './layout/main-layout';
+import { RootComponent } from './root';
 
-import { authGuard } from './shared/guards/auth-guard';
-import { appInitializerFactory } from './shared/services/app-initializer';
+import { authGuard } from '@shared/guards/auth-guard';
+import { appInitializerFactory } from '@shared/services/app-initializer';
+import { provideGlobalErrorHandler } from '@shared/services/error-handler';
 
-import { SigninCallback } from './shared/pages/callbacks/signin-callback';
-import { Error403Page } from './shared/pages/error403/error403';
-import { Error404Page } from './shared/pages/error404/error404';
-import { Error500Page } from './shared/pages/error500/error500';
+import { SigninCallback } from '@shared/pages/callbacks/signin-callback';
+import { Error403Page } from '@shared/pages/error403/error403';
+import { Error404Page } from '@shared/pages/error404/error404';
+import { Error500Page } from '@shared/pages/error500/error500';
+import { SharedModule } from '@shared/shared-module';
+import { ComponentsModule } from './components/components-module';
 
 const routes: Routes = [
   {
@@ -52,13 +51,14 @@ export class RootRoutingModule { }
   ],
   imports: [
     BrowserModule,
-    RootRoutingModule
+    RootRoutingModule,
+    SharedModule,
+    ComponentsModule,
   ],
   providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideAppInitializer(appInitializerFactory),
+    provideGlobalErrorHandler(),
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: UserManager, useValue: new UserManager(authConfig) }
+    provideAppInitializer(appInitializerFactory),
   ],
   bootstrap: [RootComponent]
 })

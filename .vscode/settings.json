@@ -11,7 +11,19 @@
         "**/*.drawio*": true,
         "**/*.user": true,
     },
-    "editor.tabSize": 2,
+    "editor.tabSize": 4,
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[csharp]": {
+        "editor.tabSize": 4
+    },
     "typescript.tsc.autoDetect": "off",
     "npm.autoDetect": "off",
 }
