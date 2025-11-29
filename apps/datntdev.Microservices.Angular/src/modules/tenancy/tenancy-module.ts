@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { TenantPage } from './pages/tenant';
+import { TenantsPage } from './pages/tenants';
 import { API_BASE_URL_ADMIN, SrvAdminClient } from '@shared/proxies/admin-proxies';
 import { environment } from 'src/environments/environment';
 import { ComponentsModule } from '@components/components-module';
 
 const routes: Routes = [
-  { path: 'tenants', component: TenantPage },
+  { path: 'tenants', component: TenantsPage },
   { path: '**', redirectTo: '/error/404' }
 ]
 
 @NgModule({
   declarations: [
-    TenantPage,
+    TenantsPage,
   ],
   imports: [
     CommonModule,

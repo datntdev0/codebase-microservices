@@ -2,24 +2,24 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService } from '@components/confirmation-dialog/dialog-service';
 import { DatatableColumn } from '@components/datatable/datatable';
-import { ToastService } from '@components/toast/toast-service';
 import { MULTI_TENANCY } from '@shared/models/constants';
-import { SrvAdminClient, TenantCreateDto } from '@shared/proxies/admin-proxies';
+import { SrvAdminClient, TenantCreateDto, TenantUpdateDto } from '@shared/proxies/admin-proxies';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   standalone: false,
-  templateUrl: './tenant.html',
+  templateUrl: './tenants.html',
 })
-export class TenantPage implements OnInit {
+export class TenantsPage implements OnInit {
   private readonly clientAdminSrv = inject(SrvAdminClient);
-  private readonly toastSrv = inject(ToastService);
   private readonly dialogSrv = inject(DialogService);
   private readonly fb = inject(FormBuilder);
 
   tenants: any[] = [];
+  editingTenant: any = null;
   createForm!: FormGroup;
-  isCreating: boolean = false;
+  updateForm!: FormGroup;
+  isLoading: boolean = false;
 
   columns: DatatableColumn[] = [
     {
@@ -43,6 +43,9 @@ export class TenantPage implements OnInit {
     this.createForm = this.fb.group({
       tenantName: ['', [Validators.required, Validators.minLength(3)]]
     });
+    this.updateForm = this.fb.group({
+      tenantName: ['', [Validators.required, Validators.minLength(3)]]
+    });
 
     this.clientAdminSrv.tenants_GetAll(0, 10).subscribe(tenants => this.tenants = tenants.items ?? []);
   }
@@ -53,7 +56,7 @@ export class TenantPage implements OnInit {
       return;
     }
 
-    this.isCreating = true;
+    this.isLoading = true;
     const data = new TenantCreateDto({
       tenantName: this.createForm.value.tenantName
     })
@@ -62,19 +65,45 @@ export class TenantPage implements OnInit {
       .subscribe({
         next: () => {
           this.createForm.reset();
-          this.isCreating = false;
+          this.isLoading = false;
           this.ngOnInit();
           modal.hide();
         },
         error: () => {
-          this.isCreating = false;
+          this.isLoading = false;
         }
       });
   }
 
-  protected onEdit(item: any): void {
-    console.log('Edit item', item);
-    this.toastSrv.info('Info', 'Edit functionality is not implemented yet.', 3000);
+  protected onUpdate(modal: ModalDirective): void {
+    if (this.updateForm.invalid) {
+      this.updateForm.markAllAsTouched();
+      return;
+    }
+
+    this.isLoading = true;
+    const data = new TenantUpdateDto({
+      tenantName: this.updateForm.value.tenantName
+    });
+
+    this.clientAdminSrv.tenants_Update(this.editingTenant.id, data)
+      .subscribe({
+        next: () => {
+          this.updateForm.reset();
+          this.isLoading = false;
+          this.ngOnInit();
+          modal.hide();
+        },
+        error: () => {
+          this.isLoading = false;
+        }
+      });
+  }
+
+  protected onEdit(item: any, modal: ModalDirective): void {
+    this.editingTenant = item;
+    this.updateForm.patchValue({ tenantName: item.tenantName });
+    modal.show();
   }
 
   protected onDelete(item: any): void {

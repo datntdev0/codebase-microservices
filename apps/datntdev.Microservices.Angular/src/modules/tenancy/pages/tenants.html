@@ -31,7 +31,7 @@
 </div>
 
 <ng-template #actionsTemplate let-item>
-  <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px me-3" (click)="onEdit(item)">
+  <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px me-3" (click)="onEdit(item, updateModal)">
     <i class="fs-6 bi bi-sliders2-vertical"></i>
   </button>
   <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px" (click)="onDelete(item)">
@@ -67,8 +67,49 @@
           <button type="reset" class="btn btn-light me-3" (click)="createForm.reset(); createModal.hide()">
             Discard
           </button>
-          <button type="submit" class="btn btn-primary" [attr.data-ui-indicator]="isCreating ? 'on' : 'off'"
-            [disabled]="isCreating || createForm.invalid" (click)="onCreate(createModal)">
+          <button type="submit" class="btn btn-primary" [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
+            [disabled]="isLoading || createForm.invalid" (click)="onCreate(createModal)">
+            <span class="indicator-label">Submit</span>
+            <span class="indicator-progress">
+              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #updateModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Update Tenant</h4>
+        <button type="button" class="btn-close close pull-right" (click)="updateModal.hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm">
+          <div class="fv-row fv-plugins-icon-container">
+            <label class="d-flex align-items-center fs-5 fw-semibold">
+              <span class="required">Tenant Name</span>
+            </label>
+            <input type="text" class="form-control form-control-lg form-control-solid" 
+                   formControlName="tenantName"
+                   [class.is-invalid]="updateForm.get('tenantName')?.invalid && updateForm.get('tenantName')?.touched" />
+            <div class="invalid-feedback" *ngIf="updateForm.get('tenantName')?.invalid && updateForm.get('tenantName')?.touched">
+              <span *ngIf="updateForm.get('tenantName')?.errors?.['required']">Tenant name is required</span>
+              <span *ngIf="updateForm.get('tenantName')?.errors?.['minlength']">Tenant name must be at least 3 characters</span>
+            </div>
+          </div>
+        </form>
+        <div class="text-center pt-10">
+          <button type="reset" class="btn btn-light me-3" (click)="updateForm.reset(); updateModal.hide()">
+            Discard
+          </button>
+          <button type="submit" class="btn btn-primary" [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
+            [disabled]="isLoading || updateForm.invalid" (click)="onUpdate(updateModal)">
             <span class="indicator-label">Submit</span>
             <span class="indicator-progress">
               Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
