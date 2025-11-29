@@ -3,7 +3,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DialogComponent } from './dialog';
 import { Observable, Subject } from 'rxjs';
 
-export interface ConfirmationDialogConfig {
+export interface DialogConfig {
   title: string;
   message: string;
   confirmText?: string;
@@ -20,7 +20,7 @@ export class DialogService {
 
   constructor(private modalService: BsModalService) { }
 
-  private confirm(config: ConfirmationDialogConfig): Observable<boolean> {
+  private confirm(config: DialogConfig): Observable<boolean> {
     const resultSubject = new Subject<boolean>();
 
     const initialState = {
@@ -60,7 +60,7 @@ export class DialogService {
     });
   }
 
-  private acknowledge(config: ConfirmationDialogConfig): Observable<boolean> {
+  private acknowledge(config: DialogConfig): Observable<boolean> {
     return this.confirm({ ...config, confirmText: config.confirmText || 'OK' });
   }
 

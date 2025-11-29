@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DatatableComponent } from './datatable/datatable';
 import { PaginatorComponent } from './paginator/paginator';
 import { ToastComponent } from './toast/toast';
-import { DialogComponent } from './confirmation-dialog/dialog';
+import { DialogComponent } from './dialog/dialog';
 import { FormsModule } from '@angular/forms';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 

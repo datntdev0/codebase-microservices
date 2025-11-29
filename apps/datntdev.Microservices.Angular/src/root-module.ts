@@ -1,15 +1,15 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { NgModule, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { NgModule, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RootComponent } from './root';
 import { ErrorLayout } from './layout/error-layout';
 import { MainLayout } from './layout/main-layout';
+import { RootComponent } from './root';
 
 import { authGuard } from '@shared/guards/auth-guard';
 import { appInitializerFactory } from '@shared/services/app-initializer';
-import { httpInterceptors } from '@shared/interceptors';
+import { provideGlobalErrorHandler } from '@shared/services/error-handler';
 
 import { SigninCallback } from '@shared/pages/callbacks/signin-callback';
 import { Error403Page } from '@shared/pages/error403/error403';
@@ -56,8 +56,8 @@ export class RootRoutingModule { }
     ComponentsModule,
   ],
   providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideHttpClient(httpInterceptors()),
+    provideGlobalErrorHandler(),
+    provideHttpClient(withInterceptorsFromDi()),
     provideAppInitializer(appInitializerFactory),
   ],
   bootstrap: [RootComponent]

@@ -1,5 +1,6 @@
 ﻿using datntdev.Microservices.Common.Configuration;
 using datntdev.Microservices.Common.Modular;
+using datntdev.Microservices.ServiceDefaults.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -42,7 +43,6 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
         public virtual void ConfigureServices(IServiceCollection services) 
         {
             services.AddServiceBootstrap<TBootstrapModule>(HostingConfiguration);
-            services.AddCorsOriginsFromConfiguration(HostingConfiguration);
         }
     }
 
@@ -50,9 +50,16 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
         : AppServiceStartup<TBootstrapModule>(env, ServiceType.Microservice), IWebServiceStartup
         where TBootstrapModule : BaseModule
     {
+        public override void ConfigureServices(IServiceCollection services) 
+        {
+            base.ConfigureServices(services);
+            services.AddCorsOriginsFromConfiguration(HostingConfiguration);
+        }
+
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
         {
             app.UseServiceBootstrap<TBootstrapModule>(HostingConfiguration);
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
         }
     }
 }

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DialogService } from '@components/confirmation-dialog/dialog-service';
+import { DialogService } from '@components/dialog/dialog-service';
 import { DatatableColumn } from '@components/datatable/datatable';
 import { MULTI_TENANCY } from '@shared/models/constants';
 import { SrvAdminClient, TenantCreateDto, TenantUpdateDto } from '@shared/proxies/admin-proxies';
@@ -69,8 +69,9 @@ export class TenantsPage implements OnInit {
           this.ngOnInit();
           modal.hide();
         },
-        error: () => {
+        error: (err) => {
           this.isLoading = false;
+          throw err;
         }
       });
   }
@@ -94,8 +95,9 @@ export class TenantsPage implements OnInit {
           this.ngOnInit();
           modal.hide();
         },
-        error: () => {
+        error: (err) => {
           this.isLoading = false;
+          throw err;
         }
       });
   }

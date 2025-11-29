@@ -1,4 +1,5 @@
 ﻿using datntdev.Microservices.Common.Application;
+using datntdev.Microservices.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -30,6 +31,11 @@ namespace datntdev.Microservices.ServiceDefaults.Providers
                     action.Selectors.Clear();
                     action.Selectors.Add(NormalizeDefaultSelector(action));
                     action.ApiExplorer.IsVisible = true;
+
+                    action.Filters.Add(NormalizeSuccessResponseType(action));
+                    action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 404));
+                    action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 409));
+                    action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 500));
                 }
             }
         }
@@ -56,6 +62,24 @@ namespace datntdev.Microservices.ServiceDefaults.Providers
             selector.ActionConstraints.Add(httpMethodConstraint);
             return selector;
         }
+
+        private static ProducesResponseTypeAttribute NormalizeSuccessResponseType(ActionModel action)
+        {
+            var returnType = action.ActionMethod.ReturnType;
+            if (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>))
+            {
+                returnType = returnType.GetGenericArguments()[0]; // Unwrap Task<T>
+            }
+
+            if (returnType == typeof(void) || returnType == typeof(Task))
+            {
+                return new ProducesResponseTypeAttribute(200);
+            }
+            else
+            {
+                return new ProducesResponseTypeAttribute(returnType, 200);
+            }
+        } 
 
         private static string GetConventionalControllerName(ControllerModel controller)
         {
