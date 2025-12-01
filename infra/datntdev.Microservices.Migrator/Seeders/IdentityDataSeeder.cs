@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using datntdev.Microservices.Srv.Identity.Web.App;
+using datntdev.Microservices.Srv.Identity.Web.App.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
 
@@ -7,6 +10,7 @@ namespace datntdev.Microservices.Migrator.Seeders
     internal class IdentityDataSeeder(IServiceProvider services)
     {
         private readonly IConfigurationRoot _configuration = services.GetRequiredService<IConfigurationRoot>();
+        private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
 
         public async Task SeedAsync()
         {
@@ -25,19 +29,21 @@ namespace datntdev.Microservices.Migrator.Seeders
             ArgumentNullException.ThrowIfNull(defaultAdminUsername, nameof(defaultAdminUsername));
             ArgumentNullException.ThrowIfNull(defaultAdminPassword, nameof(defaultAdminPassword));
 
-            var manager = services.GetRequiredService<Srv.Identity.Web.App.Authorization.Users.UserManager>();
+            var passwordHasher = services.GetRequiredService<PasswordHasher>();
 
             // Recreate the default admin user althgough it exists.
-            var existingUser = await manager.FindAsync(defaultAdminUsername);
-            if (existingUser != null) await manager.DeleteAsync(defaultAdminUsername);
-            var newUser = new Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity
-            {
-                Username = defaultAdminUsername,
-                EmailAddress = defaultAdminEmail ?? string.Empty,
-                FirstName = defaultAdminFirstName ?? string.Empty,
-                LastName = defaultAdminLastName ?? string.Empty,
-            };
-            await manager.CreateAsync(newUser, defaultAdminPassword);
+            var existingUser = await _dbContext.AppUsers.FirstOrDefaultAsync(x => x.Username == defaultAdminUsername);
+            if (existingUser != null) _dbContext.AppUsers.Remove(existingUser);
+            var newUser = passwordHasher.SetPassword(new Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity
+                {
+                    Username = defaultAdminUsername,
+                    EmailAddress = defaultAdminEmail ?? string.Empty,
+                    FirstName = defaultAdminFirstName ?? string.Empty,
+                    LastName = defaultAdminLastName ?? string.Empty,
+                }, defaultAdminPassword);
+
+            await _dbContext.AppUsers.AddAsync(newUser);
+            await _dbContext.SaveChangesAsync();
         }
 
         private async Task EnsureOpenIddictApplicationExistsAsync()

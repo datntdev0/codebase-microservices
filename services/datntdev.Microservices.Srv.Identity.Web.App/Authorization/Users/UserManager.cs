@@ -1,36 +1,68 @@
-﻿using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
+﻿using datntdev.Microservices.Common.Web.App.Application;
+using datntdev.Microservices.Common.Web.App.Exceptions;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using datntdev.Microservices.Srv.Identity.Web.App.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 {
-    public class UserManager(IServiceProvider services)
+    public class UserManager(IServiceProvider services) : BaseManager<long, AppUserEntity, SrvIdentityDbContext>
     {
         private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
         private readonly PasswordHasher _passwordHasher = services.GetRequiredService<PasswordHasher>();
 
+        public IQueryable<AppUserEntity> GetQueryable() => _dbContext.AppUsers.Where(u => !u.IsDeleted).AsQueryable();
+
         public Task<AppUserEntity?> FindAsync(string username)
         {
-            return _dbContext.AppUsers.FirstOrDefaultAsync(u => u.Username == username);
+            return _dbContext.AppUsers.FirstOrDefaultAsync(u => u.Username == username && !u.IsDeleted);
         }
 
-        public Task<AppUserEntity> GetAsync(string username)
+        public override async Task<AppUserEntity> GetEntityAsync(long id)
         {
-            return _dbContext.AppUsers.SingleAsync(u => u.Username == username);
+            var entity = await _dbContext.AppUsers.FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
+            return entity is null ? throw new ExceptionNotFound() : entity!;
         }
 
-        public Task<AppUserEntity> CreateAsync(AppUserEntity userEntity, string password)
+        public override async Task<AppUserEntity> CreateEntityAsync(AppUserEntity entity)
         {
-            userEntity.PasswordHash = _passwordHasher.HashPassword(userEntity, password);
-            var userEntityEntry = _dbContext.AppUsers.Add(userEntity);
-            return _dbContext.SaveChangesAsync().ContinueWith(t => userEntityEntry.Entity);
-        }
-
-        public async Task DeleteAsync(string username)
-        {
-            _dbContext.AppUsers.Remove(await GetAsync(username));
+            await CheckUsernameExistedAsync(entity.Username);
+            await CheckEmailExistedAsync(entity.EmailAddress);
+            _passwordHasher.SetPassword(entity, entity.PasswordPlainText);
+            var createdEntity = _dbContext.AppUsers.Add(entity);
             await _dbContext.SaveChangesAsync();
+            return createdEntity.Entity;
+        }
+
+        public override async Task<AppUserEntity> UpdateEntityAsync(AppUserEntity entity)
+        {
+            await CheckEmailExistedAsync(entity.EmailAddress, entity.Id);
+            _passwordHasher.SetPassword(entity, entity.PasswordPlainText);
+            var updatedEntity = _dbContext.AppUsers.Update(entity);
+            await _dbContext.SaveChangesAsync();
+            return updatedEntity.Entity;
+        }
+
+        public override async Task DeleteEntityAsync(long id)
+        {
+            var entity = await GetEntityAsync(id);
+            entity.IsDeleted = true;
+            _dbContext.AppUsers.Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private async Task CheckUsernameExistedAsync(string username)
+        {
+            var existed = await _dbContext.AppUsers.AnyAsync(u => u.Username == username && !u.IsDeleted);
+            if (existed) throw new ExceptionConflict($"The username '{username}' is already existed.");
+        }
+
+        private async Task CheckEmailExistedAsync(string emailAddress, long? excludeId = null)
+        {
+            var existed = await _dbContext.AppUsers.AnyAsync(u
+                => u.EmailAddress == emailAddress && !u.IsDeleted && (!excludeId.HasValue || u.Id != excludeId.Value));
+            if (existed) throw new ExceptionConflict($"The email address '{emailAddress}' is already existed.");
         }
     }
 }
