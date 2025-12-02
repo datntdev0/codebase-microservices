@@ -11,7 +11,7 @@
     "test:coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
     "e2e": "cypress open",
     "e2e:run": "cypress run",
-    "gencode": "sh ./nswag/gencode.sh"
+    "codegen": "nswag run"
   },
   "prettier": {
     "printWidth": 100,

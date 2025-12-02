@@ -1,1 +1,2 @@
-"node_modules/.bin/nswag" run ./nswag/srv-admin.config.nswag
+npm run codegen ./nswag/srv-identity.config.nswag
+npm run codegen ./nswag/srv-admin.config.nswag

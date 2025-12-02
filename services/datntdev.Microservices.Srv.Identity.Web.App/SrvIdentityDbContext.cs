@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace datntdev.Microservices.Srv.Identity.Web.App
 {
     public class SrvIdentityDbContext(DbContextOptions<SrvIdentityDbContext> options) 
-        : DbContext(options), IRelationalDbContext
+        : BaseDbContext(options), IRelationalDbContext
     {
         public DbSet<AppUserEntity> AppUsers { get; set; }
 
