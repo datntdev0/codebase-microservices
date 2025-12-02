@@ -1,6 +1,6 @@
 import { ErrorHandler, Injectable, Injector, NgZone, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { ToastService } from '@components/toast/toast-service';
-import { ErrorResponse } from '@shared/proxies/admin-proxies';
+import { ErrorResponse } from '@shared/models/proxies';
 
 @Injectable({ providedIn: 'root' })
 export class GlobalErrorHandler implements ErrorHandler {
