@@ -14,8 +14,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<AppUserEntity>(b =>
             {
-                b.HasIndex(e => e.Username).IsUnique();
-                b.HasIndex(e => e.EmailAddress).IsUnique();
+                b.HasIndex(e => e.Username);
+                b.HasIndex(e => e.EmailAddress);
                 b.Ignore(e => e.PasswordPlainText);
             });
         }

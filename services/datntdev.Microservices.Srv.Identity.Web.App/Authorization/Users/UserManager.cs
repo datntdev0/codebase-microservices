@@ -3,12 +3,14 @@ using datntdev.Microservices.Common.Web.App.Exceptions;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using datntdev.Microservices.Srv.Identity.Web.App.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 {
     public class UserManager(IServiceProvider services) : BaseManager<long, AppUserEntity, SrvIdentityDbContext>
     {
+        private readonly IConfiguration _configuration = services.GetRequiredService<IConfiguration>();
         private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
         private readonly PasswordHasher _passwordHasher = services.GetRequiredService<PasswordHasher>();
 
@@ -37,6 +39,9 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 
         public override async Task<AppUserEntity> UpdateEntityAsync(AppUserEntity entity)
         {
+            if (_configuration.GetValue<string>("DefaultAdmin:Username") == entity.Username)
+                throw new ExceptionConflict("The default admin user cannot be updated.");
+
             await CheckEmailExistedAsync(entity.EmailAddress, entity.Id);
             _passwordHasher.SetPassword(entity, entity.PasswordPlainText);
             var updatedEntity = _dbContext.AppUsers.Update(entity);
@@ -47,6 +52,10 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
         public override async Task DeleteEntityAsync(long id)
         {
             var entity = await GetEntityAsync(id);
+            
+            if (_configuration.GetValue<string>("DefaultAdmin:Username") == entity.Username)
+                throw new ExceptionConflict("The default admin user cannot be deleted.");
+
             entity.IsDeleted = true;
             _dbContext.AppUsers.Update(entity);
             await _dbContext.SaveChangesAsync();
