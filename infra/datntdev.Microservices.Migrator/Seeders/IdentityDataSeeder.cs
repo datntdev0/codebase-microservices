@@ -1,4 +1,6 @@
-﻿using datntdev.Microservices.Srv.Identity.Web.App;
+﻿using datntdev.Microservices.Common;
+using datntdev.Microservices.Srv.Identity.Web.App;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles;
 using datntdev.Microservices.Srv.Identity.Web.App.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +17,19 @@ namespace datntdev.Microservices.Migrator.Seeders
         public async Task SeedAsync()
         {
             await EnsureOpenIddictApplicationExistsAsync();
+            await EnsureDefaultAdminRoleExistsAsync();
             await EnsureDefaultAdminUserExistsAsync();
+        }
+
+        private async Task EnsureDefaultAdminRoleExistsAsync()
+        {
+            var existingRole = await _dbContext.AppRoles
+                .Where(x => x.Name == Constants.Authorization.DefaultAdminRole).ToListAsync();
+            if (existingRole.Count == 0) _dbContext.AppRoles.RemoveRange(existingRole);
+            await _dbContext.AppRoles.AddRangeAsync(
+                RoleManager.CreateDefaultAdminRole(null),
+                RoleManager.CreateDefaultAdminRole(Constants.MultiTenancy.DefaultTenantId));
+            await _dbContext.SaveChangesAsync();
         }
 
         private async Task EnsureDefaultAdminUserExistsAsync()

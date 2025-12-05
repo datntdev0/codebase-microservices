@@ -1,0 +1,76 @@
+﻿using datntdev.Microservices.Common;
+using datntdev.Microservices.Common.Web.App.Application;
+using datntdev.Microservices.Common.Web.App.Exceptions;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
+{
+    public class RoleManager(IServiceProvider services) : BaseManager<int, AppRoleEntity, SrvIdentityDbContext>
+    {
+        private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
+
+        public IQueryable<AppRoleEntity> GetQueryable() => _dbContext.AppRoles.Where(r => !r.IsDeleted).AsQueryable();
+
+        public Task<AppRoleEntity?> FindAsync(string name, int? tenantId = null)
+        {
+            return _dbContext.AppRoles.FirstOrDefaultAsync(r => r.Name == name && r.TenantId == tenantId && !r.IsDeleted);
+        }
+
+        public override async Task<AppRoleEntity> GetEntityAsync(int id)
+        {
+            var entity = await _dbContext.AppRoles.FirstOrDefaultAsync(r => r.Id == id && !r.IsDeleted);
+            return entity is null ? throw new ExceptionNotFound() : entity!;
+        }
+
+        public override async Task<AppRoleEntity> CreateEntityAsync(AppRoleEntity entity)
+        {
+            await CheckRoleNameExistedAsync(entity.Name, entity.TenantId);
+            var createdEntity = _dbContext.AppRoles.Add(entity);
+            await _dbContext.SaveChangesAsync();
+            return createdEntity.Entity;
+        }
+
+        public override async Task<AppRoleEntity> UpdateEntityAsync(AppRoleEntity entity)
+        {
+            if (entity.Name == Constants.Authorization.DefaultAdminRole)
+                throw new ExceptionConflict("The default admin role cannot be updated.");
+
+            await CheckRoleNameExistedAsync(entity.Name, entity.TenantId, entity.Id);
+            var updatedEntity = _dbContext.AppRoles.Update(entity);
+            await _dbContext.SaveChangesAsync();
+            return updatedEntity.Entity;
+        }
+
+        public override async Task DeleteEntityAsync(int id)
+        {
+            var entity = await GetEntityAsync(id);
+            
+            if (entity.Name == Constants.Authorization.DefaultAdminRole)
+                throw new ExceptionConflict("The default admin role cannot be deleted.");
+
+            entity.IsDeleted = true;
+            _dbContext.AppRoles.Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private async Task CheckRoleNameExistedAsync(string name, int? tenantId, int? excludeId = null)
+        {
+            var existed = await _dbContext.AppRoles.AnyAsync(r 
+                => r.Name == name && r.TenantId == tenantId && !r.IsDeleted && (!excludeId.HasValue || r.Id != excludeId.Value));
+            if (existed) throw new ExceptionConflict($"The role name '{name}' already exists for this tenant.");
+        }
+
+        public static AppRoleEntity CreateDefaultAdminRole(int? tenantId)
+        {
+            return new AppRoleEntity
+            {
+                TenantId = tenantId,
+                Name = Constants.Authorization.DefaultAdminRole,
+                Description = "Default administrator role with full permissions.",
+                Permissions = Enum.GetValues<Constants.Enum.AppPermission>(),
+            };
+        }
+    }
+}

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using datntdev.Microservices.Common.Models;
-using datntdev.Microservices.Srv.Identity.Contract.Authorization.Dto;
+using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users.Dto;
 
 namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models
 {

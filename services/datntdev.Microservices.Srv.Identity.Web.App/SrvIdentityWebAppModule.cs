@@ -3,7 +3,6 @@ using datntdev.Microservices.Common.Configuration;
 using datntdev.Microservices.Common.Modular;
 using datntdev.Microservices.Common.Web.App;
 using datntdev.Microservices.Srv.Identity.Contract;
-using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users;
 using datntdev.Microservices.Srv.Identity.Web.App.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -65,7 +64,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
         {
             services.AddScoped<IdentityManager>()
                 .AddSingleton<PasswordHasher>()
-                .AddScoped<UserManager>()
                 .AddHttpContextAccessor();
             return services;
         }

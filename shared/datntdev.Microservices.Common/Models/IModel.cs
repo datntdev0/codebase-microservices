@@ -16,4 +16,9 @@
     {
         public bool IsDeleted { get; set; }
     }
+
+    public interface ITenancy
+    {
+        public int? TenantId { get; set; }
+    }
 }

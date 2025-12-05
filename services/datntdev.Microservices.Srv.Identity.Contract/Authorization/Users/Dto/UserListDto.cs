@@ -1,6 +1,6 @@
 using datntdev.Microservices.Common.Models;
 
-namespace datntdev.Microservices.Srv.Identity.Contract.Authorization.Dto
+namespace datntdev.Microservices.Srv.Identity.Contract.Authorization.Users.Dto
 {
     public class UserListDto : BaseDto<long>
     {

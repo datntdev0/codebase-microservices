@@ -16,6 +16,11 @@
             public const string DefaultTenantName = "Default";
         }
 
+        public static class Authorization
+        {
+            public const string DefaultAdminRole = "Administrator";
+        }
+
         public static class Endpoints
         {
             public const string Health = "/health";
@@ -35,6 +40,11 @@
                 Gateway,
                 Migrator,
                 Microservice,
+            }
+
+            public enum AppPermission
+            {
+                None = 0,
             }
         }
     }

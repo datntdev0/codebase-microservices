@@ -1,7 +1,7 @@
 using datntdev.Microservices.Common.Models;
 using datntdev.Microservices.Common.Web.App.Application;
-using datntdev.Microservices.Srv.Identity.Contract.Authorization;
-using datntdev.Microservices.Srv.Identity.Contract.Authorization.Dto;
+using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users;
+using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users.Dto;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,5 @@
 ﻿using datntdev.Microservices.Common.Repository;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
         : BaseDbContext(options), IRelationalDbContext
     {
         public DbSet<AppUserEntity> AppUsers { get; set; }
+        public DbSet<AppRoleEntity> AppRoles { get; set; }
 
         override protected void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,6 +19,10 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
                 b.HasIndex(e => e.Username);
                 b.HasIndex(e => e.EmailAddress);
                 b.Ignore(e => e.PasswordPlainText);
+            });
+            modelBuilder.Entity<AppRoleEntity>(b =>
+            {
+                b.HasIndex(e => e.Name);
             });
         }
     }
