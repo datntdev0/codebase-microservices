@@ -37,7 +37,6 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
         app.UseMiddleware<AppSessionMiddleware>();
 
         app.UseAntiforgery();
-
         app.UseEndpoints(configure =>
         {
             configure.MapRazorComponents<AppIndex>();
@@ -45,7 +44,7 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvIdentityW
             configure.MapControllers();
             configure.MapOpenApi();
             configure.MapScalarApiReference();
-
+           
             if (env.IsDevelopment()) configure.MapDefaultHealthChecks();
         });
     }

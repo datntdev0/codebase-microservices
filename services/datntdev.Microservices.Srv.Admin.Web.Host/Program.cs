@@ -29,10 +29,12 @@ internal class Startup(IWebHostEnvironment env) : WebServiceStartup<SrvAdminWebH
         app.UseEndpoints(configure =>
         {
             configure.MapControllers();
-            configure.MapOpenApi();
-            configure.MapScalarApiReference();
-
-            if (env.IsDevelopment()) configure.MapDefaultHealthChecks();
+            
+            if (env.IsDevelopment()) 
+            { 
+                configure.MapRootToScalar();
+                configure.MapDefaultHealthChecks();
+            }
         });
     }
 }

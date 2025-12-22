@@ -2,6 +2,7 @@
 using datntdev.Microservices.Common.Modular;
 using datntdev.Microservices.ServiceDefaults.Providers;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using Scalar.AspNetCore;
 
 namespace datntdev.Microservices.ServiceDefaults.Hosting
 {
@@ -141,6 +143,17 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             {
                 Predicate = r => r.Tags.Contains("live")
             });
+            return builder;
+        }
+
+        public static IEndpointRouteBuilder MapRootToScalar(this IEndpointRouteBuilder builder)
+        {
+            builder.MapOpenApi();
+            builder.MapScalarApiReference();
+            builder.MapGet("/", () => Results.Redirect("/scalar/v1"))
+                .ExcludeFromDescription()
+                .ExcludeFromApiReference();
+
             return builder;
         }
     }
