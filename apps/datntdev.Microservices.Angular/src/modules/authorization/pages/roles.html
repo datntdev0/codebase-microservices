@@ -1,0 +1,140 @@
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <div class="card-title">
+      <div class="d-flex align-items-center position-relative">
+        <i class="bi bi-search position-absolute ms-5"></i>
+        <input type="text" class="form-control form-control-solid w-250px ps-12" placeholder="Search Role" />
+      </div>
+    </div>
+
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-light-primary me-3">
+          <i class="bi bi-filter"></i> Filter
+        </button>
+
+        <button type="button" class="btn btn-light-primary me-3">
+          <i class="bi bi-box-arrow-up"></i> Export
+        </button>
+
+        <button type="button" class="btn btn-primary" (click)="createModal.show()">
+          <i class="bi bi-plus-square-fill"></i> New Role
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body pt-0">
+    <app-datatable [data]="roles" [columns]="columns" [checkboxEnabled]="true" [actionsTemplate]="actionsTemplate">
+    </app-datatable>
+  </div>
+</div>
+
+<ng-template #actionsTemplate let-item>
+  <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px me-3" (click)="onEdit(item, updateModal)">
+    <i class="fs-6 bi bi-sliders2-vertical"></i>
+  </button>
+  <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px" (click)="onDelete(item)">
+    <i class="fs-6 bi bi-x-octagon"></i>
+  </button>
+</ng-template>
+
+<div class="modal fade" bsModal #createModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Create New Role</h4>
+        <button type="button" class="btn-close close pull-right" (click)="createModal.hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createForm">
+          <div class="fv-row fv-plugins-icon-container mb-5">
+            <label class="d-flex align-items-center fs-5 fw-semibold">
+              <span class="required">Name</span>
+            </label>
+            <input type="text" class="form-control form-control-lg form-control-solid" 
+                   formControlName="name"
+                   [class.is-invalid]="createForm.get('name')?.invalid && createForm.get('name')?.touched" />
+            <div class="invalid-feedback" *ngIf="createForm.get('name')?.invalid && createForm.get('name')?.touched">
+              <span *ngIf="createForm.get('name')?.errors?.['required']">Name is required</span>
+              <span *ngIf="createForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</span>
+            </div>
+          </div>
+
+          <div class="fv-row fv-plugins-icon-container mb-5">
+            <label class="d-flex align-items-center fs-5 fw-semibold">
+              <span>Description</span>
+            </label>
+            <textarea class="form-control form-control-lg form-control-solid" 
+                      formControlName="description"
+                      rows="3"></textarea>
+          </div>
+        </form>
+        <div class="text-center pt-10">
+          <button type="reset" class="btn btn-light me-3" (click)="createForm.reset(); createModal.hide()">
+            Discard
+          </button>
+          <button type="submit" class="btn btn-primary" [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
+            [disabled]="isLoading || createForm.invalid" (click)="onCreate(createModal)">
+            <span class="indicator-label">Submit</span>
+            <span class="indicator-progress">
+              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #updateModal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Update Role</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="updateModal.hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm">
+          <div class="fv-row fv-plugins-icon-container mb-5">
+            <label class="d-flex align-items-center fs-5 fw-semibold">
+              <span class="required">Name</span>
+            </label>
+            <input type="text" class="form-control form-control-lg form-control-solid" 
+                   formControlName="name"
+                   [class.is-invalid]="updateForm.get('name')?.invalid && updateForm.get('name')?.touched" />
+            <div class="invalid-feedback" *ngIf="updateForm.get('name')?.invalid && updateForm.get('name')?.touched">
+              <span *ngIf="updateForm.get('name')?.errors?.['required']">Name is required</span>
+              <span *ngIf="updateForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</span>
+            </div>
+          </div>
+
+          <div class="fv-row fv-plugins-icon-container mb-5">
+            <label class="d-flex align-items-center fs-5 fw-semibold">
+              <span>Description</span>
+            </label>
+            <textarea class="form-control form-control-lg form-control-solid" 
+                      formControlName="description"
+                      rows="3"></textarea>
+          </div>
+        </form>
+        <div class="text-center pt-10">
+          <button type="reset" class="btn btn-light me-3" (click)="updateForm.reset(); updateModal.hide()">
+            Discard
+          </button>
+          <button type="submit" class="btn btn-primary" [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
+            [disabled]="isLoading || updateForm.invalid" (click)="onUpdate(updateModal)">
+            <span class="indicator-label">Submit</span>
+            <span class="indicator-progress">
+              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
