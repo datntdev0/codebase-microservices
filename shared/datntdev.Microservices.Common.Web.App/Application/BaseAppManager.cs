@@ -3,9 +3,9 @@ using datntdev.Microservices.Common.Repository;
 
 namespace datntdev.Microservices.Common.Web.App.Application
 {
-    public abstract class BaseManager { }
+    public abstract class BaseAppManager { }
 
-    public abstract class BaseManager<TKey, TEntity, TDbContext> : BaseManager
+    public abstract class BaseManager<TKey, TEntity, TDbContext> : BaseAppManager
         where TKey : IEquatable<TKey>
         where TEntity : BaseEntity<TKey>
         where TDbContext : IDbContext

@@ -45,6 +45,15 @@
             public enum AppPermission
             {
                 None = 0,
+                MultiTenancy = 1000,
+                MultiTenancy_Read = 1001,
+                MultiTenancy_Write = 1002,
+                Users = 2000,
+                Users_Read = 2001,
+                Users_Write = 2002,
+                Roles = 3000,
+                Roles_Read = 3001,
+                Roles_Write = 3002,
             }
         }
     }

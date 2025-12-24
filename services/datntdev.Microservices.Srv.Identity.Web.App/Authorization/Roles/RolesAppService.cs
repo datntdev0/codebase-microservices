@@ -2,6 +2,7 @@ using datntdev.Microservices.Common.Models;
 using datntdev.Microservices.Common.Web.App.Application;
 using datntdev.Microservices.Srv.Identity.Contract.Authorization.Roles;
 using datntdev.Microservices.Srv.Identity.Contract.Authorization.Roles.Dto;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
     internal class RolesAppService(IServiceProvider services) : BaseAppService(services), IRolesAppService
     {
         private readonly RoleManager _manager = services.GetRequiredService<RoleManager>();
+        private readonly PermissionProvider _permissionProvider = services.GetRequiredService<PermissionProvider>();
 
         public async Task<RoleDto> CreateAsync(RoleCreateDto request)
         {

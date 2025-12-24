@@ -16,6 +16,7 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             _modules.ToList().ForEach(module => 
             {
                 module.ConfigureServices(services, configs);
+                RegisterProviderServices(module, services);
                 RegisterManagerServices(module, services);
                 RegisterInjectableServices(module, services);
                 RegisterApplicationPartAssembly(module, services);
@@ -84,8 +85,16 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
         {
             var managerServiceTypes = module.GetType().Assembly.GetTypes()
                  .Where(type => type.IsClass && !type.IsAbstract)
-                 .Where(type => type.IsAssignableTo(typeof(BaseManager)));
+                 .Where(type => type.IsAssignableTo(typeof(BaseAppManager)));
             managerServiceTypes.ToList().ForEach(type => services.AddScoped(type));
+        }
+
+        private static void RegisterProviderServices(BaseModule module, IServiceCollection services)
+        {
+            var providerServiceTypes = module.GetType().Assembly.GetTypes()
+                 .Where(type => type.IsClass && !type.IsAbstract)
+                 .Where(type => type.IsAssignableTo(typeof(BaseAppProvider)));
+            providerServiceTypes.ToList().ForEach(type => services.AddSingleton(type));
         }
 
         private static void RegisterApplicationPartAssembly(BaseModule module, IServiceCollection services)

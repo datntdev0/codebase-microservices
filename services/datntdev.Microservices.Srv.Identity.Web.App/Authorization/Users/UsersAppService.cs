@@ -1,7 +1,9 @@
 using datntdev.Microservices.Common.Models;
 using datntdev.Microservices.Common.Web.App.Application;
+using datntdev.Microservices.Srv.Identity.Contract.Authorization.Permissions.Dto;
 using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users;
 using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users.Dto;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
     internal class UsersAppService(IServiceProvider services) : BaseAppService(services), IUsersAppService
     {
         private readonly UserManager _manager = services.GetRequiredService<UserManager>();
+        private readonly PermissionProvider _permissionProvider = services.GetRequiredService<PermissionProvider>();
 
         public async Task<UserDto> CreateAsync(UserCreateDto request)
         {
