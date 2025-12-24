@@ -55,6 +55,12 @@
                 Roles_Read = 3001,
                 Roles_Write = 3002,
             }
+
+            public enum MultiTenancySide
+            {
+                Host = 0x01,
+                Tenant = 0x10,
+            }
         }
     }
 }

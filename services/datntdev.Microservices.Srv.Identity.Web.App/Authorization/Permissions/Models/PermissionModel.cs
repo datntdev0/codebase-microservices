@@ -5,10 +5,10 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions.
     public class PermissionModel(
         AppPermission permission,
         AppPermission parentPermission = AppPermission.None,
-        bool isTenantOnly = true)
+        MultiTenancySide tenancySide = MultiTenancySide.Host | MultiTenancySide.Tenant)
     {
         public AppPermission Permission { get; set; } = permission;
         public AppPermission Parent { get; set; } = parentPermission;
-        public bool IsTenantOnly { get; set; } = isTenantOnly;
+        public MultiTenancySide TenancySide { get; set; } = tenancySide;
     }
 }

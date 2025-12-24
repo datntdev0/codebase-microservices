@@ -1,11 +1,14 @@
 ﻿using datntdev.Microservices.Common;
 using datntdev.Microservices.Srv.Identity.Web.App;
-using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using datntdev.Microservices.Srv.Identity.Web.App.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
+using static datntdev.Microservices.Common.Constants.Enum;
 
 namespace datntdev.Microservices.Migrator.Seeders
 {
@@ -13,6 +16,7 @@ namespace datntdev.Microservices.Migrator.Seeders
     {
         private readonly IConfigurationRoot _configuration = services.GetRequiredService<IConfigurationRoot>();
         private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
+        private readonly PermissionProvider _permissionProvider = services.GetRequiredService<PermissionProvider>();
 
         public async Task SeedAsync()
         {
@@ -25,10 +29,10 @@ namespace datntdev.Microservices.Migrator.Seeders
         {
             var existingRole = await _dbContext.AppRoles
                 .Where(x => x.Name == Constants.Authorization.DefaultAdminRole).ToListAsync();
-            if (existingRole.Count == 0) _dbContext.AppRoles.RemoveRange(existingRole);
+            if (existingRole.Count != 0) _dbContext.AppRoles.RemoveRange(existingRole);
             await _dbContext.AppRoles.AddRangeAsync(
-                RoleManager.CreateDefaultAdminRole(null),
-                RoleManager.CreateDefaultAdminRole(Constants.MultiTenancy.DefaultTenantId));
+                CreateDefaultHostAdminRole(),
+                CreateDefaultTenantAdminRole());
             await _dbContext.SaveChangesAsync();
         }
 
@@ -48,7 +52,7 @@ namespace datntdev.Microservices.Migrator.Seeders
             // Recreate the default admin user althgough it exists.
             var existingUser = await _dbContext.AppUsers.FirstOrDefaultAsync(x => x.Username == defaultAdminUsername);
             if (existingUser != null) _dbContext.AppUsers.Remove(existingUser);
-            var newUser = passwordHasher.SetPassword(new Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity
+            var newUser = passwordHasher.SetPassword(new AppUserEntity
                 {
                     Username = defaultAdminUsername,
                     EmailAddress = defaultAdminEmail ?? string.Empty,
@@ -88,6 +92,28 @@ namespace datntdev.Microservices.Migrator.Seeders
             existingApplication = await manager.FindByClientIdAsync(newApplication.ClientId!);
             if (existingApplication != null) await manager.DeleteAsync(existingApplication);
             await manager.CreateAsync(newApplication);
+        }
+
+        private AppRoleEntity CreateDefaultHostAdminRole()
+        {
+            return new AppRoleEntity
+            {
+                TenantId = null,
+                Name = Constants.Authorization.DefaultAdminRole,
+                Description = "Default administrator role with full permissions.",
+                Permissions = _permissionProvider.GetAllPermissions(MultiTenancySide.Host).Select(x => x.Permission).ToArray(),
+            };
+        }
+
+        private AppRoleEntity CreateDefaultTenantAdminRole()
+        {
+            return new AppRoleEntity
+            {
+                TenantId = Constants.MultiTenancy.DefaultTenantId,
+                Name = Constants.Authorization.DefaultAdminRole,
+                Description = "Default tenant administrator role with full permissions.",
+                Permissions = _permissionProvider.GetAllPermissions(MultiTenancySide.Tenant).Select(x => x.Permission).ToArray(),
+            };
         }
 
         private static OpenIddictApplicationDescriptor CreateConfidentialApplication(

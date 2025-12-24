@@ -61,16 +61,5 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
                 => r.Name == name && r.TenantId == tenantId && !r.IsDeleted && (!excludeId.HasValue || r.Id != excludeId.Value));
             if (existed) throw new ExceptionConflict($"The role name '{name}' already exists for this tenant.");
         }
-
-        public static AppRoleEntity CreateDefaultAdminRole(int? tenantId)
-        {
-            return new AppRoleEntity
-            {
-                TenantId = tenantId,
-                Name = Constants.Authorization.DefaultAdminRole,
-                Description = "Default administrator role with full permissions.",
-                Permissions = Enum.GetValues<Constants.Enum.AppPermission>(),
-            };
-        }
     }
 }

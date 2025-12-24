@@ -1,4 +1,5 @@
-﻿using datntdev.Microservices.Common.Web.App.Application;
+﻿using datntdev.Microservices.Common.Extensions;
+using datntdev.Microservices.Common.Web.App.Application;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions.Models;
 using System.Collections.Immutable;
 using static datntdev.Microservices.Common.Constants.Enum;
@@ -14,9 +15,12 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions
             _permissions = LoadPermissions();
         }
 
-        public PermissionModel[] GetAllPermissions()
+        public PermissionModel[] GetAllPermissions(
+            MultiTenancySide? tenancySide = null)
         {
-            return _permissions.Values.ToArray();
+            return _permissions.Values
+                .WhereIf(tenancySide != null, x => (x.TenancySide & tenancySide) == tenancySide)
+                .ToArray();
         }
 
         private static ImmutableDictionary<AppPermission, PermissionModel> LoadPermissions()
@@ -25,15 +29,15 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions
             {
                 { 
                     AppPermission.MultiTenancy, 
-                    new PermissionModel(AppPermission.MultiTenancy, isTenantOnly: false)
+                    new PermissionModel(AppPermission.MultiTenancy, tenancySide: MultiTenancySide.Host)
                 },
                 { 
                     AppPermission.MultiTenancy_Read, 
-                    new PermissionModel(AppPermission.MultiTenancy_Read, AppPermission.MultiTenancy, isTenantOnly: false)
+                    new PermissionModel(AppPermission.MultiTenancy_Read, AppPermission.MultiTenancy, tenancySide: MultiTenancySide.Host)
                 },
                 { 
                     AppPermission.MultiTenancy_Write, 
-                    new PermissionModel(AppPermission.MultiTenancy_Write, AppPermission.MultiTenancy, isTenantOnly: false)
+                    new PermissionModel(AppPermission.MultiTenancy_Write, AppPermission.MultiTenancy, tenancySide: MultiTenancySide.Host)
                 },
                 { 
                     AppPermission.Users, 
