@@ -2,6 +2,7 @@
 using datntdev.Microservices.Common.Web.App.Application;
 using datntdev.Microservices.Common.Web.App.Exceptions;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,7 +21,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
 
         public override async Task<AppRoleEntity> GetEntityAsync(int id)
         {
-            var entity = await _dbContext.AppRoles.FirstOrDefaultAsync(r => r.Id == id && !r.IsDeleted);
+            var entity = await _dbContext.AppRoles.Include(x => x.Users)
+                .FirstOrDefaultAsync(r => r.Id == id && !r.IsDeleted);
             return entity is null ? throw new ExceptionNotFound() : entity!;
         }
 

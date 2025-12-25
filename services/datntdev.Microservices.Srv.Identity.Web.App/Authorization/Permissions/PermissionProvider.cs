@@ -15,12 +15,23 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions
             _permissions = LoadPermissions();
         }
 
-        public PermissionModel[] GetAllPermissions(
-            MultiTenancySide? tenancySide = null)
+        public PermissionModel[] GetAllPermissions(MultiTenancySide? tenancySide = null)
         {
             return _permissions.Values
                 .WhereIf(tenancySide != null, x => (x.TenancySide & tenancySide) == tenancySide)
                 .ToArray();
+        }
+
+        public AppPermission[] GetAllHostAppPermissions()
+        {
+            return GetAllPermissions(MultiTenancySide.Host)
+                .Select(x => x.Permission).ToArray();
+        }
+
+        public AppPermission[] GetAllTenantAppPermissions()
+        {
+            return GetAllPermissions(MultiTenancySide.Tenant)
+                .Select(x => x.Permission).ToArray();
         }
 
         private static ImmutableDictionary<AppPermission, PermissionModel> LoadPermissions()

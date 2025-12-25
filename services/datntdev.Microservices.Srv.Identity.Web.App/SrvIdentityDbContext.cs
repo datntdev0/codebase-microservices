@@ -19,6 +19,11 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
                 b.HasIndex(e => e.Username);
                 b.HasIndex(e => e.EmailAddress);
                 b.Ignore(e => e.PasswordPlainText);
+                b.HasMany(e => e.Roles).WithMany(e => e.Users)
+                    .UsingEntity("AppUserRoles", 
+                        r => r.HasOne(typeof(AppRoleEntity)).WithMany().HasForeignKey("RoleId").HasPrincipalKey(nameof(AppRoleEntity.Id)),
+                        l => l.HasOne(typeof(AppUserEntity)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(AppUserEntity.Id)),
+                        j => j.HasKey("RoleId", "UserId"));
             });
             modelBuilder.Entity<AppRoleEntity>(b =>
             {

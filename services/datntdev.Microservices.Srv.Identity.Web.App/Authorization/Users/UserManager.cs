@@ -23,7 +23,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 
         public override async Task<AppUserEntity> GetEntityAsync(long id)
         {
-            var entity = await _dbContext.AppUsers.FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
+            var entity = await _dbContext.AppUsers.Include(x => x.Roles)
+                .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
             return entity is null ? throw new ExceptionNotFound() : entity!;
         }
 

@@ -103,6 +103,30 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppUserRoles",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserRoles", x => new { x.RoleId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_AppUserRoles_AppRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AppRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppUserRoles_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OpenIddictAuthorizations",
                 columns: table => new
                 {
@@ -165,6 +189,11 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                 column: "Name");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppUserRoles_UserId",
+                table: "AppUserRoles",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AppUsers_EmailAddress",
                 table: "AppUsers",
                 column: "EmailAddress");
@@ -215,16 +244,19 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AppRoles");
-
-            migrationBuilder.DropTable(
-                name: "AppUsers");
+                name: "AppUserRoles");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictScopes");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictTokens");
+
+            migrationBuilder.DropTable(
+                name: "AppRoles");
+
+            migrationBuilder.DropTable(
+                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations");

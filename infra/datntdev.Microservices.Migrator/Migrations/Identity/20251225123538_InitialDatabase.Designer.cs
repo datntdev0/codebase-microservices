@@ -12,7 +12,7 @@ using datntdev.Microservices.Srv.Identity.Web.App;
 namespace datntdev.Microservices.Migrator.Migrations.Identity
 {
     [DbContext(typeof(SrvIdentityDbContext))]
-    [Migration("20251224141538_InitialDatabase")]
+    [Migration("20251225123538_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -24,6 +24,21 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AppUserRoles", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AppUserRoles");
+                });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
                 {
@@ -343,6 +358,21 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                     b.HasIndex("Username");
 
                     b.ToTable("AppUsers");
+                });
+
+            modelBuilder.Entity("AppUserRoles", b =>
+                {
+                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models.AppRoleEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>

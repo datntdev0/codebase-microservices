@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
-using static datntdev.Microservices.Common.Constants.Enum;
 
 namespace datntdev.Microservices.Migrator.Seeders
 {
@@ -36,6 +35,28 @@ namespace datntdev.Microservices.Migrator.Seeders
             await _dbContext.SaveChangesAsync();
         }
 
+        private AppRoleEntity CreateDefaultHostAdminRole()
+        {
+            return new AppRoleEntity
+            {
+                TenantId = null,
+                Name = Constants.Authorization.DefaultAdminRole,
+                Description = "Default administrator role with full permissions.",
+                Permissions = _permissionProvider.GetAllHostAppPermissions(),
+            };
+        }
+
+        private AppRoleEntity CreateDefaultTenantAdminRole()
+        {
+            return new AppRoleEntity
+            {
+                TenantId = Constants.MultiTenancy.DefaultTenantId,
+                Name = Constants.Authorization.DefaultAdminRole,
+                Description = "Default tenant administrator role with full permissions.",
+                Permissions = _permissionProvider.GetAllTenantAppPermissions(),
+            };
+        }
+
         private async Task EnsureDefaultAdminUserExistsAsync()
         {
             var defaultAdminUsername = _configuration.GetValue<string>("DefaultAdmin:Username");
@@ -52,16 +73,34 @@ namespace datntdev.Microservices.Migrator.Seeders
             // Recreate the default admin user althgough it exists.
             var existingUser = await _dbContext.AppUsers.FirstOrDefaultAsync(x => x.Username == defaultAdminUsername);
             if (existingUser != null) _dbContext.AppUsers.Remove(existingUser);
-            var newUser = passwordHasher.SetPassword(new AppUserEntity
-                {
-                    Username = defaultAdminUsername,
-                    EmailAddress = defaultAdminEmail ?? string.Empty,
-                    FirstName = defaultAdminFirstName ?? string.Empty,
-                    LastName = defaultAdminLastName ?? string.Empty,
-                }, defaultAdminPassword);
+
+            var newUser = GetDefaultAdminUser(
+                defaultAdminUsername, 
+                defaultAdminPassword,
+                defaultAdminFirstName ?? string.Empty, 
+                defaultAdminLastName ?? string.Empty);
+
+            // Lookup the default administrator roles
+            newUser.Roles = await _dbContext.AppRoles.Where(x => x.Name == Constants.Authorization.DefaultAdminRole)
+                .ToListAsync();
+
+            newUser = passwordHasher.SetPassword(newUser, defaultAdminPassword);
 
             await _dbContext.AppUsers.AddAsync(newUser);
             await _dbContext.SaveChangesAsync();
+        }
+
+        private AppUserEntity GetDefaultAdminUser(
+            string username, string password, string firstName, string lastName)
+        {
+            return new AppUserEntity()
+            {
+                Username = username,
+                EmailAddress = username,
+                FirstName = firstName,
+                LastName = lastName,
+                Permissions = _permissionProvider.GetAllHostAppPermissions(),
+            };
         }
 
         private async Task EnsureOpenIddictApplicationExistsAsync()
@@ -92,28 +131,6 @@ namespace datntdev.Microservices.Migrator.Seeders
             existingApplication = await manager.FindByClientIdAsync(newApplication.ClientId!);
             if (existingApplication != null) await manager.DeleteAsync(existingApplication);
             await manager.CreateAsync(newApplication);
-        }
-
-        private AppRoleEntity CreateDefaultHostAdminRole()
-        {
-            return new AppRoleEntity
-            {
-                TenantId = null,
-                Name = Constants.Authorization.DefaultAdminRole,
-                Description = "Default administrator role with full permissions.",
-                Permissions = _permissionProvider.GetAllPermissions(MultiTenancySide.Host).Select(x => x.Permission).ToArray(),
-            };
-        }
-
-        private AppRoleEntity CreateDefaultTenantAdminRole()
-        {
-            return new AppRoleEntity
-            {
-                TenantId = Constants.MultiTenancy.DefaultTenantId,
-                Name = Constants.Authorization.DefaultAdminRole,
-                Description = "Default tenant administrator role with full permissions.",
-                Permissions = _permissionProvider.GetAllPermissions(MultiTenancySide.Tenant).Select(x => x.Permission).ToArray(),
-            };
         }
 
         private static OpenIddictApplicationDescriptor CreateConfidentialApplication(
