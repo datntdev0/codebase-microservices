@@ -6,6 +6,7 @@ using datntdev.Microservices.Srv.Identity.Contract.Authorization.Roles.Dto;
 using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users.Dto;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,11 +16,21 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
     internal class RolesAppService(IServiceProvider services) : BaseAppService(services), IRolesAppService
     {
         private readonly RoleManager _manager = services.GetRequiredService<RoleManager>();
+        private readonly RoleCreateValidator _createValidator = services.GetRequiredService<RoleCreateValidator>();
+        private readonly RoleUpdateValidator _updateValidator = services.GetRequiredService<RoleUpdateValidator>();
         private readonly UserManager _userManager = services.GetRequiredService<UserManager>();
 
         public async Task<RoleDto> CreateAsync(RoleCreateDto request)
         {
+            _createValidator.ValidateAndThrow(request);
+
             var roleEntity = _Mapper.Map<AppRoleEntity>(request);
+            
+            // Load users based on provided user IDs
+            roleEntity.Users = _userManager.GetQueryable()
+                .Where(u => request.UserIds.Contains(u.Id))
+                .ToList();
+
             roleEntity = await _manager.CreateEntityAsync(roleEntity);
             return _Mapper.Map<RoleDto>(roleEntity);
         }
@@ -68,6 +79,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
 
         public async Task<RoleDto> UpdateAsync(int id, RoleUpdateDto request)
         {
+            _updateValidator.ValidateAndThrow((id, request));
+
             var roleEntity = await _manager.GetEntityAsync(id);
     
             // Map basic properties

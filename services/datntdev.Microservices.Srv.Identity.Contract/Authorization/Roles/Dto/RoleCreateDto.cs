@@ -1,4 +1,4 @@
-﻿using datntdev.Microservices.Common;
+﻿using static datntdev.Microservices.Common.Constants.Enum;
 
 namespace datntdev.Microservices.Srv.Identity.Contract.Authorization.Roles.Dto
 {
@@ -7,6 +7,7 @@ namespace datntdev.Microservices.Srv.Identity.Contract.Authorization.Roles.Dto
         public int? TenantId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public Constants.Enum.AppPermission[] Permissions { get; set; } = [];
+        public AppPermission[] Permissions { get; set; } = [];
+        public long[] UserIds { get; set; } = [];
     }
 }

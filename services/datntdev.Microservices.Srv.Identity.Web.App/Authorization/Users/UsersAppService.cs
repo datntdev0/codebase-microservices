@@ -6,6 +6,7 @@ using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users;
 using datntdev.Microservices.Srv.Identity.Contract.Authorization.Users.Dto;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,12 +16,22 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
     internal class UsersAppService(IServiceProvider services) : BaseAppService(services), IUsersAppService
     {
         private readonly UserManager _manager = services.GetRequiredService<UserManager>();
+        private readonly UserCreateValidator _createValidator = services.GetRequiredService<UserCreateValidator>();
+        private readonly UserUpdateValidator _updateValidator = services.GetRequiredService<UserUpdateValidator>();
         private readonly RoleManager _roleManager = services.GetRequiredService<RoleManager>();
 
         public async Task<UserDto> CreateAsync(UserCreateDto request)
         {
+            _createValidator.ValidateAndThrow(request);
+            
             var userEntity = _Mapper.Map<AppUserEntity>(request);
             userEntity.PasswordPlainText = request.Password;
+            
+            // Load roles based on provided role IDs
+            userEntity.Roles = _roleManager.GetQueryable()
+                .Where(r => request.RoleIds.Contains(r.Id))
+                .ToList();
+
             userEntity = await _manager.CreateEntityAsync(userEntity);
             return _Mapper.Map<UserDto>(userEntity);
         }
@@ -69,6 +80,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 
         public async Task<UserDto> UpdateAsync(long id, UserUpdateDto request)
         {
+            _updateValidator.ValidateAndThrow((id, request));
+
             var userEntity = await _manager.GetEntityAsync(id);
 
             // Map basic properties
@@ -90,7 +103,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 
             // Update roles: start with existing, add new ones, remove specified ones
             var currentRoleIds = userEntity.Roles.Select(r => r.Id).ToHashSet();
-            foreach (var roleId in currentRoleIds)
+            foreach (var roleId in request.AppendRoleIds)
             {
                 currentRoleIds.Add(roleId);
             }

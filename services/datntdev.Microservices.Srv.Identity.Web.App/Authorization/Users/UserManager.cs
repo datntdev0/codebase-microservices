@@ -30,8 +30,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 
         public override async Task<AppUserEntity> CreateEntityAsync(AppUserEntity entity)
         {
-            await CheckUsernameExistedAsync(entity.Username);
-            await CheckEmailExistedAsync(entity.EmailAddress);
             _passwordHasher.SetPassword(entity, entity.PasswordPlainText);
             var createdEntity = _dbContext.AppUsers.Add(entity);
             await _dbContext.SaveChangesAsync();
@@ -41,9 +39,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
         public override async Task<AppUserEntity> UpdateEntityAsync(AppUserEntity entity)
         {
             if (_configuration.GetValue<string>("DefaultAdmin:Username") == entity.Username)
-                throw new ExceptionConflict("The default admin user cannot be updated.");
+                throw new ExceptionConflict("The default admin user cannot be deleted.");
 
-            await CheckEmailExistedAsync(entity.EmailAddress, entity.Id);
             _passwordHasher.SetPassword(entity, entity.PasswordPlainText);
             var updatedEntity = _dbContext.AppUsers.Update(entity);
             await _dbContext.SaveChangesAsync();
@@ -60,19 +57,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
             entity.IsDeleted = true;
             _dbContext.AppUsers.Update(entity);
             await _dbContext.SaveChangesAsync();
-        }
-
-        private async Task CheckUsernameExistedAsync(string username)
-        {
-            var existed = await _dbContext.AppUsers.AnyAsync(u => u.Username == username && !u.IsDeleted);
-            if (existed) throw new ExceptionConflict($"The username '{username}' is already existed.");
-        }
-
-        private async Task CheckEmailExistedAsync(string emailAddress, long? excludeId = null)
-        {
-            var existed = await _dbContext.AppUsers.AnyAsync(u
-                => u.EmailAddress == emailAddress && !u.IsDeleted && (!excludeId.HasValue || u.Id != excludeId.Value));
-            if (existed) throw new ExceptionConflict($"The email address '{emailAddress}' is already existed.");
         }
     }
 }

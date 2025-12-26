@@ -28,7 +28,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
 
         public override async Task<AppRoleEntity> CreateEntityAsync(AppRoleEntity entity)
         {
-            await CheckRoleNameExistedAsync(entity.Name, entity.TenantId);
             var createdEntity = _dbContext.AppRoles.Add(entity);
             await _dbContext.SaveChangesAsync();
             return createdEntity.Entity;
@@ -39,7 +38,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
             if (entity.Name == Constants.Authorization.DefaultAdminRole)
                 throw new ExceptionConflict("The default admin role cannot be updated.");
 
-            await CheckRoleNameExistedAsync(entity.Name, entity.TenantId, entity.Id);
             var updatedEntity = _dbContext.AppRoles.Update(entity);
             await _dbContext.SaveChangesAsync();
             return updatedEntity.Entity;
@@ -55,13 +53,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
             entity.IsDeleted = true;
             _dbContext.AppRoles.Update(entity);
             await _dbContext.SaveChangesAsync();
-        }
-
-        private async Task CheckRoleNameExistedAsync(string name, int? tenantId, int? excludeId = null)
-        {
-            var existed = await _dbContext.AppRoles.AnyAsync(r 
-                => r.Name == name && r.TenantId == tenantId && !r.IsDeleted && (!excludeId.HasValue || r.Id != excludeId.Value));
-            if (existed) throw new ExceptionConflict($"The role name '{name}' already exists for this tenant.");
         }
     }
 }

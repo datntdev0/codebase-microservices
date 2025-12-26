@@ -1,9 +1,9 @@
 ﻿using datntdev.Microservices.Common;
 
-namespace datntdev.Microservices.Srv.Identity.Tests
+namespace datntdev.Microservices.Srv.Identity.Authentication
 {
     [TestClass]
-    public sealed class GetAuthenticationTests : TestBase
+    public sealed class AuthControllerTests : SrvIdentityTestBase
     {
         private static string _cookies = string.Empty;
 
@@ -18,7 +18,7 @@ namespace datntdev.Microservices.Srv.Identity.Tests
         public async Task GetToken_ClientCredentialsGrant_ReturnsAccessToken()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "/connect/token")
+            var request = new HttpRequestMessage(HttpMethod.Post, Constants.Endpoints.OAuth2Token)
             {
                 Content = new FormUrlEncodedContent(
                 [
