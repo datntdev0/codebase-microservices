@@ -1,16 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\..\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\shared\datntdev.Microservices.Common.Web.App\datntdev.Microservices.Common.Web.App.csproj" />
-    <ProjectReference Include="..\datntdev.Microservices.Srv.Admin.Contract\datntdev.Microservices.Srv.Admin.Contract.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<InternalsVisibleTo Include="datntdev.Microservices.Srv.Admin.Tests" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\shared\datntdev.Microservices.Common.Web.App\datntdev.Microservices.Common.Web.App.csproj" />
+		<ProjectReference Include="..\datntdev.Microservices.Srv.Admin.Contract\datntdev.Microservices.Srv.Admin.Contract.csproj" />
+	</ItemGroup>
 
 </Project>
