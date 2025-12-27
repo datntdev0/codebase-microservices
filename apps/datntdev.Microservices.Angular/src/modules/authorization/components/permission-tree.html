@@ -1,0 +1,41 @@
+<div class="card card-flush h-md-100">
+  <div class="card-body pt-5" style="max-height: 500px; overflow-y: auto;">
+    <div *ngIf="permissionTree.length === 0" class="text-muted text-center py-5">
+      <i class="bi bi-hourglass-split fs-2x mb-3"></i>
+      <p>Loading permissions...</p>
+    </div>
+    <div *ngFor="let permission of permissionTree" class="permission-node">
+      <div class="d-flex align-items-center mb-2">
+        <div class="form-check form-check-custom form-check-solid me-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [id]="'permission-' + permission.permission"
+            [checked]="permission.checked"
+            [indeterminate]="permission.indeterminate"
+            (change)="onPermissionChange(permission, $event)"
+          />
+        </div>
+        <label class="form-check-label fw-bold" [for]="'permission-' + permission.permission">
+          {{ permission.permissionName }}
+        </label>
+      </div>
+      <div *ngIf="permission.children && permission.children.length > 0" class="ms-8">
+        <div *ngFor="let child of permission.children" class="d-flex align-items-center mb-2">
+          <div class="form-check form-check-custom form-check-solid me-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [id]="'permission-' + child.permission"
+              [checked]="child.checked"
+              (change)="onPermissionChange(child, $event)"
+            />
+          </div>
+          <label class="form-check-label" [for]="'permission-' + child.permission">
+            {{ child.permissionName }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

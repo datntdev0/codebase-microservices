@@ -7,6 +7,12 @@ import { API_BASE_URL_IDENTITY, SrvIdentityClient } from '@shared/proxies/identi
 import { environment } from 'src/environments/environment';
 import { RolesPage } from './pages/roles';
 import { UsersPage } from './pages/users';
+import { UserCreateModalComponent } from './components/user-create-modal';
+import { UserUpdateModalComponent } from './components/user-update-modal';
+import { RoleCreateModalComponent } from './components/role-create-modal';
+import { RoleUpdateModalComponent } from './components/role-update-modal';
+import { PermissionTreeComponent } from './components/permission-tree';
+import { PermissionService } from './services/permission-service';
 
 const routes: Routes = [
   { path: 'users', component: UsersPage },
@@ -18,6 +24,11 @@ const routes: Routes = [
   declarations: [
     UsersPage,
     RolesPage,
+    UserCreateModalComponent,
+    UserUpdateModalComponent,
+    RoleCreateModalComponent,
+    RoleUpdateModalComponent,
+    PermissionTreeComponent,
   ],
   imports: [
     CommonModule,
@@ -26,8 +37,9 @@ const routes: Routes = [
     ComponentsModule
   ],
   providers: [
-    SrvIdentityClient,
-    { provide: API_BASE_URL_IDENTITY, useValue: environment.apiurl.srvIdentity },
+    SrvIdentityClient, { provide: API_BASE_URL_IDENTITY, useValue: environment.apiurl.srvIdentity },
+
+    PermissionService,
   ],
 })
 export class AuthorizationModule { }

@@ -637,99 +637,7 @@ export class SrvIdentityClient {
      * @param limit (optional) 
      * @return OK
      */
-    users_GetAllPermissions(id: number, offset: number | undefined, limit: number | undefined): Observable<PaginatedResultOfPermissionDto> {
-        let url_ = this.baseUrl + "/api/users/{id}/permissions?";
-        if (id === undefined || id === null)
-            throw new globalThis.Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (offset === null)
-            throw new globalThis.Error("The parameter 'offset' cannot be null.");
-        else if (offset !== undefined)
-            url_ += "Offset=" + encodeURIComponent("" + offset) + "&";
-        if (limit === null)
-            throw new globalThis.Error("The parameter 'limit' cannot be null.");
-        else if (limit !== undefined)
-            url_ += "Limit=" + encodeURIComponent("" + limit) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "application/json"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUsers_GetAllPermissions(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processUsers_GetAllPermissions(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<PaginatedResultOfPermissionDto>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<PaginatedResultOfPermissionDto>;
-        }));
-    }
-
-    protected processUsers_GetAllPermissions(response: HttpResponseBase): Observable<PaginatedResultOfPermissionDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PaginatedResultOfPermissionDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result400: any = null;
-            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result400 = ErrorResponse.fromJS(resultData400);
-            return throwException("Bad Request", status, _responseText, _headers, result400);
-            }));
-        } else if (status === 404) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = ErrorResponse.fromJS(resultData404);
-            return throwException("Not Found", status, _responseText, _headers, result404);
-            }));
-        } else if (status === 409) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result409: any = null;
-            let resultData409 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result409 = ErrorResponse.fromJS(resultData409);
-            return throwException("Conflict", status, _responseText, _headers, result409);
-            }));
-        } else if (status === 500) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result500: any = null;
-            let resultData500 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result500 = ErrorResponse.fromJS(resultData500);
-            return throwException("Internal Server Error", status, _responseText, _headers, result500);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @param offset (optional) 
-     * @param limit (optional) 
-     * @return OK
-     */
-    users_GetAllRoles(id: number, offset: number | undefined, limit: number | undefined): Observable<PaginatedResultOfRoleListDto> {
+    users_GetAllRoles(id: number, offset: number | undefined, limit: number | undefined): Observable<PaginatedResultOfUserRoleListDto> {
         let url_ = this.baseUrl + "/api/users/{id}/roles?";
         if (id === undefined || id === null)
             throw new globalThis.Error("The parameter 'id' must be defined.");
@@ -759,14 +667,14 @@ export class SrvIdentityClient {
                 try {
                     return this.processUsers_GetAllRoles(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<PaginatedResultOfRoleListDto>;
+                    return _observableThrow(e) as any as Observable<PaginatedResultOfUserRoleListDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<PaginatedResultOfRoleListDto>;
+                return _observableThrow(response_) as any as Observable<PaginatedResultOfUserRoleListDto>;
         }));
     }
 
-    protected processUsers_GetAllRoles(response: HttpResponseBase): Observable<PaginatedResultOfRoleListDto> {
+    protected processUsers_GetAllRoles(response: HttpResponseBase): Observable<PaginatedResultOfUserRoleListDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -777,7 +685,7 @@ export class SrvIdentityClient {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PaginatedResultOfRoleListDto.fromJS(resultData200);
+            result200 = PaginatedResultOfUserRoleListDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -1239,8 +1147,8 @@ export class SrvIdentityClient {
      * @param limit (optional) 
      * @return OK
      */
-    roles_GetAllPermissions(id: number, offset: number | undefined, limit: number | undefined): Observable<PaginatedResultOfPermissionDto> {
-        let url_ = this.baseUrl + "/api/roles/{id}/permissions?";
+    roles_GetAllUsers(id: number, offset: number | undefined, limit: number | undefined): Observable<PaginatedResultOfRoleUserListDto> {
+        let url_ = this.baseUrl + "/api/roles/{id}/users?";
         if (id === undefined || id === null)
             throw new globalThis.Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -1263,20 +1171,20 @@ export class SrvIdentityClient {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processRoles_GetAllPermissions(response_);
+            return this.processRoles_GetAllUsers(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processRoles_GetAllPermissions(response_ as any);
+                    return this.processRoles_GetAllUsers(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<PaginatedResultOfPermissionDto>;
+                    return _observableThrow(e) as any as Observable<PaginatedResultOfRoleUserListDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<PaginatedResultOfPermissionDto>;
+                return _observableThrow(response_) as any as Observable<PaginatedResultOfRoleUserListDto>;
         }));
     }
 
-    protected processRoles_GetAllPermissions(response: HttpResponseBase): Observable<PaginatedResultOfPermissionDto> {
+    protected processRoles_GetAllUsers(response: HttpResponseBase): Observable<PaginatedResultOfRoleUserListDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1287,7 +1195,7 @@ export class SrvIdentityClient {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PaginatedResultOfPermissionDto.fromJS(resultData200);
+            result200 = PaginatedResultOfRoleUserListDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -1327,23 +1235,10 @@ export class SrvIdentityClient {
     }
 
     /**
-     * @param offset (optional) 
-     * @param limit (optional) 
      * @return OK
      */
-    roles_GetAllUsers(id: number, offset: number | undefined, limit: number | undefined): Observable<PaginatedResultOfUserListDto> {
-        let url_ = this.baseUrl + "/api/roles/{id}/users?";
-        if (id === undefined || id === null)
-            throw new globalThis.Error("The parameter 'id' must be defined.");
-        url_ = url_.replace("{id}", encodeURIComponent("" + id));
-        if (offset === null)
-            throw new globalThis.Error("The parameter 'offset' cannot be null.");
-        else if (offset !== undefined)
-            url_ += "Offset=" + encodeURIComponent("" + offset) + "&";
-        if (limit === null)
-            throw new globalThis.Error("The parameter 'limit' cannot be null.");
-        else if (limit !== undefined)
-            url_ += "Limit=" + encodeURIComponent("" + limit) + "&";
+    permissions_GetAll(): Observable<PermissionDto[]> {
+        let url_ = this.baseUrl + "/api/permissions";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -1355,20 +1250,20 @@ export class SrvIdentityClient {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processRoles_GetAllUsers(response_);
+            return this.processPermissions_GetAll(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processRoles_GetAllUsers(response_ as any);
+                    return this.processPermissions_GetAll(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<PaginatedResultOfUserListDto>;
+                    return _observableThrow(e) as any as Observable<PermissionDto[]>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<PaginatedResultOfUserListDto>;
+                return _observableThrow(response_) as any as Observable<PermissionDto[]>;
         }));
     }
 
-    protected processRoles_GetAllUsers(response: HttpResponseBase): Observable<PaginatedResultOfUserListDto> {
+    protected processPermissions_GetAll(response: HttpResponseBase): Observable<PermissionDto[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1379,7 +1274,14 @@ export class SrvIdentityClient {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PaginatedResultOfUserListDto.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(PermissionDto.fromJS(item));
+            }
+            else {
+                result200 = null as any;
+            }
             return _observableOf(result200);
             }));
         } else if (status === 400) {
@@ -1417,74 +1319,6 @@ export class SrvIdentityClient {
         }
         return _observableOf(null as any);
     }
-}
-
-export class PaginatedResultOfPermissionDto implements IPaginatedResultOfPermissionDto {
-    total?: number;
-    limit?: number;
-    offset?: number;
-    items?: PermissionDto[];
-
-    [key: string]: any;
-
-    constructor(data?: IPaginatedResultOfPermissionDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (this as any)[property] = (data as any)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-            this.total = _data["total"];
-            this.limit = _data["limit"];
-            this.offset = _data["offset"];
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items!.push(PermissionDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PaginatedResultOfPermissionDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PaginatedResultOfPermissionDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        data["total"] = this.total;
-        data["limit"] = this.limit;
-        data["offset"] = this.offset;
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item ? item.toJSON() : undefined as any);
-        }
-        return data;
-    }
-}
-
-export interface IPaginatedResultOfPermissionDto {
-    total?: number;
-    limit?: number;
-    offset?: number;
-    items?: PermissionDto[];
-
-    [key: string]: any;
 }
 
 export class PaginatedResultOfRoleListDto implements IPaginatedResultOfRoleListDto {
@@ -1551,6 +1385,74 @@ export interface IPaginatedResultOfRoleListDto {
     limit?: number;
     offset?: number;
     items?: RoleListDto[];
+
+    [key: string]: any;
+}
+
+export class PaginatedResultOfRoleUserListDto implements IPaginatedResultOfRoleUserListDto {
+    total?: number;
+    limit?: number;
+    offset?: number;
+    items?: RoleUserListDto[];
+
+    [key: string]: any;
+
+    constructor(data?: IPaginatedResultOfRoleUserListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.total = _data["total"];
+            this.limit = _data["limit"];
+            this.offset = _data["offset"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(RoleUserListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PaginatedResultOfRoleUserListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PaginatedResultOfRoleUserListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["total"] = this.total;
+        data["limit"] = this.limit;
+        data["offset"] = this.offset;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item ? item.toJSON() : undefined as any);
+        }
+        return data;
+    }
+}
+
+export interface IPaginatedResultOfRoleUserListDto {
+    total?: number;
+    limit?: number;
+    offset?: number;
+    items?: RoleUserListDto[];
 
     [key: string]: any;
 }
@@ -1623,10 +1525,78 @@ export interface IPaginatedResultOfUserListDto {
     [key: string]: any;
 }
 
+export class PaginatedResultOfUserRoleListDto implements IPaginatedResultOfUserRoleListDto {
+    total?: number;
+    limit?: number;
+    offset?: number;
+    items?: UserRoleListDto[];
+
+    [key: string]: any;
+
+    constructor(data?: IPaginatedResultOfUserRoleListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.total = _data["total"];
+            this.limit = _data["limit"];
+            this.offset = _data["offset"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(UserRoleListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PaginatedResultOfUserRoleListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PaginatedResultOfUserRoleListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["total"] = this.total;
+        data["limit"] = this.limit;
+        data["offset"] = this.offset;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item ? item.toJSON() : undefined as any);
+        }
+        return data;
+    }
+}
+
+export interface IPaginatedResultOfUserRoleListDto {
+    total?: number;
+    limit?: number;
+    offset?: number;
+    items?: UserRoleListDto[];
+
+    [key: string]: any;
+}
+
 export class PermissionDto implements IPermissionDto {
+    permissionName?: string;
     permission?: number;
     parent?: number;
-    isGranted?: boolean;
 
     [key: string]: any;
 
@@ -1645,9 +1615,9 @@ export class PermissionDto implements IPermissionDto {
                 if (_data.hasOwnProperty(property))
                     this[property] = _data[property];
             }
+            this.permissionName = _data["permissionName"];
             this.permission = _data["permission"];
             this.parent = _data["parent"];
-            this.isGranted = _data["isGranted"];
         }
     }
 
@@ -1664,17 +1634,17 @@ export class PermissionDto implements IPermissionDto {
             if (this.hasOwnProperty(property))
                 data[property] = this[property];
         }
+        data["permissionName"] = this.permissionName;
         data["permission"] = this.permission;
         data["parent"] = this.parent;
-        data["isGranted"] = this.isGranted;
         return data;
     }
 }
 
 export interface IPermissionDto {
+    permissionName?: string;
     permission?: number;
     parent?: number;
-    isGranted?: boolean;
 
     [key: string]: any;
 }
@@ -1763,6 +1733,7 @@ export class RoleDto implements IRoleDto {
     tenantId?: number | undefined;
     name?: string;
     description?: string;
+    permissions?: number[];
     createdAt?: Date | undefined;
     createdBy?: string | undefined;
     updatedAt?: Date | undefined;
@@ -1789,6 +1760,11 @@ export class RoleDto implements IRoleDto {
             this.tenantId = _data["tenantId"];
             this.name = _data["name"];
             this.description = _data["description"];
+            if (Array.isArray(_data["permissions"])) {
+                this.permissions = [] as any;
+                for (let item of _data["permissions"])
+                    this.permissions!.push(item);
+            }
             this.createdAt = _data["createdAt"] ? new Date(_data["createdAt"].toString()) : undefined as any;
             this.createdBy = _data["createdBy"];
             this.updatedAt = _data["updatedAt"] ? new Date(_data["updatedAt"].toString()) : undefined as any;
@@ -1813,6 +1789,11 @@ export class RoleDto implements IRoleDto {
         data["tenantId"] = this.tenantId;
         data["name"] = this.name;
         data["description"] = this.description;
+        if (Array.isArray(this.permissions)) {
+            data["permissions"] = [];
+            for (let item of this.permissions)
+                data["permissions"].push(item);
+        }
         data["createdAt"] = this.createdAt ? this.createdAt.toISOString() : undefined as any;
         data["createdBy"] = this.createdBy;
         data["updatedAt"] = this.updatedAt ? this.updatedAt.toISOString() : undefined as any;
@@ -1826,6 +1807,7 @@ export interface IRoleDto {
     tenantId?: number | undefined;
     name?: string;
     description?: string;
+    permissions?: number[];
     createdAt?: Date | undefined;
     createdBy?: string | undefined;
     updatedAt?: Date | undefined;
@@ -2003,6 +1985,78 @@ export interface IRoleUpdateDto {
     [key: string]: any;
 }
 
+export class RoleUserListDto implements IRoleUserListDto {
+    username?: string;
+    emailAddress?: string;
+    firstName?: string;
+    lastName?: string;
+    createdAt?: Date | undefined;
+    updatedAt?: Date | undefined;
+    id?: number;
+
+    [key: string]: any;
+
+    constructor(data?: IRoleUserListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.username = _data["username"];
+            this.emailAddress = _data["emailAddress"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.createdAt = _data["createdAt"] ? new Date(_data["createdAt"].toString()) : undefined as any;
+            this.updatedAt = _data["updatedAt"] ? new Date(_data["updatedAt"].toString()) : undefined as any;
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): RoleUserListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new RoleUserListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["username"] = this.username;
+        data["emailAddress"] = this.emailAddress;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["createdAt"] = this.createdAt ? this.createdAt.toISOString() : undefined as any;
+        data["updatedAt"] = this.updatedAt ? this.updatedAt.toISOString() : undefined as any;
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface IRoleUserListDto {
+    username?: string;
+    emailAddress?: string;
+    firstName?: string;
+    lastName?: string;
+    createdAt?: Date | undefined;
+    updatedAt?: Date | undefined;
+    id?: number;
+
+    [key: string]: any;
+}
+
 export class UserCreateDto implements IUserCreateDto {
     username?: string;
     emailAddress?: string;
@@ -2096,6 +2150,7 @@ export class UserDto implements IUserDto {
     emailAddress?: string;
     firstName?: string;
     lastName?: string;
+    permissions?: number[];
     createdAt?: Date | undefined;
     createdBy?: string | undefined;
     updatedAt?: Date | undefined;
@@ -2123,6 +2178,11 @@ export class UserDto implements IUserDto {
             this.emailAddress = _data["emailAddress"];
             this.firstName = _data["firstName"];
             this.lastName = _data["lastName"];
+            if (Array.isArray(_data["permissions"])) {
+                this.permissions = [] as any;
+                for (let item of _data["permissions"])
+                    this.permissions!.push(item);
+            }
             this.createdAt = _data["createdAt"] ? new Date(_data["createdAt"].toString()) : undefined as any;
             this.createdBy = _data["createdBy"];
             this.updatedAt = _data["updatedAt"] ? new Date(_data["updatedAt"].toString()) : undefined as any;
@@ -2148,6 +2208,11 @@ export class UserDto implements IUserDto {
         data["emailAddress"] = this.emailAddress;
         data["firstName"] = this.firstName;
         data["lastName"] = this.lastName;
+        if (Array.isArray(this.permissions)) {
+            data["permissions"] = [];
+            for (let item of this.permissions)
+                data["permissions"].push(item);
+        }
         data["createdAt"] = this.createdAt ? this.createdAt.toISOString() : undefined as any;
         data["createdBy"] = this.createdBy;
         data["updatedAt"] = this.updatedAt ? this.updatedAt.toISOString() : undefined as any;
@@ -2162,6 +2227,7 @@ export interface IUserDto {
     emailAddress?: string;
     firstName?: string;
     lastName?: string;
+    permissions?: number[];
     createdAt?: Date | undefined;
     createdBy?: string | undefined;
     updatedAt?: Date | undefined;
@@ -2238,6 +2304,70 @@ export interface IUserListDto {
     lastName?: string;
     createdAt?: Date | undefined;
     updatedAt?: Date | undefined;
+    id?: number;
+
+    [key: string]: any;
+}
+
+export class UserRoleListDto implements IUserRoleListDto {
+    name?: string;
+    description?: string;
+    createdAt?: Date | undefined;
+    createdBy?: string | undefined;
+    id?: number;
+
+    [key: string]: any;
+
+    constructor(data?: IUserRoleListDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.name = _data["name"];
+            this.description = _data["description"];
+            this.createdAt = _data["createdAt"] ? new Date(_data["createdAt"].toString()) : undefined as any;
+            this.createdBy = _data["createdBy"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): UserRoleListDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserRoleListDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["name"] = this.name;
+        data["description"] = this.description;
+        data["createdAt"] = this.createdAt ? this.createdAt.toISOString() : undefined as any;
+        data["createdBy"] = this.createdBy;
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface IUserRoleListDto {
+    name?: string;
+    description?: string;
+    createdAt?: Date | undefined;
+    createdBy?: string | undefined;
     id?: number;
 
     [key: string]: any;

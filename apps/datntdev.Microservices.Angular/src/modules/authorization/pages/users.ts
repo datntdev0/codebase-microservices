@@ -1,26 +1,27 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DialogService } from '@components/dialog/dialog-service';
 import { DatatableColumn } from '@components/datatable/datatable';
-import { SrvIdentityClient, UserCreateDto, UserUpdateDto } from '@shared/proxies/identity-proxies';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { SrvIdentityClient } from '@shared/proxies/identity-proxies';
 import { LocalDateTimePipe } from '@shared/pipes/local-datetime.pipe';
+import { UserCreateModalComponent } from '../components/user-create-modal';
+import { UserUpdateModalComponent } from '../components/user-update-modal';
+import { PermissionService } from '../services/permission-service';
 
 @Component({
   standalone: false,
   templateUrl: './users.html',
 })
 export class UsersPage implements OnInit {
+  @ViewChild(UserCreateModalComponent) createModalComponent!: UserCreateModalComponent;
+  @ViewChild(UserUpdateModalComponent) updateModalComponent!: UserUpdateModalComponent;
+
   private readonly clientIdentitySrv = inject(SrvIdentityClient);
   private readonly dialogSrv = inject(DialogService);
-  private readonly fb = inject(FormBuilder);
+  private readonly permissionService = inject(PermissionService);
   private readonly localDateTimePipe = new LocalDateTimePipe();
 
   users: any[] = [];
-  editingUser: any = null;
-  createForm!: FormGroup;
-  updateForm!: FormGroup;
-  isLoading: boolean = false;
 
   columns: DatatableColumn[] = [
     {
@@ -56,90 +57,26 @@ export class UsersPage implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.createForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      emailAddress: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]]
-    });
-    this.updateForm = this.fb.group({
-      emailAddress: ['', [Validators.required, Validators.email]],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      password: ['', [Validators.minLength(6)]]
-    });
-
+    // Preload permissions once for the session
+    this.permissionService.getPermissions().subscribe();
+    
     this.clientIdentitySrv.users_GetAll(0, 10).subscribe(users => this.users = users.items ?? []);
   }
 
-  protected onCreate(modal: ModalDirective): void {
-    if (this.createForm.invalid) {
-      this.createForm.markAllAsTouched();
-      return;
-    }
-
-    this.isLoading = true;
-    const data = new UserCreateDto({
-      username: this.createForm.value.username,
-      emailAddress: this.createForm.value.emailAddress,
-      password: this.createForm.value.password,
-      firstName: this.createForm.value.firstName,
-      lastName: this.createForm.value.lastName
-    })
-
-    this.clientIdentitySrv.users_Create(data)
-      .subscribe({
-        next: () => {
-          this.createForm.reset();
-          this.isLoading = false;
-          this.ngOnInit();
-          modal.hide();
-        },
-        error: (err) => {
-          this.isLoading = false;
-          throw err;
-        }
-      });
+  protected onCreateUser(): void {
+    this.createModalComponent.show();
   }
 
-  protected onUpdate(modal: ModalDirective): void {
-    if (this.updateForm.invalid) {
-      this.updateForm.markAllAsTouched();
-      return;
-    }
-
-    this.isLoading = true;
-    const data = new UserUpdateDto({
-      emailAddress: this.updateForm.value.emailAddress,
-      firstName: this.updateForm.value.firstName,
-      lastName: this.updateForm.value.lastName,
-      password: this.updateForm.value.password || undefined
-    });
-
-    this.clientIdentitySrv.users_Update(this.editingUser.id, data)
-      .subscribe({
-        next: () => {
-          this.updateForm.reset();
-          this.isLoading = false;
-          this.ngOnInit();
-          modal.hide();
-        },
-        error: (err) => {
-          this.isLoading = false;
-          throw err;
-        }
-      });
+  protected onUserCreated(): void {
+    this.ngOnInit();
   }
 
-  protected onEdit(item: any, modal: ModalDirective): void {
-    this.editingUser = item;
-    this.updateForm.patchValue({ 
-      emailAddress: item.emailAddress,
-      firstName: item.firstName,
-      lastName: item.lastName
-    });
-    modal.show();
+  protected onEdit(item: any): void {
+    this.updateModalComponent.show(item);
+  }
+
+  protected onUserUpdated(): void {
+    this.ngOnInit();
   }
 
   protected onDelete(item: any): void {

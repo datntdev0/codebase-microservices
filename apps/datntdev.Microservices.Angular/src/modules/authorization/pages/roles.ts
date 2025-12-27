@@ -1,26 +1,26 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { DialogService } from '@components/dialog/dialog-service';
 import { DatatableColumn } from '@components/datatable/datatable';
-import { SrvIdentityClient, RoleCreateDto, RoleUpdateDto } from '@shared/proxies/identity-proxies';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { SrvIdentityClient } from '@shared/proxies/identity-proxies';
 import { LocalDateTimePipe } from '@shared/pipes/local-datetime.pipe';
+import { RoleCreateModalComponent } from '../components/role-create-modal';
+import { RoleUpdateModalComponent } from '../components/role-update-modal';
+import { PermissionService } from '../services/permission-service';
 
 @Component({
   standalone: false,
   templateUrl: './roles.html',
 })
 export class RolesPage implements OnInit {
+  @ViewChild(RoleCreateModalComponent) createModalComponent!: RoleCreateModalComponent;
+  @ViewChild(RoleUpdateModalComponent) updateModalComponent!: RoleUpdateModalComponent;
+
   private readonly clientIdentitySrv = inject(SrvIdentityClient);
   private readonly dialogSrv = inject(DialogService);
-  private readonly fb = inject(FormBuilder);
+  private readonly permissionService = inject(PermissionService);
   private readonly localDateTimePipe = new LocalDateTimePipe();
 
   roles: any[] = [];
-  editingRole: any = null;
-  createForm!: FormGroup;
-  updateForm!: FormGroup;
-  isLoading: boolean = false;
 
   columns: DatatableColumn[] = [
     {
@@ -49,79 +49,26 @@ export class RolesPage implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.createForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['']
-    });
-    this.updateForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['']
-    });
-
+    // Preload permissions once for the session
+    this.permissionService.getPermissions().subscribe();
+    
     this.clientIdentitySrv.roles_GetAll(0, 10).subscribe(roles => this.roles = roles.items ?? []);
   }
 
-  protected onCreate(modal: ModalDirective): void {
-    if (this.createForm.invalid) {
-      this.createForm.markAllAsTouched();
-      return;
-    }
-
-    this.isLoading = true;
-    const data = new RoleCreateDto({
-      name: this.createForm.value.name,
-      description: this.createForm.value.description
-    })
-
-    this.clientIdentitySrv.roles_Create(data)
-      .subscribe({
-        next: () => {
-          this.createForm.reset();
-          this.isLoading = false;
-          this.ngOnInit();
-          modal.hide();
-        },
-        error: (err) => {
-          this.isLoading = false;
-          throw err;
-        }
-      });
+  protected onCreateRole(): void {
+    this.createModalComponent.show();
   }
 
-  protected onUpdate(modal: ModalDirective): void {
-    if (this.updateForm.invalid) {
-      this.updateForm.markAllAsTouched();
-      return;
-    }
-
-    this.isLoading = true;
-    const data = new RoleUpdateDto({
-      name: this.updateForm.value.name,
-      description: this.updateForm.value.description
-    });
-
-    this.clientIdentitySrv.roles_Update(this.editingRole.id, data)
-      .subscribe({
-        next: () => {
-          this.updateForm.reset();
-          this.isLoading = false;
-          this.ngOnInit();
-          modal.hide();
-        },
-        error: (err) => {
-          this.isLoading = false;
-          throw err;
-        }
-      });
+  protected onRoleCreated(): void {
+    this.ngOnInit();
   }
 
-  protected onEdit(item: any, modal: ModalDirective): void {
-    this.editingRole = item;
-    this.updateForm.patchValue({ 
-      name: item.name,
-      description: item.description
-    });
-    modal.show();
+  protected onEdit(item: any): void {
+    this.updateModalComponent.show(item);
+  }
+
+  protected onRoleUpdated(): void {
+    this.ngOnInit();
   }
 
   protected onDelete(item: any): void {

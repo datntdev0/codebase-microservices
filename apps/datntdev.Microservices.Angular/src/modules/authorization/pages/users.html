@@ -17,7 +17,7 @@
           <i class="bi bi-box-arrow-up"></i> Export
         </button>
 
-        <button type="button" class="btn btn-primary" (click)="createModal.show()">
+        <button type="button" class="btn btn-primary" (click)="onCreateUser()">
           <i class="bi bi-plus-square-fill"></i> New User
         </button>
       </div>
@@ -30,10 +30,12 @@
   </div>
 </div>
 
+<app-user-create-modal (created)="onUserCreated()"></app-user-create-modal>
+
 <ng-template #actionsTemplate let-item>
   <div class="d-flex justify-content-end">
     <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px me-3"
-      (click)="onEdit(item, updateModal)">
+      (click)="onEdit(item)">
       <i class="fs-6 bi bi-sliders2-vertical"></i>
     </button>
     <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px" (click)="onDelete(item)">
@@ -42,174 +44,4 @@
   </div>
 </ng-template>
 
-<div class="modal fade" bsModal #createModal="bs-modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 id="dialog-static-name" class="modal-title pull-left">Create New User</h4>
-        <button type="button" class="btn-close close pull-right" (click)="createModal.hide()">
-          <span aria-hidden="true" class="visually-hidden">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="createForm">
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">Username</span>
-            </label>
-            <input type="text" class="form-control form-control-lg form-control-solid" formControlName="username"
-              [class.is-invalid]="createForm.get('username')?.invalid && createForm.get('username')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="createForm.get('username')?.invalid && createForm.get('username')?.touched">
-              <span *ngIf="createForm.get('username')?.errors?.['required']">Username is required</span>
-              <span *ngIf="createForm.get('username')?.errors?.['minlength']">Username must be at least 3
-                characters</span>
-            </div>
-          </div>
-
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">Email Address</span>
-            </label>
-            <input type="email" class="form-control form-control-lg form-control-solid" formControlName="emailAddress"
-              [class.is-invalid]="createForm.get('emailAddress')?.invalid && createForm.get('emailAddress')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="createForm.get('emailAddress')?.invalid && createForm.get('emailAddress')?.touched">
-              <span *ngIf="createForm.get('emailAddress')?.errors?.['required']">Email address is required</span>
-              <span *ngIf="createForm.get('emailAddress')?.errors?.['email']">Email address must be valid</span>
-            </div>
-          </div>
-
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">Password</span>
-            </label>
-            <input type="password" class="form-control form-control-lg form-control-solid" formControlName="password"
-              [class.is-invalid]="createForm.get('password')?.invalid && createForm.get('password')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="createForm.get('password')?.invalid && createForm.get('password')?.touched">
-              <span *ngIf="createForm.get('password')?.errors?.['required']">Password is required</span>
-              <span *ngIf="createForm.get('password')?.errors?.['minlength']">Password must be at least 6
-                characters</span>
-            </div>
-          </div>
-
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">First Name</span>
-            </label>
-            <input type="text" class="form-control form-control-lg form-control-solid" formControlName="firstName"
-              [class.is-invalid]="createForm.get('firstName')?.invalid && createForm.get('firstName')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="createForm.get('firstName')?.invalid && createForm.get('firstName')?.touched">
-              <span *ngIf="createForm.get('firstName')?.errors?.['required']">First name is required</span>
-            </div>
-          </div>
-
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">Last Name</span>
-            </label>
-            <input type="text" class="form-control form-control-lg form-control-solid" formControlName="lastName"
-              [class.is-invalid]="createForm.get('lastName')?.invalid && createForm.get('lastName')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="createForm.get('lastName')?.invalid && createForm.get('lastName')?.touched">
-              <span *ngIf="createForm.get('lastName')?.errors?.['required']">Last name is required</span>
-            </div>
-          </div>
-        </form>
-        <div class="text-center pt-10">
-          <button type="reset" class="btn btn-light me-3" (click)="createForm.reset(); createModal.hide()">
-            Discard
-          </button>
-          <button type="submit" class="btn btn-primary" [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
-            [disabled]="isLoading || createForm.invalid" (click)="onCreate(createModal)">
-            <span class="indicator-label">Submit</span>
-            <span class="indicator-progress">
-              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" bsModal #updateModal="bs-modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 id="dialog-static-name" class="modal-title pull-left">Update User</h4>
-        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="updateModal.hide()">
-          <span aria-hidden="true" class="visually-hidden">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="updateForm">
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">Email Address</span>
-            </label>
-            <input type="email" class="form-control form-control-lg form-control-solid" formControlName="emailAddress"
-              [class.is-invalid]="updateForm.get('emailAddress')?.invalid && updateForm.get('emailAddress')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="updateForm.get('emailAddress')?.invalid && updateForm.get('emailAddress')?.touched">
-              <span *ngIf="updateForm.get('emailAddress')?.errors?.['required']">Email address is required</span>
-              <span *ngIf="updateForm.get('emailAddress')?.errors?.['email']">Email address must be valid</span>
-            </div>
-          </div>
-
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">First Name</span>
-            </label>
-            <input type="text" class="form-control form-control-lg form-control-solid" formControlName="firstName"
-              [class.is-invalid]="updateForm.get('firstName')?.invalid && updateForm.get('firstName')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="updateForm.get('firstName')?.invalid && updateForm.get('firstName')?.touched">
-              <span *ngIf="updateForm.get('firstName')?.errors?.['required']">First name is required</span>
-            </div>
-          </div>
-
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span class="required">Last Name</span>
-            </label>
-            <input type="text" class="form-control form-control-lg form-control-solid" formControlName="lastName"
-              [class.is-invalid]="updateForm.get('lastName')?.invalid && updateForm.get('lastName')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="updateForm.get('lastName')?.invalid && updateForm.get('lastName')?.touched">
-              <span *ngIf="updateForm.get('lastName')?.errors?.['required']">Last name is required</span>
-            </div>
-          </div>
-
-          <div class="fv-row fv-plugins-icon-container mb-5">
-            <label class="d-flex align-items-center fs-5 fw-semibold">
-              <span>Password</span>
-              <span class="text-muted ms-2 fs-7">(Leave blank to keep current password)</span>
-            </label>
-            <input type="password" class="form-control form-control-lg form-control-solid" formControlName="password"
-              [class.is-invalid]="updateForm.get('password')?.invalid && updateForm.get('password')?.touched" />
-            <div class="invalid-feedback"
-              *ngIf="updateForm.get('password')?.invalid && updateForm.get('password')?.touched">
-              <span *ngIf="updateForm.get('password')?.errors?.['minlength']">Password must be at least 6
-                characters</span>
-            </div>
-          </div>
-        </form>
-        <div class="text-center pt-10">
-          <button type="reset" class="btn btn-light me-3" (click)="updateForm.reset(); updateModal.hide()">
-            Discard
-          </button>
-          <button type="submit" class="btn btn-primary" [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
-            [disabled]="isLoading || updateForm.invalid" (click)="onUpdate(updateModal)">
-            <span class="indicator-label">Submit</span>
-            <span class="indicator-progress">
-              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-user-update-modal (updated)="onUserUpdated()"></app-user-update-modal>
