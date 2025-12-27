@@ -106,8 +106,10 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                 name: "AppUserRoles",
                 columns: table => new
                 {
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,6 +189,11 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                 name: "IX_AppRoles_Name",
                 table: "AppRoles",
                 column: "Name");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUserRoles_RoleId_UserId",
+                table: "AppUserRoles",
+                columns: new[] { "RoleId", "UserId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserRoles_UserId",

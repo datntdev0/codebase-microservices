@@ -1,5 +1,4 @@
-﻿using System;
-using datntdev.Microservices.Common.Models;
+﻿using datntdev.Microservices.Common.Models;
 
 namespace datntdev.Microservices.Srv.Identity.Contract.Authorization.Roles.Dto
 {

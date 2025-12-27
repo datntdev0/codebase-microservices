@@ -10,6 +10,7 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
     {
         public DbSet<AppUserEntity> AppUsers { get; set; }
         public DbSet<AppRoleEntity> AppRoles { get; set; }
+        public DbSet<AppUserRoleEntity> AppUserRoles { get; set; }
 
         override protected void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,10 +21,10 @@ namespace datntdev.Microservices.Srv.Identity.Web.App
                 b.HasIndex(e => e.EmailAddress);
                 b.Ignore(e => e.PasswordPlainText);
                 b.HasMany(e => e.Roles).WithMany(e => e.Users)
-                    .UsingEntity("AppUserRoles", 
-                        r => r.HasOne(typeof(AppRoleEntity)).WithMany().HasForeignKey("RoleId").HasPrincipalKey(nameof(AppRoleEntity.Id)),
-                        l => l.HasOne(typeof(AppUserEntity)).WithMany().HasForeignKey("UserId").HasPrincipalKey(nameof(AppUserEntity.Id)),
-                        j => j.HasKey("RoleId", "UserId"));
+                    .UsingEntity<AppUserRoleEntity>(
+                        r => r.HasOne(e => e.Role).WithMany(e => e.UserRoles).HasForeignKey(e => e.RoleId),
+                        l => l.HasOne(e => e.User).WithMany(e => e.UserRoles).HasForeignKey(e => e.UserId), 
+                        j => j.HasIndex(nameof(AppUserRoleEntity.RoleId), nameof(AppUserRoleEntity.UserId)));
             });
             modelBuilder.Entity<AppRoleEntity>(b =>
             {

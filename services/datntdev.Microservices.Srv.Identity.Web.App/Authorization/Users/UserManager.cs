@@ -8,13 +8,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 {
-    public class UserManager(IServiceProvider services) : BaseManager<long, AppUserEntity, SrvIdentityDbContext>
+    public class UserManager(IServiceProvider services) 
+        : BaseManager<long, AppUserEntity, SrvIdentityDbContext>(services)
     {
         private readonly IConfiguration _configuration = services.GetRequiredService<IConfiguration>();
-        private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
         private readonly PasswordHasher _passwordHasher = services.GetRequiredService<PasswordHasher>();
 
         public IQueryable<AppUserEntity> GetQueryable() => _dbContext.AppUsers.Where(u => !u.IsDeleted).AsQueryable();
+
+        public IQueryable<AppUserRoleEntity> GetUserRoleByUserId(long userId)
+        {
+            return _dbContext.AppUserRoles.Where(ur => ur.UserId == userId)
+                .AsQueryable().Include(x => x.Role);
+        }
+
+        public IQueryable<AppUserRoleEntity> GetUserRoleByRoleId(int roleId)
+        {
+            return _dbContext.AppUserRoles.Where(ur => ur.RoleId == roleId)
+                .AsQueryable().Include(x => x.User);
+        }
 
         public Task<AppUserEntity?> FindAsync(string username)
         {
@@ -23,8 +35,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
 
         public override async Task<AppUserEntity> GetEntityAsync(long id)
         {
-            var entity = await _dbContext.AppUsers.Include(x => x.Roles)
-                .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
+            var entity = await GetQueryable().Include(x => x.Roles)
+                .FirstOrDefaultAsync(u => u.Id == id);
             return entity is null ? throw new ExceptionNotFound() : entity!;
         }
 

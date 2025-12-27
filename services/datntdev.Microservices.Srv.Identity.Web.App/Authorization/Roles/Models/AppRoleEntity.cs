@@ -18,5 +18,6 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models
         public AppPermission[] Permissions { get; set; } = [];
 
         public List<AppUserEntity> Users { get; set; } = [];
+        public List<AppUserRoleEntity> UserRoles { get; set; } = [];
     }
 }

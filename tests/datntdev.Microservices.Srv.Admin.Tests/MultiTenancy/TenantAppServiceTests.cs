@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 namespace datntdev.Microservices.Srv.Admin.MultiTenancy
 {
     [TestClass]
-    [DoNotParallelize]
     public class TenantAppServiceTests : SrvAdminTestBase
     {
         public const string TenantNamePrefix = "testtenant_";

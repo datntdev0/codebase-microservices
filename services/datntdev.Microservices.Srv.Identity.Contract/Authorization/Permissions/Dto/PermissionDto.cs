@@ -1,11 +1,11 @@
-﻿using datntdev.Microservices.Common;
+﻿using static datntdev.Microservices.Common.Constants.Enum;
 
 namespace datntdev.Microservices.Srv.Identity.Contract.Authorization.Permissions.Dto
 {
     public class PermissionDto
     {
-        public Constants.Enum.AppPermission Permission { get; set; }
-        public Constants.Enum.AppPermission Parent { get; set; }
-        public bool IsGranted { get; set; }
+        public string PermissionName { get; set; } = string.Empty;
+        public AppPermission Permission { get; set; }
+        public AppPermission Parent { get; set; }
     }
 }

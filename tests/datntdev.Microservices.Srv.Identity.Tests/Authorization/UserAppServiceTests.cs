@@ -255,60 +255,7 @@ namespace datntdev.Microservices.Srv.Identity.Authorization
 
         #endregion
 
-        #region GetPermissionsAsync & GetRolesAsync
-
-        [TestMethod]
-        public async Task GetPermissions_WithExistingUserId_ReturnsPermissions()
-        {
-            // Arrange - Create a user with permissions
-            var createDto = new UserCreateDto
-            {
-                Username = $"{UsernamePrefix}{Guid.NewGuid():N}",
-                EmailAddress = $"{UsernamePrefix}{Guid.NewGuid():N}@test.com",
-                Password = "Test@123456",
-                FirstName = "Test",
-                LastName = "User",
-                Permissions = [AppPermission.Users_Read, AppPermission.Roles_Read],
-                RoleIds = []
-            };
-
-            var createResponse = await _client.PostAsJsonAsync(BaseUrl, createDto);
-            createResponse.EnsureSuccessStatusCode();
-            var createdUser = await createResponse.Content.ReadFromJsonAsync<UserDto>();
-            Assert.IsNotNull(createdUser);
-
-            // Act
-            var offset = 0;
-            var limit = 100;
-            var response = await _client.GetAsync($"{BaseUrl}/{createdUser.Id}/permissions?Offset={offset}&Limit={limit}");
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadFromJsonAsync<PaginatedResult<PermissionDto>>();
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Items);
-            Assert.AreEqual(limit, result.Limit);
-            Assert.AreEqual(offset, result.Offset);
-            
-            // Verify the permissions match
-            var fullPermissions = GetPermissions();
-            var resultPermissions = result.Items.ToDictionary(x => x.Permission);
-            Assert.AreEqual(fullPermissions.Length, result.Items.Count());
-            Assert.IsTrue(createDto.Permissions.All(x => resultPermissions[x].IsGranted));
-        }
-
-        [TestMethod]
-        public async Task GetPermissions_WithNonExistingUserId_ReturnsNotFound()
-        {
-            // Arrange
-            var nonExistingUserId = 999999L;
-
-            // Act
-            var response = await _client.GetAsync($"{BaseUrl}/{nonExistingUserId}/permissions?Offset=0&Limit=10");
-
-            // Assert
-            Assert.AreEqual(System.Net.HttpStatusCode.NotFound, response.StatusCode);
-        }
+        #region GetRolesAsync
 
         [TestMethod]
         public async Task GetRoles_WithExistingUserId_ReturnsRoles()

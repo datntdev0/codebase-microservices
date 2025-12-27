@@ -12,7 +12,7 @@ using datntdev.Microservices.Srv.Identity.Web.App;
 namespace datntdev.Microservices.Migrator.Migrations.Identity
 {
     [DbContext(typeof(SrvIdentityDbContext))]
-    [Migration("20251225123538_InitialDatabase")]
+    [Migration("20251227063514_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -24,21 +24,6 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AppUserRoles", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("RoleId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AppUserRoles");
-                });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
                 {
@@ -360,19 +345,27 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                     b.ToTable("AppUsers");
                 });
 
-            modelBuilder.Entity("AppUserRoles", b =>
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserRoleEntity", b =>
                 {
-                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models.AppRoleEntity", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
-                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("RoleId", "UserId");
+
+                    b.ToTable("AppUserRoles");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
@@ -399,6 +392,25 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                     b.Navigation("Authorization");
                 });
 
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserRoleEntity", b =>
+                {
+                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models.AppRoleEntity", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
                 {
                     b.Navigation("Authorizations");
@@ -409,6 +421,16 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
                 {
                     b.Navigation("Tokens");
+                });
+
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models.AppRoleEntity", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

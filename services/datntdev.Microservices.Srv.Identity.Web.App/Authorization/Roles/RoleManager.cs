@@ -2,16 +2,13 @@
 using datntdev.Microservices.Common.Web.App.Application;
 using datntdev.Microservices.Common.Web.App.Exceptions;
 using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
-using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
 {
-    public class RoleManager(IServiceProvider services) : BaseManager<int, AppRoleEntity, SrvIdentityDbContext>
+    public class RoleManager(IServiceProvider services) 
+        : BaseManager<int, AppRoleEntity, SrvIdentityDbContext>(services)
     {
-        private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
-
         public IQueryable<AppRoleEntity> GetQueryable() => _dbContext.AppRoles.Where(r => !r.IsDeleted).AsQueryable();
 
         public Task<AppRoleEntity?> FindAsync(string name, int? tenantId = null)
@@ -21,8 +18,8 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles
 
         public override async Task<AppRoleEntity> GetEntityAsync(int id)
         {
-            var entity = await _dbContext.AppRoles.Include(x => x.Users)
-                .FirstOrDefaultAsync(r => r.Id == id && !r.IsDeleted);
+            var entity = await GetQueryable().Include(x => x.Users)
+                .FirstOrDefaultAsync(r => r.Id == id);
             return entity is null ? throw new ExceptionNotFound() : entity!;
         }
 

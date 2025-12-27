@@ -2,14 +2,12 @@
 using datntdev.Microservices.Common.Web.App.Application;
 using datntdev.Microservices.Common.Web.App.Exceptions;
 using datntdev.Microservices.Srv.Admin.Web.App.MultiTenancy.Models;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Srv.Admin.Web.App.MultiTenancy
 {
-    internal class TenantManager(IServiceProvider services) : BaseManager<int, AppTenantEntity, SrvAdminDbContext>
+    internal class TenantManager(IServiceProvider services) 
+        : BaseManager<int, AppTenantEntity, SrvAdminDbContext>(services)
     {
-        private readonly SrvAdminDbContext _dbContext = services.GetRequiredService<SrvAdminDbContext>();
-
         public IQueryable<AppTenantEntity> GetQueryable() => _dbContext.AppTenants.AsQueryable();
 
         public override async Task<AppTenantEntity> CreateEntityAsync(AppTenantEntity entity)
