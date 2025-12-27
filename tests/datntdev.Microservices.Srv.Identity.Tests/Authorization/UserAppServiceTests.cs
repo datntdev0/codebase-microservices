@@ -86,7 +86,6 @@ namespace datntdev.Microservices.Srv.Identity.Authorization
             var response = await _client.PostAsJsonAsync(BaseUrl, createDto);
 
             // Assert
-            var responseString = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(System.Net.HttpStatusCode.BadRequest, response.StatusCode);
         }
 

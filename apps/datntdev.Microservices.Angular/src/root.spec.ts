@@ -3,15 +3,19 @@ import { RouterModule } from '@angular/router';
 import { provideRouter } from '@angular/router';
 
 import { RootComponent } from './root';
+import { ComponentsModule } from '@components/components-module';
 
-describe('RootComponent', () => {
+describe('Components.Root', () => {
   let component: RootComponent;
   let fixture: ComponentFixture<RootComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RootComponent],
-      imports: [RouterModule],
+      imports: [
+        RouterModule,
+        ComponentsModule,
+      ],
       providers: [provideRouter([])]
     })
     .compileComponents();

@@ -6,7 +6,7 @@ import { SigninCallback } from './signin-callback';
 import { AuthService } from '@shared/services/auth-service';
 import { LoggerService } from '@shared/services/logger-service';
 
-describe('SigninCallback', () => {
+describe('Pages.SigninCallback', () => {
   let component: SigninCallback;
   let fixture: ComponentFixture<SigninCallback>;
   let authService: jasmine.SpyObj<AuthService>;

@@ -1,12 +1,11 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { DialogService } from '@components/dialog/dialog-service';
 import { DatatableColumn } from '@components/datatable/datatable';
-import { SrvIdentityClient } from '@shared/proxies/identity-proxies';
+import { DialogService } from '@components/dialog/dialog-service';
 import { LocalDateTimePipe } from '@shared/pipes/local-datetime.pipe';
+import { SrvIdentityClient } from '@shared/proxies/identity-proxies';
 import { UserCreateModalComponent } from '../components/user-create-modal';
-import { UserUpdateModalComponent } from '../components/user-update-modal';
 import { UserRoleAssignmentModalComponent } from '../components/user-role-assignment-modal';
+import { UserUpdateModalComponent } from '../components/user-update-modal';
 import { PermissionService } from '../services/permission-service';
 
 @Component({

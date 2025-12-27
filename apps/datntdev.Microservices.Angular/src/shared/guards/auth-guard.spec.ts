@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@shared/services/auth-service';
 import { User } from 'oidc-client-ts';
 
-describe('authGuard', () => {
+describe('Services.AuthGuard', () => {
   let authService: jasmine.SpyObj<AuthService>;
   let router: jasmine.SpyObj<Router>;
 

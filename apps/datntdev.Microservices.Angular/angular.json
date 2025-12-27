@@ -99,6 +99,7 @@
             "codeCoverage": true,
             "codeCoverageExclude": [
               "src/**/*.spec.ts",
+              "src/shared/proxies/*.ts",
               "src/main.ts",
               "src/test.ts"
             ]

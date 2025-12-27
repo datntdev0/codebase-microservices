@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { UserManager, User } from 'oidc-client-ts';
 import { AuthService } from './auth-service';
 
-describe('AuthService', () => {
+describe('Services.AuthService', () => {
   let service: AuthService;
   let userManagerSpy: jasmine.SpyObj<UserManager>;
 

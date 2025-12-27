@@ -4,7 +4,7 @@ import { HeaderComponent } from './header';
 import { AuthService } from '@shared/services/auth-service';
 import { User, UserManager } from 'oidc-client-ts';
 
-describe('Header', () => {
+describe('Components.Header', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let userManagerSpy: jasmine.SpyObj<UserManager>;

@@ -64,7 +64,7 @@ describe('RootRoutingModule', () => {
   });
 });
 
-describe('RootModule', () => {
+describe('Modules.RootModule', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RootModule]

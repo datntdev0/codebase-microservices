@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ToastComponent } from './toast';
 
-import { Error403Page } from './error403';
-
-describe('Pages.Error403', () => {
-  let component: Error403Page;
-  let fixture: ComponentFixture<Error403Page>;
+describe('Components.Toast', () => {
+  let component: ToastComponent;
+  let fixture: ComponentFixture<ToastComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Error403Page]
+      declarations: [ToastComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Error403Page);
+    fixture = TestBed.createComponent(ToastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
