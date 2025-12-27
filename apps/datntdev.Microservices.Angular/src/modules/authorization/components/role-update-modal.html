@@ -1,0 +1,63 @@
+<div class="modal fade" bsModal #modal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Role</h4>
+        <button type="button" class="btn-close" (click)="hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="row">
+            <!-- Left Column: Role Information -->
+            <div class="col-md-6">
+              <h4 class="mb-4">Role Information</h4>
+
+              <div class="fv-row fv-plugins-icon-container mb-5">
+                <label class="d-flex align-items-center fs-5 fw-semibold">
+                  <span class="required">Name</span>
+                </label>
+                <input type="text" class="form-control form-control-lg form-control-solid" formControlName="name"
+                  [class.is-invalid]="form.get('name')?.invalid && form.get('name')?.touched" />
+                <div class="invalid-feedback"
+                  *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+                  <span *ngIf="form.get('name')?.errors?.['required']">Name is required</span>
+                  <span *ngIf="form.get('name')?.errors?.['minlength']">Name must be at least 3 characters</span>
+                </div>
+              </div>
+
+              <div class="fv-row fv-plugins-icon-container mb-5">
+                <label class="d-flex align-items-center fs-5 fw-semibold">
+                  <span>Description</span>
+                </label>
+                <textarea class="form-control form-control-lg form-control-solid" formControlName="description"
+                  rows="5"></textarea>
+              </div>
+            </div>
+
+            <!-- Right Column: Permissions Tree -->
+            <div class="col-md-6">
+              <h4 class="mb-4">Permissions</h4>
+              <app-permission-tree></app-permission-tree>
+            </div>
+          </div>
+        </form>
+        <div class="text-center pt-10">
+          <button type="reset" class="btn btn-light me-3" (click)="onDiscard()">
+            Discard
+          </button>
+          <button type="submit" class="btn btn-primary" 
+            [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
+            [disabled]="isLoading || form.invalid" 
+            (click)="onSubmit()">
+            <span class="indicator-label">Submit</span>
+            <span class="indicator-progress">
+              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -47,13 +47,12 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Identity
             };
         }
 
-        public async Task<IdentityResult> SignUpWithPassword(AppUserEntity user, string password)
+        public async Task<IdentityResult> SignUpWithPassword(AppUserEntity user)
         {
-            // Ignore query filters to allow querying all users cross tenants
             var existingUser = await _userManager.FindAsync(user.Username);
             if (existingUser != null) return IdentityResult.Duplicated;
 
-            await _userManager.CreateAsync(user, password);
+            await _userManager.CreateEntityAsync(user);
             return IdentityResult.Success;
         }
     }

@@ -1,0 +1,105 @@
+<div class="modal fade" bsModal #modal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create New User</h4>
+        <button type="button" class="btn-close" (click)="hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="row">
+            <!-- Left Column: User Information -->
+            <div class="col-md-6">
+              <h4 class="mb-4">User Information</h4>
+              
+              <div class="fv-row fv-plugins-icon-container mb-5">
+                <label class="d-flex align-items-center fs-5 fw-semibold">
+                  <span class="required">Username</span>
+                </label>
+                <input type="text" class="form-control form-control-lg form-control-solid" formControlName="username"
+                  [class.is-invalid]="form.get('username')?.invalid && form.get('username')?.touched" />
+                <div class="invalid-feedback"
+                  *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
+                  <span *ngIf="form.get('username')?.errors?.['required']">Username is required</span>
+                  <span *ngIf="form.get('username')?.errors?.['minlength']">Username must be at least 3 characters</span>
+                </div>
+              </div>
+
+              <div class="fv-row fv-plugins-icon-container mb-5">
+                <label class="d-flex align-items-center fs-5 fw-semibold">
+                  <span class="required">Email Address</span>
+                </label>
+                <input type="email" class="form-control form-control-lg form-control-solid" formControlName="emailAddress"
+                  [class.is-invalid]="form.get('emailAddress')?.invalid && form.get('emailAddress')?.touched" />
+                <div class="invalid-feedback"
+                  *ngIf="form.get('emailAddress')?.invalid && form.get('emailAddress')?.touched">
+                  <span *ngIf="form.get('emailAddress')?.errors?.['required']">Email address is required</span>
+                  <span *ngIf="form.get('emailAddress')?.errors?.['email']">Email address must be valid</span>
+                </div>
+              </div>
+
+              <div class="fv-row fv-plugins-icon-container mb-5">
+                <label class="d-flex align-items-center fs-5 fw-semibold">
+                  <span class="required">Password</span>
+                </label>
+                <input type="password" class="form-control form-control-lg form-control-solid" formControlName="password"
+                  [class.is-invalid]="form.get('password')?.invalid && form.get('password')?.touched" />
+                <div class="invalid-feedback"
+                  *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+                  <span *ngIf="form.get('password')?.errors?.['required']">Password is required</span>
+                  <span *ngIf="form.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+                </div>
+              </div>
+
+              <div class="fv-row fv-plugins-icon-container mb-5">
+                <label class="d-flex align-items-center fs-5 fw-semibold">
+                  <span class="required">First Name</span>
+                </label>
+                <input type="text" class="form-control form-control-lg form-control-solid" formControlName="firstName"
+                  [class.is-invalid]="form.get('firstName')?.invalid && form.get('firstName')?.touched" />
+                <div class="invalid-feedback"
+                  *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
+                  <span *ngIf="form.get('firstName')?.errors?.['required']">First name is required</span>
+                </div>
+              </div>
+
+              <div class="fv-row fv-plugins-icon-container mb-5">
+                <label class="d-flex align-items-center fs-5 fw-semibold">
+                  <span class="required">Last Name</span>
+                </label>
+                <input type="text" class="form-control form-control-lg form-control-solid" formControlName="lastName"
+                  [class.is-invalid]="form.get('lastName')?.invalid && form.get('lastName')?.touched" />
+                <div class="invalid-feedback"
+                  *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
+                  <span *ngIf="form.get('lastName')?.errors?.['required']">Last name is required</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Permissions Tree -->
+            <div class="col-md-6">
+              <h4 class="mb-4">Permissions</h4>
+              <app-permission-tree></app-permission-tree>
+            </div>
+          </div>
+        </form>
+        <div class="text-center pt-10">
+          <button type="reset" class="btn btn-light me-3" (click)="onDiscard()">
+            Discard
+          </button>
+          <button type="submit" class="btn btn-primary" 
+            [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
+            [disabled]="isLoading || form.invalid" 
+            (click)="onSubmit()">
+            <span class="indicator-label">Submit</span>
+            <span class="indicator-progress">
+              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

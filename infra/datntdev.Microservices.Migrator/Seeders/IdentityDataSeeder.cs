@@ -1,4 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using datntdev.Microservices.Common;
+using datntdev.Microservices.Srv.Identity.Web.App;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Permissions;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models;
+using datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models;
+using datntdev.Microservices.Srv.Identity.Web.App.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
 
@@ -7,11 +14,47 @@ namespace datntdev.Microservices.Migrator.Seeders
     internal class IdentityDataSeeder(IServiceProvider services)
     {
         private readonly IConfigurationRoot _configuration = services.GetRequiredService<IConfigurationRoot>();
+        private readonly SrvIdentityDbContext _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
+        private readonly PermissionProvider _permissionProvider = services.GetRequiredService<PermissionProvider>();
 
         public async Task SeedAsync()
         {
             await EnsureOpenIddictApplicationExistsAsync();
+            await EnsureDefaultAdminRoleExistsAsync();
             await EnsureDefaultAdminUserExistsAsync();
+        }
+
+        private async Task EnsureDefaultAdminRoleExistsAsync()
+        {
+            var existingRole = await _dbContext.AppRoles
+                .Where(x => x.Name == Constants.Authorization.DefaultAdminRole).ToListAsync();
+            if (existingRole.Count != 0) _dbContext.AppRoles.RemoveRange(existingRole);
+            await _dbContext.AppRoles.AddRangeAsync(
+                CreateDefaultHostAdminRole(),
+                CreateDefaultTenantAdminRole());
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private AppRoleEntity CreateDefaultHostAdminRole()
+        {
+            return new AppRoleEntity
+            {
+                TenantId = null,
+                Name = Constants.Authorization.DefaultAdminRole,
+                Description = "Default administrator role with full permissions.",
+                Permissions = _permissionProvider.GetAllHostAppPermissions(),
+            };
+        }
+
+        private AppRoleEntity CreateDefaultTenantAdminRole()
+        {
+            return new AppRoleEntity
+            {
+                TenantId = Constants.MultiTenancy.DefaultTenantId,
+                Name = Constants.Authorization.DefaultAdminRole,
+                Description = "Default tenant administrator role with full permissions.",
+                Permissions = _permissionProvider.GetAllTenantAppPermissions(),
+            };
         }
 
         private async Task EnsureDefaultAdminUserExistsAsync()
@@ -25,19 +68,39 @@ namespace datntdev.Microservices.Migrator.Seeders
             ArgumentNullException.ThrowIfNull(defaultAdminUsername, nameof(defaultAdminUsername));
             ArgumentNullException.ThrowIfNull(defaultAdminPassword, nameof(defaultAdminPassword));
 
-            var manager = services.GetRequiredService<Srv.Identity.Web.App.Authorization.Users.UserManager>();
+            var passwordHasher = services.GetRequiredService<PasswordHasher>();
 
             // Recreate the default admin user althgough it exists.
-            var existingUser = await manager.FindAsync(defaultAdminUsername);
-            if (existingUser != null) await manager.DeleteAsync(defaultAdminUsername);
-            var newUser = new Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity
+            var existingUser = await _dbContext.AppUsers.FirstOrDefaultAsync(x => x.Username == defaultAdminUsername);
+            if (existingUser != null) _dbContext.AppUsers.Remove(existingUser);
+
+            var newUser = GetDefaultAdminUser(
+                defaultAdminUsername, 
+                defaultAdminPassword,
+                defaultAdminFirstName ?? string.Empty, 
+                defaultAdminLastName ?? string.Empty);
+
+            // Lookup the default administrator roles
+            newUser.Roles = await _dbContext.AppRoles.Where(x => x.Name == Constants.Authorization.DefaultAdminRole)
+                .ToListAsync();
+
+            newUser = passwordHasher.SetPassword(newUser, defaultAdminPassword);
+
+            await _dbContext.AppUsers.AddAsync(newUser);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private AppUserEntity GetDefaultAdminUser(
+            string username, string password, string firstName, string lastName)
+        {
+            return new AppUserEntity()
             {
-                Username = defaultAdminUsername,
-                EmailAddress = defaultAdminEmail ?? string.Empty,
-                FirstName = defaultAdminFirstName ?? string.Empty,
-                LastName = defaultAdminLastName ?? string.Empty,
+                Username = username,
+                EmailAddress = username,
+                FirstName = firstName,
+                LastName = lastName,
+                Permissions = _permissionProvider.GetAllHostAppPermissions(),
             };
-            await manager.CreateAsync(newUser, defaultAdminPassword);
         }
 
         private async Task EnsureOpenIddictApplicationExistsAsync()

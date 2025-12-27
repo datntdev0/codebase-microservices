@@ -1,0 +1,38 @@
+<div class="modal fade" bsModal #modal="bs-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Assign Roles to User: {{ editingUser?.username }}</h4>
+        <button type="button" class="btn-close" (click)="hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-datatable 
+          #datatable
+          [data]="roles" 
+          [columns]="columns" 
+          [checkboxEnabled]="true"
+          [currentPage]="currentPage"
+          [totalPages]="totalPages"
+          (pageChange)="onPageChange($event)">
+        </app-datatable>
+
+        <div class="text-center pt-10">
+          <button type="reset" class="btn btn-light me-3" (click)="onDiscard()">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary" 
+            [attr.data-ui-indicator]="isLoading ? 'on' : 'off'"
+            [disabled]="isLoading" 
+            (click)="onSubmit()">
+            <span class="indicator-label">Save Changes</span>
+            <span class="indicator-progress">
+              Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

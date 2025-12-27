@@ -26,5 +26,15 @@
         public int Limit { get; set; }
         public int Offset { get; set; }
         public IEnumerable<TData> Items { get; set; } = [];
+
+        public PaginatedResult() { }
+
+        public PaginatedResult(IEnumerable<TData> full, int limit, int offset)
+        {
+            Items = full.Skip(offset).Take(limit);
+            Total = full.Count();
+            Limit = limit;
+            Offset = offset;
+        }
     }
 }

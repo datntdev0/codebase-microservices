@@ -1,5 +1,6 @@
 ﻿using datntdev.Microservices.Common.Modular;
 using datntdev.Microservices.Common.Web.App.Application;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,9 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
             _modules.ToList().ForEach(module => 
             {
                 module.ConfigureServices(services, configs);
+                RegisterProviderServices(module, services);
                 RegisterManagerServices(module, services);
+                RegisterFluentValidators(module, services);
                 RegisterInjectableServices(module, services);
                 RegisterApplicationPartAssembly(module, services);
             });
@@ -84,8 +87,24 @@ namespace datntdev.Microservices.ServiceDefaults.Hosting
         {
             var managerServiceTypes = module.GetType().Assembly.GetTypes()
                  .Where(type => type.IsClass && !type.IsAbstract)
-                 .Where(type => type.IsAssignableTo(typeof(BaseManager)));
+                 .Where(type => type.IsAssignableTo(typeof(BaseAppManager)));
             managerServiceTypes.ToList().ForEach(type => services.AddScoped(type));
+        }
+
+        private static void RegisterProviderServices(BaseModule module, IServiceCollection services)
+        {
+            var providerServiceTypes = module.GetType().Assembly.GetTypes()
+                 .Where(type => type.IsClass && !type.IsAbstract)
+                 .Where(type => type.IsAssignableTo(typeof(BaseAppProvider)));
+            providerServiceTypes.ToList().ForEach(type => services.AddSingleton(type));
+        }
+
+        private static void RegisterFluentValidators(BaseModule module, IServiceCollection services)
+        {
+            var validatorTypes = module.GetType().Assembly.GetTypes()
+                 .Where(type => type.IsClass && !type.IsAbstract)
+                 .Where(type => type.IsAssignableTo(typeof(IValidator)));
+            validatorTypes.ToList().ForEach(type => services.AddScoped(type));
         }
 
         private static void RegisterApplicationPartAssembly(BaseModule module, IServiceCollection services)

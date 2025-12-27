@@ -1,6 +1,6 @@
 import { LoggerService } from './logger-service';
 
-describe('LoggerService', () => {
+describe('Services.LoggerService', () => {
   let service: LoggerService;
   let consoleSpy: jasmine.SpyObj<Console>;
 

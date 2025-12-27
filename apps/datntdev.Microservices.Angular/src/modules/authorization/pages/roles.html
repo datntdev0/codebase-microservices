@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <div class="card-title">
+      <div class="d-flex align-items-center position-relative">
+        <i class="bi bi-search position-absolute ms-5"></i>
+        <input type="text" class="form-control form-control-solid w-250px ps-12" placeholder="Search Role" />
+      </div>
+    </div>
+
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-light-primary me-3">
+          <i class="bi bi-filter"></i> Filter
+        </button>
+
+        <button type="button" class="btn btn-light-primary me-3">
+          <i class="bi bi-box-arrow-up"></i> Export
+        </button>
+
+        <button type="button" class="btn btn-primary" (click)="onCreateRole()">
+          <i class="bi bi-plus-square-fill"></i> New Role
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body pt-0">
+    <app-datatable [data]="roles" [columns]="columns" [checkboxEnabled]="true" [actionsTemplate]="actionsTemplate">
+    </app-datatable>
+  </div>
+</div>
+
+<app-role-create-modal (created)="onRoleCreated()"></app-role-create-modal>
+
+<ng-template #actionsTemplate let-item>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px me-3" 
+      tooltip="Assign Users" [delay]="1000" (click)="onAssignUsers(item)">
+      <i class="fs-6 bi bi-person-check"></i>
+    </button>
+    <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px me-3"
+      tooltip="Edit Role" [delay]="1000" (click)="onEdit(item)">
+      <i class="fs-6 bi bi-sliders2-vertical"></i>
+    </button>
+    <button class="btn btn-icon btn-light btn-active-light-primary w-30px h-30px" 
+      tooltip="Delete Role" [delay]="1000" (click)="onDelete(item)">
+      <i class="fs-6 bi bi-x-octagon"></i>
+    </button>
+  </div>
+</ng-template>
+
+<app-role-update-modal (updated)="onRoleUpdated()"></app-role-update-modal>
+<app-role-user-assignment-modal (updated)="onRoleUpdated()"></app-role-user-assignment-modal>

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Error404Page } from './error404';
 
-describe('Error404Page', () => {
+describe('Pages.Error404', () => {
   let component: Error404Page;
   let fixture: ComponentFixture<Error404Page>;
 

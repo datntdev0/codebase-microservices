@@ -233,6 +233,55 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                     b.ToTable("OpenIddictTokens", (string)null);
                 });
 
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models.AppRoleEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.PrimitiveCollection<string>("Permissions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name");
+
+                    b.ToTable("AppRoles");
+                });
+
             modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -270,6 +319,10 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.PrimitiveCollection<string>("Permissions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -282,13 +335,34 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmailAddress")
-                        .IsUnique();
+                    b.HasIndex("EmailAddress");
 
-                    b.HasIndex("Username")
-                        .IsUnique();
+                    b.HasIndex("Username");
 
                     b.ToTable("AppUsers");
+                });
+
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserRoleEntity", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("RoleId", "UserId");
+
+                    b.ToTable("AppUserRoles");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
@@ -315,6 +389,25 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
                     b.Navigation("Authorization");
                 });
 
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserRoleEntity", b =>
+                {
+                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models.AppRoleEntity", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
                 {
                     b.Navigation("Authorizations");
@@ -325,6 +418,16 @@ namespace datntdev.Microservices.Migrator.Migrations.Identity
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
                 {
                     b.Navigation("Tokens");
+                });
+
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Roles.Models.AppRoleEntity", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users.Models.AppUserEntity", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

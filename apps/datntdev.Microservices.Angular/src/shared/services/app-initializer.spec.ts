@@ -69,7 +69,7 @@ describe('AppInitializerService', () => {
   });
 });
 
-describe('appInitializerFactory', () => {
+describe('Services.AppInitializer', () => {
   it('should return a Promise', () => {
     TestBed.configureTestingModule({
       providers: [

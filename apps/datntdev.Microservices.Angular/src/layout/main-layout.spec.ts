@@ -5,7 +5,7 @@ import { MainLayout } from './main-layout';
 import { AuthService } from '@shared/services/auth-service';
 import { LoggerService } from '@shared/services/logger-service';
 
-describe('MainLayout', () => {
+describe('Components.MainLayout', () => {
   let component: MainLayout;
   let fixture: ComponentFixture<MainLayout>;
 

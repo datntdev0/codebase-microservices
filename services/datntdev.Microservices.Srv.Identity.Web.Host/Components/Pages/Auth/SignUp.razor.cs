@@ -43,8 +43,9 @@ namespace datntdev.Microservices.Srv.Identity.Web.Host.Components.Pages.Auth
                 EmailAddress = Model.Email!,
                 FirstName = Model.FirstName!,
                 LastName = Model.LastName!,
+                PasswordPlainText = Model.Password!
             };
-            var registerResult = await IdentityManager.SignUpWithPassword(newUser, Model.Password!);
+            var registerResult = await IdentityManager.SignUpWithPassword(newUser);
 
             if (registerResult.Status == IdentityResultStatus.Success)
             {

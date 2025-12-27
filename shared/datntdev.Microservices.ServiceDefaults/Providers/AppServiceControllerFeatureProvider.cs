@@ -33,6 +33,7 @@ namespace datntdev.Microservices.ServiceDefaults.Providers
                     action.ApiExplorer.IsVisible = true;
 
                     action.Filters.Add(NormalizeSuccessResponseType(action));
+                    action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 400));
                     action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 404));
                     action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 409));
                     action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 500));
@@ -90,6 +91,9 @@ namespace datntdev.Microservices.ServiceDefaults.Providers
         {
             var controllerName = action.Controller.ControllerName;
             var baseRoute = $"api/{KebabCaseRegex().Replace(controllerName, "$1-$2").ToLower()}";
+
+            var routeAttribute = action.Attributes.SingleOrDefault(x => x is RouteAttribute);
+            if (routeAttribute != null) return $"{baseRoute}/{((RouteAttribute)routeAttribute).Template}";
 
             if (action.ActionName == "Get") return $"{baseRoute}/{{id}}";
             if (action.ActionName == "Update") return $"{baseRoute}/{{id}}";

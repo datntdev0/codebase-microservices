@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import { Sidebar } from './sidebar';
 
-describe('Sidebar', () => {
+describe('Components.Sidebar', () => {
   let component: Sidebar;
   let fixture: ComponentFixture<Sidebar>;
 

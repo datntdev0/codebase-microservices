@@ -1,5 +1,6 @@
 using datntdev.Microservices.Common.Models;
 using datntdev.Microservices.Common.Web.App.Exceptions;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
@@ -29,6 +30,7 @@ namespace datntdev.Microservices.ServiceDefaults.Middlewares
             {
                 ExceptionNotFound => (int)HttpStatusCode.NotFound,
                 ExceptionConflict => (int)HttpStatusCode.Conflict,
+                ValidationException => (int)HttpStatusCode.BadRequest,
                 _ => (int)HttpStatusCode.InternalServerError
             };
 

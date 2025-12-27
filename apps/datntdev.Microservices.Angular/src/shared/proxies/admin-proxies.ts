@@ -7,6 +7,7 @@
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 
+import { ErrorResponse } from '@shared/models/proxies';
 import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
 import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
@@ -119,6 +120,13 @@ export class SrvAdminClient {
             result200 = TenantDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = ErrorResponse.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
         } else if (status === 404) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result404: any = null;
@@ -201,6 +209,13 @@ export class SrvAdminClient {
             result200 = PaginatedResultOfTenantListDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = ErrorResponse.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
         } else if (status === 404) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result404: any = null;
@@ -271,6 +286,13 @@ export class SrvAdminClient {
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             return _observableOf(null as any);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = ErrorResponse.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
             }));
         } else if (status === 404) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -346,6 +368,13 @@ export class SrvAdminClient {
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = TenantDto.fromJS(resultData200);
             return _observableOf(result200);
+            }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = ErrorResponse.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
             }));
         } else if (status === 404) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
@@ -426,6 +455,13 @@ export class SrvAdminClient {
             result200 = TenantDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
+        } else if (status === 400) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = ErrorResponse.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            }));
         } else if (status === 404) {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result404: any = null;
@@ -454,66 +490,6 @@ export class SrvAdminClient {
         }
         return _observableOf(null as any);
     }
-}
-
-export class ErrorResponse implements IErrorResponse {
-    statusCode?: number;
-    errorCode?: number;
-    message?: string;
-    details?: string | undefined;
-
-    [key: string]: any;
-
-    constructor(data?: IErrorResponse) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (this as any)[property] = (data as any)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-            this.statusCode = _data["statusCode"];
-            this.errorCode = _data["errorCode"];
-            this.message = _data["message"];
-            this.details = _data["details"];
-        }
-    }
-
-    static fromJS(data: any): ErrorResponse {
-        data = typeof data === 'object' ? data : {};
-        let result = new ErrorResponse();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        data["statusCode"] = this.statusCode;
-        data["errorCode"] = this.errorCode;
-        data["message"] = this.message;
-        data["details"] = this.details;
-        return data;
-    }
-}
-
-export interface IErrorResponse {
-    statusCode?: number;
-    errorCode?: number;
-    message?: string;
-    details?: string | undefined;
-
-    [key: string]: any;
 }
 
 export class PaginatedResultOfTenantListDto implements IPaginatedResultOfTenantListDto {

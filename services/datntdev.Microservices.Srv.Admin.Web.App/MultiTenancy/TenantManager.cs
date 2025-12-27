@@ -2,21 +2,20 @@
 using datntdev.Microservices.Common.Web.App.Application;
 using datntdev.Microservices.Common.Web.App.Exceptions;
 using datntdev.Microservices.Srv.Admin.Web.App.MultiTenancy.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace datntdev.Microservices.Srv.Admin.Web.App.MultiTenancy
 {
-    internal class TenantManager(IServiceProvider services) : BaseManager<int, AppTenantEntity, SrvAdminDbContext>
+    internal class TenantManager(IServiceProvider services) 
+        : BaseManager<int, AppTenantEntity, SrvAdminDbContext>(services)
     {
-        private readonly SrvAdminDbContext _dbContext = services.GetRequiredService<SrvAdminDbContext>();
-
         public IQueryable<AppTenantEntity> GetQueryable() => _dbContext.AppTenants.AsQueryable();
 
         public override async Task<AppTenantEntity> CreateEntityAsync(AppTenantEntity entity)
         {
-            await CheckTenantNameExistedAsync(entity.TenantName);
-            entity.Id = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            var unixTimeSeconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            var combinedString = $"{entity.TenantName}{unixTimeSeconds}";
+            entity.Id = combinedString.GetHashCode();
+
             var createdEntity = await _dbContext.AppTenants.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
             return createdEntity.Entity;
@@ -43,17 +42,9 @@ namespace datntdev.Microservices.Srv.Admin.Web.App.MultiTenancy
             if (Constants.MultiTenancy.DefaultTenantId == entity.Id)
                 throw new ExceptionConflict("The default tenant cannot be updated.");
 
-            await CheckTenantNameExistedAsync(entity.TenantName, entity.Id);
             var updatedEntity = _dbContext.AppTenants.Update(entity);
             await _dbContext.SaveChangesAsync();
             return updatedEntity.Entity;
-        }
-
-        private async Task CheckTenantNameExistedAsync(string tenantName, int? excludeId = null)
-        {
-            var existed = await _dbContext.AppTenants.AnyAsync(t
-                => t.TenantName == tenantName && (!excludeId.HasValue || t.Id != excludeId.Value));
-            if (existed) throw new ExceptionConflict($"The tenant name '{tenantName}' is already existed.");
         }
     }
 }

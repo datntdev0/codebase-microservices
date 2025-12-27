@@ -5,6 +5,7 @@ import { DatatableColumn } from '@components/datatable/datatable';
 import { MULTI_TENANCY } from '@shared/models/constants';
 import { SrvAdminClient, TenantCreateDto, TenantUpdateDto } from '@shared/proxies/admin-proxies';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { LocalDateTimePipe } from '@shared/pipes/local-datetime.pipe';
 
 @Component({
   standalone: false,
@@ -14,6 +15,7 @@ export class TenantsPage implements OnInit {
   private readonly clientAdminSrv = inject(SrvAdminClient);
   private readonly dialogSrv = inject(DialogService);
   private readonly fb = inject(FormBuilder);
+  private readonly localDateTimePipe = new LocalDateTimePipe();
 
   tenants: any[] = [];
   editingTenant: any = null;
@@ -32,10 +34,12 @@ export class TenantsPage implements OnInit {
     {
       key: 'createdAt',
       title: 'Created Date',
+      template: (item) => this.localDateTimePipe.transform(item.createdAt)
     },
     {
       key: 'updatedAt',
       title: 'Updated Date',
+      template: (item) => this.localDateTimePipe.transform(item.updatedAt)
     }
   ];
 
