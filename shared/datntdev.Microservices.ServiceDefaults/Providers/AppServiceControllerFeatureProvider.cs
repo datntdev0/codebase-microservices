@@ -33,6 +33,7 @@ namespace datntdev.Microservices.ServiceDefaults.Providers
                     action.ApiExplorer.IsVisible = true;
 
                     action.Filters.Add(NormalizeSuccessResponseType(action));
+                    action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 400));
                     action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 404));
                     action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 409));
                     action.Filters.Add(new ProducesResponseTypeAttribute(typeof(ErrorResponse), 500));

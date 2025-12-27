@@ -26,17 +26,14 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
                 .NotEmpty()
                 .Must(CheckDuplicatedUsername).WithMessage(v => $"The username '{v}' is already existed.");
         }
-
         public bool CheckDuplicatedUsername(string username)
         {
             return !_dbContext.AppUsers.Any(u => u.Username == username && !u.IsDeleted);
         }
-
         public bool CheckDuplicatedEmaill(string emailAddress)
         {
             return !_dbContext.AppUsers.Any(u => u.EmailAddress == emailAddress && !u.IsDeleted);
         }
-
         public static bool CheckPermissions(AppPermission[] permissions)
         {
             if (permissions.Length == 0) return true;
@@ -52,20 +49,19 @@ namespace datntdev.Microservices.Srv.Identity.Web.App.Authorization.Users
         {
             _dbContext = services.GetRequiredService<SrvIdentityDbContext>();
 
-            RuleFor(x => x.Item2.FirstName).NotEmpty();
-            RuleFor(x => x.Item2.LastName).NotEmpty();
-            RuleFor(x => x.Item2.RemovePermissions).Must(CheckPermissions);
-            RuleFor(x => x.Item2.AppendPermissions).Must(CheckPermissions);
+            RuleFor(x => x.Item2.FirstName).NotEmpty().OverridePropertyName("FirstName");
+            RuleFor(x => x.Item2.LastName).NotEmpty().OverridePropertyName("LastName");
+            RuleFor(x => x.Item2.RemovePermissions).Must(CheckPermissions).OverridePropertyName("RemovePermissions");
+            RuleFor(x => x.Item2.AppendPermissions).Must(CheckPermissions).OverridePropertyName("AppendPermissions");
 
-            RuleFor(x => x.Item2.EmailAddress)
-                .NotEmpty()
-                .EmailAddress()
+            RuleFor(x => x.Item2.EmailAddress).NotEmpty().EmailAddress()
                 .Must((req, email) => CheckDuplicatedEmaill(req.Item1, email))
-                .WithMessage(v => $"The email '{v}' is already existed.");
-            RuleFor(x => x.Item2.Username)
-                .NotEmpty()
+                .WithMessage(v => $"The email '{v}' is already existed.")
+                .OverridePropertyName("EmailAddress");
+            RuleFor(x => x.Item2.Username).NotEmpty()
                 .Must((req, username) => CheckDuplicatedUsername(req.Item1, username))
-                .WithMessage(v => $"The username '{v}' is already existed.");
+                .WithMessage(v => $"The username '{v}' is already existed.")
+                .OverridePropertyName("Username");
         }
         public bool CheckDuplicatedUsername(long id, string username)
         {

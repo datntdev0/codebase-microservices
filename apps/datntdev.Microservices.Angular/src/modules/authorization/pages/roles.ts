@@ -4,7 +4,7 @@ import { DialogService } from '@components/dialog/dialog-service';
 import { DatatableColumn } from '@components/datatable/datatable';
 import { SrvIdentityClient, RoleCreateDto, RoleUpdateDto } from '@shared/proxies/identity-proxies';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { MULTI_TENANCY } from '@shared/models/constants';
+import { LocalDateTimePipe } from '@shared/pipes/local-datetime.pipe';
 
 @Component({
   standalone: false,
@@ -14,6 +14,7 @@ export class RolesPage implements OnInit {
   private readonly clientIdentitySrv = inject(SrvIdentityClient);
   private readonly dialogSrv = inject(DialogService);
   private readonly fb = inject(FormBuilder);
+  private readonly localDateTimePipe = new LocalDateTimePipe();
 
   roles: any[] = [];
   editingRole: any = null;
@@ -26,8 +27,8 @@ export class RolesPage implements OnInit {
       key: 'name',
       title: 'Name',
       template: (item) =>
-        `<span class="text-gray-800 text-hover-primary mb-1">${item.name}</span>`
-        + ((item.tenantId === null) ? `<span class="ms-3 badge badge-primary">Host</span>` : ''),
+        `<span class="text-gray-800 text-hover-primary mb-1 me-3">${item.name}</span>`
+        + ((item.tenantId === null) ? `<span class="badge badge-primary">Host</span>` : ''),
     },
     {
       key: 'description',
@@ -36,10 +37,14 @@ export class RolesPage implements OnInit {
     {
       key: 'createdAt',
       title: 'Created Date',
+      minWidth: "125px",
+      template: (item) => this.localDateTimePipe.transform(item.createdAt)
     },
     {
       key: 'updatedAt',
       title: 'Updated Date',
+      minWidth: "125px",
+      template: (item) => this.localDateTimePipe.transform(item.updatedAt)
     }
   ];
 

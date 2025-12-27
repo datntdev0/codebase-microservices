@@ -1,5 +1,6 @@
 using datntdev.Microservices.Common.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace datntdev.Microservices.Common.Repository
 {
@@ -15,6 +16,25 @@ namespace datntdev.Microservices.Common.Repository
         {
             SetDefaults();
             return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            // Apply to all DateTime properties
+            foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(x => x.GetProperties()))
+            {
+                if (property.ClrType == typeof(DateTime) || property.ClrType == typeof(DateTime?))
+                {
+                    property.SetValueConverter(
+                        new ValueConverter<DateTime, DateTime>(
+                            v => v.ToUniversalTime(), // Save: convert to UTC
+                            v => DateTime.SpecifyKind(v, DateTimeKind.Utc) // Load: mark as UTC
+                        )
+                    );
+                }
+            }
         }
 
         private void SetDefaults()

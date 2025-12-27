@@ -4,6 +4,7 @@ import { DialogService } from '@components/dialog/dialog-service';
 import { DatatableColumn } from '@components/datatable/datatable';
 import { SrvIdentityClient, UserCreateDto, UserUpdateDto } from '@shared/proxies/identity-proxies';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { LocalDateTimePipe } from '@shared/pipes/local-datetime.pipe';
 
 @Component({
   standalone: false,
@@ -13,6 +14,7 @@ export class UsersPage implements OnInit {
   private readonly clientIdentitySrv = inject(SrvIdentityClient);
   private readonly dialogSrv = inject(DialogService);
   private readonly fb = inject(FormBuilder);
+  private readonly localDateTimePipe = new LocalDateTimePipe();
 
   users: any[] = [];
   editingUser: any = null;
@@ -42,10 +44,14 @@ export class UsersPage implements OnInit {
     {
       key: 'createdAt',
       title: 'Created Date',
+      minWidth: "125px",
+      template: (item) => this.localDateTimePipe.transform(item.createdAt)
     },
     {
       key: 'updatedAt',
       title: 'Updated Date',
+      minWidth: "125px",
+      template: (item) => this.localDateTimePipe.transform(item.updatedAt)
     }
   ];
 
