@@ -6,6 +6,7 @@ import { ToastComponent } from './toast/toast';
 import { DialogComponent } from './dialog/dialog';
 import { FormsModule } from '@angular/forms';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -18,9 +19,11 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
     CommonModule,
     FormsModule,
     ModalModule,
+    TooltipModule,
   ],
   exports: [
     ModalModule,
+    TooltipModule,
     DatatableComponent,
     PaginatorComponent,
     ToastComponent,

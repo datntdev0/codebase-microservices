@@ -6,6 +6,7 @@ import { SrvIdentityClient } from '@shared/proxies/identity-proxies';
 import { LocalDateTimePipe } from '@shared/pipes/local-datetime.pipe';
 import { UserCreateModalComponent } from '../components/user-create-modal';
 import { UserUpdateModalComponent } from '../components/user-update-modal';
+import { UserRoleAssignmentModalComponent } from '../components/user-role-assignment-modal';
 import { PermissionService } from '../services/permission-service';
 
 @Component({
@@ -15,6 +16,7 @@ import { PermissionService } from '../services/permission-service';
 export class UsersPage implements OnInit {
   @ViewChild(UserCreateModalComponent) createModalComponent!: UserCreateModalComponent;
   @ViewChild(UserUpdateModalComponent) updateModalComponent!: UserUpdateModalComponent;
+  @ViewChild(UserRoleAssignmentModalComponent) roleAssignmentModalComponent!: UserRoleAssignmentModalComponent;
 
   private readonly clientIdentitySrv = inject(SrvIdentityClient);
   private readonly dialogSrv = inject(DialogService);
@@ -67,12 +69,16 @@ export class UsersPage implements OnInit {
     this.createModalComponent.show();
   }
 
-  protected onUserCreated(): void {
-    this.ngOnInit();
+  protected onEditUser(item: any): void {
+    this.updateModalComponent.show(item);
   }
 
-  protected onEdit(item: any): void {
-    this.updateModalComponent.show(item);
+  protected onAssignRoles(item: any): void {
+    this.roleAssignmentModalComponent.show(item);
+  }
+
+  protected onUserCreated(): void {
+    this.ngOnInit();
   }
 
   protected onUserUpdated(): void {

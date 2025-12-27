@@ -9,8 +9,10 @@ import { RolesPage } from './pages/roles';
 import { UsersPage } from './pages/users';
 import { UserCreateModalComponent } from './components/user-create-modal';
 import { UserUpdateModalComponent } from './components/user-update-modal';
+import { UserRoleAssignmentModalComponent } from './components/user-role-assignment-modal';
 import { RoleCreateModalComponent } from './components/role-create-modal';
 import { RoleUpdateModalComponent } from './components/role-update-modal';
+import { RoleUserAssignmentModalComponent } from './components/role-user-assignment-modal';
 import { PermissionTreeComponent } from './components/permission-tree';
 import { PermissionService } from './services/permission-service';
 
@@ -26,8 +28,10 @@ const routes: Routes = [
     RolesPage,
     UserCreateModalComponent,
     UserUpdateModalComponent,
+    UserRoleAssignmentModalComponent,
     RoleCreateModalComponent,
     RoleUpdateModalComponent,
+    RoleUserAssignmentModalComponent,
     PermissionTreeComponent,
   ],
   imports: [
